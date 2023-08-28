@@ -13,7 +13,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final ValueChanged<String?>? onChanged, onSaved;
   final int? maxLength, maxLines;
   final int? minLines;
-  final bool readOnly, addHint, enabled, obscureText;
+  final bool readOnly, addHint, enabled, obscureText, filled;
   final bool? isDense;
   final EdgeInsetsGeometry? contentPadding;
   final Function()? onTap;
@@ -41,6 +41,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.onSaved,
     this.prefixStyle,
+    this.filled = false,
     this.suffixStyle,
     this.textColor,
     this.style,
@@ -76,6 +77,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle textStyle = style ?? context.getTheme.textTheme.bodyMedium!;
     return TextFormField(
+      cursorColor: context.getTheme.primaryColor,
       focusNode: focusNode,
       textAlign: TextAlign.start,
       style: textStyle,
@@ -105,49 +107,56 @@ class CustomTextFieldWidget extends StatelessWidget {
             enteredText == null ? null : '${enteredText!.length}/$maxLength',
         fillColor: fillColor ?? context.getTheme.primaryColor.withOpacity(0.05),
         contentPadding: contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        filled: true,
+            const EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+        filled: filled,
         isDense: isDense,
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
-                color: borderColor ?? context.getTheme.primaryColor,
+                width: 0.50,
+                color: borderColor ??
+                    context.getTheme.primaryColor.withOpacity(0.5),
               ),
               borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 5),
+                Radius.circular(borderRadius ?? 12),
               ),
             ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius ?? 5),
+            Radius.circular(borderRadius ?? 12),
           ),
         ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
-              borderSide: BorderSide.none,
+              borderSide: const BorderSide(
+                width: 0.50,
+                color: Color(0xFFE4E4E4),
+              ),
               borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 5),
+                Radius.circular(borderRadius ?? 12),
               ),
             ),
+        suffixIconColor: context.getTheme.primaryColor,
         border: border ??
             OutlineInputBorder(
               borderSide: BorderSide(
                 color: borderColor ?? context.getTheme.primaryColor,
               ),
               borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 5),
+                Radius.circular(borderRadius ?? 12),
               ),
             ),
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red),
+          borderSide: const BorderSide(color: Colors.red, width: 0.50),
           borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius ?? 5),
+            Radius.circular(borderRadius ?? 12),
           ),
         ),
         labelText: addHint
             ? null
             : ((controller?.text != null || !readOnly) ? labelText : null),
         hintText: hintText,
+        hintStyle: context.getTheme.textTheme.labelMedium,
         prefixIconConstraints: BoxConstraints(
           maxHeight: 40.h,
           maxWidth: 40.w,

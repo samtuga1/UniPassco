@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:passco/data/images.dart';
+import 'package:passco/router/routes.dart';
 import 'package:passco/ui/widgets/custom_adaptive_text_button.dart';
 import 'package:passco/utils/extensions.dart';
 import '../../widgets/widgets.dart';
@@ -20,68 +22,120 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              66.verticalSpace,
-              CustomText(
-                'Create an account',
-                style: context.getTheme.textTheme.displayLarge,
-              ),
-              6.verticalSpace,
-              CustomText(
-                'Please enter your email address and password',
-                style: context.getTheme.textTheme.displayMedium,
-              ),
-              6.verticalSpace,
-              const CustomTextFieldWidget(
-                hintText: 'Enter your email',
-              ),
-              10.verticalSpace,
-              CustomTextFieldWidget(
-                maxLines: 1,
-                obscureText: obscurePassword,
-                hintText: 'Password',
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    obscurePassword = !obscurePassword;
-                    setState(() {});
-                  },
-                  icon: obscurePassword
-                      ? const FaIcon(FontAwesomeIcons.eye)
-                      : const FaIcon(FontAwesomeIcons.eyeSlash),
-                ),
-              ),
-              36.verticalSpace,
-              CustomElevatedButton(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                title: 'Create account',
-                onPressed: () {},
-              ),
-              5.verticalSpace,
-              Center(
-                child: Text.rich(
-                  TextSpan(
-                    text: 'Already have an account? ',
-                    style: context.getTheme.textTheme.bodyLarge,
-                    children: [
-                      WidgetSpan(
-                        child: CustomAdaptiveTextButton(
-                          onTap: widget.loginTapped!,
-                          text: 'Sign in',
-                          style: context.getTheme.textTheme.bodyLarge?.copyWith(
-                            color: context.getTheme.primaryColor,
-                            decoration: TextDecoration.underline,
-                            decorationColor: context.getTheme.primaryColor,
-                          ),
-                        ),
-                      ),
-                    ],
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                30.verticalSpace,
+                const Align(
+                  alignment: Alignment.center,
+                  child: CircleAvatar(
+                    radius: 60,
                   ),
                 ),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    'UniPasco Ghana',
+                    style: context.getTheme.textTheme.displaySmall,
+                  ),
+                ),
+                36.verticalSpace,
+                Align(
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    'Let’s get you started',
+                    style: context.getTheme.textTheme.displayMedium,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    'Sign Up to enjoy amazing past questions',
+                    style: context.getTheme.textTheme.labelMedium,
+                  ),
+                ),
+                15.verticalSpace,
+                CustomText(
+                  'Full Name',
+                  style: context.getTheme.textTheme.bodyMedium,
+                ),
+                6.verticalSpace,
+                const CustomTextFieldWidget(
+                  hintText: 'Your name',
+                ),
+                20.verticalSpace,
+                CustomText(
+                  'E-mail',
+                  style: context.getTheme.textTheme.bodyMedium,
+                ),
+                6.verticalSpace,
+                const CustomTextFieldWidget(
+                  hintText: 'name@example.com',
+                ),
+                20.verticalSpace,
+                CustomText(
+                  'Password',
+                  style: context.getTheme.textTheme.bodyMedium,
+                ),
+                6.verticalSpace,
+                CustomTextFieldWidget(
+                  maxLines: 1,
+                  obscureText: obscurePassword,
+                  hintText: 'Your password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      obscurePassword = !obscurePassword;
+                      setState(() {});
+                    },
+                    icon: obscurePassword
+                        ? SvgPicture.asset(AppImages.toggle_password)
+                        : const Icon(Icons.visibility_off_outlined),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: CustomAdaptiveTextButton(
+                    onTap: () {},
+                    text: 'Forgot password?',
+                    style: context.getTheme.textTheme.labelMedium!.copyWith(
+                      color: const Color(0xFF0F96FF),
+                    ),
+                  ),
+                ),
+                26.verticalSpace,
+                CustomElevatedButton(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  title: 'Register',
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Routes.verificationScreen);
+                  },
+                ),
+                32.verticalSpace,
+                Center(
+                  child: Text.rich(
+                    TextSpan(
+                      text: 'Already have an account? ',
+                      style: context.getTheme.textTheme.bodyMedium,
+                      children: [
+                        WidgetSpan(
+                          child: CustomAdaptiveTextButton(
+                            onTap: widget.loginTapped!,
+                            text: 'Sign In',
+                            style: context.getTheme.textTheme.labelMedium
+                                ?.copyWith(
+                              color: const Color(0xFF0F96FF),
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

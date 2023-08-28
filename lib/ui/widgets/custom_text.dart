@@ -42,7 +42,7 @@ class CustomText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = style == null
-        ? context.getTheme.textTheme.bodyLarge!.copyWith(
+        ? context.getTheme.textTheme.bodyMedium!.copyWith(
             decoration: textDecoration,
             color: color,
             fontSize: fontSize,

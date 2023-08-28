@@ -1,40 +1,93 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
-  static TextTheme get textTheme => TextTheme(
-        // For headings
+  static TextTheme get lightTextTheme => TextTheme(
         displayLarge: TextStyle(
-          fontSize: 24.5.sp,
-          fontWeight: FontWeight.w500,
+          fontSize: 30.sp,
+          fontWeight: FontWeight.w700,
+          color: Colors.black,
+          fontFamily: 'Satoshi',
         ),
-        // For medium headings
         displayMedium: TextStyle(
-          fontSize: 16.5.sp,
+          fontSize: 20.sp,
+          color: Colors.black,
+          fontWeight: FontWeight.w500,
+          fontFamily: 'Satoshi',
+        ),
+        displaySmall: TextStyle(
+          fontSize: 16.sp,
+          color: Colors.black,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w700,
+        ),
+        bodyMedium: TextStyle(
+          color: Colors.black,
+          fontSize: 15.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w400,
+        ),
+        labelMedium: TextStyle(
+          color: const Color(0xFF4E4E4E),
+          fontSize: 15.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          color: Colors.black,
+          fontSize: 13.5.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w300,
+        ),
+        labelSmall: TextStyle(
+          color: const Color(0xFF4D4D4D),
+          fontSize: 12.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w300,
+        ),
+        titleLarge: TextStyle(
+          color: Colors.black,
+          fontSize: 17.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: TextStyle(
+          color: Colors.black,
+          fontSize: 16.sp,
+          fontFamily: 'Satoshi',
           fontWeight: FontWeight.w500,
         ),
-        // Normal body text
-        bodyLarge: TextStyle(
-          fontSize: 17.5.sp,
-          fontWeight: FontWeight.w400,
-        ),
-
-        titleMedium: TextStyle(
-          fontSize: 14.5.sp,
-          fontWeight: FontWeight.w400,
-          color: const Color(0xFFBDBDBD),
+        // button
+        labelLarge: TextStyle(
+          color: Colors.white,
+          fontSize: 16.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w500,
         ),
       );
 
-  static FlexSubThemesData get subTheme => const FlexSubThemesData(
-        bottomNavigationBarBackgroundSchemeColor: SchemeColor.background,
-        bottomNavigationBarElevation: 5,
-        bottomNavigationBarType: BottomNavigationBarType.shifting,
-        bottomNavigationBarUnselectedIconSize: 20,
-        cardElevation: 0,
-        cardRadius: 0,
-        bottomNavigationBarSelectedIconSize: 20,
-        appBarBackgroundSchemeColor: SchemeColor.background,
-      );
+  static ThemeData get light => ThemeData(
+      canvasColor: Colors.white,
+      primaryColor: Colors.black,
+      textTheme: lightTextTheme,
+      scaffoldBackgroundColor: const Color(0xFFFAFAFA),
+      appBarTheme: AppBarTheme(
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
+        titleTextStyle: lightTextTheme.displaySmall,
+        backgroundColor: const Color(0xFFFAFAFA),
+        elevation: 0,
+        centerTitle: true,
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: const Color(0xFFF7F9FC),
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            width: 0.50,
+            color: Color(0xFFF1F1F1),
+          ),
+          borderRadius: BorderRadius.circular(24),
+        ),
+      ));
 }

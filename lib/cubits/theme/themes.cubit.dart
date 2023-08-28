@@ -13,7 +13,7 @@ class ThemeCubit extends Cubit<ThemeCubitState> {
   ISharedPreference prefs;
   ThemeCubit(this.prefs) : super(const ThemeCubitState.light());
 
-  void togglePassword() {
+  void toggleTheme() {
     if (state == const ThemeCubitState.light()) {
       emit(const ThemeCubitState.dark());
     } else {

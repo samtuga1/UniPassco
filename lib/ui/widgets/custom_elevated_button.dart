@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
 import 'package:passco/utils/extensions.dart';
 
 import 'widgets.dart';
@@ -16,6 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
   final bool addBorder;
   final bool isBusy;
   final bool? isValidated;
+  final double? borderRadius;
   final EdgeInsets? padding;
 
   const CustomElevatedButton({
@@ -23,6 +26,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.title,
     required this.onPressed,
     this.textStyle,
+    this.borderRadius,
     this.buttonColor,
     this.buttonBorderColor,
     this.textColor,
@@ -41,10 +45,83 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
-      return CupertinoButton.filled(
-        padding: const EdgeInsets.symmetric(vertical: 0),
-        borderRadius: BorderRadius.circular(20),
-        onPressed: onPressed,
+      return StatefulBuilder(builder: (ctx, setState) {
+        final isLightMode =
+            context.read<ThemeCubit>().state == const ThemeCubitState.light();
+
+        // check if its light mode
+        Color buttonColor = isLightMode ? Colors.black : Colors.white;
+        return GestureDetector(
+          onTap: isValidated! ? onPressed : null,
+          onTapDown: (tapDetails) {
+            setState(() {
+              if (isLightMode) {
+                buttonColor = Colors.white;
+              } else {
+                buttonColor = Colors.black;
+              }
+            });
+          },
+          onTapCancel: () {
+            setState(() {
+              if (isLightMode) {
+                buttonColor = Colors.black;
+              } else {
+                buttonColor = Colors.white;
+              }
+            });
+          },
+          child: CupertinoButton(
+            color: buttonColor,
+            padding: const EdgeInsets.symmetric(vertical: 13),
+            borderRadius: BorderRadius.circular(borderRadius ?? 12),
+            onPressed: isValidated! ? onPressed : null,
+            disabledColor: buttonColor.withOpacity(0.75),
+            child: !isBusy
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      titleWidget ??
+                          Text(
+                            title!,
+                            style: context.getTheme.textTheme.labelLarge,
+                          ),
+                    ],
+                  )
+                : Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Loading(
+                      color: context.getTheme.canvasColor,
+                      height: 15,
+                      width: 15,
+                    ),
+                  ),
+          ),
+        );
+      });
+    }
+    return ElevatedButton(
+      onPressed: isValidated! ? onPressed : null,
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        padding: padding,
+        shape: addBorder
+            ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                    borderRadius == null ? 12 : borderRadius! + 5),
+                side: const BorderSide(
+                  width: 1.2,
+                ),
+              )
+            : RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius ?? 12),
+              ),
+        backgroundColor: !isBusy
+            ? context.getTheme.primaryColor
+            : context.getTheme.primaryColor.withOpacity(0.5),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 13),
         child: !isBusy
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,6 +129,7 @@ class CustomElevatedButton extends StatelessWidget {
                   titleWidget ??
                       Text(
                         title!,
+                        style: context.getTheme.textTheme.labelLarge,
                       ),
                 ],
               )
@@ -60,42 +138,7 @@ class CustomElevatedButton extends StatelessWidget {
                 height: 15,
                 width: 15,
               ),
-      );
-    }
-    return ElevatedButton(
-        onPressed: isValidated! ? onPressed : null,
-        style: ElevatedButton.styleFrom(
-          padding: padding,
-          shape: addBorder
-              ? RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                  side: const BorderSide(
-                    width: 1.2,
-                  ),
-                )
-              : RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-          backgroundColor:
-              !isBusy ? null : context.getTheme.colorScheme.primary,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2),
-          child: !isBusy
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    titleWidget ??
-                        Text(
-                          title!,
-                        ),
-                  ],
-                )
-              : Loading(
-                  color: context.getTheme.canvasColor,
-                  height: 15,
-                  width: 15,
-                ),
-        ));
+      ),
+    );
   }
 }
