@@ -11,6 +11,8 @@ class CustomAppBar extends PreferredSize {
     this.title = '',
     this.bottom,
     this.bottomHeight = 0,
+    this.leadingTapped,
+    this.actions,
   }) : super(
           child: const SizedBox.shrink(),
           preferredSize: Size.fromHeight(
@@ -20,21 +22,25 @@ class CustomAppBar extends PreferredSize {
   final String? title;
   final double bottomHeight;
   final Widget? bottom;
+  final VoidCallback? leadingTapped;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actions: actions,
       leading: Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(
-              Platform.isIOS
-                  ? CupertinoIcons.chevron_left
-                  : Icons.keyboard_backspace_outlined,
-              size: 28,
-            ),
-          )),
+        padding: const EdgeInsets.only(left: 12.5),
+        child: IconButton(
+          onPressed: leadingTapped ?? () => Navigator.of(context).pop(),
+          icon: Icon(
+            Platform.isIOS
+                ? CupertinoIcons.chevron_left
+                : Icons.keyboard_backspace_outlined,
+            size: 24,
+          ),
+        ),
+      ),
       title: CustomText(
         title!,
         style: context.getTheme.textTheme.displaySmall,

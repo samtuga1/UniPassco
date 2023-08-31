@@ -6,7 +6,6 @@ class Helpers {
     SvgAssetLoader arrowRight = SvgAssetLoader(AppImages.arrow_right);
     SvgAssetLoader email = SvgAssetLoader(AppImages.email);
     SvgAssetLoader lock = SvgAssetLoader(AppImages.lock);
-    SvgAssetLoader logo = SvgAssetLoader(AppImages.logo);
     SvgAssetLoader profile = SvgAssetLoader(AppImages.profile);
     SvgAssetLoader togglePassword = SvgAssetLoader(AppImages.toggle_password);
     await Future.wait([
@@ -21,10 +20,6 @@ class Helpers {
       svg.cache.putIfAbsent(
         lock.cacheKey(null),
         () => lock.loadBytes(null),
-      ),
-      svg.cache.putIfAbsent(
-        logo.cacheKey(null),
-        () => logo.loadBytes(null),
       ),
       svg.cache.putIfAbsent(
         profile.cacheKey(null),

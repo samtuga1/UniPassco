@@ -26,11 +26,13 @@ class _SignInState extends State<SignIn> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                30.verticalSpace,
-                const Align(
+                62.verticalSpace,
+                Align(
                   alignment: Alignment.center,
-                  child: CircleAvatar(
-                    radius: 60,
+                  child: Image.asset(
+                    AppImages.logo,
+                    height: 58.h,
+                    width: 58.w,
                   ),
                 ),
                 Align(
@@ -122,6 +124,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
+                30.verticalSpace,
               ],
             ),
           ),

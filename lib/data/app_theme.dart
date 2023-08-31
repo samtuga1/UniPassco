@@ -27,21 +27,21 @@ class AppTheme {
           fontFamily: 'Satoshi',
           fontWeight: FontWeight.w400,
         ),
+        bodySmall: TextStyle(
+          color: Colors.black,
+          fontSize: 13.5.sp,
+          fontFamily: 'Satoshi',
+          fontWeight: FontWeight.w400,
+        ),
         labelMedium: TextStyle(
           color: const Color(0xFF4E4E4E),
           fontSize: 15.sp,
           fontFamily: 'Satoshi',
           fontWeight: FontWeight.w400,
         ),
-        bodySmall: TextStyle(
-          color: Colors.black,
-          fontSize: 13.5.sp,
-          fontFamily: 'Satoshi',
-          fontWeight: FontWeight.w300,
-        ),
         labelSmall: TextStyle(
           color: const Color(0xFF4D4D4D),
-          fontSize: 12.sp,
+          fontSize: 13.5.sp,
           fontFamily: 'Satoshi',
           fontWeight: FontWeight.w300,
         ),
@@ -67,27 +67,37 @@ class AppTheme {
       );
 
   static ThemeData get light => ThemeData(
-      canvasColor: Colors.white,
-      primaryColor: Colors.black,
-      textTheme: lightTextTheme,
-      scaffoldBackgroundColor: const Color(0xFFFAFAFA),
-      appBarTheme: AppBarTheme(
-        iconTheme: const IconThemeData(
-          color: Colors.black,
-        ),
-        titleTextStyle: lightTextTheme.displaySmall,
-        backgroundColor: const Color(0xFFFAFAFA),
-        elevation: 0,
-        centerTitle: true,
-      ),
-      chipTheme: ChipThemeData(
-        backgroundColor: const Color(0xFFF7F9FC),
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            width: 0.50,
-            color: Color(0xFFF1F1F1),
+        indicatorColor: const Color(0xff1097FF),
+        hintColor: const Color(0xFF676767),
+        canvasColor: Colors.white,
+        primaryColor: Colors.black,
+        textTheme: lightTextTheme,
+        scaffoldBackgroundColor: const Color(0xFFFAFAFA),
+        appBarTheme: AppBarTheme(
+          iconTheme: const IconThemeData(
+            color: Colors.black,
           ),
-          borderRadius: BorderRadius.circular(24),
+          titleTextStyle: lightTextTheme.displaySmall,
+          backgroundColor: const Color(0xFFFAFAFA),
+          elevation: 0,
+          centerTitle: true,
         ),
-      ));
+        chipTheme: ChipThemeData(
+          backgroundColor: const Color(0xFFF7F9FC),
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(
+              width: 0.50,
+              color: Color(0xFFF1F1F1),
+            ),
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          showUnselectedLabels: true,
+          unselectedLabelStyle: lightTextTheme.bodySmall,
+          selectedLabelStyle: lightTextTheme.bodySmall,
+        ),
+      );
 }

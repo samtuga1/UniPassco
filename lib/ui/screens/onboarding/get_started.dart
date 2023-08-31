@@ -15,7 +15,7 @@ class GetStartedScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFB5DBFF),
       body: SafeArea(
         child: Column(children: [
-          (MediaQuery.sizeOf(context).height * 0.1).verticalSpace,
+          (MediaQuery.sizeOf(context).height * 0.05).verticalSpace,
           Expanded(
             child: SizedBox(
               height: 300,
@@ -37,32 +37,23 @@ class GetStartedScreen extends StatelessWidget {
                 ),
                 Positioned(
                   top: 60,
-                  left: 35,
+                  left: 27,
                   child: Image.asset(
-                    AppImages.get_started_boy,
+                    AppImages.get_started_male,
+                    width: MediaQuery.of(context).size.width < 390 ? 220 : null,
                   ),
                 ),
                 Positioned(
                   top: 90,
-                  right: 35,
+                  right: 27,
                   child: Image.asset(
-                    AppImages.get_started_girl,
+                    AppImages.get_started_female,
+                    width: MediaQuery.of(context).size.width < 390 ? 210 : null,
                   ),
                 ),
-                Positioned(
-                  top: 195,
-                  left: 180,
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundImage: NetworkImage(
-                      AppImages.ug,
-                    ),
-                  ),
-                )
               ]),
             ),
           ),
-          // (MediaQuery.sizeOf(context).height * 0.04).verticalSpace,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(

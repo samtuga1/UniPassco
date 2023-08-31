@@ -20,7 +20,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final AutovalidateMode autoValidateMode;
   final BoxConstraints? suffixIconConstraints;
   final EdgeInsets? prefixIconPadding;
-  final Color? fillColor, textColor;
+  final Color? fillColor, textColor, suffixIconColor;
   final Color? borderColor;
   final double? borderRadius, fontSize;
   final String? enteredText;
@@ -36,6 +36,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.controller,
     this.prefixIcon,
     this.suffixIcon,
+    this.suffixIconColor,
     this.keyboardType = TextInputType.text,
     this.validator,
     this.onChanged,
@@ -128,15 +129,15 @@ class CustomTextFieldWidget extends StatelessWidget {
         ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
-              borderSide: const BorderSide(
+              borderSide: BorderSide(
                 width: 0.50,
-                color: Color(0xFFE4E4E4),
+                color: borderColor ?? const Color(0xFFE4E4E4),
               ),
               borderRadius: BorderRadius.all(
                 Radius.circular(borderRadius ?? 12),
               ),
             ),
-        suffixIconColor: context.getTheme.primaryColor,
+        suffixIconColor: suffixIconColor ?? context.getTheme.primaryColor,
         border: border ??
             OutlineInputBorder(
               borderSide: BorderSide(
