@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:passco/cubits/theme/themes.cubit.dart';
 import 'package:passco/utils/extensions.dart';
 
@@ -44,7 +45,7 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS) {
+    if (!Platform.isIOS) {
       return StatefulBuilder(builder: (ctx, setState) {
         final isLightMode =
             context.read<ThemeCubit>().state == const ThemeCubitState.light();
@@ -104,7 +105,7 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: isValidated! ? onPressed : null,
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        padding: padding,
+        padding: padding ?? const EdgeInsets.symmetric(vertical: 10),
         shape: addBorder
             ? RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
@@ -120,8 +121,7 @@ class CustomElevatedButton extends StatelessWidget {
             ? context.getTheme.primaryColor
             : context.getTheme.primaryColor.withOpacity(0.5),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 13),
+      child: SizedBox(
         child: !isBusy
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,

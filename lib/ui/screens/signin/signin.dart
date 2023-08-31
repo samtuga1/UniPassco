@@ -98,7 +98,6 @@ class _SignInState extends State<SignIn> {
                 ),
                 26.verticalSpace,
                 CustomElevatedButton(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
                   title: 'Login',
                   onPressed: () {},
                 ),

@@ -108,7 +108,6 @@ class _SignUpState extends State<SignUp> {
                 ),
                 26.verticalSpace,
                 CustomElevatedButton(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
                   title: 'Register',
                   onPressed: () {
                     Navigator.of(context).pushNamed(Routes.verificationScreen);
