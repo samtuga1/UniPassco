@@ -1,153 +1,155 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'http_errors.handler.freezed.dart';
+sealed class HttpError {}
 
-@freezed
-abstract class HttpError with _$HttpError {
-  const factory HttpError.requestCancelled() = RequestCancelled;
-  const factory HttpError.unauthorisedRequest(String message) =
-      UnauthorisedRequest;
-  const factory HttpError.badRequest(String message) = BadRequest;
-  const factory HttpError.notFound(String reason) = NotFound;
-  const factory HttpError.methodNotAllowed() = MethodNotAllowed;
-  const factory HttpError.notAcceptable() = NotAcceptable;
-  const factory HttpError.requestTimeout() = RequestTimeout;
-  const factory HttpError.sendTimeout() = SendTimeout;
-  const factory HttpError.conflict() = Conflict;
-  const factory HttpError.internalServerError() = InternalServerError;
-  const factory HttpError.notImplemented() = NotImplemented;
-  const factory HttpError.serviceUnavailable() = ServiceUnavailable;
-  const factory HttpError.noInternetConnection() = NoInternetConnection;
-  const factory HttpError.formatException() = FormatException;
-  const factory HttpError.unableToProcess() = UnableToProcess;
-  const factory HttpError.defaultError(dynamic error) = DefaultError;
-  const factory HttpError.unexpectedError() = UnexpectedError;
+class RequestCancelled extends HttpError {}
 
+class UnauthorisedRequest extends HttpError {
+  late String message;
+  UnauthorisedRequest({required this.message});
+}
+
+class BadRequest extends HttpError {
+  late String message;
+  BadRequest({required this.message});
+}
+
+class NotFound extends HttpError {
+  late String message;
+  NotFound({required this.message});
+}
+
+class NotAcceptable extends HttpError {}
+
+class RequestTimeout extends HttpError {}
+
+class SendTimeout extends HttpError {}
+
+class Conflict extends HttpError {}
+
+class InternalServerError extends HttpError {}
+
+class NotImplemented extends HttpError {}
+
+class ServiceUnavailable extends HttpError {}
+
+class NoInternetConnection extends HttpError {}
+
+class FormatException extends HttpError {}
+
+class UnableToProcess extends HttpError {}
+
+class DefaultError extends HttpError {
+  late int errorCode;
+  DefaultError(this.errorCode);
+}
+
+class UnexpectedError extends HttpError {}
+
+class HttpUtils {
   static HttpError getDioException(error) {
     if (error is Exception) {
       try {
         //TODO: Better error handling
-        HttpError httpError = const HttpError.defaultError(500);
-        if (error is DioError) {
+        HttpError httpError = DefaultError(500);
+        if (error is DioException) {
           switch (error.type) {
-            case DioErrorType.cancel:
-              httpError = const HttpError.requestCancelled();
+            case DioExceptionType.cancel:
+              httpError = RequestCancelled();
               break;
-            case DioErrorType.connectionTimeout:
-              httpError = const HttpError.requestTimeout();
+            case DioExceptionType.connectionTimeout:
+              httpError = RequestTimeout();
               break;
-            case DioErrorType.unknown:
-              httpError = const HttpError.noInternetConnection();
+            case DioExceptionType.unknown:
+              httpError = NoInternetConnection();
               break;
-            case DioErrorType.receiveTimeout:
-              httpError = const HttpError.sendTimeout();
+            case DioExceptionType.receiveTimeout:
+              httpError = SendTimeout();
               break;
-            case DioErrorType.badResponse:
+            case DioExceptionType.badResponse:
               switch (error.response!.statusCode) {
                 case 400:
                   httpError =
-                      HttpError.badRequest(error.response!.data['message']);
+                      BadRequest(message: error.response!.data['message']);
                   break;
                 case 401:
-                  httpError = HttpError.unauthorisedRequest(
-                      error.response!.data['message']);
+                  httpError = UnauthorisedRequest(
+                    message: error.response!.data['message'],
+                  );
                   break;
                 case 403:
-                  httpError = const HttpError.internalServerError();
+                  httpError = InternalServerError();
                   break;
                 case 404:
-                  httpError = const HttpError.notFound("");
+                  httpError = NotFound(message: "");
                   break;
                 case 409:
-                  httpError = const HttpError.conflict();
+                  httpError = Conflict();
                   break;
                 case 408:
-                  httpError = const HttpError.requestTimeout();
+                  httpError = RequestTimeout();
                   break;
                 case 500:
-                  httpError = const HttpError.internalServerError();
+                  httpError = InternalServerError();
                   break;
                 case 503:
-                  httpError = const HttpError.serviceUnavailable();
+                  httpError = ServiceUnavailable();
                   break;
                 default:
-                  httpError =
-                      HttpError.defaultError(error.response!.statusCode);
+                  httpError = DefaultError(error.response!.statusCode!);
               }
               break;
-            case DioErrorType.sendTimeout:
-              httpError = const HttpError.sendTimeout();
+            case DioExceptionType.sendTimeout:
+              httpError = SendTimeout();
               break;
-            case DioErrorType.badCertificate:
+            case DioExceptionType.badCertificate:
               // TODO: Handle this case.
               break;
-            case DioErrorType.connectionError:
+            case DioExceptionType.connectionError:
               // TODO: Handle this case.
               break;
           }
         } else if (error is SocketException) {
-          httpError = const HttpError.noInternetConnection();
+          httpError = NoInternetConnection();
         } else {
-          httpError = const HttpError.unexpectedError();
+          httpError = UnexpectedError();
         }
         return httpError;
       } on FormatException catch (_) {
-        return const HttpError.formatException();
+        return FormatException();
       } catch (_) {
-        return const HttpError.unexpectedError();
+        return UnexpectedError();
       }
     } else {
       if (error.toString().contains("is not a subtype of")) {
-        return const HttpError.unableToProcess();
+        print(error.toString());
+        return UnableToProcess();
       } else {
-        return const HttpError.unexpectedError();
+        return UnexpectedError();
       }
     }
   }
 
-  static String getErrorMessage(
-      BuildContext context, HttpError networkExceptions) {
-    var errorMessage = "";
-    networkExceptions.when(notImplemented: () {
-      errorMessage = "Not Implemented";
-    }, requestCancelled: () {
-      errorMessage = "Request Cancelled";
-    }, internalServerError: () {
-      errorMessage = "Internal Server Error";
-    }, notFound: (String reason) {
-      errorMessage = "Not found, please try again";
-    }, serviceUnavailable: () {
-      errorMessage = "Service unavailable, please try again";
-    }, methodNotAllowed: () {
-      errorMessage = "Method allowed, please try again";
-    }, badRequest: (String message) {
-      errorMessage = message;
-    }, unauthorisedRequest: (String message) {
-      errorMessage = message;
-    }, unexpectedError: () {
-      errorMessage = "Unexpected error occurred, please try again";
-    }, requestTimeout: () {
-      errorMessage = "Connection request timeout";
-    }, noInternetConnection: () {
-      errorMessage = "No internet connection, please try again";
-    }, conflict: () {
-      errorMessage = "Error due to a conflict, please try again";
-    }, sendTimeout: () {
-      errorMessage = "Server connection timeout, please try again";
-    }, unableToProcess: () {
-      errorMessage = "Unable to process the data, please try again";
-    }, defaultError: (responseCode) {
-      errorMessage =
-          "Unexpected error $responseCode occurred, please try again";
-    }, formatException: () {
-      errorMessage = "Unexpected error occurred, please try again";
-    }, notAcceptable: () {
-      errorMessage = "Not acceptable";
-    });
-    return errorMessage;
-  }
+  static String getErrorMessage(HttpError networkExceptions) =>
+      switch (networkExceptions) {
+        RequestCancelled() => 'Request Cancelled',
+        UnauthorisedRequest(message: String message) => message,
+        BadRequest(message: String message) => message,
+        NotFound() => 'Not found, please try again',
+        NotAcceptable() => 'Not accepted',
+        RequestTimeout() => 'Connection request timeout',
+        SendTimeout() => 'Connection request timeout',
+        Conflict() => 'Error due to a conflict, please try again',
+        InternalServerError() => 'Internal Server Error',
+        NotImplemented() => '',
+        ServiceUnavailable() => 'Service unavailable, please try again later',
+        NoInternetConnection() => 'No internet connection, please try again',
+        FormatException() => 'Unexpected error occurred, please try again',
+        UnableToProcess() => 'Unable to process the data, please try again',
+        DefaultError(errorCode: int responseCode) =>
+          'Unexpected error $responseCode occurred, please try again',
+        UnexpectedError() => 'Unexpected error occurred, please try again',
+      };
 }

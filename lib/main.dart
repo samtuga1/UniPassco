@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
               builder: (context, state) {
             return MaterialApp(
               title: 'PassCo',
-              themeMode: state == const ThemeCubitState.dark()
+              themeMode: state == DarkThemeCubitState()
                   ? ThemeMode.dark
                   : ThemeMode.light,
               theme: AppTheme.light,

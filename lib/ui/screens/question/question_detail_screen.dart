@@ -37,10 +37,10 @@ class QuestionDetailScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.r),
-                color: context.read<ThemeCubit>().state ==
-                        const ThemeCubitState.light()
-                    ? Colors.white
-                    : Colors.black,
+                color:
+                    context.read<ThemeCubit>().state == LightThemeCubitState()
+                        ? Colors.white
+                        : Colors.black,
               ),
               child: Column(
                 children: [

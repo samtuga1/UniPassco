@@ -1,10 +1,13 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
 
-part 'http_response.handler.freezed.dart';
+sealed class HttpResponse {}
 
-@freezed
-abstract class HttpResponse<T> with _$HttpResponse<T> {
-  const factory HttpResponse.succuss({required T data}) = Success<T>;
-  const factory HttpResponse.failure({required HttpError error}) = Failure<T>;
+class SuccussResponse<T> extends HttpResponse {
+  late T data;
+  SuccussResponse({required T data});
+}
+
+class ErrorResponse<T> extends HttpResponse {
+  late Error data;
+  ErrorResponse({required HttpError data});
 }

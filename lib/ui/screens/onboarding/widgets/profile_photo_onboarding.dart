@@ -84,8 +84,7 @@ class _ProfilePhotoOnboardingState extends State<ProfilePhotoOnboarding> {
           right: 0,
           left: 0,
           child: ColoredBox(
-            color: context.read<ThemeCubit>().state ==
-                    const ThemeCubitState.light()
+            color: context.read<ThemeCubit>().state == LightThemeCubitState()
                 ? Colors.white
                 : Colors.black,
             child: Padding(

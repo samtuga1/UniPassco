@@ -1,7 +1,13 @@
 part of 'themes.cubit.dart';
 
-@freezed
-class ThemeCubitState<T> with _$ThemeCubitState<T> {
-  const factory ThemeCubitState.light() = _Light<T>;
-  const factory ThemeCubitState.dark() = _Dark<T>;
+sealed class ThemeCubitState extends Equatable {}
+
+class LightThemeCubitState extends ThemeCubitState {
+  @override
+  List<Object?> get props => [];
+}
+
+class DarkThemeCubitState extends ThemeCubitState {
+  @override
+  List<Object?> get props => [];
 }
