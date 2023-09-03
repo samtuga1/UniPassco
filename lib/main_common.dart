@@ -1,16 +1,17 @@
+import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/config/global_configuration.dart';
-import 'package:passco/cubits/theme/themes.cubit.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/injectable/injection.dart';
-import 'package:passco/router/app_router.dart';
+import 'package:campuspulse/config/global_configuration.dart';
+import 'package:campuspulse/cubits/theme/themes.cubit.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/injectable/injection.dart';
+import 'package:campuspulse/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:passco/utils/helpers.dart';
+import 'package:campuspulse/utils/helpers.dart';
 
-void main() async {
+Future<void> mainCommon(String envConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GlobalConfiguration().loadFromAsset();
+  await GlobalConfiguration().loadFromAsset(envConfig);
   await configureDependencies();
   await Helpers.precacheSvgs();
   runApp(const MyApp());
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<ThemeCubit>(
           create: (_) => getIt<ThemeCubit>()..setThemeFromSharePreference(),
         ),
+        BlocProvider<AuthenticationBloc>(
+          create: (_) => getIt<AuthenticationBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
@@ -35,7 +39,7 @@ class MyApp extends StatelessWidget {
           return BlocBuilder<ThemeCubit, ThemeCubitState>(
               builder: (context, state) {
             return MaterialApp(
-              title: 'PassCo',
+              title: 'campuspulse',
               themeMode: state == DarkThemeCubitState()
                   ? ThemeMode.dark
                   : ThemeMode.light,

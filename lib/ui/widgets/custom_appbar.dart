@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/utils.dart';
 
 class CustomAppBar extends PreferredSize {
   CustomAppBar({

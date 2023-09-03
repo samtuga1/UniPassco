@@ -1,22 +1,33 @@
 import 'dart:async';
 
+import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
+import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/router/routes.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/router/routes.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/utils.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  VerificationScreen({super.key, this.email});
+  String? email;
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  int time = 10;
+  late String email;
+
+  String pin = '';
+
+  // time in seconds before you can resend the token
+  int time = 120;
+
+  // helper to toggle visibility of timer chip
   bool showTimerChip = false;
   Timer? retryTimer;
   void startTimer() {
@@ -43,8 +54,17 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    email =
+        widget.email ?? ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(
+        leadingTapped: () => UiUtils.customDialog(
+          context,
+          title: 'Are you sure you want to go back?',
+          'This will terminate the verification process but don\'t worry, you will be re-directed here ones you try logging back in with the same email',
+          onTap: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SafeArea(
@@ -64,7 +84,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   style: context.getTheme.textTheme.displayMedium,
                 ),
                 CustomText(
-                  'We’ve sent a code to nathan@gmail.com',
+                  'We’ve sent a code to $email',
                   textAlign: TextAlign.center,
                   style: context.getTheme.textTheme.labelMedium,
                 ),
@@ -86,17 +106,67 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     style: context.getTheme.textTheme.displayMedium!,
                     textFieldAlignment: MainAxisAlignment.spaceAround,
                     fieldStyle: FieldStyle.box,
-                    onCompleted: (pin) {},
+                    onChanged: (value) => pin = value,
+                    onCompleted: (pin) {
+                      context.read<AuthenticationBloc>().add(
+                            VerifyEmail(email: email, token: pin),
+                          );
+                    },
                   ),
                 ),
                 51.verticalSpace,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: CustomElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(Routes.onbardingScreen);
+                  child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                    listener: (context, state) {
+                      if (state is VerifyTokenSuccess) {
+                        // navigate to onboarding screen if success
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.onbardingScreen,
+                          arguments: email,
+                          (_) => false,
+                        );
+
+                        UiUtils.flush(
+                          context,
+                          errorState: ErrorState.success,
+                          title: 'Success',
+                          msg: 'Email verification was successfull',
+                        );
+                      } else if (state is VerifyTokenError) {
+                        // show flush bar if there is an error
+                        UiUtils.showStandardErrorFlushBar(
+                          context,
+                          message: HttpErrorUtils.getErrorMessage(state.error),
+                        );
+                      }
                     },
-                    title: 'Verify',
+                    listenWhen: (previous, current) =>
+                        current is VerifyTokenError ||
+                        current is VerifyTokenSuccess,
+                    builder: (context, state) {
+                      return CustomElevatedButton(
+                        isBusy: state is VerifyingToken,
+                        onPressed: () {
+                          if (pin.trim().length != 4) {
+                            UiUtils.flush(
+                              context,
+                              errorState: ErrorState.warning,
+                              msg: 'Verification pin cannot be empty',
+                            );
+                          } else {
+                            context.read<AuthenticationBloc>().add(
+                                  VerifyEmail(email: email, token: pin),
+                                );
+                          }
+                        },
+                        title: 'Verify',
+                      );
+                    },
+                    buildWhen: (previous, current) =>
+                        current is VerifyingToken ||
+                        current is VerifyTokenSuccess ||
+                        current is VerifyTokenError,
                   ),
                 ),
                 24.verticalSpace,

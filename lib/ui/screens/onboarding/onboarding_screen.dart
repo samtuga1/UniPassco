@@ -1,34 +1,48 @@
+import 'package:campuspulse/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/ui/screens/onboarding/widgets/onboarding_stepper.dart';
-import 'package:passco/ui/screens/onboarding/widgets/profile_photo_onboarding.dart';
-import 'package:passco/ui/screens/onboarding/widgets/programme_onboarding.dart';
-import 'package:passco/ui/widgets/widgets.dart';
+import 'package:campuspulse/ui/screens/onboarding/widgets/onboarding_stepper.dart';
+import 'package:campuspulse/ui/screens/onboarding/widgets/profile_photo_onboarding.dart';
+import 'package:campuspulse/ui/screens/onboarding/widgets/programme_onboarding.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  OnboardingScreen({super.key, this.email});
+  String? email;
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  late String email;
+
   late PageController _pageController;
 
   bool firstPageComplete = false;
 
   void handleAppbarLeadingTap() {
     _pageController.page == 0
-        ? Navigator.of(context).pop()
-        : () {
-            setState(() {
-              firstPageComplete = false;
-            });
-            _pageController.previousPage(
-              duration: const Duration(milliseconds: 800),
-              curve: Curves.fastEaseInToSlowEaseOut,
-            );
-          }.call();
+        ? UiUtils.customDialog(
+            context,
+            title: 'Are you sure you want to go back?',
+            'This will terminate the onboarding process but don\'t worry, you will be re-directed here ones you try logging back in with the same email',
+            onTap: () => Navigator.of(context).pop(),
+          )
+        : UiUtils.customDialog(
+            context,
+            title: 'Are you sure you want to go back?',
+            'This will terminate the onboarding process but don\'t worry, you will be re-directed here ones you try logging back in with the same email',
+            onTap: () {
+              setState(() {
+                firstPageComplete = false;
+              });
+              _pageController.previousPage(
+                duration: const Duration(milliseconds: 800),
+                curve: Curves.fastEaseInToSlowEaseOut,
+              );
+            },
+          );
   }
 
   @override
@@ -39,6 +53,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    email =
+        widget.email ?? ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: CustomAppBar(
         leadingTapped: () => handleAppbarLeadingTap(),
@@ -56,6 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 ProgrammeOnboarding(
+                  email: email,
                   onTap: () {
                     setState(() {
                       firstPageComplete = true;
@@ -66,7 +83,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     );
                   },
                 ),
-                const ProfilePhotoOnboarding(),
+                ProfilePhotoOnboarding(
+                  email: email,
+                ),
               ],
             ),
           ),

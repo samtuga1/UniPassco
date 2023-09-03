@@ -41,6 +41,8 @@ class FormatException extends HttpError {}
 
 class UnableToProcess extends HttpError {}
 
+class Unknown extends HttpError {}
+
 class DefaultError extends HttpError {
   late int errorCode;
   DefaultError(this.errorCode);
@@ -48,7 +50,7 @@ class DefaultError extends HttpError {
 
 class UnexpectedError extends HttpError {}
 
-class HttpUtils {
+class HttpErrorUtils {
   static HttpError getDioException(error) {
     if (error is Exception) {
       try {
@@ -63,7 +65,7 @@ class HttpUtils {
               httpError = RequestTimeout();
               break;
             case DioExceptionType.unknown:
-              httpError = NoInternetConnection();
+              httpError = Unknown();
               break;
             case DioExceptionType.receiveTimeout:
               httpError = SendTimeout();
@@ -83,7 +85,8 @@ class HttpUtils {
                   httpError = InternalServerError();
                   break;
                 case 404:
-                  httpError = NotFound(message: "");
+                  httpError =
+                      NotFound(message: error.response!.data['message']);
                   break;
                 case 409:
                   httpError = Conflict();
@@ -137,7 +140,8 @@ class HttpUtils {
         RequestCancelled() => 'Request Cancelled',
         UnauthorisedRequest(message: String message) => message,
         BadRequest(message: String message) => message,
-        NotFound() => 'Not found, please try again',
+        NotFound(message: String message) =>
+          message.isEmpty ? 'Not found, please try again' : message,
         NotAcceptable() => 'Not accepted',
         RequestTimeout() => 'Connection request timeout',
         SendTimeout() => 'Connection request timeout',
@@ -151,5 +155,6 @@ class HttpUtils {
         DefaultError(errorCode: int responseCode) =>
           'Unexpected error $responseCode occurred, please try again',
         UnexpectedError() => 'Unexpected error occurred, please try again',
+        Unknown() => 'Something went wrong, please try again later',
       };
 }

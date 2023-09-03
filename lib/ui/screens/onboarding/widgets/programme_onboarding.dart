@@ -1,14 +1,23 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
+import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/utils.dart';
 
 class ProgrammeOnboarding extends StatefulWidget {
-  const ProgrammeOnboarding({super.key, required this.onTap});
+  const ProgrammeOnboarding({
+    super.key,
+    required this.onTap,
+    required this.email,
+  });
   final VoidCallback onTap;
+  final String email;
 
   @override
   State<ProgrammeOnboarding> createState() => _ProgrammeOnboardingState();
@@ -54,7 +63,6 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
           CustomTextFieldWidget(
             controller: selectedProgramme,
             suffixIconConstraints: const BoxConstraints(minWidth: 45),
-            style: context.getTheme.textTheme.labelMedium,
             suffixIconColor: context.getTheme.hintColor,
             readOnly: true,
             onTap: () => UiUtils.showBottomSheet(
@@ -69,6 +77,7 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                 child: Column(
                   children: [
                     CustomTextFieldWidget(
+                      validator: null,
                       prefixIcon: SvgPicture.asset(AppImages.search),
                       borderRadius: 31,
                       hintText: 'Search Programmes',
@@ -108,9 +117,35 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
             ),
           ),
           200.verticalSpace,
-          CustomElevatedButton(
-            onPressed: widget.onTap,
-            title: 'Next',
+          BlocConsumer<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+              if (state is OnboardUserSuccess) {
+                widget.onTap.call();
+              } else if (state is OnboardUserError) {
+                UiUtils.showStandardErrorFlushBar(
+                  context,
+                  message: HttpErrorUtils.getErrorMessage(state.error),
+                );
+              }
+            },
+            listenWhen: (prev, current) =>
+                current is OnboardUserError || current is OnboardUserSuccess,
+            builder: (context, state) {
+              return CustomElevatedButton(
+                isBusy: state is OnboardingUser,
+                onPressed: () => context.read<AuthenticationBloc>().add(
+                      OnboardUser(
+                        email: widget.email.trim(),
+                        programme: selectedProgramme.text.trim(),
+                      ),
+                    ),
+                title: 'Next',
+              );
+            },
+            buildWhen: (prev, current) =>
+                current is OnboardingUser ||
+                current is OnboardUserError ||
+                current is OnboardUserSuccess,
           ),
         ],
       ),

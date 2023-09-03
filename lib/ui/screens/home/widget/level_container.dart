@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/router/routes.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/router/routes.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/utils.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class LevelContainer extends StatelessWidget {
   const LevelContainer({
@@ -34,30 +34,32 @@ class LevelContainer extends StatelessWidget {
                   style: context.getTheme.textTheme.titleMedium,
                 ),
                 6.verticalSpace,
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomText(
-                        'Get Started',
-                        style: context.getTheme.textTheme.bodySmall,
+                Skeleton.ignore(
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    decoration: ShapeDecoration(
+                      color: context.getTheme.canvasColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
                       ),
-                      6.horizontalSpace,
-                      const Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: 16,
-                      )
-                    ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          'Get Started',
+                          style: context.getTheme.textTheme.bodySmall,
+                        ),
+                        6.horizontalSpace,
+                        const Icon(
+                          CupertinoIcons.chevron_forward,
+                          size: 16,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

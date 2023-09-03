@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/cubits/theme/themes.cubit.dart';
-import 'package:passco/utils/extensions.dart';
+import 'package:campuspulse/cubits/theme/themes.cubit.dart';
+import 'package:campuspulse/utils/extensions.dart';
 
 import 'widgets.dart';
 
@@ -45,7 +44,7 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!Platform.isIOS) {
+    if (Platform.isIOS) {
       return StatefulBuilder(builder: (ctx, setState) {
         final isLightMode =
             context.read<ThemeCubit>().state == LightThemeCubitState();
@@ -53,7 +52,7 @@ class CustomElevatedButton extends StatelessWidget {
         // check if its light mode
         Color buttonColor = isLightMode ? Colors.black : Colors.white;
         return GestureDetector(
-          onTap: isValidated! ? onPressed : null,
+          onTap: (isValidated! && isBusy == false) ? onPressed : null,
           onTapDown: (tapDetails) {
             setState(() {
               if (isLightMode) {
@@ -76,8 +75,8 @@ class CustomElevatedButton extends StatelessWidget {
             color: buttonColor,
             padding: const EdgeInsets.symmetric(vertical: 13),
             borderRadius: BorderRadius.circular(borderRadius ?? 12),
-            onPressed: isValidated! ? onPressed : null,
-            disabledColor: buttonColor.withOpacity(0.75),
+            onPressed: (isValidated! && isBusy == false) ? onPressed : null,
+            disabledColor: buttonColor.withOpacity(0.5),
             child: !isBusy
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +89,7 @@ class CustomElevatedButton extends StatelessWidget {
                     ],
                   )
                 : Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 3),
                     child: Loading(
                       color: context.getTheme.canvasColor,
                       height: 15,
@@ -102,26 +101,26 @@ class CustomElevatedButton extends StatelessWidget {
       });
     }
     return ElevatedButton(
-      onPressed: isValidated! ? onPressed : null,
+      onPressed: isValidated! && !isBusy ? onPressed : null,
       style: ElevatedButton.styleFrom(
-        elevation: 0,
-        padding: padding ?? const EdgeInsets.symmetric(vertical: 10),
-        shape: addBorder
-            ? RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    borderRadius == null ? 12 : borderRadius! + 5),
-                side: const BorderSide(
-                  width: 1.2,
+          elevation: 0,
+          padding: padding ?? const EdgeInsets.symmetric(vertical: 13),
+          shape: addBorder
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      borderRadius == null ? 12 : borderRadius! + 5),
+                  side: const BorderSide(
+                    width: 1.2,
+                  ),
+                )
+              : RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(borderRadius ?? 12),
                 ),
-              )
-            : RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadius ?? 12),
-              ),
-        backgroundColor: !isBusy
-            ? context.getTheme.primaryColor
-            : context.getTheme.primaryColor.withOpacity(0.5),
-      ),
+          disabledBackgroundColor:
+              context.getTheme.primaryColor.withOpacity(0.5),
+          backgroundColor: context.getTheme.primaryColor),
       child: SizedBox(
+        height: 22,
         child: !isBusy
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,

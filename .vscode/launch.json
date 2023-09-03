@@ -1,0 +1,18 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "campuspulse_stage",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_stage.dart",
+        },
+        {
+            "name": "campuspulse_prod",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_prod.dart",
+        },
+       
+    ]
+}

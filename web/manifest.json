@@ -1,6 +1,6 @@
 {
-    "name": "passco",
-    "short_name": "passco",
+    "name": "campuspulse",
+    "short_name": "campuspulse",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

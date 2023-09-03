@@ -1,7 +1,8 @@
+import 'package:campuspulse/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/utils/extensions.dart';
+import 'package:campuspulse/utils/extensions.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final String? labelText, hintText;
@@ -38,11 +39,11 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.suffixIconColor,
     this.keyboardType = TextInputType.text,
-    this.validator,
+    this.validator = Validators.validateEmpty,
     this.onChanged,
     this.onSaved,
     this.prefixStyle,
-    this.filled = false,
+    this.filled = true,
     this.suffixStyle,
     this.textColor,
     this.style,
@@ -106,7 +107,8 @@ class CustomTextFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         counterText:
             enteredText == null ? null : '${enteredText!.length}/$maxLength',
-        fillColor: fillColor ?? context.getTheme.primaryColor.withOpacity(0.05),
+        fillColor:
+            fillColor ?? context.getTheme.primaryColor.withOpacity(0.025),
         contentPadding: contentPadding ??
             const EdgeInsets.symmetric(horizontal: 17, vertical: 12),
         filled: filled,
@@ -119,12 +121,12 @@ class CustomTextFieldWidget extends StatelessWidget {
                     context.getTheme.primaryColor.withOpacity(0.5),
               ),
               borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 12),
+                Radius.circular(borderRadius ?? 8),
               ),
             ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius ?? 12),
+            Radius.circular(borderRadius ?? 8),
           ),
         ),
         enabledBorder: enabledBorder ??
@@ -134,7 +136,7 @@ class CustomTextFieldWidget extends StatelessWidget {
                 color: borderColor ?? const Color(0xFFE4E4E4),
               ),
               borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 12),
+                Radius.circular(borderRadius ?? 8),
               ),
             ),
         suffixIconColor: suffixIconColor ?? context.getTheme.primaryColor,
@@ -144,13 +146,13 @@ class CustomTextFieldWidget extends StatelessWidget {
                 color: borderColor ?? context.getTheme.primaryColor,
               ),
               borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 12),
+                Radius.circular(borderRadius ?? 8),
               ),
             ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 0.50),
           borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius ?? 12),
+            Radius.circular(borderRadius ?? 8),
           ),
         ),
         labelText: addHint

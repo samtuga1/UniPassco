@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/ui/widgets/custom_text_field.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/ui/widgets/custom_text_field.dart';
+import 'package:campuspulse/utils/utils.dart';
 
 import '../../../../data/data.dart';
 

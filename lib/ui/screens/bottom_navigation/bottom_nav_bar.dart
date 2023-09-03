@@ -1,6 +1,7 @@
+import 'package:campuspulse/ui/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:passco/ui/screens/home/home.dart';
+import 'package:campuspulse/ui/screens/home/home.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -15,7 +16,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const HomeScreen(),
     Container(),
     Container(),
-    Container(),
+    const SettingsScreen(),
   ];
 
   void onBottomNavItemTap(int index) {

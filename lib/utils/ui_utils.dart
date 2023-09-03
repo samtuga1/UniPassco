@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:another_flushbar/flushbar.dart';
+import 'package:campuspulse/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/extensions.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/extensions.dart';
 
 class UiUtils {
   UiUtils._();
@@ -156,5 +158,81 @@ class UiUtils {
         ),
       ),
     ).then((value) => onEnd != null ? onEnd(value) : () {});
+  }
+
+  static void flush(
+    BuildContext context, {
+    String? title,
+    String? msg,
+    required ErrorState errorState,
+  }) {
+    Flushbar(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: const EdgeInsets.only(top: 15, left: 10, right: 10),
+        borderRadius: BorderRadius.circular(8),
+        barBlur: 50.0,
+        icon: errorState == ErrorState.error
+            ? const Icon(
+                Icons.cancel,
+                color: Colors.white,
+              )
+            : errorState == ErrorState.warning
+                ? const Icon(
+                    Icons.warning_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  )
+                : const Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
+        duration: const Duration(milliseconds: 4000),
+        flushbarPosition: FlushbarPosition.TOP,
+        backgroundGradient: LinearGradient(
+          colors: errorState == ErrorState.error
+              ? [Colors.red.shade600, Colors.redAccent.shade400]
+              : errorState == ErrorState.warning
+                  ? [Colors.amber.shade600, Colors.amber.shade400]
+                  : [Colors.green.shade600, Colors.greenAccent.shade400],
+          stops: const [0.6, 1],
+        ),
+        boxShadows: const [
+          BoxShadow(
+            color: Colors.black45,
+            offset: Offset(3, 3),
+            blurRadius: 3,
+          ),
+        ],
+        dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+        // The default curve is Curves.easeOut
+        forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+        titleText: CustomText(
+          title ?? 'Alert',
+          style: context.getTheme.textTheme.displayMedium!.copyWith(
+            color: context.getTheme.canvasColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        messageText: CustomText(
+          msg ?? 'Alert message',
+          style: context.getTheme.textTheme.bodyMedium!.copyWith(
+            color: context.getTheme.canvasColor,
+            fontWeight: FontWeight.w500,
+            fontSize: 16.sp,
+          ),
+        )).show(context);
+  }
+
+  static void showStandardErrorFlushBar(
+    BuildContext context, {
+    String? title,
+    String? message,
+  }) {
+    flush(
+      context,
+      msg: message ?? 'Something unexpected happened. Please try again',
+      title: title ?? 'That\'s weird',
+      errorState: ErrorState.error,
+    );
   }
 }

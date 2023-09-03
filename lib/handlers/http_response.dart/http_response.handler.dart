@@ -1,13 +1,13 @@
-import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 
-sealed class HttpResponse {}
+sealed class HttpResponse<T> {}
 
-class SuccussResponse<T> extends HttpResponse {
+class SuccussResponse<T> implements HttpResponse<T> {
   late T data;
-  SuccussResponse({required T data});
+  SuccussResponse({required this.data});
 }
 
-class ErrorResponse<T> extends HttpResponse {
-  late Error data;
-  ErrorResponse({required HttpError data});
+class ErrorResponse<T> implements HttpResponse<T> {
+  late HttpError error;
+  ErrorResponse({required this.error});
 }

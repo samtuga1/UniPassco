@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:passco/interfaces/shared_preferences.interface.dart';
+import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable(as: ISharedPreference)
@@ -14,7 +14,7 @@ class SharedPreference implements ISharedPreference {
 
   @override
   Future getBool(String path) async {
-    return prefs.getBool(path);
+    return prefs.getBool(path) ?? false;
   }
 
   @override
@@ -30,5 +30,10 @@ class SharedPreference implements ISharedPreference {
   @override
   Future<void> setBool(String path, bool value) async {
     prefs.setBool(path, value);
+  }
+
+  @override
+  Future<void> clear() async {
+    await prefs.clear();
   }
 }

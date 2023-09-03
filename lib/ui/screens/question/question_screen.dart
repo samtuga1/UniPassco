@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/ui/screens/question/widget/question_widget.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/ui/screens/question/widget/question_widget.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/utils.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key});

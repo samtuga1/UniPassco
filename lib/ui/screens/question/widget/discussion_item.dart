@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/extensions.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/extensions.dart';
 
 class DiscussionItem extends StatelessWidget {
   const DiscussionItem({super.key});

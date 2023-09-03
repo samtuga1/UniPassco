@@ -1,10 +1,14 @@
+import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
+import 'package:campuspulse/injectable/injection.dart';
+import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
+import 'package:campuspulse/models/auth/data/user_model.dart';
+import 'package:campuspulse/ui/screens/home/widget/home_widget.dart';
+import 'package:campuspulse/ui/screens/home/widget/skeleton.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/ui/screens/home/widget/level_container.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,139 +16,32 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        children: [
-          55.verticalSpace,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 26.r,
-                backgroundImage: AssetImage(AppImages.animoji_1),
-              ),
-              7.horizontalSpace,
-              Expanded(
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) => switch (state) {
+          RetrievingUser() => const HomeSkeleton(),
+          RetrievingUserSuccess(user: User _) => const HomeWidget(),
+          RetrievingUserError(error: HttpError error) => SizedBox(
+              child: Center(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomText(
-                      'Hi Samuel, 🚀',
-                      style: context.getTheme.textTheme.titleLarge,
+                      HttpErrorUtils.getErrorMessage(error),
                     ),
-                    CustomText(
-                      'Find the resources you need to pass your exams',
-                      softWrap: true,
-                      style: context.getTheme.textTheme.labelMedium!
-                          .copyWith(fontSize: 13.5),
-                    ),
+                    TextButton(
+                        onPressed: () async {
+                          context.read<AuthenticationBloc>().add(
+                                RetrieveUser(),
+                              );
+                        },
+                        child: const Text('Try again')),
                   ],
                 ),
               ),
-            ],
-          ),
-          21.verticalSpace,
-          CustomTextFieldWidget(
-            readOnly: true,
-            contentPadding: const EdgeInsets.symmetric(vertical: 9),
-            prefixIcon: SvgPicture.asset(AppImages.search),
-            borderColor: context.getTheme.scaffoldBackgroundColor,
-            borderRadius: 31,
-            hintText: 'Search Programmes',
-            fillColor: const Color(0xFFF4F5F6),
-            filled: true,
-          ),
-          27.verticalSpace,
-          Row(
-            children: [
-              Flexible(
-                child: LevelContainer(
-                  levelText: 'Level 100',
-                  assetPath: AppImages.level_container_1,
-                ),
-              ),
-              16.horizontalSpace,
-              Flexible(
-                child: LevelContainer(
-                  levelText: 'Level 200',
-                  assetPath: AppImages.level_container_2,
-                ),
-              ),
-            ],
-          ),
-          17.verticalSpace,
-          Row(
-            children: [
-              Flexible(
-                child: LevelContainer(
-                  levelText: 'Level 300',
-                  assetPath: AppImages.level_container_3,
-                ),
-              ),
-              16.horizontalSpace,
-              Flexible(
-                child: LevelContainer(
-                  levelText: 'Level 400',
-                  assetPath: AppImages.level_container_4,
-                ),
-              ),
-            ],
-          ),
-          27.verticalSpace,
-          Container(
-            padding: const EdgeInsets.only(
-              top: 11,
-              left: 20,
-              right: 21,
-              bottom: 14,
             ),
-            clipBehavior: Clip.antiAlias,
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(23.64),
-              ),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  AppImages.books,
-                  height: 55,
-                  width: 55,
-                ),
-                18.horizontalSpace,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        'Contribute Resources',
-                        style: context.getTheme.textTheme.titleMedium,
-                      ),
-                      3.verticalSpace,
-                      CustomText(
-                        'Got some past questions available you want to share ?',
-                        style: context.getTheme.textTheme.labelMedium,
-                        softWrap: true,
-                      ),
-                      3.verticalSpace,
-                      CustomAdaptiveTextButton(
-                        onTap: () {},
-                        text: 'Click to resend',
-                        style: context.getTheme.textTheme.labelMedium?.copyWith(
-                          color: const Color(0xFF0F96FF),
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          35.verticalSpace,
-        ],
+          _ => const HomeWidget(),
+        },
       ),
     );
   }

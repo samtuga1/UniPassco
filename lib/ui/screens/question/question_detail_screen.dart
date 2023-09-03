@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:passco/cubits/theme/themes.cubit.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/ui/screens/question/widget/discussion_item.dart';
-import 'package:passco/ui/screens/question/widget/message_box.dart';
-import 'package:passco/ui/screens/question/widget/question_container.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/extensions.dart';
+import 'package:campuspulse/cubits/theme/themes.cubit.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/ui/screens/question/widget/discussion_item.dart';
+import 'package:campuspulse/ui/screens/question/widget/message_box.dart';
+import 'package:campuspulse/ui/screens/question/widget/question_container.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/extensions.dart';
 
 class QuestionDetailScreen extends StatelessWidget {
   const QuestionDetailScreen({super.key});

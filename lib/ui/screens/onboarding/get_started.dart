@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:passco/data/data.dart';
-import 'package:passco/router/routes.dart';
-import 'package:passco/ui/widgets/widgets.dart';
-import 'package:passco/utils/utils.dart';
+import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/router/routes.dart';
+import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:campuspulse/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -40,7 +40,9 @@ class GetStartedScreen extends StatelessWidget {
                   left: 27,
                   child: Image.asset(
                     AppImages.get_started_male,
-                    width: MediaQuery.of(context).size.width < 390 ? 220 : null,
+                    width: MediaQuery.sizeOf(context).width < 390
+                        ? MediaQuery.sizeOf(context).height * 0.3
+                        : MediaQuery.sizeOf(context).height * 0.25,
                   ),
                 ),
                 Positioned(
@@ -48,7 +50,9 @@ class GetStartedScreen extends StatelessWidget {
                   right: 27,
                   child: Image.asset(
                     AppImages.get_started_female,
-                    width: MediaQuery.of(context).size.width < 390 ? 210 : null,
+                    width: MediaQuery.sizeOf(context).width < 390
+                        ? MediaQuery.sizeOf(context).height * 0.3
+                        : MediaQuery.sizeOf(context).height * 0.25,
                   ),
                 ),
               ]),

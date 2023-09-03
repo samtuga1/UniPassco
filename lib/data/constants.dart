@@ -1,4 +1,17 @@
 import 'package:flutter/material.dart';
 
-const kAppLogo = Icon(Icons.book);
-const kThemeString = 'theme_state';
+const PROD_CONFIG = "prod_config";
+const STG_CONFIG = "stage_config";
+
+class Constants {
+  static const kAppLogo = Icon(Icons.book);
+  static const kThemeString = 'theme_state';
+  static const http_token = 'token';
+  static const hasSignedUp = 'hasSignedUp';
+  static const hasLoggedIn = 'hasLoggedIn';
+  static const hasFinishedOnboarding = 'hasFinishedOnboarding';
+  static const userEmail = 'email';
+  static const hasVerifiedEmail = 'hasVerifiedEmail';
+  static const userKey = 'user';
+  static const userIdKey = 'userId';
+}

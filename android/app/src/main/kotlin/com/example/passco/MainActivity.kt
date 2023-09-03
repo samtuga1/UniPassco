@@ -1,4 +1,4 @@
-package com.example.passco
+package com.example.campuspulse
 
 import io.flutter.embedding.android.FlutterActivity
 

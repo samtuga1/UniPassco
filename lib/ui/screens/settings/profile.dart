@@ -4,11 +4,11 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:passco/cubits/theme/themes.cubit.dart';
-// import 'package:passco/data/data.dart';
-// import 'package:passco/injectable/injection.dart';
-// import 'package:passco/ui/widgets/custom_listtile.dart';
-// import 'package:passco/utils/utils.dart';
+// import 'package:campuspulse/cubits/theme/themes.cubit.dart';
+// import 'package:campuspulse/data/data.dart';
+// import 'package:campuspulse/injectable/injection.dart';
+// import 'package:campuspulse/ui/widgets/custom_listtile.dart';
+// import 'package:campuspulse/utils/utils.dart';
 // import 'package:random_avatar/random_avatar.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 

@@ -13,4 +13,7 @@ abstract class ISharedPreference {
 
   // Remove data from device storage
   Future<void> remove(String path);
+
+  // Clear all preferences stored in memory
+  Future<void> clear();
 }

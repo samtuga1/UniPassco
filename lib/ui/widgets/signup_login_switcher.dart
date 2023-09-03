@@ -1,18 +1,24 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:passco/ui/screens/signin/signin.dart';
-import 'package:passco/ui/screens/signup/signup.dart';
+import 'package:campuspulse/ui/screens/signin/signin.dart';
+import 'package:campuspulse/ui/screens/signup/signup.dart';
 
 class LoginSignUpSwitch extends StatefulWidget {
-  static const routeName = 'login_signup';
-  const LoginSignUpSwitch({super.key});
+  const LoginSignUpSwitch({super.key, this.showLogin = true});
+  final bool showLogin;
 
   @override
   State<LoginSignUpSwitch> createState() => _LoginSignUpSwitchState();
 }
 
 class _LoginSignUpSwitchState extends State<LoginSignUpSwitch> {
-  bool showLogin = true;
+  late bool showLogin;
+
+  @override
+  void initState() {
+    showLogin = widget.showLogin;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
