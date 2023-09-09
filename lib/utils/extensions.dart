@@ -11,3 +11,12 @@ extension Spaces on double {
   Widget get vertical => SizedBox(height: h);
   Widget get horizontal => SizedBox(width: w);
 }
+
+extension DebugBorder on Widget {
+  Widget get debugBorder => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),
+        ),
+        child: this,
+      );
+}

@@ -81,8 +81,6 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                       prefixIcon: SvgPicture.asset(AppImages.search),
                       borderRadius: 31,
                       hintText: 'Search Programmes',
-                      fillColor: const Color(0xFFF4F5F6),
-                      filled: true,
                     ),
                     StatefulBuilder(builder: (ctx, setState) {
                       return Column(

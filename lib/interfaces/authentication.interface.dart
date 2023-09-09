@@ -2,6 +2,7 @@ import 'package:campuspulse/handlers/http_response.dart/http_response.handler.da
 import 'package:campuspulse/models/auth/data/user_model.dart';
 import 'package:campuspulse/models/auth/requests/login_request.dart';
 import 'package:campuspulse/models/auth/requests/onboarding_request.dart';
+import 'package:campuspulse/models/auth/requests/reset_password.dart';
 import 'package:campuspulse/models/auth/requests/signup_request.dart';
 import 'package:campuspulse/models/auth/responses/login_response.dart';
 
@@ -27,4 +28,10 @@ abstract class IAuthentication {
   });
 
   Future<HttpResponse<User>> retrieveUser();
+
+  Future<HttpResponse> requestResetPasswordToken({required String email});
+
+  Future<HttpResponse> resetPassword({
+    required ResetPasswordRequest request,
+  });
 }

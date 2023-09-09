@@ -5,7 +5,7 @@ import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
 import 'package:campuspulse/models/auth/data/user_model.dart';
 import 'package:campuspulse/ui/screens/home/widget/home_widget.dart';
-import 'package:campuspulse/ui/screens/home/widget/skeleton.dart';
+import 'package:campuspulse/ui/screens/home/widget/home_skeleton.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

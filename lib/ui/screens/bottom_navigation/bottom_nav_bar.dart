@@ -1,3 +1,5 @@
+import 'package:campuspulse/ui/screens/bookmark/bookmark_screen.dart';
+import 'package:campuspulse/ui/screens/downloads/downloads_screen.dart';
 import 'package:campuspulse/ui/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -14,8 +16,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int selectedIndex = 0;
   List<Widget> pages = [
     const HomeScreen(),
-    Container(),
-    Container(),
+    const BookmarksScreen(),
+    const DownloadsScreen(),
     const SettingsScreen(),
   ];
 

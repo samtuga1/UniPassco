@@ -8,6 +8,7 @@ import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
 import 'package:campuspulse/models/auth/data/user_model.dart';
 import 'package:campuspulse/models/auth/requests/login_request.dart';
 import 'package:campuspulse/models/auth/requests/onboarding_request.dart';
+import 'package:campuspulse/models/auth/requests/reset_password.dart';
 import 'package:campuspulse/models/auth/requests/signup_request.dart';
 import 'package:campuspulse/models/auth/responses/login_response.dart';
 import 'package:equatable/equatable.dart';
@@ -30,6 +31,51 @@ class AuthenticationBloc
     on<UploadProfilePicture>(_uploadProfilePicture);
     on<LoginAccount>(_loginUser);
     on<RetrieveUser>(_retrieveUser);
+    on<RequestPasswordReset>(_requestResetPassword);
+    on<ResetPassword>(_resetPassword);
+  }
+
+  Future<void> _resetPassword(
+    ResetPassword event,
+    Emitter emit,
+  ) async {
+    emit(ResettingPassword());
+
+    final resetPasswordRequest = ResetPasswordRequest(
+      email: event.email,
+      token: event.token,
+      password: event.password,
+    );
+
+    final HttpResponse response = await authService.resetPassword(
+      request: resetPasswordRequest,
+    );
+
+    switch (response) {
+      case SuccussResponse():
+        emit(ResettingPasswordSuccess());
+
+      case ErrorResponse(error: HttpError error):
+        emit(ResettingPasswordError(error: error));
+    }
+  }
+
+  Future<void> _requestResetPassword(
+    RequestPasswordReset event,
+    Emitter emit,
+  ) async {
+    emit(RequestingPasswordReset());
+
+    final HttpResponse response =
+        await authService.requestResetPasswordToken(email: event.email);
+
+    switch (response) {
+      case SuccussResponse():
+        emit(RequestPasswordResetSuccess());
+
+      case ErrorResponse(error: HttpError error):
+        emit(RequestPasswordResetError(error: error));
+    }
   }
 
   Future<void> _retrieveUser(RetrieveUser event, Emitter emit) async {

@@ -6,11 +6,10 @@ class AppImages {
 
   static String get_started_female = 'assets/images/get_started_female.png';
   static String get_started_male = 'assets/images/get_started_male.png';
-  static String ug =
-      'https://s3-alpha-sig.figma.com/img/de8a/b680/798d79fb41eeba64054e616d0fe9db89?Expires=1693785600&Signature=XyXKJ4ZA-eOAInMj8muBlQvqA1djOoo3dl1dyGCe9eqmDwjL8Em4CBIMqTukAGAayzpZ2Chz7MiHm4drKgJq7a39TgiuYpfQ96PHxl8XBKa2FYdRtsfZWYqA5dBCl2WSk2~WMqicbAWMFR3HUk-vkkclSjOeEtZGCjTcEcuAB6sPpmG~Ng10SSufEc0CKSb6ZAP~2X5ecU~knPSjoyfrU1~3ZroVx2DMyktCTjnWXSr1QeMAtOHN3e3hz3K6Zw9yPjpeLRHDpCGF0IFZKMinMFQZCgYsd-f-fdBk2rVXdHL7~ucsHGLC3rdcmTeHPihUulTS4OqmV2H2SD7ORUSdng__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
   static String get_started_curve = 'assets/images/get_started_curve.png';
   static String image = 'assets/images/image.png';
   static String arrow_right = 'assets/svgs/arrow_right.svg';
+  static String share = 'assets/svgs/share.svg';
   static String email = 'assets/svgs/email.svg';
   static String pdf_icon = 'assets/images/pdf.png';
   static String jpeg_icon = 'assets/images/jpeg.png';
@@ -44,4 +43,5 @@ class AppImages {
   static String level_container_4 =
       'assets/images/onboarding/level_container_4.png';
   static String books = 'assets/images/onboarding/books.png';
+  static String circle_wave = 'assets/images/circle_wave.png';
 }

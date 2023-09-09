@@ -2,6 +2,7 @@ import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/interceptors/http_access_token.interceptor.dart';
 import 'package:campuspulse/models/auth/requests/login_request.dart';
 import 'package:campuspulse/models/auth/requests/onboarding_request.dart';
+import 'package:campuspulse/models/auth/requests/reset_password.dart';
 import 'package:campuspulse/models/auth/requests/signup_request.dart';
 import 'package:campuspulse/models/auth/responses/login_response.dart';
 import 'package:dio/dio.dart';
@@ -122,6 +123,40 @@ class AuthenticationService implements IAuthentication {
       return SuccussResponse<LoginRegisterUserResponseData>(data: jsonRes);
     } catch (error) {
       return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+    }
+  }
+
+  @override
+  Future<HttpResponse> requestResetPasswordToken({
+    required String email,
+  }) async {
+    try {
+      final res = await dioClient.post(
+        '/account/user/request/password/reset',
+        data: {
+          "email": email,
+        },
+      );
+
+      return SuccussResponse(data: res);
+    } catch (err) {
+      return ErrorResponse(error: HttpErrorUtils.getDioException(err));
+    }
+  }
+
+  @override
+  Future<HttpResponse> resetPassword({
+    required ResetPasswordRequest request,
+  }) async {
+    try {
+      final res = await dioClient.post(
+        '/account/user/reset/password',
+        data: request.toJson(),
+      );
+
+      return SuccussResponse(data: res);
+    } catch (err) {
+      return ErrorResponse(error: HttpErrorUtils.getDioException(err));
     }
   }
 }

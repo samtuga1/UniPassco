@@ -13,6 +13,7 @@ class CustomAppBar extends PreferredSize {
     this.bottomHeight = 0,
     this.leadingTapped,
     this.actions,
+    this.addBackBtn = true,
   }) : super(
           child: const SizedBox.shrink(),
           preferredSize: Size.fromHeight(
@@ -24,23 +25,26 @@ class CustomAppBar extends PreferredSize {
   final Widget? bottom;
   final VoidCallback? leadingTapped;
   final List<Widget>? actions;
+  final bool addBackBtn;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actions: actions,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 12.5),
-        child: IconButton(
-          onPressed: leadingTapped ?? () => Navigator.of(context).pop(),
-          icon: Icon(
-            Platform.isIOS
-                ? CupertinoIcons.chevron_left
-                : Icons.keyboard_backspace_outlined,
-            size: 24,
-          ),
-        ),
-      ),
+      leading: addBackBtn
+          ? Padding(
+              padding: const EdgeInsets.only(left: 12.5),
+              child: IconButton(
+                onPressed: leadingTapped ?? () => Navigator.of(context).pop(),
+                icon: Icon(
+                  Platform.isIOS
+                      ? CupertinoIcons.chevron_left
+                      : Icons.keyboard_backspace_outlined,
+                  size: 24,
+                ),
+              ),
+            )
+          : null,
       title: CustomText(
         title!,
         style: context.getTheme.textTheme.displaySmall,

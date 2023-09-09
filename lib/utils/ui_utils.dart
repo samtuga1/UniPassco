@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:another_flushbar/flushbar.dart';
+import 'package:campuspulse/ui/widgets/custom_fader.dart';
 import 'package:campuspulse/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,7 @@ import 'package:campuspulse/utils/extensions.dart';
 class UiUtils {
   UiUtils._();
 
-  static void customDialog(
+  static Future<void> customDialog(
     BuildContext context,
     String? message, {
     String title = 'Alert',
@@ -19,9 +21,9 @@ class UiUtils {
     String yesButtonText = "Yes",
     bool showOnlyYesButton = false,
     VoidCallback? onTap,
-  }) {
+  }) async {
     Platform.isAndroid
-        ? showDialog(
+        ? await showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
                   title: Center(
@@ -59,7 +61,7 @@ class UiUtils {
                     ),
                   ],
                 ))
-        : showCupertinoModalPopup(
+        : await showCupertinoModalPopup(
             context: context,
             builder: (BuildContext context) => CupertinoAlertDialog(
               title: Text(title),
@@ -163,7 +165,7 @@ class UiUtils {
   static void flush(
     BuildContext context, {
     String? title,
-    String? msg,
+    required String msg,
     required ErrorState errorState,
   }) {
     Flushbar(
@@ -211,14 +213,15 @@ class UiUtils {
           style: context.getTheme.textTheme.displayMedium!.copyWith(
             color: context.getTheme.canvasColor,
             fontWeight: FontWeight.w600,
+            fontSize: 17.sp,
           ),
         ),
         messageText: CustomText(
-          msg ?? 'Alert message',
+          msg,
           style: context.getTheme.textTheme.bodyMedium!.copyWith(
             color: context.getTheme.canvasColor,
             fontWeight: FontWeight.w500,
-            fontSize: 16.sp,
+            fontSize: 15.sp,
           ),
         )).show(context);
   }
@@ -235,4 +238,119 @@ class UiUtils {
       errorState: ErrorState.error,
     );
   }
+
+  // This shows a CupertinoModalPopup which hosts a CupertinoActionSheet.
+  static void showActionSheet(
+    BuildContext context, {
+    required List<CupertinoActionSheetData> actions,
+  }) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomText(
+                  'Cancel',
+                  style: context.getTheme.textTheme.titleMedium,
+                ),
+              ],
+            ),
+          ),
+          actions: actions.map((action) {
+            return CupertinoActionSheetAction(
+              onPressed: () {
+                action.onTap.call();
+                Navigator.pop(context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 22.5),
+                child: Row(
+                  children: [
+                    CustomText(
+                      action.label,
+                      style: context.getTheme.textTheme.titleMedium,
+                    ),
+                    const Spacer(),
+                    action.trailingIcon ?? Container(),
+                  ],
+                ),
+              ),
+            );
+          }).toList()),
+    );
+  }
+
+  static void showOverlayLoader(
+    BuildContext context, {
+    required Future<void> asyncAction,
+    VoidCallback? onEnd,
+  }) async {
+    FaderController faderController = FaderController();
+    OverlayState? overlayState = Overlay.of(context);
+    OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(builder: (context) {
+      return Positioned.fill(
+        child: Fader(
+          duration: const Duration(milliseconds: 300),
+          controller: faderController,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              alignment: Alignment.center,
+              color: Colors.transparent,
+              padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.02),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 3.5,
+                  sigmaY: 3.5,
+                ),
+                child: Container(
+                  width: 125.w,
+                  height: 140.h,
+                  decoration: BoxDecoration(
+                      color: context.getTheme.primaryColor.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Transform.scale(
+                    scale: 2,
+                    child: CircularProgressIndicator.adaptive(
+                      backgroundColor: context.getTheme.canvasColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+
+    // inserting overlay entry
+    faderController.fadeIn();
+    overlayState.insert(overlayEntry);
+
+    asyncAction.then((_) {
+      faderController.fadeOut();
+      onEnd?.call();
+      return Future.delayed(const Duration(milliseconds: 300));
+    }).then((_) {
+      overlayEntry.remove();
+    });
+  }
+}
+
+class CupertinoActionSheetData {
+  late String label;
+  late VoidCallback onTap;
+  Widget? trailingIcon;
+
+  CupertinoActionSheetData({
+    required this.label,
+    this.trailingIcon,
+    required this.onTap,
+  });
 }

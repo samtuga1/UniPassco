@@ -5,14 +5,15 @@ import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:campuspulse/utils/utils.dart';
 
-class QuestionScreen extends StatelessWidget {
-  const QuestionScreen({super.key});
+class BookmarksScreen extends StatelessWidget {
+  const BookmarksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Available Questions',
+        addBackBtn: false,
+        title: 'Bookmarks',
       ),
       body: CustomListViewBuilder(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -24,7 +25,7 @@ class QuestionScreen extends StatelessWidget {
               prefixIcon: SvgPicture.asset(AppImages.search),
               borderColor: context.getTheme.scaffoldBackgroundColor,
               borderRadius: 31,
-              hintText: 'Search resources',
+              hintText: 'Search bookmarks',
               fillColor: const Color(0xFFF4F5F6),
               filled: true,
             ),

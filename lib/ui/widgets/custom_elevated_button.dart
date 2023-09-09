@@ -73,7 +73,7 @@ class CustomElevatedButton extends StatelessWidget {
           },
           child: CupertinoButton(
             color: buttonColor,
-            padding: const EdgeInsets.symmetric(vertical: 13),
+            padding: const EdgeInsets.symmetric(vertical: 11.5),
             borderRadius: BorderRadius.circular(borderRadius ?? 12),
             onPressed: (isValidated! && isBusy == false) ? onPressed : null,
             disabledColor: buttonColor.withOpacity(0.5),
@@ -104,7 +104,7 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: isValidated! && !isBusy ? onPressed : null,
       style: ElevatedButton.styleFrom(
           elevation: 0,
-          padding: padding ?? const EdgeInsets.symmetric(vertical: 13),
+          padding: padding ?? const EdgeInsets.symmetric(vertical: 11.5),
           shape: addBorder
               ? RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(

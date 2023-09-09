@@ -1,3 +1,6 @@
+import 'package:campuspulse/ui/screens/forgot_password/check_email.dart';
+import 'package:campuspulse/ui/screens/forgot_password/request_password_screen.dart';
+import 'package:campuspulse/ui/screens/forgot_password/reset_password.dart';
 import 'package:campuspulse/ui/screens/landing/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:campuspulse/router/routes.dart';
@@ -12,7 +15,6 @@ import '../ui/widgets/widgets.dart';
 class AppRouter {
   Route onGenerateRoute(RouteSettings settings) => switch (settings.name) {
         Routes.landing => route(const LandingScreen()),
-        Routes.get_started => route(const GetStartedScreen()),
         Routes.signin_signup => route(const LoginSignUpSwitch()),
         Routes.verificationScreen =>
           route(VerificationScreen(), settings: settings),
@@ -20,7 +22,13 @@ class AppRouter {
         Routes.bottomNavigationBar => route(const BottomNavBar()),
         Routes.question_screen => route(const QuestionScreen()),
         Routes.question_detail => route(const QuestionDetailScreen()),
-        _ => route(const GetStartedScreen()),
+        Routes.requestPasswordReset =>
+          route(const RequestPasswordResetScreen()),
+        Routes.checkEmailScreen =>
+          route(const CheckEmailSceen(), settings: settings),
+        Routes.resetPasswordScreen =>
+          route(const ResetPasswordScreen(), settings: settings),
+        _ => route(const LandingScreen()),
       };
 
   Route route(Widget routeWidget, {RouteSettings? settings}) {

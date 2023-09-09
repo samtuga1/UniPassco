@@ -133,10 +133,12 @@ class _SignUpState extends State<SignUp> {
                       );
                     },
                   ),
+                  12.verticalSpace,
                   Align(
                     alignment: Alignment.topRight,
                     child: CustomAdaptiveTextButton(
-                      onTap: () {},
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(Routes.requestPasswordReset),
                       text: 'Forgot password?',
                       style: context.getTheme.textTheme.labelMedium!.copyWith(
                         color: const Color(0xFF0F96FF),
@@ -201,7 +203,6 @@ class _SignUpState extends State<SignUp> {
                               style: context.getTheme.textTheme.labelMedium
                                   ?.copyWith(
                                 color: const Color(0xFF0F96FF),
-                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),

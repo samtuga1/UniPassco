@@ -48,7 +48,7 @@ class CustomText extends StatelessWidget {
             fontSize: fontSize,
             fontStyle: fontStyle,
             fontWeight: fontWeight,
-            overflow: TextOverflow.ellipsis,
+            overflow: ellipsis,
           )
         : style!.copyWith(
             decoration: textDecoration,
@@ -56,7 +56,7 @@ class CustomText extends StatelessWidget {
             fontSize: fontSize,
             fontStyle: fontStyle,
             fontWeight: fontWeight,
-            overflow: TextOverflow.visible,
+            overflow: ellipsis,
           );
     return Text(
       text,

@@ -114,6 +114,7 @@ class HomeWidget extends StatelessWidget {
                       style: context.getTheme.textTheme.labelMedium?.copyWith(
                         color: const Color(0xFF0F96FF),
                         decoration: TextDecoration.underline,
+                        decorationColor: const Color(0xFF0F96FF),
                       ),
                     ),
                   ],

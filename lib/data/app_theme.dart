@@ -67,6 +67,7 @@ class AppTheme {
       );
 
   static ThemeData get light => ThemeData(
+        useMaterial3: true,
         indicatorColor: const Color(0xff1097FF),
         hintColor: const Color(0xFF676767),
         canvasColor: Colors.white,

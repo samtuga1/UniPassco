@@ -50,3 +50,22 @@ class LoginAccount extends AuthenticationEvent {
 }
 
 class RetrieveUser extends AuthenticationEvent {}
+
+class RequestPasswordReset extends AuthenticationEvent {
+  late String email;
+  RequestPasswordReset({
+    required this.email,
+  });
+}
+
+class ResetPassword extends AuthenticationEvent {
+  late String email;
+  late String token;
+  late String password;
+
+  ResetPassword({
+    required this.email,
+    required this.password,
+    required this.token,
+  });
+}

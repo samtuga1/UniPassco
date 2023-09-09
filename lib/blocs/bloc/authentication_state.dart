@@ -136,3 +136,41 @@ final class RetrievingUserError extends AuthenticationState {
   @override
   List<Object?> get props => [error];
 }
+
+final class RequestingPasswordReset extends AuthenticationState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
+final class RequestPasswordResetSuccess extends AuthenticationState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
+final class RequestPasswordResetError extends AuthenticationState {
+  late final HttpError error;
+
+  RequestPasswordResetError({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}
+
+final class ResettingPassword extends AuthenticationState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
+final class ResettingPasswordSuccess extends AuthenticationState {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
+
+final class ResettingPasswordError extends AuthenticationState {
+  late final HttpError error;
+
+  ResettingPasswordError({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}

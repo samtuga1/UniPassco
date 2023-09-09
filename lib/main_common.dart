@@ -8,11 +8,13 @@ import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuspulse/utils/helpers.dart';
+import 'package:motion/motion.dart';
 
 Future<void> mainCommon(String envConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset(envConfig);
   await configureDependencies();
+  await Motion.instance.initialize();
   await Helpers.precacheSvgs();
   runApp(const MyApp());
 }
