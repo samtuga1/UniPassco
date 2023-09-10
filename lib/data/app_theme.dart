@@ -100,5 +100,8 @@ class AppTheme {
           unselectedLabelStyle: lightTextTheme.bodySmall,
           selectedLabelStyle: lightTextTheme.bodySmall,
         ),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Colors.black12,
+        ),
       );
 }

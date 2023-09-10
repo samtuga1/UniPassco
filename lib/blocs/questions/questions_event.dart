@@ -13,3 +13,19 @@ class RetrieveQuestion extends QuestionsEvent {
 
   RetrieveQuestion({required this.questionId});
 }
+
+class BookmarkQuestion extends QuestionsEvent {
+  late final String questionId;
+
+  BookmarkQuestion({
+    required this.questionId,
+  });
+}
+
+class DownloadQuestion extends QuestionsEvent {
+  late final Question question;
+
+  DownloadQuestion({
+    required this.question,
+  });
+}

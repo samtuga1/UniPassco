@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:campuspulse/injectable/injection.dart';
+import 'package:campuspulse/interceptors/http_access_token.interceptor.dart';
+import 'package:campuspulse/interfaces/dio_client.interface.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:campuspulse/data/data.dart';
@@ -58,5 +62,32 @@ class Helpers {
     } else {
       return 'Second Semester';
     }
+  }
+
+  static Future<File?> downloadFile(String url) async {
+    var dir = await getApplicationDocumentsDirectory();
+    var path = '${dir.path}/${getFileNameFromUrl(url)}';
+    print('start');
+    await getIt<IDioClientService>().download(url, path);
+    print('end');
+    return File(path);
+  }
+
+  static String getFileNameFromUrl(String url) {
+    final uri = Uri.parse(url);
+    final pathSegments = uri.pathSegments;
+
+    // Check if there are path segments and return the last one as the file name
+    if (pathSegments.isNotEmpty) {
+      final lastSegment = pathSegments.last;
+
+      // Decode the segment to handle URL-encoded characters
+      final decodedSegment = Uri.decodeComponent(lastSegment);
+
+      return decodedSegment;
+    }
+
+    // If no path segments are found, return a default name or an empty string
+    return 'file.pdf';
   }
 }

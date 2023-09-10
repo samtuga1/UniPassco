@@ -14,6 +14,7 @@ class CustomAppBar extends PreferredSize {
     this.leadingTapped,
     this.actions,
     this.addBackBtn = true,
+    this.showActions = true,
   }) : super(
           child: const SizedBox.shrink(),
           preferredSize: Size.fromHeight(
@@ -26,11 +27,12 @@ class CustomAppBar extends PreferredSize {
   final VoidCallback? leadingTapped;
   final List<Widget>? actions;
   final bool addBackBtn;
+  final bool showActions;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: actions,
+      actions: showActions ? actions : null,
       leading: addBackBtn
           ? Padding(
               padding: const EdgeInsets.only(left: 12.5),

@@ -11,4 +11,5 @@ class Routes {
   static const String requestPasswordReset = '/requestPasswordReset';
   static const String checkEmailScreen = '/checkEmailScreen';
   static const String resetPasswordScreen = '/resetPassword';
+  static const String pdfScreen = '/pdfScreen';
 }

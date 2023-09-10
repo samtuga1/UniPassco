@@ -285,62 +285,62 @@ class UiUtils {
     );
   }
 
-  static void showOverlayLoader(
-    BuildContext context, {
-    required Future<void> asyncAction,
-    VoidCallback? onEnd,
-  }) async {
-    FaderController faderController = FaderController();
-    OverlayState? overlayState = Overlay.of(context);
-    OverlayEntry overlayEntry;
-    overlayEntry = OverlayEntry(builder: (context) {
-      return Positioned.fill(
-        child: Fader(
-          duration: const Duration(milliseconds: 300),
-          controller: faderController,
-          child: Material(
-            color: Colors.transparent,
-            child: Container(
-              alignment: Alignment.center,
-              color: Colors.transparent,
-              padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.02),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(
-                  sigmaX: 3.5,
-                  sigmaY: 3.5,
-                ),
-                child: Container(
-                  width: 125.w,
-                  height: 140.h,
-                  decoration: BoxDecoration(
-                      color: context.getTheme.primaryColor.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(25)),
-                  child: Transform.scale(
-                    scale: 2,
-                    child: CircularProgressIndicator.adaptive(
-                      backgroundColor: context.getTheme.canvasColor,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    });
+  // static void showOverlayLoader(
+  //   BuildContext context, {
+  //   required Function(FaderController, OverlayState, OverlayEntry) callBack,
+  //   VoidCallback? onEnd,
+  // }) async {
+  //   FaderController faderController = FaderController();
+  //   OverlayState? overlayState = Overlay.of(context);
+  //   OverlayEntry overlayEntry;
+  //   overlayEntry = OverlayEntry(builder: (context) {
+  //     return Positioned.fill(
+  //       child: Fader(
+  //         duration: const Duration(milliseconds: 300),
+  //         controller: faderController,
+  //         child: Material(
+  //           color: Colors.transparent,
+  //           child: Container(
+  //             alignment: Alignment.center,
+  //             color: Colors.transparent,
+  //             padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.02),
+  //             child: BackdropFilter(
+  //               filter: ImageFilter.blur(
+  //                 sigmaX: 2,
+  //                 sigmaY: 2,
+  //               ),
+  //               child: Container(
+  //                 width: 100.w,
+  //                 height: 100.h,
+  //                 decoration: BoxDecoration(
+  //                   color: context.getTheme.primaryColor.withOpacity(0.5),
+  //                   borderRadius: BorderRadius.circular(20),
+  //                 ),
+  //                 child: CustomLoading(
+  //                   height: 45,
+  //                   width: 45,
+  //                   color: context.getTheme.canvasColor,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //   });
 
-    // inserting overlay entry
-    faderController.fadeIn();
-    overlayState.insert(overlayEntry);
+  //   // inserting overlay entry
 
-    asyncAction.then((_) {
-      faderController.fadeOut();
-      onEnd?.call();
-      return Future.delayed(const Duration(milliseconds: 300));
-    }).then((_) {
-      overlayEntry.remove();
-    });
-  }
+  //   callBack(faderController, overlayState, overlayEntry);
+
+  //   asyncAction.then((_) {
+  //     faderController.fadeOut();
+  //     onEnd?.call();
+  //     return Future.delayed(const Duration(milliseconds: 300));
+  //   }).then((_) {
+  //     overlayEntry.remove();
+  //   });
+  // }
 }
 
 class CupertinoActionSheetData {

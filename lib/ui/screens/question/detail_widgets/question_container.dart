@@ -1,4 +1,5 @@
 import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:campuspulse/router/routes.dart';
 import 'package:campuspulse/ui/screens/question/detail_widgets/pdf_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -68,12 +69,9 @@ class QuestionContainer extends StatelessWidget {
           13.verticalSpace,
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => PdfScreen(
-                    url: question!.fileUrl,
-                  ),
-                ),
+              Navigator.of(context).pushNamed(
+                Routes.pdfScreen,
+                arguments: question,
               );
             },
             child: DecoratedBox(

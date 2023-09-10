@@ -14,4 +14,6 @@ class Constants {
   static const hasVerifiedEmail = 'hasVerifiedEmail';
   static const userKey = 'user';
   static const userIdKey = 'userId';
+  static String downloadedQuestions(String userId) =>
+      '${userId}downloadedQuestions';
 }

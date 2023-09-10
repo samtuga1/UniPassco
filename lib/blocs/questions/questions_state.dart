@@ -54,3 +54,26 @@ final class RetrievingQuestionError extends QuestionsState {
   @override
   List<Object?> get props => [error];
 }
+
+final class DownloadingQuestion extends QuestionsState {
+  @override
+  List<Object?> get props => [];
+}
+
+final class DownloadingQuestionSuccess extends QuestionsState {
+  final String message;
+  final List<Question> downloadedQuestions;
+
+  DownloadingQuestionSuccess(
+      {required this.downloadedQuestions, required this.message});
+  @override
+  List<Object?> get props => [downloadedQuestions, message];
+}
+
+final class DownloadingQuestionError extends QuestionsState {
+  final String error;
+
+  DownloadingQuestionError({required this.error});
+  @override
+  List<Object?> get props => [error];
+}

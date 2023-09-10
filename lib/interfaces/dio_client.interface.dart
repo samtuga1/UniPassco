@@ -9,6 +9,15 @@ abstract class IDioClientService {
     CancelToken cancelToken,
     ProgressCallback? onReceiveProgress,
   });
+  Future<dynamic> download(
+    String url,
+    String savePath, {
+    List<Interceptor>? interceptors,
+    Map<String, dynamic> queryParameters,
+    Options options,
+    CancelToken cancelToken,
+    ProgressCallback? onReceiveProgress,
+  });
   Future<dynamic> post(
     String uri, {
     List<Interceptor>? interceptors,

@@ -148,4 +148,41 @@ class DioClientService implements IDioClientService {
       rethrow;
     }
   }
+
+  @override
+  Future download(
+    String url,
+    String savePath, {
+    dynamic data,
+    List<Interceptor>? interceptors,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    try {
+      if (dio.interceptors.isNotEmpty) {
+        dio.interceptors.clear();
+      }
+      if (interceptors != null) {
+        dio.interceptors.addAll(interceptors);
+      }
+      final response = await dio.download(
+        url,
+        savePath,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+      );
+      return response.data;
+    } on SocketException catch (error) {
+      throw SocketException(error.message);
+    } on FormatException catch (error) {
+      throw FormatException(error.message);
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

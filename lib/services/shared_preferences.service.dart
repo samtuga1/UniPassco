@@ -9,7 +9,7 @@ class SharedPreference implements ISharedPreference {
 
   @override
   Future getString(String path) async {
-    return prefs.getString(path);
+    return prefs.getString(path) ?? '';
   }
 
   @override

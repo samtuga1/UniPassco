@@ -23,6 +23,30 @@ class Question {
     this.discussions = const [],
   });
 
+  Question copyWith({
+    String? id,
+    String? mimeType,
+    String? courseName,
+    String? courseCode,
+    String? semester,
+    String? year,
+    String? programme,
+    String? fileUrl,
+    String? level,
+    List? discussions = const [],
+  }) =>
+      Question(
+        id: id ?? this.id,
+        mimeType: mimeType ?? this.mimeType,
+        courseName: courseName ?? this.courseName,
+        courseCode: courseCode ?? this.courseCode,
+        semester: semester ?? this.semester,
+        year: year ?? this.year,
+        programme: programme ?? this.programme,
+        fileUrl: fileUrl ?? this.fileUrl,
+        level: level ?? this.level,
+      );
+
   factory Question.fromJson(Map<String, dynamic> json) => Question(
         id: json["_id"],
         mimeType: json["mimeType"],
