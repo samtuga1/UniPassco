@@ -1,5 +1,4 @@
-import 'package:another_flushbar/flushbar.dart';
-import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
+import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Loading extends StatelessWidget {
-  const Loading({
+class CustomLoading extends StatelessWidget {
+  const CustomLoading({
     Key? key,
     this.color,
     this.height = 50,

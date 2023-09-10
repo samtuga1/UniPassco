@@ -10,15 +10,16 @@ class LevelContainer extends StatelessWidget {
   const LevelContainer({
     super.key,
     required this.assetPath,
-    required this.levelText,
+    required this.level,
   });
   final String assetPath;
-  final String levelText;
+  final String level;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.question_screen),
+      onTap: () => Navigator.of(context)
+          .pushNamed(Routes.question_screen, arguments: level),
       child: Stack(
         children: [
           Image.asset(assetPath),
@@ -30,7 +31,7 @@ class LevelContainer extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomText(
-                  levelText,
+                  "Level $level",
                   style: context.getTheme.textTheme.titleMedium,
                 ),
                 6.verticalSpace,

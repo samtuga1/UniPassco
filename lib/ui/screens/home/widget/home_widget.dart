@@ -1,6 +1,5 @@
+import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
 import 'package:flutter/material.dart';
-
-import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
 import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
 import 'package:campuspulse/models/auth/data/user_model.dart';
@@ -38,14 +37,14 @@ class HomeWidget extends StatelessWidget {
           children: [
             Flexible(
               child: LevelContainer(
-                levelText: 'Level 100',
+                level: '100',
                 assetPath: AppImages.level_container_1,
               ),
             ),
             16.horizontalSpace,
             Flexible(
               child: LevelContainer(
-                levelText: 'Level 200',
+                level: '200',
                 assetPath: AppImages.level_container_2,
               ),
             ),
@@ -56,14 +55,14 @@ class HomeWidget extends StatelessWidget {
           children: [
             Flexible(
               child: LevelContainer(
-                levelText: 'Level 300',
+                level: '300',
                 assetPath: AppImages.level_container_3,
               ),
             ),
             16.horizontalSpace,
             Flexible(
               child: LevelContainer(
-                levelText: 'Level 400',
+                level: '400',
                 assetPath: AppImages.level_container_4,
               ),
             ),

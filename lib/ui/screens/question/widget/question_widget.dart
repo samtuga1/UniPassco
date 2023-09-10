@@ -1,3 +1,5 @@
+import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:campuspulse/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,12 +9,17 @@ import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:campuspulse/utils/extensions.dart';
 
 class QuestionWidget extends StatelessWidget {
-  const QuestionWidget({super.key});
+  const QuestionWidget({
+    super.key,
+    this.question,
+  });
+  final Question? question;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.question_detail),
+      onTap: () => Navigator.of(context)
+          .pushNamed(Routes.question_detail, arguments: question?.id),
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: 17,
@@ -28,13 +35,10 @@ class QuestionWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Hero(
-              tag: 1,
-              child: Image.asset(
-                AppImages.pdf_icon,
-                height: 52.h,
-                width: 52.w,
-              ),
+            Image.asset(
+              AppImages.pdf_icon,
+              height: 52.h,
+              width: 52.w,
             ),
             8.horizontalSpace,
             Expanded(
@@ -42,7 +46,7 @@ class QuestionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    'STAT 446: Multivariate Methods',
+                    '${question?.courseCode}: ${question?.courseName}',
                     style: context.getTheme.textTheme.titleMedium,
                   ),
                   3.verticalSpace,
@@ -54,12 +58,12 @@ class QuestionWidget extends StatelessWidget {
                       ),
                       8.horizontalSpace,
                       CustomText(
-                        '2017 - ',
+                        '${question?.year} - ',
                         style: context.getTheme.textTheme.labelMedium,
                         softWrap: true,
                       ),
                       CustomText(
-                        'Second Semester',
+                        Helpers.numberToSemester(question?.semester ?? '1'),
                         style: context.getTheme.textTheme.labelMedium,
                         softWrap: true,
                       ),

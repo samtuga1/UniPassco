@@ -20,8 +20,10 @@ class AppRouter {
           route(VerificationScreen(), settings: settings),
         Routes.onbardingScreen => route(OnboardingScreen(), settings: settings),
         Routes.bottomNavigationBar => route(const BottomNavBar()),
-        Routes.question_screen => route(const QuestionScreen()),
-        Routes.question_detail => route(const QuestionDetailScreen()),
+        Routes.question_screen =>
+          route(const QuestionScreen(), settings: settings),
+        Routes.question_detail =>
+          route(const QuestionDetailScreen(), settings: settings),
         Routes.requestPasswordReset =>
           route(const RequestPasswordResetScreen()),
         Routes.checkEmailScreen =>

@@ -1,4 +1,5 @@
-import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
+import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
+import 'package:campuspulse/blocs/questions/questions_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:campuspulse/config/global_configuration.dart';
@@ -8,13 +9,11 @@ import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuspulse/utils/helpers.dart';
-import 'package:motion/motion.dart';
 
 Future<void> mainCommon(String envConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset(envConfig);
   await configureDependencies();
-  await Motion.instance.initialize();
   await Helpers.precacheSvgs();
   runApp(const MyApp());
 }
@@ -31,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<AuthenticationBloc>(
           create: (_) => getIt<AuthenticationBloc>(),
+        ),
+        BlocProvider<QuestionsBloc>(
+          create: (_) => getIt<QuestionsBloc>(),
         ),
       ],
       child: ScreenUtilInit(

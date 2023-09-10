@@ -24,7 +24,7 @@ dependencies:
   shared_preferences: ^2.2.0
   animate_to: ^0.1.0
   equatable: ^2.0.5
-  motion: ^1.4.0
+  easy_pdf_viewer: ^1.0.7
   path_provider: ^2.1.1
   another_flushbar: ^1.12.30
 

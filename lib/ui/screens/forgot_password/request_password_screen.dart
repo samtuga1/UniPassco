@@ -1,4 +1,4 @@
-import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
+import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
 import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:campuspulse/router/routes.dart';

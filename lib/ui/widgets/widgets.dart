@@ -8,4 +8,4 @@ export './custom_otp_field.dart';
 export './custom_adaptive_text_button.dart';
 export './custom_listview.dart';
 export './custom_cache_image.dart';
-export './custom_question_widget.dart';
+export '../screens/question/widget/question_widget.dart';

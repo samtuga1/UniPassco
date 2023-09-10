@@ -51,4 +51,12 @@ class Helpers {
       );
     }
   }
+
+  static String numberToSemester(String number) {
+    if (int.parse(number) == 1) {
+      return 'First Semester';
+    } else {
+      return 'Second Semester';
+    }
+  }
 }

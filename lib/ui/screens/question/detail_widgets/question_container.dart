@@ -1,3 +1,5 @@
+import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:campuspulse/ui/screens/question/detail_widgets/pdf_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +9,11 @@ import 'package:campuspulse/utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
 class QuestionContainer extends StatelessWidget {
-  const QuestionContainer({super.key});
+  const QuestionContainer({
+    super.key,
+    this.question,
+  });
+  final Question? question;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +31,17 @@ class QuestionContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           12.verticalSpace,
-          Hero(
-            tag: 1,
-            child: Image.asset(
-              AppImages.pdf_icon,
-              height: 52.h,
-              width: 52.w,
-            ),
+          Image.asset(
+            question?.mimeType == 'pdf'
+                ? AppImages.pdf_icon
+                : AppImages.jpeg_icon,
+            height: 52.h,
+            width: 52.w,
           ),
           5.verticalSpace,
           CustomText(
-            'STAT 446: Multivariate Methods',
+            '${question?.courseCode}: ${question?.courseName}',
+            textAlign: TextAlign.center,
             style: context.getTheme.textTheme.titleMedium,
           ),
           5.verticalSpace,
@@ -48,29 +54,40 @@ class QuestionContainer extends StatelessWidget {
               ),
               8.horizontalSpace,
               CustomText(
-                '2017 - ',
+                '${question?.year} - ',
                 style: context.getTheme.textTheme.labelMedium,
                 softWrap: true,
               ),
               CustomText(
-                'Second Semester',
+                Helpers.numberToSemester(question?.semester ?? '1'),
                 style: context.getTheme.textTheme.labelMedium,
                 softWrap: true,
               ),
             ],
           ),
           13.verticalSpace,
-          DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color(0xFFE4E4E4),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PdfScreen(
+                    url: question!.fileUrl,
+                  ),
+                ),
+              );
+            },
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color(0xFFE4E4E4),
+                ),
+                borderRadius: BorderRadius.circular(12.r),
               ),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 21),
-              child: CustomText(
-                'View Questions',
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 21),
+                child: CustomText(
+                  'View Questions',
+                ),
               ),
             ),
           ),

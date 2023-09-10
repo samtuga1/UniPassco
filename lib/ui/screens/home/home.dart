@@ -1,8 +1,5 @@
-import 'package:campuspulse/blocs/bloc/authentication_bloc.dart';
-import 'package:campuspulse/data/data.dart';
+import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
 import 'package:campuspulse/models/auth/data/user_model.dart';
 import 'package:campuspulse/ui/screens/home/widget/home_widget.dart';
 import 'package:campuspulse/ui/screens/home/widget/home_skeleton.dart';

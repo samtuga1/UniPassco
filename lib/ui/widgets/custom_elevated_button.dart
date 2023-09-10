@@ -90,7 +90,7 @@ class CustomElevatedButton extends StatelessWidget {
                   )
                 : Padding(
                     padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Loading(
+                    child: CustomLoading(
                       color: context.getTheme.canvasColor,
                       height: 15,
                       width: 15,
@@ -132,7 +132,7 @@ class CustomElevatedButton extends StatelessWidget {
                       ),
                 ],
               )
-            : Loading(
+            : CustomLoading(
                 color: context.getTheme.canvasColor,
                 height: 15,
                 width: 15,

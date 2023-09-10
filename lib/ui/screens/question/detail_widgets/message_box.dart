@@ -15,6 +15,7 @@ class MessageBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       height: 60,
       decoration: BoxDecoration(
+        color: context.getTheme.scaffoldBackgroundColor,
         border: Border(
           top: BorderSide(
             color: const Color(0xFFF0F0F0),
