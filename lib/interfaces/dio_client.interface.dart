@@ -41,6 +41,7 @@ abstract class IDioClientService {
 
   Future<dynamic> delete(
     String uri, {
+    dynamic data,
     List<Interceptor>? interceptors,
   });
 }

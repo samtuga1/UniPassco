@@ -1,10 +1,12 @@
 import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:campuspulse/router/routes.dart';
+import 'package:campuspulse/ui/screens/question/detail_widgets/pdf_screen.dart';
+import 'package:campuspulse/ui/screens/question/question_detail_screen.dart';
 import 'package:campuspulse/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/router/routes.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:campuspulse/utils/extensions.dart';
 
@@ -12,14 +14,26 @@ class QuestionWidget extends StatelessWidget {
   const QuestionWidget({
     super.key,
     this.question,
+    this.fromBookmark = false,
   });
   final Question? question;
+  final bool fromBookmark;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed(Routes.question_detail, arguments: question?.id),
+      onTap: !Helpers.isUrl(question?.fileUrl ?? '')
+          ? () => Navigator.of(context).pushNamed(Routes.pdfScreen,
+              arguments: PdfPageParams(
+                question: question!,
+                showBookmarksIcon: false,
+                showDownloadIcon: false,
+              ))
+          : () => Navigator.of(context).pushNamed(Routes.question_detail,
+              arguments: PageDetailParams(
+                questionId: question!.id,
+                fromBookmark: fromBookmark,
+              )),
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: 17,

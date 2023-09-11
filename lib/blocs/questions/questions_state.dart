@@ -77,3 +77,72 @@ final class DownloadingQuestionError extends QuestionsState {
   @override
   List<Object?> get props => [error];
 }
+
+final class QuestionDeletedSuccess extends QuestionsState {
+  @override
+  List<Object?> get props => [];
+}
+
+final class AddBookmarkSuccess extends QuestionsState {
+  final Question question;
+
+  AddBookmarkSuccess({
+    required this.question,
+  });
+  @override
+  List<Object?> get props => [question];
+}
+
+final class AddBookmarkError extends QuestionsState {
+  final HttpError error;
+
+  AddBookmarkError({required this.error});
+  @override
+  List<Object?> get props => [error];
+}
+
+final class RemoveBookmarkSuccess extends QuestionsState {
+  final Question question;
+
+  RemoveBookmarkSuccess({
+    required this.question,
+  });
+  @override
+  List<Object?> get props => [question];
+}
+
+final class RemoveBookmarkError extends QuestionsState {
+  final HttpError error;
+
+  RemoveBookmarkError({required this.error});
+  @override
+  List<Object?> get props => [error];
+}
+
+final class FetchingBookmarkedQuestions extends QuestionsState {
+  @override
+  List<Object?> get props => [];
+}
+
+final class FetchingBookmarkedQuestionsSuccess extends QuestionsState {
+  final ListQuestionsResponse bookmarkedQuestions;
+
+  FetchingBookmarkedQuestionsSuccess({
+    required this.bookmarkedQuestions,
+  });
+  @override
+  List<Object?> get props => [bookmarkedQuestions];
+}
+
+final class FetchingBookmarkedQuestionsError extends QuestionsState {
+  final HttpError error;
+
+  FetchingBookmarkedQuestionsError({required this.error});
+  @override
+  List<Object?> get props => [error];
+}
+
+final class RefreshedDownloads extends QuestionsState {
+  @override
+  List<Object?> get props => [];
+}

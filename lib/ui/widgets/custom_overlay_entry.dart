@@ -9,7 +9,7 @@ class CustomOverlayEntry {
     Overlay.of(context).insert(_overlayEntry);
   }
 
-  void hide() {
+  void hide(BuildContext context) {
     _overlayEntry.remove();
   }
 }

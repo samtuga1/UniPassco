@@ -1,13 +1,22 @@
 import 'dart:io';
 
+import 'package:campuspulse/blocs/questions/questions_bloc.dart';
 import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/interceptors/http_access_token.interceptor.dart';
 import 'package:campuspulse/interfaces/dio_client.interface.dart';
+import 'package:campuspulse/interfaces/questions.repository.interface.dart';
+import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:campuspulse/utils/enums.dart';
+import 'package:campuspulse/utils/ui_utils.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:campuspulse/data/data.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Helpers {
   // pre cache the svgs to memory to prevent flushing of svgs
@@ -67,10 +76,26 @@ class Helpers {
   static Future<File?> downloadFile(String url) async {
     var dir = await getApplicationDocumentsDirectory();
     var path = '${dir.path}/${getFileNameFromUrl(url)}';
-    print('start');
     await getIt<IDioClientService>().download(url, path);
-    print('end');
     return File(path);
+  }
+
+  static Future<File?> downloadFirebaseFile(String url) async {
+    var dir = await getApplicationDocumentsDirectory();
+    var path = '${dir.path}/${getFileNameFromUrl(url)}';
+
+    final file = File(path);
+
+    if (await file.exists()) return null;
+
+    Reference storageReference = FirebaseStorage.instance.refFromURL(url);
+    final Uint8List? fileData = await storageReference.getData();
+    if (fileData == null) {
+      return null;
+    }
+
+    await file.writeAsBytes(fileData);
+    return file;
   }
 
   static String getFileNameFromUrl(String url) {
@@ -84,10 +109,58 @@ class Helpers {
       // Decode the segment to handle URL-encoded characters
       final decodedSegment = Uri.decodeComponent(lastSegment);
 
-      return decodedSegment;
+      return decodedSegment.split('/').last;
     }
 
     // If no path segments are found, return a default name or an empty string
     return 'file.pdf';
+  }
+
+  static bool isUrl(String value) {
+    return value.contains('http');
+  }
+
+  static Future<void> launchWebUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  static Future<void> downloadQuestion(
+    BuildContext context, {
+    required Question question,
+    required bool questionHasBeenDownloaded,
+    required Function(bool) callback,
+  }) async {
+    questionHasBeenDownloaded
+        ? getIt<IQuestionsRepository>()
+            .deleteFile(question: question)
+            .then((_) {
+            UiUtils.flush(
+              context,
+              errorState: ErrorState.success,
+              msg: '${question.courseCode} has been removed from downloads',
+            );
+            context.read<QuestionsBloc>().add(RefreshDownloads());
+            questionHasBeenDownloaded = false;
+            callback(questionHasBeenDownloaded);
+          })
+        : context
+            .read<QuestionsBloc>()
+            .add(DownloadQuestion(question: question));
+  }
+
+  static Future<void> bookmarkQuestion(
+    BuildContext context, {
+    required bool questionHasBeenBookmarked,
+    required String questionId,
+  }) async {
+    questionHasBeenBookmarked
+        ? context
+            .read<QuestionsBloc>()
+            .add(RemoveBookmarkQuestion(questionId: questionId))
+        : context
+            .read<QuestionsBloc>()
+            .add(AddBookmarkQuestion(questionId: questionId));
   }
 }

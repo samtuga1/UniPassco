@@ -13,8 +13,10 @@ class QuestionContainer extends StatelessWidget {
   const QuestionContainer({
     super.key,
     this.question,
+    this.questionHasBeenBookmarked = false,
   });
   final Question? question;
+  final bool questionHasBeenBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,10 @@ class QuestionContainer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(
                 Routes.pdfScreen,
-                arguments: question,
+                arguments: PdfPageParams(
+                  question: question!,
+                  questionHasBeenBookmarked: questionHasBeenBookmarked,
+                ),
               );
             },
             child: DecoratedBox(

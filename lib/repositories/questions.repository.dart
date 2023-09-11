@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
@@ -20,11 +21,17 @@ class QuestionsRepository implements IQuestionsRepository {
     // get initially downloaded questions if any
     List<Question> downloadedQuestions = await getDownloads();
 
-    print(question.fileUrl);
+    if (downloadedQuestions.contains(question)) {
+      return downloadedQuestions;
+    }
 
     // download the question pdf to storage
-    final file = await Helpers.downloadFile(question.fileUrl);
-    print(file!.path);
+    final file = await Helpers.downloadFirebaseFile(question.fileUrl);
+
+    // check if file is already stored then return the downloadedQuestions
+    if (file == null) {
+      return downloadedQuestions;
+    }
 
     // new question to save
     // mutate the filepath to make it reference a path in memory
@@ -61,8 +68,40 @@ class QuestionsRepository implements IQuestionsRepository {
 
   @override
   Future<void> clearDownloads() async {
+    final questions = await getDownloads();
+
+    for (var question in questions) {
+      File file = File(question.fileUrl);
+
+      if (await file.exists()) {
+        await file.delete();
+      }
+    }
+
     await _prefs.remove(
       Constants.downloadedQuestions(await _userRepository.getUserId()),
+    );
+  }
+
+  @override
+  Future<void> deleteFile({
+    required Question question,
+  }) async {
+    List<Question> questions = await getDownloads();
+
+    Question result = questions.firstWhere((value) => value.id == question.id);
+
+    final file = File(result.fileUrl);
+
+    if (await file.exists()) {
+      await file.delete();
+    }
+
+    questions.remove(result);
+
+    _prefs.setString(
+      Constants.downloadedQuestions(await _userRepository.getUserId()),
+      jsonEncode(questions),
     );
   }
 }

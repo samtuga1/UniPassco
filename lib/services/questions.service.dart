@@ -49,4 +49,62 @@ class QuestionService implements IQuestionsService {
       return ErrorResponse(error: HttpErrorUtils.getDioException(error));
     }
   }
+
+  @override
+  Future<HttpResponse<Question>> addBookmarkQuestion({
+    required String questionId,
+  }) async {
+    try {
+      final results = await _dioClient.post(
+        '/questions/bookmark/add',
+        data: {
+          "questionId": questionId,
+        },
+        interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      );
+
+      Question questions = Question.fromJson(results);
+
+      return SuccussResponse(data: questions);
+    } catch (error) {
+      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+    }
+  }
+
+  @override
+  Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion() async {
+    try {
+      final results = await _dioClient.get(
+        '/questions/bookmark/list',
+        interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      );
+
+      ListQuestionsResponse questions = ListQuestionsResponse.fromJson(results);
+
+      return SuccussResponse(data: questions);
+    } catch (error) {
+      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+    }
+  }
+
+  @override
+  Future<HttpResponse<Question>> removeBookmarkQuestion({
+    required String questionId,
+  }) async {
+    try {
+      final results = await _dioClient.delete(
+        '/questions/bookmark/remove',
+        data: {
+          "questionId": questionId,
+        },
+        interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      );
+
+      Question questions = Question.fromJson(results);
+
+      return SuccussResponse(data: questions);
+    } catch (error) {
+      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+    }
+  }
 }

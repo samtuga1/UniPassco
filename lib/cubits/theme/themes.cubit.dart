@@ -31,4 +31,6 @@ class ThemeCubit extends Cubit<ThemeCubitState> {
       emit(DarkThemeCubitState());
     }
   }
+
+  bool get isLightMode => state == LightThemeCubitState();
 }

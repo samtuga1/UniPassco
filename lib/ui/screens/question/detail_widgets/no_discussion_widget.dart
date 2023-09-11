@@ -15,7 +15,8 @@ class NoDiscussionsWidget extends StatelessWidget {
       children: [
         55.verticalSpace,
         Container(
-          height: 94,
+          height: 80,
+          width: 80,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(

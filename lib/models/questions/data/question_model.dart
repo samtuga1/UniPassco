@@ -9,6 +9,7 @@ class Question {
   final String fileUrl;
   final String level;
   final List discussions;
+  bool? userHasBookmarked;
 
   Question({
     required this.id,
@@ -20,6 +21,7 @@ class Question {
     required this.programme,
     required this.fileUrl,
     required this.level,
+    this.userHasBookmarked,
     this.discussions = const [],
   });
 
@@ -33,6 +35,7 @@ class Question {
     String? programme,
     String? fileUrl,
     String? level,
+    bool? userHasBookmarked,
     List? discussions = const [],
   }) =>
       Question(
@@ -45,19 +48,25 @@ class Question {
         programme: programme ?? this.programme,
         fileUrl: fileUrl ?? this.fileUrl,
         level: level ?? this.level,
+        userHasBookmarked: userHasBookmarked ?? this.userHasBookmarked,
       );
 
-  factory Question.fromJson(Map<String, dynamic> json) => Question(
-        id: json["_id"],
-        mimeType: json["mimeType"],
-        courseName: json["courseName"],
-        courseCode: json["courseCode"],
-        semester: json["semester"],
-        year: json["year"],
-        programme: json["programme"],
-        fileUrl: json["fileUrl"],
-        level: json["level"],
-      );
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      id: json["_id"],
+      mimeType: json["mimeType"],
+      courseName: json["courseName"],
+      courseCode: json["courseCode"],
+      semester: json["semester"],
+      year: json["year"],
+      programme: json["programme"],
+      fileUrl: json["fileUrl"],
+      level: json["level"],
+      userHasBookmarked: json.containsKey('userHasBookmarked')
+          ? json['userHasBookmarked']
+          : null,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,
@@ -69,5 +78,6 @@ class Question {
         "programme": programme,
         "fileUrl": fileUrl,
         "level": level,
+        "userHasBookmarked": userHasBookmarked,
       };
 }

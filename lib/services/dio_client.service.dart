@@ -129,6 +129,7 @@ class DioClientService implements IDioClientService {
   @override
   Future delete(
     String uri, {
+    dynamic data,
     List<Interceptor>? interceptors,
   }) async {
     try {
@@ -138,7 +139,10 @@ class DioClientService implements IDioClientService {
       if (interceptors != null) {
         dio.interceptors.addAll(interceptors);
       }
-      final response = await dio.delete(uri);
+      final response = await dio.delete(
+        uri,
+        data: data,
+      );
       return response.data;
     } on SocketException catch (error) {
       throw SocketException(error.message);

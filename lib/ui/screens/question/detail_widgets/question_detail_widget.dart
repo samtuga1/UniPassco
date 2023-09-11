@@ -11,8 +11,10 @@ class QuestionDetailWidget extends StatelessWidget {
   const QuestionDetailWidget({
     super.key,
     required this.question,
+    this.questionHasBeenBookmarked = false,
   });
   final Question question;
+  final bool questionHasBeenBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class QuestionDetailWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: QuestionContainer(
             question: question,
+            questionHasBeenBookmarked: questionHasBeenBookmarked,
           ),
         ),
         15.verticalSpace,

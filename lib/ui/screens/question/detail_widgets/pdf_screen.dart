@@ -1,37 +1,82 @@
 import 'package:campuspulse/blocs/questions/questions_bloc.dart';
+import 'package:campuspulse/cubits/theme/themes.cubit.dart';
 import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/injectable/injection.dart';
+import 'package:campuspulse/interfaces/questions.repository.interface.dart';
 import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/ui/widgets/custom_overlay_entry.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:campuspulse/utils/utils.dart';
-import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PdfScreen extends StatelessWidget {
-  const PdfScreen({super.key});
+class PdfScreen extends StatefulWidget {
+  const PdfScreen({
+    super.key,
+  });
+
+  @override
+  State<PdfScreen> createState() => _PdfScreenState();
+}
+
+class _PdfScreenState extends State<PdfScreen> {
+  late PdfPageParams params;
+  bool questionHasBeenDownloaded = false;
+  late bool questionHasBeenBookmarked;
+
+  @override
+  void didChangeDependencies() {
+    params = ModalRoute.of(context)!.settings.arguments as PdfPageParams;
+    getIt<IQuestionsRepository>().getDownloads().then((downloads) {
+      for (var element in downloads) {
+        if (element.id == params.question.id) {
+          questionHasBeenDownloaded = true;
+          setState(() {});
+        }
+      }
+    });
+    questionHasBeenBookmarked = params.questionHasBeenBookmarked;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Question question = ModalRoute.of(context)!.settings.arguments as Question;
     return Scaffold(
         appBar: CustomAppBar(
           actions: [
-            IconButton(
-              onPressed: () {
-                context
-                    .read<QuestionsBloc>()
-                    .add(DownloadQuestion(question: question));
-              },
-              icon: const Icon(IconlyLight.download),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(IconlyLight.bookmark),
-            ),
+            if (params.showDownloadIcon)
+              IconButton(
+                onPressed: () {
+                  Helpers.downloadQuestion(context,
+                      question: params.question,
+                      questionHasBeenDownloaded: questionHasBeenDownloaded,
+                      callback: (p0) => {}).then(
+                    (_) => setState(() {
+                      questionHasBeenDownloaded = !questionHasBeenDownloaded;
+                    }),
+                  );
+                },
+                icon: Icon(questionHasBeenDownloaded
+                    ? IconlyBold.download
+                    : IconlyLight.download),
+              ),
+            if (params.showBookmarksIcon)
+              IconButton(
+                onPressed: () {
+                  Helpers.bookmarkQuestion(
+                    context,
+                    questionHasBeenBookmarked: questionHasBeenBookmarked,
+                    questionId: params.question.id,
+                  ).then((_) => setState(() {
+                        questionHasBeenBookmarked = !questionHasBeenBookmarked;
+                      }));
+                },
+                icon: Icon(questionHasBeenBookmarked
+                    ? IconlyBold.bookmark
+                    : IconlyLight.bookmark),
+              ),
             IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(
@@ -43,52 +88,44 @@ class PdfScreen extends StatelessWidget {
           ],
         ),
         body: BlocListener<QuestionsBloc, QuestionsState>(
-          listener: (context, state) {
-            if (state is DownloadingQuestion) {
-              getIt<CustomOverlayEntry>().show(context);
-            } else if (state is DownloadingQuestionSuccess) {
-              getIt<CustomOverlayEntry>().hide();
-              UiUtils.flush(context,
-                  errorState: ErrorState.success, msg: state.message);
-            } else if (state is DownloadingQuestionError) {
-              getIt<CustomOverlayEntry>().hide();
-              UiUtils.showStandardErrorFlushBar(context, message: state.error);
-            }
-          },
-          child: FutureBuilder<PDFDocument>(
-            future: PDFDocument.fromURL(
-              question.fileUrl,
-            ),
-            builder: (BuildContext ctx, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SizedBox();
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: CustomText(snapshot.error.toString()),
-                );
-              } else if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  return PDFViewer(
-                    pickerButtonColor: Colors.red,
-                    showPicker: false,
-                    scrollDirection: Axis.vertical,
-                    document: snapshot.data,
-                    progressIndicator: const CustomLoading(
-                      adaptive: true,
-                      height: 40,
-                      width: 40,
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: CustomText('Empty'),
-                  );
-                }
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
+          listener: (ctx, state) {},
+          child: Helpers.isUrl(params.question.fileUrl)
+              ? PDF(
+                  autoSpacing: false,
+                  nightMode: !context.read<ThemeCubit>().isLightMode,
+                  onLinkHandler: (uri) => Helpers.launchWebUrl(uri!),
+                ).fromUrl(
+                  params.question.fileUrl,
+                  placeholder: (progess) {
+                    return const Center(
+                      child: CustomLoading(
+                        height: 35,
+                        width: 35,
+                      ),
+                    );
+                  },
+                  errorWidget: (error) => Center(
+                    child: CustomText(error),
+                  ),
+                )
+              : PDF(
+                  nightMode: !context.read<ThemeCubit>().isLightMode,
+                  onLinkHandler: (uri) => Helpers.launchWebUrl(uri!),
+                ).fromPath(params.question.fileUrl),
         ));
   }
+}
+
+class PdfPageParams {
+  Question question;
+  bool showDownloadIcon;
+  bool showBookmarksIcon;
+  bool questionHasBeenBookmarked;
+
+  PdfPageParams({
+    required this.question,
+    this.showBookmarksIcon = true,
+    this.showDownloadIcon = true,
+    this.questionHasBeenBookmarked = false,
+  });
 }
