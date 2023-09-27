@@ -1,4 +1,5 @@
 import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
+import 'package:campuspulse/blocs/user/user_bloc.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -114,26 +115,30 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
             ),
           ),
           200.verticalSpace,
-          BlocConsumer<AuthenticationBloc, AuthenticationState>(
+          BlocConsumer<UserBloc, UserState>(
             listener: (context, state) {
-              if (state is OnboardUserSuccess) {
-                widget.onTap.call();
-              } else if (state is OnboardUserError) {
-                UiUtils.showStandardErrorFlushBar(
-                  context,
-                  message: HttpErrorUtils.getErrorMessage(state.error),
-                );
-              }
+              state.maybeWhen(
+                onboardUserSuccess: () {
+                  widget.onTap.call();
+                },
+                userError: (error) {
+                  UiUtils.showStandardErrorFlushBar(
+                    context,
+                    message: HttpErrorUtils.getErrorMessage(error),
+                  );
+                },
+                orElse: () {},
+              );
             },
             listenWhen: (prev, current) =>
-                current is OnboardUserError || current is OnboardUserSuccess,
+                current is UserError || current is OnboardUserSuccess,
             builder: (context, state) {
               return CustomElevatedButton(
                 isBusy: state is OnboardingUser,
-                onPressed: () => context.read<AuthenticationBloc>().add(
+                onPressed: () => context.read<UserBloc>().add(
                       OnboardUser(
                         email: widget.email.trim(),
-                        programme: selectedProgramme.text.trim(),
+                        programme: selectedProgramme.text.toLowerCase().trim(),
                       ),
                     ),
                 title: 'Next',
@@ -141,7 +146,7 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
             },
             buildWhen: (prev, current) =>
                 current is OnboardingUser ||
-                current is OnboardUserError ||
+                current is UserError ||
                 current is OnboardUserSuccess,
           ),
         ],

@@ -28,7 +28,7 @@ class CustomAdaptiveTextButton extends StatelessWidget {
             padding: EdgeInsets.zero,
             minSize: 10,
             onPressed: onTap,
-            child: Text(
+            child: CustomText(
               text,
               style: style ?? textStyle,
             ),

@@ -1,3 +1,4 @@
+import 'package:campuspulse/ui/screens/downloads/widgets/downloads_pdf_screen.dart';
 import 'package:campuspulse/ui/screens/forgot_password/check_email.dart';
 import 'package:campuspulse/ui/screens/forgot_password/request_password_screen.dart';
 import 'package:campuspulse/ui/screens/forgot_password/reset_password.dart';
@@ -28,7 +29,10 @@ class AppRouter {
           route(const RequestPasswordResetScreen()),
         Routes.checkEmailScreen =>
           route(const CheckEmailSceen(), settings: settings),
-        Routes.pdfScreen => route(const PdfScreen(), settings: settings),
+        Routes.questionsPdfScreen =>
+          route(const QuestionsPdfScreen(), settings: settings),
+        Routes.downloadsPdfScreen =>
+          route(const DownloadsPdfScreen(), settings: settings),
         Routes.resetPasswordScreen =>
           route(const ResetPasswordScreen(), settings: settings),
         _ => route(const LandingScreen()),

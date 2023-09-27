@@ -10,6 +10,8 @@ class CustomOverlayEntry {
   }
 
   void hide(BuildContext context) {
-    _overlayEntry.remove();
+    if (_overlayEntry.mounted) {
+      _overlayEntry.remove();
+    }
   }
 }

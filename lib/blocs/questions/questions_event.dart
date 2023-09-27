@@ -1,51 +1,23 @@
 part of 'questions_bloc.dart';
 
-sealed class QuestionsEvent {}
-
-class FetchQuestionsList extends QuestionsEvent {
-  late final String level;
-
-  FetchQuestionsList({required this.level});
+@freezed
+sealed class QuestionsEvent with _$QuestionsEvent {
+  const factory QuestionsEvent.fetchQuestionsList({required String level}) =
+      FetchQuestionsList;
+  const factory QuestionsEvent.retrieveQuestionById({
+    required String questionId,
+  }) = RetrieveQuestionById;
+  const factory QuestionsEvent.addBookmarkQuestion({
+    required String questionId,
+  }) = AddBookmarkQuestion;
+  const factory QuestionsEvent.removeBookmarkQuestion({
+    required String questionId,
+  }) = RemoveBookmarkQuestion;
+  const factory QuestionsEvent.downloadQuestion({
+    required Question question,
+  }) = DownloadQuestion;
+  const factory QuestionsEvent.deleteQuestion({required Question question}) =
+      DeleteQuestion;
+  const factory QuestionsEvent.fetchBookmarks() = FetchBookmarks;
+  const factory QuestionsEvent.refreshDownloads() = RefreshDownloads;
 }
-
-class RetrieveQuestion extends QuestionsEvent {
-  late final String questionId;
-
-  RetrieveQuestion({required this.questionId});
-}
-
-class AddBookmarkQuestion extends QuestionsEvent {
-  late final String questionId;
-
-  AddBookmarkQuestion({
-    required this.questionId,
-  });
-}
-
-class RemoveBookmarkQuestion extends QuestionsEvent {
-  late final String questionId;
-
-  RemoveBookmarkQuestion({
-    required this.questionId,
-  });
-}
-
-class DownloadQuestion extends QuestionsEvent {
-  late final Question question;
-
-  DownloadQuestion({
-    required this.question,
-  });
-}
-
-class DeleteQuestion extends QuestionsEvent {
-  late final Question question;
-
-  DeleteQuestion({
-    required this.question,
-  });
-}
-
-class FetchBookmarks extends QuestionsEvent {}
-
-class RefreshDownloads extends QuestionsEvent {}

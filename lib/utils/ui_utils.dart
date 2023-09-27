@@ -1,14 +1,10 @@
 import 'dart:io';
-import 'dart:ui';
-
 import 'package:another_flushbar/flushbar.dart';
-import 'package:campuspulse/ui/widgets/custom_fader.dart';
 import 'package:campuspulse/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/extensions.dart';
 
 class UiUtils {
   UiUtils._();
@@ -284,63 +280,6 @@ class UiUtils {
           }).toList()),
     );
   }
-
-  // static void showOverlayLoader(
-  //   BuildContext context, {
-  //   required Function(FaderController, OverlayState, OverlayEntry) callBack,
-  //   VoidCallback? onEnd,
-  // }) async {
-  //   FaderController faderController = FaderController();
-  //   OverlayState? overlayState = Overlay.of(context);
-  //   OverlayEntry overlayEntry;
-  //   overlayEntry = OverlayEntry(builder: (context) {
-  //     return Positioned.fill(
-  //       child: Fader(
-  //         duration: const Duration(milliseconds: 300),
-  //         controller: faderController,
-  //         child: Material(
-  //           color: Colors.transparent,
-  //           child: Container(
-  //             alignment: Alignment.center,
-  //             color: Colors.transparent,
-  //             padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.02),
-  //             child: BackdropFilter(
-  //               filter: ImageFilter.blur(
-  //                 sigmaX: 2,
-  //                 sigmaY: 2,
-  //               ),
-  //               child: Container(
-  //                 width: 100.w,
-  //                 height: 100.h,
-  //                 decoration: BoxDecoration(
-  //                   color: context.getTheme.primaryColor.withOpacity(0.5),
-  //                   borderRadius: BorderRadius.circular(20),
-  //                 ),
-  //                 child: CustomLoading(
-  //                   height: 45,
-  //                   width: 45,
-  //                   color: context.getTheme.canvasColor,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     );
-  //   });
-
-  //   // inserting overlay entry
-
-  //   callBack(faderController, overlayState, overlayEntry);
-
-  //   asyncAction.then((_) {
-  //     faderController.fadeOut();
-  //     onEnd?.call();
-  //     return Future.delayed(const Duration(milliseconds: 300));
-  //   }).then((_) {
-  //     overlayEntry.remove();
-  //   });
-  // }
 }
 
 class CupertinoActionSheetData {

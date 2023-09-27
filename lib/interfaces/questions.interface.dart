@@ -5,6 +5,7 @@ import 'package:campuspulse/models/questions/response/list_questions_response.da
 abstract class IQuestionsService {
   Future<HttpResponse<ListQuestionsResponse>> listQuestions({
     required String level,
+    required int page,
   });
 
   Future<HttpResponse<Question>> retrieveSingleQuestion({
@@ -19,5 +20,6 @@ abstract class IQuestionsService {
     required String questionId,
   });
 
-  Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion();
+  Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion(
+      {required int page});
 }

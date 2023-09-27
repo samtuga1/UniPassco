@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 abstract class IDioClientService {
   Future<dynamic> get(
     String url, {
+    dynamic data,
     List<Interceptor>? interceptors,
     Map<String, dynamic> queryParameters,
     Options options,

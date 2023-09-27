@@ -1,148 +1,39 @@
 part of 'questions_bloc.dart';
 
-sealed class QuestionsState extends Equatable {}
-
-final class QuestionsInitial extends QuestionsState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class FetchingQuestionsList extends QuestionsState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class FetchingQuestionsListSuccess extends QuestionsState {
-  late final ListQuestionsResponse questions;
-
-  FetchingQuestionsListSuccess({
-    required this.questions,
-  });
-  @override
-  List<Object?> get props => [questions];
-}
-
-final class FetchingQuestionsListError extends QuestionsState {
-  late final HttpError error;
-
-  FetchingQuestionsListError({
-    required this.error,
-  });
-  @override
-  List<Object?> get props => [error];
-}
-
-final class RetrievingQuestion extends QuestionsState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class RetrievingQuestionSuccess extends QuestionsState {
-  late final Question question;
-
-  RetrievingQuestionSuccess({
-    required this.question,
-  });
-  @override
-  List<Object?> get props => [question];
-}
-
-final class RetrievingQuestionError extends QuestionsState {
-  late final HttpError error;
-
-  RetrievingQuestionError({required this.error});
-  @override
-  List<Object?> get props => [error];
-}
-
-final class DownloadingQuestion extends QuestionsState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class DownloadingQuestionSuccess extends QuestionsState {
-  final String message;
-  final List<Question> downloadedQuestions;
-
-  DownloadingQuestionSuccess(
-      {required this.downloadedQuestions, required this.message});
-  @override
-  List<Object?> get props => [downloadedQuestions, message];
-}
-
-final class DownloadingQuestionError extends QuestionsState {
-  final String error;
-
-  DownloadingQuestionError({required this.error});
-  @override
-  List<Object?> get props => [error];
-}
-
-final class QuestionDeletedSuccess extends QuestionsState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class AddBookmarkSuccess extends QuestionsState {
-  final Question question;
-
-  AddBookmarkSuccess({
-    required this.question,
-  });
-  @override
-  List<Object?> get props => [question];
-}
-
-final class AddBookmarkError extends QuestionsState {
-  final HttpError error;
-
-  AddBookmarkError({required this.error});
-  @override
-  List<Object?> get props => [error];
-}
-
-final class RemoveBookmarkSuccess extends QuestionsState {
-  final Question question;
-
-  RemoveBookmarkSuccess({
-    required this.question,
-  });
-  @override
-  List<Object?> get props => [question];
-}
-
-final class RemoveBookmarkError extends QuestionsState {
-  final HttpError error;
-
-  RemoveBookmarkError({required this.error});
-  @override
-  List<Object?> get props => [error];
-}
-
-final class FetchingBookmarkedQuestions extends QuestionsState {
-  @override
-  List<Object?> get props => [];
-}
-
-final class FetchingBookmarkedQuestionsSuccess extends QuestionsState {
-  final ListQuestionsResponse bookmarkedQuestions;
-
-  FetchingBookmarkedQuestionsSuccess({
-    required this.bookmarkedQuestions,
-  });
-  @override
-  List<Object?> get props => [bookmarkedQuestions];
-}
-
-final class FetchingBookmarkedQuestionsError extends QuestionsState {
-  final HttpError error;
-
-  FetchingBookmarkedQuestionsError({required this.error});
-  @override
-  List<Object?> get props => [error];
-}
-
-final class RefreshedDownloads extends QuestionsState {
-  @override
-  List<Object?> get props => [];
+@freezed
+sealed class QuestionsState<T> with _$QuestionsState<T> {
+  const factory QuestionsState.initial() = QuestionsInitial<T>;
+  const factory QuestionsState.fetchingQuestionsList() =
+      FetchingQuestionsList<T>;
+  const factory QuestionsState.fetchingQuestionsListSuccess(
+      {required T questions}) = FetchingQuestionsListSuccess<T>;
+  const factory QuestionsState.fetchingQuestionsListError(
+      {required HttpError error}) = FetchingQuestionsListError<T>;
+  const factory QuestionsState.retrievingQuestionById() =
+      RetrievingQuestionById<T>;
+  const factory QuestionsState.retrievingQuestionSuccess(
+      {required Question question}) = RetrievingQuestionSuccess<T>;
+  const factory QuestionsState.retrievingQuestionError(
+      {required HttpError error}) = RetrievingQuestionError<T>;
+  const factory QuestionsState.downloadingQuestion() = DownloadingQuestion<T>;
+  const factory QuestionsState.downloadingQuestionSuccess({
+    required String message,
+    required List<Question> downloadedQuestions,
+  }) = DownloadingQuestionSuccess<T>;
+  const factory QuestionsState.questionDeletedSuccess() =
+      QuestionDeletedSuccess<T>;
+  const factory QuestionsState.addBookmarkSuccess(
+      {required Question question}) = AddBookmarkSuccess<T>;
+  const factory QuestionsState.removeBookmarkSuccess(
+      {required Question question}) = RemoveBookmarkSuccess<T>;
+  const factory QuestionsState.fetchingBookmarkedQuestions() =
+      FetchingBookmarkedQuestions<T>;
+  const factory QuestionsState.fetchingBookmarkedQuestionsSuccess(
+          {required ListQuestionsResponse bookmarkedQuestions}) =
+      FetchingBookmarkedQuestionsSuccess<T>;
+  const factory QuestionsState.fetchingBookmarkedQuestionsError(
+      {required HttpError error}) = FetchingBookmarkedQuestionsError<T>;
+  const factory QuestionsState.refreshedDownloads() = RefreshedDownloads<T>;
+  const factory QuestionsState.questionsError({required HttpError error}) =
+      QuestionsError<T>;
 }

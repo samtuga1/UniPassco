@@ -27,11 +27,7 @@ class QuestionsRepository implements IQuestionsRepository {
 
     // download the question pdf to storage
     final file = await Helpers.downloadFirebaseFile(question.fileUrl);
-
-    // check if file is already stored then return the downloadedQuestions
-    if (file == null) {
-      return downloadedQuestions;
-    }
+    if (file == null) return downloadedQuestions;
 
     // new question to save
     // mutate the filepath to make it reference a path in memory
@@ -89,7 +85,12 @@ class QuestionsRepository implements IQuestionsRepository {
   }) async {
     List<Question> questions = await getDownloads();
 
-    Question result = questions.firstWhere((value) => value.id == question.id);
+    Question result = questions.firstWhere(
+      (value) => value.id == question.id,
+      orElse: () => Question.blank(),
+    );
+
+    if (result.id.isEmpty) return;
 
     final file = File(result.fileUrl);
 

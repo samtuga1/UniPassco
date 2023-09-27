@@ -47,7 +47,7 @@ class CustomElevatedButton extends StatelessWidget {
     if (Platform.isIOS) {
       return StatefulBuilder(builder: (ctx, setState) {
         final isLightMode =
-            context.read<ThemeCubit>().state == LightThemeCubitState();
+            context.read<ThemeCubit>().state == ThemeCubitState.light();
 
         // check if its light mode
         Color buttonColor = isLightMode ? Colors.black : Colors.white;

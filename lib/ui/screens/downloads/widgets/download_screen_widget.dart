@@ -1,5 +1,6 @@
 import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:campuspulse/router/routes.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:campuspulse/utils/extensions.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,10 @@ class DownloadScreenWidget extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 14),
         child: QuestionWidget(
           question: downloadedQuestions[index],
+          onTap: () => Navigator.of(context).pushNamed(
+            Routes.downloadsPdfScreen,
+            arguments: downloadedQuestions[index],
+          ),
         ),
       ),
     );

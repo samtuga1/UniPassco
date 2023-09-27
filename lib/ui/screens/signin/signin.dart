@@ -125,42 +125,45 @@ class _SignInState extends State<SignIn> {
                   26.verticalSpace,
                   BlocConsumer<AuthenticationBloc, AuthenticationState>(
                     listenWhen: (previous, current) =>
-                        current is LoginSuccess || current is LoginInError,
+                        current is LoginSuccess ||
+                        current is AuthenticationError,
                     listener: (context, state) {
-                      if (state is LoginInError) {
-                        // show flush message if somwthing is wrong
+                      state.maybeWhen(
+                        authenticationError: (error) {
+                          // show flush message if somwthing is wrong
 
-                        if (HttpErrorUtils.getErrorMessage(state.error)
-                            .contains('verified')) {
-                          // Take the user to the verification screen if he/she has not beem verified
-                          Navigator.of(context).pushNamed(
-                            Routes.verificationScreen,
-                            arguments: emailController.text.trim(),
-                          );
-                        } else {
-                          // else show the standard error flush
-                          UiUtils.flush(
-                            context,
-                            errorState: ErrorState.error,
-                            msg: HttpErrorUtils.getErrorMessage(state.error),
-                          );
-                        }
-                      } else if (state is LoginSuccess) {
-                        if (state.user.programme != null &&
-                            state.user.photo != '') {
-                          // navigate user to verification screen is success
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                            Routes.bottomNavigationBar,
-                            (_) => false,
-                          );
-                        } else {
-                          // navigate to onboarding if user has not finished with the onboarding
-                          Navigator.of(context).pushNamed(
-                            Routes.onbardingScreen,
-                            arguments: emailController.text.trim(),
-                          );
-                        }
-                      }
+                          if (HttpErrorUtils.getErrorMessage(error)
+                              .contains('verified')) {
+                            // Take the user to the verification screen if he/she has not beem verified
+                            Navigator.of(context).pushNamed(
+                              Routes.verificationScreen,
+                              arguments: emailController.text.trim(),
+                            );
+                          } else {
+                            // else show the standard error flush
+                            UiUtils.showStandardErrorFlushBar(
+                              context,
+                              message: HttpErrorUtils.getErrorMessage(error),
+                            );
+                          }
+                        },
+                        loginSuccess: (user) {
+                          if (user.programme != null && user.photo != '') {
+                            // navigate user to verification screen is success
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.bottomNavigationBar,
+                              (_) => false,
+                            );
+                          } else {
+                            // navigate to onboarding if user has not finished with the onboarding
+                            Navigator.of(context).pushNamed(
+                              Routes.onbardingScreen,
+                              arguments: emailController.text.trim(),
+                            );
+                          }
+                        },
+                        orElse: () {},
+                      );
                     },
                     builder: (context, state) {
                       return CustomElevatedButton(
@@ -182,7 +185,7 @@ class _SignInState extends State<SignIn> {
                     buildWhen: (previous, current) =>
                         current is LogingIn ||
                         current is LoginSuccess ||
-                        current is LoginInError,
+                        current is AuthenticationError,
                   ),
                   32.verticalSpace,
                   Center(

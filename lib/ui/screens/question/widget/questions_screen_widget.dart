@@ -1,5 +1,7 @@
 import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/models/questions/response/list_questions_response.dart';
+import 'package:campuspulse/router/routes.dart';
+import 'package:campuspulse/ui/screens/question/question_detail_screen.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
 import 'package:campuspulse/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,12 @@ class QuestionsScreenWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 14),
               child: QuestionWidget(
                 question: questions.result[index],
+                onTap: () => Navigator.of(context).pushNamed(
+                  Routes.question_detail,
+                  arguments: PageDetailParams(
+                    questionId: questions.result[index].id,
+                  ),
+                ),
               ),
             ),
           );

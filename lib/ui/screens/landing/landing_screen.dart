@@ -46,29 +46,35 @@ class _LandingScreenState extends State<LandingScreen> {
           return const Scaffold(
             body: SizedBox.shrink(),
           );
-        } else if (hasSignedUp && !hasLoggedIn) {
-          return const LoginSignUpSwitch(
-            showLogin: true,
-          );
-        } else if (!hasSignedUp && !hasLoggedIn) {
-          return const LoginSignUpSwitch(
-            showLogin: false,
-          );
-        } else if (hasSignedUp && !hasVerifiedEmail) {
-          return VerificationScreen(
-            email: userEmail,
-          );
-        } else if (hasSignedUp && hasVerifiedEmail && !hasFinishedOnboarding) {
-          return OnboardingScreen(
-            email: userEmail,
-          );
-        } else if (hasSignedUp &&
-            hasVerifiedEmail &&
-            hasFinishedOnboarding &&
-            hasLoggedIn) {
-          return const BottomNavBar();
         } else {
-          return const GetStartedScreen();
+          if (hasSignedUp && !hasLoggedIn) {
+            return const LoginSignUpSwitch(
+              showLogin: true,
+            );
+          }
+          // else if (!hasSignedUp && !hasLoggedIn) {
+          //   return const LoginSignUpSwitch(
+          //     showLogin: false,
+          //   );
+          // }
+          else if (hasSignedUp && !hasVerifiedEmail) {
+            return VerificationScreen(
+              email: userEmail,
+            );
+          } else if (hasSignedUp &&
+              hasVerifiedEmail &&
+              !hasFinishedOnboarding) {
+            return OnboardingScreen(
+              email: userEmail,
+            );
+          } else if (hasSignedUp &&
+              hasVerifiedEmail &&
+              hasFinishedOnboarding &&
+              hasLoggedIn) {
+            return const BottomNavBar();
+          } else {
+            return const GetStartedScreen();
+          }
         }
       },
     );

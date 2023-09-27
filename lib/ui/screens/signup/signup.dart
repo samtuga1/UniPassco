@@ -148,23 +148,27 @@ class _SignUpState extends State<SignUp> {
                   26.verticalSpace,
                   BlocConsumer<AuthenticationBloc, AuthenticationState>(
                     listenWhen: (previous, current) =>
-                        current is SignUpSuccess || current is SigningUpError,
+                        current is SignUpSuccess ||
+                        current is AuthenticationError,
                     listener: (context, state) {
-                      if (state is SigningUpError) {
-                        // show flush message when somwthing is wrong
+                      state.maybeWhen(
+                        authenticationError: (error) {
+                          // show flush message when somwthing is wrong
 
-                        return UiUtils.flush(
-                          context,
-                          errorState: ErrorState.error,
-                          msg: HttpErrorUtils.getErrorMessage(state.error),
-                        );
-                      } else if (state is SignUpSuccess) {
-                        // navigate user to verification screen is success
-                        Navigator.of(context).pushNamed(
-                          Routes.verificationScreen,
-                          arguments: emailController.text,
-                        );
-                      }
+                          return UiUtils.showStandardErrorFlushBar(
+                            context,
+                            message: HttpErrorUtils.getErrorMessage(error),
+                          );
+                        },
+                        signUpSuccess: () {
+                          // navigate user to verification screen is success
+                          Navigator.of(context).pushNamed(
+                            Routes.verificationScreen,
+                            arguments: emailController.text,
+                          );
+                        },
+                        orElse: () {},
+                      );
                     },
                     builder: (context, state) {
                       return CustomElevatedButton(
@@ -187,7 +191,7 @@ class _SignUpState extends State<SignUp> {
                     buildWhen: (previous, current) =>
                         current is SigningUp ||
                         current is SignUpSuccess ||
-                        current is SigningUpError,
+                        current is AuthenticationError,
                   ),
                   32.verticalSpace,
                   Center(

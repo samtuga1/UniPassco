@@ -79,6 +79,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle textStyle = style ?? context.getTheme.textTheme.bodyMedium!;
     return TextFormField(
+      cursorHeight: 15,
       cursorColor: context.getTheme.primaryColor,
       focusNode: focusNode,
       textAlign: TextAlign.start,

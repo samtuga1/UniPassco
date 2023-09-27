@@ -6,11 +6,7 @@ import 'package:campuspulse/ui/screens/question/widget/questions_skeletonizer.da
 import 'package:campuspulse/ui/widgets/custom_error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/utils.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});

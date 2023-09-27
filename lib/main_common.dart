@@ -1,5 +1,7 @@
 import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
+import 'package:campuspulse/blocs/discussions/discussions_bloc.dart';
 import 'package:campuspulse/blocs/questions/questions_bloc.dart';
+import 'package:campuspulse/blocs/user/user_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +13,8 @@ import 'package:campuspulse/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:campuspulse/utils/helpers.dart';
 import 'firebase_options.dart';
+
+final appNavigatorObserver = NavigatorObserver();
 
 Future<void> mainCommon(String envConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +43,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<QuestionsBloc>(
           create: (_) => getIt<QuestionsBloc>(),
         ),
+        BlocProvider<UserBloc>(
+          create: (_) => getIt<UserBloc>(),
+        ),
+        BlocProvider<DiscussionsBloc>(
+          create: (_) => getIt<DiscussionsBloc>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),
@@ -49,13 +59,16 @@ class MyApp extends StatelessWidget {
               builder: (context, state) {
             return MaterialApp(
               title: 'campuspulse',
-              themeMode: state == DarkThemeCubitState()
+              themeMode: state == const ThemeCubitState.dark()
                   ? ThemeMode.dark
                   : ThemeMode.light,
               theme: AppTheme.light,
               // darkTheme: AppTheme.darkMode(),
               onGenerateRoute: (settings) =>
                   AppRouter().onGenerateRoute(settings),
+              navigatorObservers: [
+                appNavigatorObserver,
+              ],
             );
           });
         },

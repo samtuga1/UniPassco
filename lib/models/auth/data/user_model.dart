@@ -17,6 +17,16 @@ class User {
     required this.programme,
   });
 
+  factory User.test() => User(
+        id: '',
+        school: 'University of Ghana',
+        name: 'Samuel Twumasi',
+        email: 'samuel@gmail.com',
+        photo: '',
+        isVerified: true,
+        programme: 'Computer Science',
+      );
+
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["_id"],
         school: json['school'],

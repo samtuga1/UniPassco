@@ -33,7 +33,10 @@ class AuthedUserRepository implements IAuthedUserRepository {
 
   @override
   Future<String> getUserId() async {
-    final userId = await prefs.getString(Constants.userKey);
-    return userId;
+    final user = await prefs.getString(Constants.userKey);
+
+    final decodedUser = jsonDecode(user);
+
+    return decodedUser['_id'];
   }
 }

@@ -33,9 +33,11 @@ class QuestionsSkeletonizer extends StatelessWidget {
             ],
           ),
           itemCount: 15,
-          itemBuilder: (ctx, index) => const Padding(
-            padding: EdgeInsets.only(bottom: 14),
-            child: QuestionWidget(),
+          itemBuilder: (ctx, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 14),
+            child: QuestionWidget(
+              onTap: () {},
+            ),
           ),
         ),
       ),

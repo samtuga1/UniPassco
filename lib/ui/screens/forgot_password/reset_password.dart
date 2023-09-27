@@ -99,23 +99,25 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             40.verticalSpace,
             BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
-                if (state is ResettingPasswordError) {
-                  UiUtils.showStandardErrorFlushBar(
+                state.maybeWhen(
+                  authenticationError: (error) =>
+                      UiUtils.showStandardErrorFlushBar(
                     context,
-                    message: HttpErrorUtils.getErrorMessage(state.error),
-                  );
-                }
-                if (state is ResettingPasswordSuccess) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    Routes.signin_signup,
-                    (route) => false,
-                  );
-                }
-                UiUtils.flush(
-                  context,
-                  errorState: ErrorState.success,
-                  msg:
-                      'Password changed successfully, you can log in with your new password',
+                    message: HttpErrorUtils.getErrorMessage(error),
+                  ),
+                  resettingPasswordSuccess: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      Routes.signin_signup,
+                      (route) => false,
+                    );
+                    UiUtils.flush(
+                      context,
+                      errorState: ErrorState.success,
+                      msg:
+                          'Password changed successfully, you can log in with your new password',
+                    );
+                  },
+                  orElse: () {},
                 );
               },
               builder: (context, state) {
@@ -137,10 +139,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               },
               buildWhen: (previous, current) =>
                   current is ResettingPassword ||
-                  current is ResettingPasswordError ||
+                  current is AuthenticationError ||
                   current is ResettingPasswordSuccess,
               listenWhen: (previous, current) =>
-                  current is ResettingPasswordError ||
+                  current is AuthenticationError ||
                   current is ResettingPasswordSuccess,
             ),
             30.verticalSpace,

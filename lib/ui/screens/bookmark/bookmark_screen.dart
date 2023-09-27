@@ -1,6 +1,8 @@
 import 'package:campuspulse/blocs/questions/questions_bloc.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:campuspulse/models/questions/response/list_questions_response.dart';
+import 'package:campuspulse/router/routes.dart';
+import 'package:campuspulse/ui/screens/question/question_detail_screen.dart';
 import 'package:campuspulse/ui/screens/question/widget/questions_skeletonizer.dart';
 import 'package:campuspulse/ui/widgets/custom_error_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<QuestionsBloc>().add(FetchBookmarks());
+      context.read<QuestionsBloc>().add(const FetchBookmarks());
     });
     super.initState();
   }
@@ -35,17 +37,14 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
         addBackBtn: false,
         title: 'Bookmarks',
       ),
-      body: BlocConsumer<QuestionsBloc, QuestionsState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      body: BlocBuilder<QuestionsBloc, QuestionsState>(
         builder: (context, state) => switch (state) {
           FetchingBookmarkedQuestions() => const QuestionsSkeletonizer(),
           FetchingBookmarkedQuestionsError(error: HttpError error) =>
             CustomErrorPage(
               errorDescription: HttpErrorUtils.getErrorMessage(error),
               onRefreshTap: () => context.read<QuestionsBloc>().add(
-                    FetchBookmarks(),
+                    const FetchBookmarks(),
                   ),
             ),
           FetchingBookmarkedQuestionsSuccess(
@@ -109,7 +108,12 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                       padding: const EdgeInsets.only(bottom: 14),
                       child: QuestionWidget(
                         question: bookmarkedQuestions.result[index],
-                        fromBookmark: true,
+                        onTap: () => Navigator.of(context).pushNamed(
+                          Routes.question_detail,
+                          arguments: PageDetailParams(
+                            questionId: bookmarkedQuestions.result[index].id,
+                          ),
+                        ),
                       ),
                     ),
                   ),

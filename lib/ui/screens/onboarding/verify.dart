@@ -118,30 +118,33 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
                     listener: (context, state) {
-                      if (state is VerifyTokenSuccess) {
-                        // navigate to onboarding screen if success
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          Routes.onbardingScreen,
-                          arguments: email,
-                          (_) => false,
-                        );
+                      state.maybeWhen(
+                        verifyTokenSuccess: () {
+                          // navigate to onboarding screen if success
+                          Navigator.of(context).pushNamed(
+                            Routes.onbardingScreen,
+                            arguments: email,
+                          );
 
-                        UiUtils.flush(
-                          context,
-                          errorState: ErrorState.success,
-                          title: 'Success',
-                          msg: 'Email verification was successfull',
-                        );
-                      } else if (state is VerifyTokenError) {
-                        // show flush bar if there is an error
-                        UiUtils.showStandardErrorFlushBar(
-                          context,
-                          message: HttpErrorUtils.getErrorMessage(state.error),
-                        );
-                      }
+                          UiUtils.flush(
+                            context,
+                            errorState: ErrorState.success,
+                            title: 'Success',
+                            msg: 'Email verification was successfull',
+                          );
+                        },
+                        authenticationError: (error) {
+                          // show flush bar if there is an error
+                          UiUtils.showStandardErrorFlushBar(
+                            context,
+                            message: HttpErrorUtils.getErrorMessage(error),
+                          );
+                        },
+                        orElse: () {},
+                      );
                     },
                     listenWhen: (previous, current) =>
-                        current is VerifyTokenError ||
+                        current is AuthenticationError ||
                         current is VerifyTokenSuccess,
                     builder: (context, state) {
                       return CustomElevatedButton(
@@ -165,7 +168,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     buildWhen: (previous, current) =>
                         current is VerifyingToken ||
                         current is VerifyTokenSuccess ||
-                        current is VerifyTokenError,
+                        current is AuthenticationError,
                   ),
                 ),
                 24.verticalSpace,

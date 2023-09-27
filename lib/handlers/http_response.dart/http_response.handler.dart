@@ -1,13 +1,10 @@
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-sealed class HttpResponse<T> {}
+part 'http_response.handler.freezed.dart';
 
-class SuccussResponse<T> implements HttpResponse<T> {
-  late T data;
-  SuccussResponse({required this.data});
-}
-
-class ErrorResponse<T> implements HttpResponse<T> {
-  late HttpError error;
-  ErrorResponse({required this.error});
+@freezed
+sealed class HttpResponse<T> with _$HttpResponse<T> {
+  const factory HttpResponse.success({T? result}) = Success<T>;
+  const factory HttpResponse.error({required HttpError error}) = Error<T>;
 }

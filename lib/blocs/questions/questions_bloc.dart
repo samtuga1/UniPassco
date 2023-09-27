@@ -1,24 +1,25 @@
 import 'package:bloc/bloc.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/handlers/http_response.dart/http_response.handler.dart';
 import 'package:campuspulse/interfaces/questions.interface.dart';
 import 'package:campuspulse/interfaces/questions.repository.interface.dart';
 import 'package:campuspulse/models/questions/data/question_model.dart';
 import 'package:campuspulse/models/questions/response/list_questions_response.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'questions_event.dart';
 part 'questions_state.dart';
+
+part 'questions_bloc.freezed.dart';
 
 @Injectable()
 class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
   final IQuestionsService _questionsService;
   final IQuestionsRepository _repository;
   QuestionsBloc(this._questionsService, this._repository)
-      : super(QuestionsInitial()) {
+      : super(const QuestionsState.initial()) {
     on<FetchQuestionsList>(_fetchQuestionsList);
-    on<RetrieveQuestion>(_retrieveQuestion);
+    on<RetrieveQuestionById>(_retrieveQuestion);
     on<DownloadQuestion>(downloadQuestion);
     on<AddBookmarkQuestion>(_addBookmarkQuestion);
     on<FetchBookmarks>(_fetchBookmarks);
@@ -27,7 +28,7 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
   }
 
   void _refreshDownloads(RefreshDownloads event, Emitter emit) {
-    emit(RefreshedDownloads());
+    emit(const QuestionsState.refreshedDownloads());
   }
 
   Future<void> _addBookmarkQuestion(
@@ -35,13 +36,14 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
     Emitter emit,
   ) async {
     final result = await _questionsService.addBookmarkQuestion(
-        questionId: event.questionId);
-    switch (result) {
-      case SuccussResponse(data: Question question):
-        emit(AddBookmarkSuccess(question: question));
-      case ErrorResponse(error: HttpError error):
-        emit(AddBookmarkError(error: error));
-    }
+      questionId: event.questionId,
+    );
+
+    result.when(success: (question) {
+      emit(QuestionsState.addBookmarkSuccess(question: question!));
+    }, error: (error) {
+      emit(QuestionsState.questionsError(error: error));
+    });
   }
 
   Future<void> _removeBookmarkQuestion(
@@ -51,43 +53,44 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
     final result = await _questionsService.removeBookmarkQuestion(
       questionId: event.questionId,
     );
-    switch (result) {
-      case SuccussResponse(data: Question question):
-        emit(RemoveBookmarkSuccess(question: question));
-      case ErrorResponse(error: HttpError error):
-        emit(RemoveBookmarkError(error: error));
-    }
+
+    result.when(success: (question) {
+      emit(QuestionsState.removeBookmarkSuccess(question: question!));
+    }, error: (error) {
+      emit(QuestionsState.questionsError(error: error));
+    });
   }
 
   Future<void> _fetchBookmarks(FetchBookmarks event, Emitter emit) async {
-    emit(FetchingBookmarkedQuestions());
+    emit(const QuestionsState.fetchingBookmarkedQuestions());
 
-    final result = await _questionsService.listBookmarkedQuestion();
-    switch (result) {
-      case SuccussResponse(data: ListQuestionsResponse questions):
-        emit(
-            FetchingBookmarkedQuestionsSuccess(bookmarkedQuestions: questions));
-      case ErrorResponse(error: HttpError error):
-        emit(FetchingBookmarkedQuestionsError(error: error));
-    }
+    final result = await _questionsService.listBookmarkedQuestion(page: 1);
+
+    result.when(success: (questions) {
+      emit(QuestionsState.fetchingBookmarkedQuestionsSuccess(
+        bookmarkedQuestions: questions!,
+      ));
+    }, error: (error) {
+      emit(QuestionsState.fetchingBookmarkedQuestionsError(error: error));
+    });
   }
 
   Future<void> downloadQuestion(DownloadQuestion event, Emitter emit) async {
     try {
-      emit(DownloadingQuestion());
+      emit(const QuestionsState.downloadingQuestion());
 
       final downloadedQuestions =
           await _repository.download(question: event.question);
 
-      emit(DownloadingQuestionSuccess(
+      emit(QuestionsState.downloadingQuestionSuccess(
         message:
             "${event.question.courseCode} has been downloaded successfully",
         downloadedQuestions: downloadedQuestions,
       ));
     } catch (error) {
       emit(
-        DownloadingQuestionError(
-          error: 'Something unexpected happened, please try again later',
+        QuestionsState.questionsError(
+          error: HttpErrorUtils.getDioException(error),
         ),
       );
     }
@@ -95,33 +98,32 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
 
   Future<void> _fetchQuestionsList(
       FetchQuestionsList event, Emitter emit) async {
-    emit(FetchingQuestionsList());
+    emit(const QuestionsState.fetchingQuestionsList());
 
-    final result = await _questionsService.listQuestions(level: event.level);
+    final result =
+        await _questionsService.listQuestions(level: event.level, page: 1);
 
-    switch (result) {
-      case SuccussResponse(data: ListQuestionsResponse questions):
-        emit(FetchingQuestionsListSuccess(questions: questions));
-      case ErrorResponse(error: HttpError error):
-        emit(FetchingQuestionsListError(error: error));
-    }
+    result.when(success: (questions) {
+      emit(QuestionsState.fetchingQuestionsListSuccess(questions: questions));
+    }, error: (error) {
+      emit(QuestionsState.fetchingQuestionsListError(error: error));
+    });
   }
 
   Future<void> _retrieveQuestion(
-    RetrieveQuestion event,
+    RetrieveQuestionById event,
     Emitter emit,
   ) async {
-    emit(RetrievingQuestion());
+    emit(const QuestionsState.retrievingQuestionById());
 
     final result = await _questionsService.retrieveSingleQuestion(
       questionId: event.questionId,
     );
 
-    switch (result) {
-      case SuccussResponse(data: Question question):
-        emit(RetrievingQuestionSuccess(question: question));
-      case ErrorResponse(error: HttpError error):
-        emit(RetrievingQuestionError(error: error));
-    }
+    result.when(success: (question) {
+      emit(QuestionsState.retrievingQuestionSuccess(question: question!));
+    }, error: (error) {
+      emit(QuestionsState.retrievingQuestionError(error: error));
+    });
   }
 }

@@ -1,71 +1,30 @@
 part of 'authentication_bloc.dart';
 
-sealed class AuthenticationEvent {}
+@freezed
+sealed class AuthenticationEvent with _$AuthenticationEvent {
+  const factory AuthenticationEvent.signUpWithEmail({
+    required String name,
+    required String email,
+    required String password,
+  }) = SignUpWithEmail;
 
-class SignUpWithEmail extends AuthenticationEvent {
-  String name;
-  String email;
-  String password;
-  SignUpWithEmail({
-    required this.name,
-    required this.email,
-    required this.password,
-  });
-}
+  const factory AuthenticationEvent.verifyEmail({
+    required String email,
+    required String token,
+  }) = VerifyEmail;
 
-class VerifyEmail extends AuthenticationEvent {
-  String email;
-  String token;
-  VerifyEmail({
-    required this.email,
-    required this.token,
-  });
-}
+  const factory AuthenticationEvent.loginAccount({
+    required String email,
+    required String password,
+  }) = LoginAccount;
 
-class OnboardUser extends AuthenticationEvent {
-  String email;
-  String programme;
-  OnboardUser({
-    required this.email,
-    required this.programme,
-  });
-}
+  const factory AuthenticationEvent.requestPasswordReset({
+    required String email,
+  }) = RequestPasswordReset;
 
-class UploadProfilePicture extends AuthenticationEvent {
-  String email;
-  String filePath;
-  UploadProfilePicture({
-    required this.email,
-    required this.filePath,
-  });
-}
-
-class LoginAccount extends AuthenticationEvent {
-  String email;
-  String password;
-  LoginAccount({
-    required this.email,
-    required this.password,
-  });
-}
-
-class RetrieveUser extends AuthenticationEvent {}
-
-class RequestPasswordReset extends AuthenticationEvent {
-  late String email;
-  RequestPasswordReset({
-    required this.email,
-  });
-}
-
-class ResetPassword extends AuthenticationEvent {
-  late String email;
-  late String token;
-  late String password;
-
-  ResetPassword({
-    required this.email,
-    required this.password,
-    required this.token,
-  });
+  const factory AuthenticationEvent.resetPassword({
+    required String email,
+    required String token,
+    required String password,
+  }) = ResetPassword;
 }

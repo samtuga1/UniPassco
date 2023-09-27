@@ -6,14 +6,14 @@ import 'package:campuspulse/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OverEntryWidget extends StatefulWidget {
-  const OverEntryWidget({super.key});
+class OverlayEntryWidget extends StatefulWidget {
+  const OverlayEntryWidget({super.key});
 
   @override
-  State<OverEntryWidget> createState() => _OverEntryWidgetState();
+  State<OverlayEntryWidget> createState() => _OverlayEntryWidgetState();
 }
 
-class _OverEntryWidgetState extends State<OverEntryWidget> {
+class _OverlayEntryWidgetState extends State<OverlayEntryWidget> {
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(

@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:campuspulse/blocs/questions/questions_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/interceptors/http_access_token.interceptor.dart';
 import 'package:campuspulse/interfaces/dio_client.interface.dart';
 import 'package:campuspulse/interfaces/questions.repository.interface.dart';
+import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
 import 'package:campuspulse/models/questions/data/question_model.dart';
 import 'package:campuspulse/utils/enums.dart';
 import 'package:campuspulse/utils/ui_utils.dart';
@@ -21,28 +24,28 @@ import 'package:url_launcher/url_launcher.dart';
 class Helpers {
   // pre cache the svgs to memory to prevent flushing of svgs
   static Future<void> precacheSvgs() async {
-    SvgAssetLoader arrowRight = SvgAssetLoader(AppImages.arrow_right);
-    SvgAssetLoader email = SvgAssetLoader(AppImages.email);
-    SvgAssetLoader lock = SvgAssetLoader(AppImages.lock);
-    SvgAssetLoader profile = SvgAssetLoader(AppImages.profile);
-    await Future.wait([
-      svg.cache.putIfAbsent(
-        arrowRight.cacheKey(null),
-        () => arrowRight.loadBytes(null),
-      ),
-      svg.cache.putIfAbsent(
-        email.cacheKey(null),
-        () => email.loadBytes(null),
-      ),
-      svg.cache.putIfAbsent(
-        lock.cacheKey(null),
-        () => lock.loadBytes(null),
-      ),
-      svg.cache.putIfAbsent(
-        profile.cacheKey(null),
-        () => profile.loadBytes(null),
-      ),
-    ]);
+    // SvgAssetLoader arrowRight = SvgAssetLoader(AppImages.arrow_right);
+    // SvgAssetLoader email = SvgAssetLoader(AppImages.email);
+    // SvgAssetLoader lock = SvgAssetLoader(AppImages.lock);
+    // SvgAssetLoader profile = SvgAssetLoader(AppImages.profile);
+    // await Future.wait([
+    //   svg.cache.putIfAbsent(
+    //     arrowRight.cacheKey(null),
+    //     () => arrowRight.loadBytes(null),
+    //   ),
+    //   svg.cache.putIfAbsent(
+    //     email.cacheKey(null),
+    //     () => email.loadBytes(null),
+    //   ),
+    //   svg.cache.putIfAbsent(
+    //     lock.cacheKey(null),
+    //     () => lock.loadBytes(null),
+    //   ),
+    //   svg.cache.putIfAbsent(
+    //     profile.cacheKey(null),
+    //     () => profile.loadBytes(null),
+    //   ),
+    // ]);
   }
 
   static Future<File> getImageFileFromAssets(String path) async {
@@ -85,15 +88,13 @@ class Helpers {
     var path = '${dir.path}/${getFileNameFromUrl(url)}';
 
     final file = File(path);
-
-    if (await file.exists()) return null;
+    if (await file.exists()) return file;
 
     Reference storageReference = FirebaseStorage.instance.refFromURL(url);
     final Uint8List? fileData = await storageReference.getData();
     if (fileData == null) {
       return null;
     }
-
     await file.writeAsBytes(fileData);
     return file;
   }
@@ -129,10 +130,8 @@ class Helpers {
   static Future<void> downloadQuestion(
     BuildContext context, {
     required Question question,
-    required bool questionHasBeenDownloaded,
-    required Function(bool) callback,
   }) async {
-    questionHasBeenDownloaded
+    question.userHasDownloaded
         ? getIt<IQuestionsRepository>()
             .deleteFile(question: question)
             .then((_) {
@@ -141,9 +140,7 @@ class Helpers {
               errorState: ErrorState.success,
               msg: '${question.courseCode} has been removed from downloads',
             );
-            context.read<QuestionsBloc>().add(RefreshDownloads());
-            questionHasBeenDownloaded = false;
-            callback(questionHasBeenDownloaded);
+            context.read<QuestionsBloc>().add(const RefreshDownloads());
           })
         : context
             .read<QuestionsBloc>()
@@ -162,5 +159,44 @@ class Helpers {
         : context
             .read<QuestionsBloc>()
             .add(AddBookmarkQuestion(questionId: questionId));
+  }
+
+  // a function to save some needed data to preferences
+  static void setPrefsData(ISharedPreference prefs) {
+    prefs.setBool(
+      Constants.hasLoggedIn,
+      true,
+    );
+    prefs.setBool(
+      Constants.hasSignedUp,
+      true,
+    );
+    prefs.setBool(
+      Constants.hasFinishedOnboarding,
+      true,
+    );
+    prefs.setBool(
+      Constants.hasVerifiedEmail,
+      true,
+    );
+  }
+
+  static Future<bool> questionHasBeeonDownloaded(Question question) async {
+    Completer<bool> completer = Completer<bool>();
+    getIt<IQuestionsRepository>().getDownloads().then((downloads) {
+      if (downloads.isEmpty) {
+        question.userHasDownloaded = false;
+      } else {
+        for (var element in downloads) {
+          if (element.id == question.id) {
+            question.userHasDownloaded = true;
+          } else {
+            question.userHasDownloaded = false;
+          }
+        }
+      }
+      completer.complete(question.userHasDownloaded);
+    });
+    return completer.future;
   }
 }

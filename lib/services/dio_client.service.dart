@@ -22,6 +22,7 @@ class DioClientService implements IDioClientService {
   @override
   Future<dynamic> get(
     String uri, {
+    dynamic data,
     List<Interceptor>? interceptors,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -39,6 +40,7 @@ class DioClientService implements IDioClientService {
         uri,
         queryParameters: queryParameters,
         options: options,
+        data: data,
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );

@@ -1,22 +1,18 @@
 import 'package:campuspulse/models/questions/data/question_model.dart';
 import 'package:campuspulse/router/routes.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/pdf_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:campuspulse/data/data.dart';
 import 'package:campuspulse/utils/utils.dart';
-
 import '../../../widgets/widgets.dart';
 
 class QuestionContainer extends StatelessWidget {
   const QuestionContainer({
     super.key,
     this.question,
-    this.questionHasBeenBookmarked = false,
   });
   final Question? question;
-  final bool questionHasBeenBookmarked;
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +68,8 @@ class QuestionContainer extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).pushNamed(
-                Routes.pdfScreen,
-                arguments: PdfPageParams(
-                  question: question!,
-                  questionHasBeenBookmarked: questionHasBeenBookmarked,
-                ),
+                Routes.questionsPdfScreen,
+                arguments: question,
               );
             },
             child: DecoratedBox(

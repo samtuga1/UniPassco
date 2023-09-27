@@ -1,7 +1,4 @@
 import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/router/routes.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/pdf_screen.dart';
-import 'package:campuspulse/ui/screens/question/question_detail_screen.dart';
 import 'package:campuspulse/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -14,26 +11,15 @@ class QuestionWidget extends StatelessWidget {
   const QuestionWidget({
     super.key,
     this.question,
-    this.fromBookmark = false,
+    required this.onTap,
   });
   final Question? question;
-  final bool fromBookmark;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: !Helpers.isUrl(question?.fileUrl ?? '')
-          ? () => Navigator.of(context).pushNamed(Routes.pdfScreen,
-              arguments: PdfPageParams(
-                question: question!,
-                showBookmarksIcon: false,
-                showDownloadIcon: false,
-              ))
-          : () => Navigator.of(context).pushNamed(Routes.question_detail,
-              arguments: PageDetailParams(
-                questionId: question!.id,
-                fromBookmark: fromBookmark,
-              )),
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: 17,

@@ -17,18 +17,23 @@ class QuestionService implements IQuestionsService {
   @override
   Future<HttpResponse<ListQuestionsResponse>> listQuestions({
     required String level,
+    required int page,
   }) async {
     try {
       final results = await _dioClient.get(
-        '/questions/list?level=$level',
+        '/questions/list/',
+        queryParameters: {
+          'page': page,
+          'level': level,
+        },
         interceptors: [getIt<HttpAccessTokenInterceptor>()],
       );
 
       ListQuestionsResponse questions = ListQuestionsResponse.fromJson(results);
 
-      return SuccussResponse(data: questions);
+      return HttpResponse.success(result: questions);
     } catch (error) {
-      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(error));
     }
   }
 
@@ -44,9 +49,9 @@ class QuestionService implements IQuestionsService {
 
       Question question = Question.fromJson(results);
 
-      return SuccussResponse(data: question);
+      return HttpResponse.success(result: question);
     } catch (error) {
-      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(error));
     }
   }
 
@@ -65,25 +70,30 @@ class QuestionService implements IQuestionsService {
 
       Question questions = Question.fromJson(results);
 
-      return SuccussResponse(data: questions);
+      return HttpResponse.success(result: questions);
     } catch (error) {
-      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(error));
     }
   }
 
   @override
-  Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion() async {
+  Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion({
+    required int page,
+  }) async {
     try {
       final results = await _dioClient.get(
-        '/questions/bookmark/list',
+        '/questions/bookmark/list/',
+        queryParameters: {
+          'page': page,
+        },
         interceptors: [getIt<HttpAccessTokenInterceptor>()],
       );
 
       ListQuestionsResponse questions = ListQuestionsResponse.fromJson(results);
 
-      return SuccussResponse(data: questions);
+      return HttpResponse.success(result: questions);
     } catch (error) {
-      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(error));
     }
   }
 
@@ -102,9 +112,9 @@ class QuestionService implements IQuestionsService {
 
       Question questions = Question.fromJson(results);
 
-      return SuccussResponse(data: questions);
+      return HttpResponse.success(result: questions);
     } catch (error) {
-      return ErrorResponse(error: HttpErrorUtils.getDioException(error));
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(error));
     }
   }
 }

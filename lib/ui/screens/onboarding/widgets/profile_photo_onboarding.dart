@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:animate_to/animate_to.dart';
 import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
+import 'package:campuspulse/blocs/user/user_bloc.dart';
 import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -132,32 +133,36 @@ class _ProfilePhotoOnboardingState extends State<ProfilePhotoOnboarding> {
                   left: 24,
                   bottom: 20,
                 ),
-                child: BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                child: BlocConsumer<UserBloc, UserState>(
                   listener: (context, state) {
-                    if (state is UploadingProfilePhotoSuccess) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        Routes.bottomNavigationBar,
-                        (_) => false,
-                      );
-                    } else if (state is UploadingProfilePhotoError) {
-                      UiUtils.showStandardErrorFlushBar(
-                        context,
-                        message: HttpErrorUtils.getErrorMessage(state.error),
-                      );
-                    }
+                    state.maybeWhen(
+                      uploadingProfilePhotoSuccess: (_) {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.bottomNavigationBar,
+                          (_) => false,
+                        );
+                      },
+                      userError: (error) {
+                        UiUtils.showStandardErrorFlushBar(
+                          context,
+                          message: HttpErrorUtils.getErrorMessage(error),
+                        );
+                      },
+                      orElse: () {},
+                    );
                   },
                   listenWhen: (previous, current) =>
-                      current is UploadingProfilePhotoError ||
+                      current is UserError ||
                       current is UploadingProfilePhotoSuccess,
                   builder: (context, state) {
                     return CustomElevatedButton(
-                      isBusy: state is UploadingProfilePhotoPhoto,
+                      isBusy: state is UserError,
                       onPressed: () async {
                         String path =
                             selectedImage.split('/').skip(1).join('/');
                         Helpers.getImageFileFromAssets(path).then((file) {
-                          context.read<AuthenticationBloc>().add(
-                                UploadProfilePicture(
+                          context.read<UserBloc>().add(
+                                UserEvent.uploadProfilePicture(
                                   email: widget.email,
                                   filePath: file.path,
                                 ),
@@ -169,8 +174,8 @@ class _ProfilePhotoOnboardingState extends State<ProfilePhotoOnboarding> {
                   },
                   buildWhen: (previous, current) =>
                       current is UploadingProfilePhotoSuccess ||
-                      current is UploadingProfilePhotoError ||
-                      current is UploadingProfilePhotoPhoto,
+                      current is UserError ||
+                      current is UploadingProfilePhoto,
                 )),
           ),
         )

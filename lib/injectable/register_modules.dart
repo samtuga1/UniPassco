@@ -16,6 +16,6 @@ abstract class RegistureModules {
 
   @lazySingleton
   CustomOverlayEntry get customOverlayEntry => CustomOverlayEntry(
-        OverlayEntry(builder: (_) => const OverEntryWidget()),
+        OverlayEntry(builder: (_) => const OverlayEntryWidget()),
       );
 }

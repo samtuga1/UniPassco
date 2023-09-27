@@ -86,18 +86,21 @@ class _RequestPasswordResetScreenState
             35.verticalSpace,
             BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
-                if (state is RequestPasswordResetError) {
-                  UiUtils.showStandardErrorFlushBar(
-                    context,
-                    message: HttpErrorUtils.getErrorMessage(state.error),
-                  );
-                }
-                if (state is RequestPasswordResetSuccess) {
-                  Navigator.of(context).pushNamed(
-                    Routes.checkEmailScreen,
-                    arguments: emailController.text.trim(),
-                  );
-                }
+                state.maybeWhen(
+                  authenticationError: (error) {
+                    UiUtils.showStandardErrorFlushBar(
+                      context,
+                      message: HttpErrorUtils.getErrorMessage(error),
+                    );
+                  },
+                  requestPasswordResetSuccess: () {
+                    Navigator.of(context).pushNamed(
+                      Routes.checkEmailScreen,
+                      arguments: emailController.text.trim(),
+                    );
+                  },
+                  orElse: () {},
+                );
               },
               builder: (context, state) {
                 return CustomElevatedButton(
@@ -116,10 +119,10 @@ class _RequestPasswordResetScreenState
               },
               buildWhen: (previous, current) =>
                   current is RequestingPasswordReset ||
-                  current is RequestPasswordResetError ||
+                  current is AuthenticationError ||
                   current is RequestPasswordResetSuccess,
               listenWhen: (previous, current) =>
-                  current is RequestPasswordResetError ||
+                  current is AuthenticationError ||
                   current is RequestPasswordResetSuccess,
             ),
             32.verticalSpace,

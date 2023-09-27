@@ -8,8 +8,8 @@ class Question {
   final String programme;
   final String fileUrl;
   final String level;
-  final List discussions;
   bool? userHasBookmarked;
+  bool userHasDownloaded;
 
   Question({
     required this.id,
@@ -22,7 +22,7 @@ class Question {
     required this.fileUrl,
     required this.level,
     this.userHasBookmarked,
-    this.discussions = const [],
+    this.userHasDownloaded = false,
   });
 
   Question copyWith({
@@ -49,6 +49,18 @@ class Question {
         fileUrl: fileUrl ?? this.fileUrl,
         level: level ?? this.level,
         userHasBookmarked: userHasBookmarked ?? this.userHasBookmarked,
+      );
+
+  static Question blank() => Question(
+        id: '',
+        mimeType: '',
+        courseName: '',
+        courseCode: '',
+        semester: '',
+        year: '',
+        programme: '',
+        fileUrl: '',
+        level: '',
       );
 
   factory Question.fromJson(Map<String, dynamic> json) {

@@ -1,4 +1,4 @@
-import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
+import 'package:campuspulse/blocs/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:campuspulse/injectable/injection.dart';
 import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
@@ -20,7 +20,7 @@ class HomeWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       children: [
         55.verticalSpace,
-        _profileWidget(context),
+        _profilePhotoWidget(context),
         21.verticalSpace,
         CustomTextFieldWidget(
           readOnly: true,
@@ -127,7 +127,7 @@ class HomeWidget extends StatelessWidget {
     );
   }
 
-  Widget _profileWidget(BuildContext context) {
+  Widget _profilePhotoWidget(BuildContext context) {
     return FutureBuilder<User>(
         future: getIt<IAuthedUserRepository>().getUser(),
         builder: (BuildContext _, AsyncSnapshot<User?> snapshot) {
@@ -135,8 +135,8 @@ class HomeWidget extends StatelessWidget {
             return const SizedBox.shrink();
           } else if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null) {
-              context.read<AuthenticationBloc>().add(
-                    RetrieveUser(),
+              context.read<UserBloc>().add(
+                    const UserEvent.retrieveUser(),
                   );
             }
             return Row(

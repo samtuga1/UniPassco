@@ -41,7 +41,7 @@ class GetStartedScreen extends StatelessWidget {
                   child: Image.asset(
                     AppImages.get_started_male,
                     width: MediaQuery.sizeOf(context).width < 390
-                        ? MediaQuery.sizeOf(context).height * 0.3
+                        ? MediaQuery.sizeOf(context).height * 0.27
                         : MediaQuery.sizeOf(context).height * 0.25,
                   ),
                 ),
@@ -51,7 +51,7 @@ class GetStartedScreen extends StatelessWidget {
                   child: Image.asset(
                     AppImages.get_started_female,
                     width: MediaQuery.sizeOf(context).width < 390
-                        ? MediaQuery.sizeOf(context).height * 0.3
+                        ? MediaQuery.sizeOf(context).height * 0.27
                         : MediaQuery.sizeOf(context).height * 0.25,
                   ),
                 ),
