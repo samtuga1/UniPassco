@@ -1,16 +1,16 @@
-import 'package:campuspulse/ui/screens/downloads/widgets/downloads_pdf_screen.dart';
-import 'package:campuspulse/ui/screens/forgot_password/check_email.dart';
-import 'package:campuspulse/ui/screens/forgot_password/request_password_screen.dart';
-import 'package:campuspulse/ui/screens/forgot_password/reset_password.dart';
-import 'package:campuspulse/ui/screens/landing/landing_screen.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/pdf_screen.dart';
+import 'package:Buddy/ui/screens/downloads/widgets/downloads_pdf_screen.dart';
+import 'package:Buddy/ui/screens/forgot_password/check_email.dart';
+import 'package:Buddy/ui/screens/forgot_password/request_password_screen.dart';
+import 'package:Buddy/ui/screens/forgot_password/reset_password.dart';
+import 'package:Buddy/ui/screens/landing/landing_screen.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/pdf_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:campuspulse/router/routes.dart';
-import 'package:campuspulse/ui/screens/bottom_navigation/bottom_nav_bar.dart';
-import 'package:campuspulse/ui/screens/question/question_detail_screen.dart';
-import 'package:campuspulse/ui/screens/question/question_screen.dart';
-import 'package:campuspulse/ui/screens/onboarding/onboarding_screen.dart';
-import 'package:campuspulse/ui/screens/onboarding/verify.dart';
+import 'package:Buddy/router/routes.dart';
+import 'package:Buddy/ui/screens/bottom_navigation/bottom_nav_bar.dart';
+import 'package:Buddy/ui/screens/question/question_detail_screen.dart';
+import 'package:Buddy/ui/screens/question/question_screen.dart';
+import 'package:Buddy/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:Buddy/ui/screens/onboarding/verify.dart';
 import '../ui/widgets/widgets.dart';
 
 class AppRouter {

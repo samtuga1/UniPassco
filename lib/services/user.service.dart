@@ -1,12 +1,12 @@
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/handlers/http_response.dart/http_response.handler.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interceptors/http_access_token.interceptor.dart';
-import 'package:campuspulse/interfaces/dio_client.interface.dart';
-import 'package:campuspulse/interfaces/user.interface.dart';
-import 'package:campuspulse/models/auth/data/user_model.dart';
-import 'package:campuspulse/models/auth/requests/onboarding_request.dart';
-import 'package:campuspulse/models/auth/responses/login_response.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/handlers/http_response/http_response.handler.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interceptors/http_access_token.interceptor.dart';
+import 'package:Buddy/interfaces/dio_client.interface.dart';
+import 'package:Buddy/interfaces/user.interface.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:Buddy/models/auth/requests/onboarding_request.dart';
+import 'package:Buddy/models/auth/responses/login_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

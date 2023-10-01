@@ -1,18 +1,18 @@
-import 'package:campuspulse/blocs/questions/questions_bloc.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/models/questions/response/list_questions_response.dart';
-import 'package:campuspulse/router/routes.dart';
-import 'package:campuspulse/ui/screens/question/question_detail_screen.dart';
-import 'package:campuspulse/ui/screens/question/widget/questions_skeletonizer.dart';
-import 'package:campuspulse/ui/widgets/custom_error_screen.dart';
+import 'package:Buddy/blocs/questions/questions_bloc.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/models/questions/response/list_questions_response.dart';
+import 'package:Buddy/router/routes.dart';
+import 'package:Buddy/ui/screens/question/question_detail_screen.dart';
+import 'package:Buddy/ui/screens/question/widget/questions_skeletonizer.dart';
+import 'package:Buddy/ui/widgets/custom_error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:Buddy/utils/utils.dart';
 
 class BookmarksScreen extends StatefulWidget {
   const BookmarksScreen({super.key});

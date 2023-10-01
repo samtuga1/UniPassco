@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:campuspulse/ui/widgets/custom_fader.dart';
-import 'package:campuspulse/ui/widgets/custom_loader.dart';
-import 'package:campuspulse/utils/extensions.dart';
+import 'package:Buddy/ui/widgets/custom_fader.dart';
+import 'package:Buddy/ui/widgets/custom_loader.dart';
+import 'package:Buddy/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

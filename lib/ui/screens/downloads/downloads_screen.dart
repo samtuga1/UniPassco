@@ -1,15 +1,15 @@
-import 'package:campuspulse/blocs/questions/questions_bloc.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/questions.repository.interface.dart';
-import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/ui/screens/downloads/widgets/download_screen_widget.dart';
+import 'package:Buddy/blocs/questions/questions_bloc.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interfaces/questions.repository.interface.dart';
+import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/ui/screens/downloads/widgets/download_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:Buddy/utils/utils.dart';
 
 class DownloadsScreen extends StatefulWidget {
   const DownloadsScreen({super.key});

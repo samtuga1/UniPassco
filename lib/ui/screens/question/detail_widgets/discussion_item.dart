@@ -1,19 +1,19 @@
 import 'package:animated_digit/animated_digit.dart';
-import 'package:campuspulse/blocs/discussions/discussions_bloc.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/models/discussions/data/discussion.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/message_box.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/reply_item.dart';
-import 'package:campuspulse/ui/widgets/custom_adaptive_button.dart';
-import 'package:campuspulse/ui/widgets/custom_overlay_entry.dart';
-import 'package:campuspulse/utils/debouncer.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/models/discussions/data/discussion.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/message_box.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/reply_item.dart';
+import 'package:Buddy/ui/widgets/custom_adaptive_button.dart';
+import 'package:Buddy/ui/widgets/custom_overlay_entry.dart';
+import 'package:Buddy/utils/debouncer.dart';
+import 'package:Buddy/utils/utils.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
 
 class DiscussionItem extends StatefulWidget {
   const DiscussionItem({

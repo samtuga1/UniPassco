@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:campuspulse/data/constants.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/handlers/http_response.dart/http_response.handler.dart';
-import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
-import 'package:campuspulse/interfaces/user.interface.dart';
-import 'package:campuspulse/models/auth/data/user_model.dart';
-import 'package:campuspulse/models/auth/requests/onboarding_request.dart';
-import 'package:campuspulse/models/auth/responses/login_response.dart';
-import 'package:campuspulse/utils/helpers.dart';
+import 'package:Buddy/data/constants.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/handlers/http_response/http_response.handler.dart';
+import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/interfaces/user.interface.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:Buddy/models/auth/requests/onboarding_request.dart';
+import 'package:Buddy/models/auth/responses/login_response.dart';
+import 'package:Buddy/utils/helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

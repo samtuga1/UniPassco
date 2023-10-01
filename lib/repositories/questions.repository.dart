@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
-import 'package:campuspulse/interfaces/questions.repository.interface.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
-import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/utils/helpers.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
+import 'package:Buddy/interfaces/questions.repository.interface.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/utils/helpers.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: IQuestionsRepository)

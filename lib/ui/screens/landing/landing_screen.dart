@@ -1,8 +1,8 @@
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
-import 'package:campuspulse/ui/screens/screens.dart';
-import 'package:campuspulse/ui/widgets/signup_login_switcher.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/ui/screens/screens.dart';
+import 'package:Buddy/ui/widgets/signup_login_switcher.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatefulWidget {

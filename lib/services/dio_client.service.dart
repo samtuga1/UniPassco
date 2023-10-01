@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:campuspulse/config/global_configuration.dart';
-import 'package:campuspulse/interfaces/dio_client.interface.dart';
+import 'package:Buddy/config/global_configuration.dart';
+import 'package:Buddy/interfaces/dio_client.interface.dart';
 
 @Injectable(as: IDioClientService)
 class DioClientService implements IDioClientService {

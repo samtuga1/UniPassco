@@ -1,4 +1,4 @@
-import 'package:campuspulse/models/auth/data/user_model.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
 
 class DiscussionReply {
   final String id;

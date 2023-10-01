@@ -1,7 +1,7 @@
-import 'package:campuspulse/handlers/http_response.dart/http_response.handler.dart';
-import 'package:campuspulse/models/auth/data/user_model.dart';
-import 'package:campuspulse/models/auth/requests/onboarding_request.dart';
-import 'package:campuspulse/models/auth/responses/login_response.dart';
+import 'package:Buddy/handlers/http_response/http_response.handler.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:Buddy/models/auth/requests/onboarding_request.dart';
+import 'package:Buddy/models/auth/responses/login_response.dart';
 
 abstract class IUser {
   Future<HttpResponse> onboarding({required OnboardingRequestData request});

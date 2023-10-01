@@ -1,12 +1,12 @@
-import 'package:campuspulse/models/auth/requests/login_request.dart';
-import 'package:campuspulse/models/auth/requests/reset_password.dart';
-import 'package:campuspulse/models/auth/requests/signup_request.dart';
-import 'package:campuspulse/models/auth/responses/login_response.dart';
+import 'package:Buddy/models/auth/requests/login_request.dart';
+import 'package:Buddy/models/auth/requests/reset_password.dart';
+import 'package:Buddy/models/auth/requests/signup_request.dart';
+import 'package:Buddy/models/auth/responses/login_response.dart';
 import 'package:injectable/injectable.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/handlers/http_response.dart/http_response.handler.dart';
-import 'package:campuspulse/interfaces/authentication.interface.dart';
-import 'package:campuspulse/interfaces/dio_client.interface.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/handlers/http_response/http_response.handler.dart';
+import 'package:Buddy/interfaces/authentication.interface.dart';
+import 'package:Buddy/interfaces/dio_client.interface.dart';
 
 @Injectable(as: IAuthentication)
 class AuthenticationService implements IAuthentication {

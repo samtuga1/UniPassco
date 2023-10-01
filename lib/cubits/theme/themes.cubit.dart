@@ -1,9 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:campuspulse/data/data.dart';
+import 'package:Buddy/data/data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:bloc/bloc.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
 
 part 'themes.state.dart';
 part 'themes.cubit.freezed.dart';

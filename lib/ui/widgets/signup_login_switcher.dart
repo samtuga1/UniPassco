@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:campuspulse/ui/screens/signin/signin.dart';
-import 'package:campuspulse/ui/screens/signup/signup.dart';
+import 'package:Buddy/ui/screens/signin/signin.dart';
+import 'package:Buddy/ui/screens/signup/signup.dart';
 
 class LoginSignUpSwitch extends StatefulWidget {
   const LoginSignUpSwitch({super.key, this.showLogin = true});

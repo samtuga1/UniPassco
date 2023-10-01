@@ -1,4 +1,4 @@
-import 'package:campuspulse/main_common.dart';
+import 'package:Buddy/main_common.dart';
 
 import 'data/data.dart';
 

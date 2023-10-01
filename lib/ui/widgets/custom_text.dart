@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:campuspulse/utils/extensions.dart';
+import 'package:Buddy/utils/extensions.dart';
 
 class CustomText extends StatelessWidget {
   final String text;

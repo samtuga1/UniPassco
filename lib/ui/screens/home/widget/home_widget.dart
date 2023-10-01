@@ -1,15 +1,15 @@
-import 'package:campuspulse/blocs/user/user_bloc.dart';
+import 'package:Buddy/blocs/user/user_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
-import 'package:campuspulse/models/auth/data/user_model.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/ui/screens/home/widget/level_container.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/ui/screens/home/widget/level_container.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:Buddy/utils/utils.dart';
 
 class HomeWidget extends StatelessWidget {
   const HomeWidget({super.key});

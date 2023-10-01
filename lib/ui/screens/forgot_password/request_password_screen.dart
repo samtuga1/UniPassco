@@ -1,9 +1,9 @@
-import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/router/routes.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/blocs/auth/authentication_bloc.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/router/routes.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:Buddy/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';

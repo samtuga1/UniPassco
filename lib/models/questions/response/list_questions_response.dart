@@ -1,4 +1,4 @@
-import 'package:campuspulse/models/questions/data/question_model.dart';
+import 'package:Buddy/models/questions/data/question_model.dart';
 
 class ListQuestionsResponse {
   final List<Question> result;

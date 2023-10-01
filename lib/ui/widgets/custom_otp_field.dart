@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/utils/utils.dart';
 
 class OTPTextField extends StatefulWidget {
   /// TextField Controller

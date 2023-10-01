@@ -1,9 +1,9 @@
-import 'package:campuspulse/ui/screens/bookmark/bookmark_screen.dart';
-import 'package:campuspulse/ui/screens/downloads/downloads_screen.dart';
-import 'package:campuspulse/ui/screens/settings/settings.dart';
+import 'package:Buddy/ui/screens/bookmark/bookmark_screen.dart';
+import 'package:Buddy/ui/screens/downloads/downloads_screen.dart';
+import 'package:Buddy/ui/screens/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:campuspulse/ui/screens/home/home.dart';
+import 'package:Buddy/ui/screens/home/home.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

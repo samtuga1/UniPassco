@@ -1,7 +1,7 @@
-import 'package:campuspulse/data/images.dart';
-import 'package:campuspulse/ui/widgets/custom_adaptive_text_button.dart';
-import 'package:campuspulse/ui/widgets/custom_text.dart';
-import 'package:campuspulse/utils/extensions.dart';
+import 'package:Buddy/data/images.dart';
+import 'package:Buddy/ui/widgets/custom_adaptive_text_button.dart';
+import 'package:Buddy/ui/widgets/custom_text.dart';
+import 'package:Buddy/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

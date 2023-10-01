@@ -1,17 +1,17 @@
-import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
-import 'package:campuspulse/blocs/discussions/discussions_bloc.dart';
-import 'package:campuspulse/blocs/questions/questions_bloc.dart';
-import 'package:campuspulse/blocs/user/user_bloc.dart';
+import 'package:Buddy/blocs/auth/authentication_bloc.dart';
+import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
+import 'package:Buddy/blocs/questions/questions_bloc.dart';
+import 'package:Buddy/blocs/user/user_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/config/global_configuration.dart';
-import 'package:campuspulse/cubits/theme/themes.cubit.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/router/app_router.dart';
+import 'package:Buddy/config/global_configuration.dart';
+import 'package:Buddy/cubits/theme/themes.cubit.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:campuspulse/utils/helpers.dart';
+import 'package:Buddy/utils/helpers.dart';
 import 'firebase_options.dart';
 
 final appNavigatorObserver = NavigatorObserver();
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
           return BlocBuilder<ThemeCubit, ThemeCubitState>(
               builder: (context, state) {
             return MaterialApp(
-              title: 'campuspulse',
+              title: 'Buddy',
               themeMode: state == const ThemeCubitState.dark()
                   ? ThemeMode.dark
                   : ThemeMode.light,

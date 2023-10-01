@@ -1,14 +1,14 @@
-import 'package:campuspulse/blocs/auth/authentication_bloc.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/utils/utils.dart';
-import 'package:campuspulse/utils/validators.dart';
+import 'package:Buddy/blocs/auth/authentication_bloc.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/utils/utils.dart';
+import 'package:Buddy/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/data/images.dart';
-import 'package:campuspulse/router/routes.dart';
+import 'package:Buddy/data/images.dart';
+import 'package:Buddy/router/routes.dart';
 import '../../widgets/widgets.dart';
 
 class SignUp extends StatefulWidget {

@@ -1,12 +1,12 @@
-import 'package:campuspulse/blocs/questions/questions_bloc.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/models/questions/response/list_questions_response.dart';
-import 'package:campuspulse/ui/screens/question/widget/questions_screen_widget.dart';
-import 'package:campuspulse/ui/screens/question/widget/questions_skeletonizer.dart';
-import 'package:campuspulse/ui/widgets/custom_error_screen.dart';
+import 'package:Buddy/blocs/questions/questions_bloc.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/models/questions/response/list_questions_response.dart';
+import 'package:Buddy/ui/screens/question/widget/questions_screen_widget.dart';
+import 'package:Buddy/ui/screens/question/widget/questions_skeletonizer.dart';
+import 'package:Buddy/ui/widgets/custom_error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});

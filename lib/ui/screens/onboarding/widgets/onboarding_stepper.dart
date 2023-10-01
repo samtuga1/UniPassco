@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/utils/extensions.dart';
+import 'package:Buddy/utils/extensions.dart';
 
 class OnboardingStepper extends StatefulWidget {
   const OnboardingStepper({

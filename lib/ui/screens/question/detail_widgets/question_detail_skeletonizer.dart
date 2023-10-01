@@ -1,7 +1,7 @@
-import 'package:campuspulse/ui/screens/question/detail_widgets/discussion_item.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/question_container.dart';
-import 'package:campuspulse/ui/widgets/custom_text.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/discussion_item.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/question_container.dart';
+import 'package:Buddy/ui/widgets/custom_text.dart';
+import 'package:Buddy/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';

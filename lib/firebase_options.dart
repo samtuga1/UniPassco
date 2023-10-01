@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '712891125160',
     projectId: 'passco-2f09d',
     storageBucket: 'passco-2f09d.appspot.com',
-    iosBundleId: 'com.example.campuspulse',
+    iosBundleId: 'com.example.Buddy',
   );
 }

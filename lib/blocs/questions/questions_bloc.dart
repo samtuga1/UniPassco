@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/interfaces/questions.interface.dart';
-import 'package:campuspulse/interfaces/questions.repository.interface.dart';
-import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/models/questions/response/list_questions_response.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/interfaces/questions.interface.dart';
+import 'package:Buddy/interfaces/questions.repository.interface.dart';
+import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/models/questions/response/list_questions_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 

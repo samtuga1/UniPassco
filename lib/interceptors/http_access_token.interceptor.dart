@@ -1,5 +1,5 @@
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

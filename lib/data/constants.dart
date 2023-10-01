@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 const PROD_CONFIG = "prod_config";
-const STG_CONFIG = "stage_config";
+const STG_CONFIG = "staging_config";
+const DEV_CONFIG = 'dev_config';
 
 class Constants {
   static const kAppLogo = Icon(Icons.book);

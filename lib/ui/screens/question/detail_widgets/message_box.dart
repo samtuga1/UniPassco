@@ -1,17 +1,17 @@
-import 'package:campuspulse/blocs/discussions/discussions_bloc.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
-import 'package:campuspulse/models/auth/data/user_model.dart';
-import 'package:campuspulse/ui/widgets/custom_adaptive_button.dart';
-import 'package:campuspulse/ui/widgets/custom_cache_image.dart';
-import 'package:campuspulse/ui/widgets/custom_loader.dart';
+import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:Buddy/ui/widgets/custom_adaptive_button.dart';
+import 'package:Buddy/ui/widgets/custom_cache_image.dart';
+import 'package:Buddy/ui/widgets/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/ui/widgets/custom_text_field.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/ui/widgets/custom_text_field.dart';
+import 'package:Buddy/utils/utils.dart';
 
 final FocusNode messageBoxTextFieldFocusNode = FocusNode();
 

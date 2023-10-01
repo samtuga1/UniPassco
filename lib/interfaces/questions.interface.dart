@@ -1,6 +1,6 @@
-import 'package:campuspulse/handlers/http_response.dart/http_response.handler.dart';
-import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/models/questions/response/list_questions_response.dart';
+import 'package:Buddy/handlers/http_response/http_response.handler.dart';
+import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/models/questions/response/list_questions_response.dart';
 
 abstract class IQuestionsService {
   Future<HttpResponse<ListQuestionsResponse>> listQuestions({

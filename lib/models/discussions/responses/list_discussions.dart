@@ -1,4 +1,4 @@
-import 'package:campuspulse/models/discussions/data/discussion.dart';
+import 'package:Buddy/models/discussions/data/discussion.dart';
 
 class ListDiscussionsResponse {
   final List<Discussion> discussions;

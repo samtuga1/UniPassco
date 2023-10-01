@@ -1,4 +1,4 @@
-import 'package:campuspulse/utils/enums.dart';
+import 'package:Buddy/utils/enums.dart';
 
 class UpdateDiscussionVotesCountRequest {
   final String discussionId;

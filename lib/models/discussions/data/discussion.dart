@@ -1,6 +1,6 @@
-import 'package:campuspulse/models/auth/data/user_model.dart';
-import 'package:campuspulse/models/discussions/data/discussion_reply.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:Buddy/models/discussions/data/discussion_reply.dart';
+import 'package:Buddy/utils/utils.dart';
 
 class Discussion {
   final String id;

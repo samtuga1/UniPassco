@@ -1,6 +1,6 @@
 {
-    "name": "campuspulse",
-    "short_name": "campuspulse",
+    "name": "Buddy",
+    "short_name": "Buddy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

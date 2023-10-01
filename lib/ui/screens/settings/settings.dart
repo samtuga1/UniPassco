@@ -1,7 +1,7 @@
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
-import 'package:campuspulse/router/routes.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/router/routes.dart';
+import 'package:Buddy/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
             onPressed: () => UiUtils.customDialog(
                   context,
                   title: 'Are you sure you want to logout ?',
-                  'You will be required to log in when you open campuspulse app again',
+                  'You will be required to log in when you open Buddy app again',
                   onTap: () {
                     getIt<ISharedPreference>().clear();
                     Navigator.of(context).pushNamedAndRemoveUntil(

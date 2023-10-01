@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @Injectable(as: ISharedPreference)

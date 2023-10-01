@@ -1,10 +1,10 @@
-import 'package:campuspulse/utils/ui_utils.dart';
+import 'package:Buddy/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:campuspulse/ui/screens/onboarding/widgets/onboarding_stepper.dart';
-import 'package:campuspulse/ui/screens/onboarding/widgets/profile_photo_onboarding.dart';
-import 'package:campuspulse/ui/screens/onboarding/widgets/programme_onboarding.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
+import 'package:Buddy/ui/screens/onboarding/widgets/onboarding_stepper.dart';
+import 'package:Buddy/ui/screens/onboarding/widgets/profile_photo_onboarding.dart';
+import 'package:Buddy/ui/screens/onboarding/widgets/programme_onboarding.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
 
 class OnboardingScreen extends StatefulWidget {
   OnboardingScreen({super.key, this.email});

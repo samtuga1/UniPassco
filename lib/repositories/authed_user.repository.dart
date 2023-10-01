@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/interfaces/authed_user.repository.interface.dart';
-import 'package:campuspulse/interfaces/shared_preferences.interface.dart';
-import 'package:campuspulse/models/auth/data/user_model.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
+import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: IAuthedUserRepository)

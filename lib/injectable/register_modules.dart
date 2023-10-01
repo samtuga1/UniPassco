@@ -1,5 +1,5 @@
-import 'package:campuspulse/ui/widgets/custom_overlay_entry.dart';
-import 'package:campuspulse/ui/widgets/overlay_entry_widget.dart';
+import 'package:Buddy/ui/widgets/custom_overlay_entry.dart';
+import 'package:Buddy/ui/widgets/overlay_entry_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';

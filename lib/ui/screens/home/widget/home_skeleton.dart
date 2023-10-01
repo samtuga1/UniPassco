@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/ui/screens/home/widget/level_container.dart';
-import 'package:campuspulse/ui/widgets/widgets.dart';
-import 'package:campuspulse/utils/extensions.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/ui/screens/home/widget/level_container.dart';
+import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:Buddy/utils/extensions.dart';
 
 class HomeSkeleton extends StatelessWidget {
   const HomeSkeleton({super.key});

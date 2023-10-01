@@ -1,4 +1,4 @@
-import 'package:campuspulse/models/auth/data/user_model.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
 
 abstract class IAuthedUserRepository {
   Future<void> save({required User user});

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:campuspulse/utils/extensions.dart';
+import 'package:Buddy/utils/extensions.dart';
 
 class CustomProfilePhotoContainer extends StatelessWidget {
   const CustomProfilePhotoContainer({

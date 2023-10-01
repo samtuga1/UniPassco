@@ -1,14 +1,14 @@
-import 'package:campuspulse/blocs/questions/questions_bloc.dart';
-import 'package:campuspulse/data/data.dart';
-import 'package:campuspulse/handlers/http_error/http_errors.handler.dart';
-import 'package:campuspulse/injectable/injection.dart';
-import 'package:campuspulse/interfaces/questions.repository.interface.dart';
-import 'package:campuspulse/models/questions/data/question_model.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/question_detail_skeletonizer.dart';
-import 'package:campuspulse/ui/screens/question/detail_widgets/question_detail_widget.dart';
-import 'package:campuspulse/ui/widgets/custom_error_screen.dart';
-import 'package:campuspulse/ui/widgets/custom_overlay_entry.dart';
-import 'package:campuspulse/utils/utils.dart';
+import 'package:Buddy/blocs/questions/questions_bloc.dart';
+import 'package:Buddy/data/data.dart';
+import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/interfaces/questions.repository.interface.dart';
+import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/question_detail_skeletonizer.dart';
+import 'package:Buddy/ui/screens/question/detail_widgets/question_detail_widget.dart';
+import 'package:Buddy/ui/widgets/custom_error_screen.dart';
+import 'package:Buddy/ui/widgets/custom_overlay_entry.dart';
+import 'package:Buddy/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

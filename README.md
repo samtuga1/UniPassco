@@ -1,4 +1,4 @@
-# campuspulse
+# Buddy
 
 An app to make the lives of university students easier
 
