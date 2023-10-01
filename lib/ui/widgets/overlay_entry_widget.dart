@@ -25,8 +25,8 @@ class _OverlayEntryWidgetState extends State<OverlayEntryWidget> {
           padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.02),
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 2,
-              sigmaY: 2,
+              sigmaX: 5,
+              sigmaY: 5,
             ),
             child: Container(
               width: 100.w,
@@ -36,6 +36,7 @@ class _OverlayEntryWidgetState extends State<OverlayEntryWidget> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: CustomLoading(
+                adaptive: true,
                 height: 45,
                 width: 45,
                 color: context.getTheme.canvasColor,

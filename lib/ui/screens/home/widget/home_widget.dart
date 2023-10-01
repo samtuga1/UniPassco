@@ -144,8 +144,8 @@ class HomeWidget extends StatelessWidget {
               children: [
                 CustomCacheImage(
                   imageUrl: snapshot.data!.photo,
-                  height: 45,
-                  width: 45,
+                  height: 46,
+                  width: 46,
                 ),
                 7.horizontalSpace,
                 Expanded(
@@ -160,7 +160,7 @@ class HomeWidget extends StatelessWidget {
                         'Find the resources you need to pass your exams',
                         softWrap: true,
                         style: context.getTheme.textTheme.labelMedium!
-                            .copyWith(fontSize: 13.5),
+                            .copyWith(fontSize: 13.5, height: 1),
                       ),
                     ],
                   ),

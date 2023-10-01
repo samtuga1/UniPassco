@@ -27,8 +27,6 @@ class OTPTextField extends StatefulWidget {
   /// show the error border or not
   final bool hasError;
 
-  final TextCapitalization textCapitalization;
-
   /// The style to use for the text being edited.
   final TextStyle style;
 
@@ -73,7 +71,6 @@ class OTPTextField extends StatefulWidget {
     this.keyboardType = TextInputType.number,
     this.style = const TextStyle(),
     this.outlineBorderRadius = 10,
-    this.textCapitalization = TextCapitalization.none,
     this.textFieldAlignment = MainAxisAlignment.spaceBetween,
     this.obscureText = false,
     this.fieldStyle = FieldStyle.underline,
@@ -188,7 +185,6 @@ class _OTPTextFieldState extends State<OTPTextField> {
         cursorColor: context.getTheme.primaryColor,
         controller: _textControllers[index],
         keyboardType: widget.keyboardType,
-        textCapitalization: widget.textCapitalization,
         textAlign: TextAlign.center,
         style: widget.style,
         inputFormatters: widget.inputFormatter,

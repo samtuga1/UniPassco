@@ -84,11 +84,11 @@ class _MessageBoxState extends State<MessageBox> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
+        top: 13,
         left: 24,
         right: 24,
-        bottom: MediaQuery.paddingOf(context).bottom + 20,
+        bottom: MediaQuery.paddingOf(context).bottom + 24,
       ),
-      // height: 60,
       decoration: BoxDecoration(
         color: context.getTheme.scaffoldBackgroundColor,
         border: Border(
@@ -134,7 +134,7 @@ class _MessageBoxState extends State<MessageBox> {
                     minLines: 1,
                     maxLength: 300,
                     contentPadding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 11),
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 11),
                     borderColor: context.getTheme.scaffoldBackgroundColor,
                     borderRadius: 31,
                     hintText: hintText,

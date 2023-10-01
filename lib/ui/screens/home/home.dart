@@ -23,6 +23,10 @@ class HomeScreen extends StatelessWidget {
           RetrievingUserError(error: HttpError _) => const HomeWidget(),
           _ => const HomeWidget(),
         },
+        buildWhen: (previous, current) =>
+            current is RetrievingUser ||
+            current is RetrievingUserError ||
+            current is RetrievingUserSuccess,
       ),
     );
   }

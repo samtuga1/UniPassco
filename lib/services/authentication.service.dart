@@ -61,6 +61,8 @@ class AuthenticationService implements IAuthentication {
 
       return HttpResponse.success(result: jsonResult);
     } catch (err) {
+      // print(t);
+      print(err);
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }
   }

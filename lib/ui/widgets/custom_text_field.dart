@@ -111,7 +111,7 @@ class CustomTextFieldWidget extends StatelessWidget {
         fillColor:
             fillColor ?? context.getTheme.primaryColor.withOpacity(0.025),
         contentPadding: contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+            const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
         filled: filled,
         isDense: isDense,
         focusedBorder: focusedBorder ??

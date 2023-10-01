@@ -109,8 +109,6 @@ class UiUtils {
       builder: (ctx) => Container(
         width: MediaQuery.sizeOf(context).width * 0.95,
         padding: EdgeInsets.only(
-          right: 14,
-          left: 14,
           bottom: MediaQuery.viewInsetsOf(context).bottom,
         ),
         child: Column(
@@ -148,7 +146,8 @@ class UiUtils {
             10.verticalSpace,
             Padding(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.viewInsetsOf(context).bottom),
+                bottom: MediaQuery.viewInsetsOf(context).bottom,
+              ),
               child: trailing ?? const SizedBox.shrink(),
             ),
             20.verticalSpace,

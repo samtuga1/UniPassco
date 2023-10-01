@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:animate_to/animate_to.dart';
-import 'package:Buddy/blocs/auth/authentication_bloc.dart';
 import 'package:Buddy/blocs/user/user_bloc.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/data/data.dart';
@@ -90,12 +90,14 @@ class _ProfilePhotoOnboardingState extends State<ProfilePhotoOnboarding> {
                         onTap: isSelected
                             ? null
                             : () {
-                                _animateToController.animateTag(index,
-                                    duration:
-                                        const Duration(milliseconds: 500));
+                                _animateToController.animateTag(
+                                  index,
+                                  duration: const Duration(milliseconds: 500),
+                                );
                                 Future.delayed(
                                     const Duration(milliseconds: 500), () {
                                   setState(() {
+                                    HapticFeedback.mediumImpact();
                                     selectedImage =
                                         'assets/images/onboarding/animoji_${index + 1}.png';
                                   });
@@ -156,7 +158,7 @@ class _ProfilePhotoOnboardingState extends State<ProfilePhotoOnboarding> {
                       current is UploadingProfilePhotoSuccess,
                   builder: (context, state) {
                     return CustomElevatedButton(
-                      isBusy: state is UserError,
+                      isBusy: state is UploadingProfilePhoto,
                       onPressed: () async {
                         String path =
                             selectedImage.split('/').skip(1).join('/');

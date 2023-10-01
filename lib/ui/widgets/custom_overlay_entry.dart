@@ -6,6 +6,7 @@ class CustomOverlayEntry {
   CustomOverlayEntry(this._overlayEntry);
 
   void show(BuildContext context) {
+    if (_overlayEntry.mounted) return;
     Overlay.of(context).insert(_overlayEntry);
   }
 

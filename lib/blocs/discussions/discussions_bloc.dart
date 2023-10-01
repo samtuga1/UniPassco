@@ -108,6 +108,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
 
   Future<void> _addDiscussion(AddDiscussion event, Emitter emit) async {
     emit(const AddingDiscussionOrReply());
+
     final request =
         AddDiscussionRequest(text: event.text, questionId: event.questionId);
 
@@ -130,7 +131,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
     VoteDiscussion event,
     Emitter emit,
   ) async {
-    emit(UpdatingDiscussionVotesCount);
+    emit(const UpdatingDiscussionVotesCount());
 
     final request = UpdateDiscussionVotesCountRequest(
       discussionId: event.discussionId,

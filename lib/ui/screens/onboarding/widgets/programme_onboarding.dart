@@ -3,6 +3,7 @@ import 'package:Buddy/blocs/user/user_bloc.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -76,18 +77,32 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomTextFieldWidget(
-                      validator: null,
-                      prefixIcon: SvgPicture.asset(AppImages.search),
-                      borderRadius: 31,
-                      hintText: 'Search Programmes',
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 14,
+                        left: 14,
+                      ),
+                      child: CustomTextFieldWidget(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 17,
+                          vertical: 8,
+                        ),
+                        validator: null,
+                        prefixIcon: SvgPicture.asset(AppImages.search),
+                        borderRadius: 31,
+                        hintText: 'Search Programmes',
+                      ),
                     ),
                     StatefulBuilder(builder: (ctx, setState) {
                       return Column(
                         children: List.generate(
                           list.length,
-                          (index) => RadioListTile.adaptive(
-                            contentPadding: EdgeInsets.zero,
+                          (index) => RadioListTile(
+                            shape: const BeveledRectangleBorder(),
+                            contentPadding: const EdgeInsets.only(
+                              right: 14,
+                              left: 14,
+                            ),
                             dense: true,
                             activeColor: context.getTheme.primaryColor,
                             title: CustomText(list[index]),
@@ -96,6 +111,7 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                             groupValue: selectedProgrammeInSheet,
                             onChanged: (val) {
                               selectedProgrammeInSheet = val!;
+                              HapticFeedback.selectionClick();
                               setState(() {});
                             },
                           ),
@@ -105,9 +121,15 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                   ],
                 ),
               ),
-              trailing: CustomElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                title: 'Continue',
+              trailing: Padding(
+                padding: const EdgeInsets.only(
+                  right: 14,
+                  left: 14,
+                ),
+                child: CustomElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  title: 'Continue',
+                ),
               ),
             ),
             suffixIcon: const Icon(

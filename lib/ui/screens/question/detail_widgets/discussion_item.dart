@@ -1,3 +1,4 @@
+import 'package:Buddy/ui/widgets/loading_screen.dart';
 import 'package:animated_digit/animated_digit.dart';
 import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
 import 'package:Buddy/injectable/injection.dart';
@@ -75,7 +76,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.74,
+              width: MediaQuery.sizeOf(context).width - 90.5,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +107,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                     widget.discussion;
               },
               child: SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.75,
+                width: MediaQuery.sizeOf(context).width - 86,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -197,21 +198,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
               ),
             ).toList(),
             7.verticalSpace,
-            BlocConsumer<DiscussionsBloc, DiscussionsState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  updatingDiscussionVotesCount: () {
-                    getIt<CustomOverlayEntry>().show(context);
-                  },
-                  updatingDiscussionVotesCountSuccess: (_) {
-                    getIt<CustomOverlayEntry>().hide(context);
-                  },
-                  discussionsError: (_) {
-                    getIt<CustomOverlayEntry>().hide(context);
-                  },
-                  orElse: () {},
-                );
-              },
+            BlocBuilder<DiscussionsBloc, DiscussionsState>(
               builder: (context, state) {
                 return widget.discussion.totalRepliesLeft > 0
                     ? (state is FetchingDiscussionReplies &&
@@ -263,10 +250,6 @@ class _DiscussionItemState extends State<DiscussionItem> {
                   current is FetchingDiscussionReplies ||
                   current is FetchingDiscussionRepliesError ||
                   current is FetchingDiscussionRepliesSuccess,
-              listenWhen: (previous, current) =>
-                  current is UpdatingDiscussionVotesCount ||
-                  current is DiscussionsError ||
-                  current is UpdatingDiscussionVotesCountSuccess,
             ),
             10.verticalSpace,
           ],

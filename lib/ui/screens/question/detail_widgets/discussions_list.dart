@@ -50,6 +50,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
                 discussionsList = discussions;
               },
               updatingDiscussionVotesCountSuccess: (discussion) {
+                getIt<CustomOverlayEntry>().hide(context);
                 final updatedDiscussionIndex =
                     discussionsList.discussions.indexWhere(
                   (element) {
@@ -107,7 +108,11 @@ class _DiscussionsListState extends State<DiscussionsList> {
                   },
                 );
               },
+              updatingDiscussionVotesCount: () {
+                getIt<CustomOverlayEntry>().show(context);
+              },
               discussionsError: (error) {
+                getIt<CustomOverlayEntry>().hide(context);
                 UiUtils.showStandardErrorFlushBar(
                   context,
                   message: HttpErrorUtils.getErrorMessage(error),
@@ -134,7 +139,8 @@ class _DiscussionsListState extends State<DiscussionsList> {
               current is UpdatingDiscussionVotesCountSuccess ||
               current is FetchingDiscussionRepliesSuccess ||
               current is DiscussionsError ||
-              current is ReplyingDiscussionSuccess,
+              current is ReplyingDiscussionSuccess ||
+              current is UpdatingDiscussionVotesCount,
           buildWhen: (previous, current) =>
               current is FetchingDiscussions ||
               current is FetchingDiscussionsError ||
@@ -186,12 +192,8 @@ class _DiscussionsListState extends State<DiscussionsList> {
                   itemBuilder: (ctx, index, animation) {
                     return FadeTransition(
                       opacity: animation,
-                      child: Builder(
-                        builder: (BuildContext context) {
-                          return DiscussionItem(
-                            discussion: discussions.discussions[index],
-                          );
-                        },
+                      child: DiscussionItem(
+                        discussion: discussions.discussions[index],
                       ),
                     );
                   },
@@ -224,12 +226,14 @@ class _DiscussionsListState extends State<DiscussionsList> {
   }
 
   int _getDiscussionIndex({String? tappedIndex}) =>
-      discussionsList.discussions.indexWhere((discussion) {
-        if (tappedIndex == null) {
-          return discussion.id ==
-              context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies;
-        } else {
-          return discussion.id == tappedIndex;
-        }
-      });
+      discussionsList.discussions.indexWhere(
+        (discussion) {
+          if (tappedIndex == null) {
+            return discussion.id ==
+                context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies;
+          } else {
+            return discussion.id == tappedIndex;
+          }
+        },
+      );
 }

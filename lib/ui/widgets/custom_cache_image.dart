@@ -44,6 +44,7 @@ class _CustomCacheImageState extends State<CustomCacheImage> {
             imageUrl: widget.imageUrl,
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
+                shape: BoxShape.circle,
                 image: DecorationImage(image: imageProvider, fit: widget.fit),
               ),
             ),
