@@ -5,7 +5,7 @@ class Question {
   final String courseCode;
   final String semester;
   final String year;
-  final String programme;
+  final String college;
   final String fileUrl;
   final String level;
   bool? userHasBookmarked;
@@ -18,7 +18,7 @@ class Question {
     required this.courseCode,
     required this.semester,
     required this.year,
-    required this.programme,
+    required this.college,
     required this.fileUrl,
     required this.level,
     this.userHasBookmarked,
@@ -32,7 +32,7 @@ class Question {
     String? courseCode,
     String? semester,
     String? year,
-    String? programme,
+    String? college,
     String? fileUrl,
     String? level,
     bool? userHasBookmarked,
@@ -45,7 +45,7 @@ class Question {
         courseCode: courseCode ?? this.courseCode,
         semester: semester ?? this.semester,
         year: year ?? this.year,
-        programme: programme ?? this.programme,
+        college: college ?? this.college,
         fileUrl: fileUrl ?? this.fileUrl,
         level: level ?? this.level,
         userHasBookmarked: userHasBookmarked ?? this.userHasBookmarked,
@@ -58,7 +58,7 @@ class Question {
         courseCode: '',
         semester: '',
         year: '',
-        programme: '',
+        college: '',
         fileUrl: '',
         level: '',
       );
@@ -71,7 +71,7 @@ class Question {
       courseCode: json["courseCode"],
       semester: json["semester"],
       year: json["year"],
-      programme: json["programme"],
+      college: json["college"],
       fileUrl: json["fileUrl"],
       level: json["level"],
       userHasBookmarked: json.containsKey('userHasBookmarked')
@@ -87,7 +87,7 @@ class Question {
         "courseCode": courseCode,
         "semester": semester,
         "year": year,
-        "programme": programme,
+        "college": college,
         "fileUrl": fileUrl,
         "level": level,
         "userHasBookmarked": userHasBookmarked,

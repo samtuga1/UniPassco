@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String programme) onboardUser,
+    required TResult Function(String email, String college) onboardUser,
     required TResult Function(String email, String filePath)
         uploadProfilePicture,
     required TResult Function() retrieveUser,
@@ -26,14 +26,14 @@ mixin _$UserEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String programme)? onboardUser,
+    TResult? Function(String email, String college)? onboardUser,
     TResult? Function(String email, String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String programme)? onboardUser,
+    TResult Function(String email, String college)? onboardUser,
     TResult Function(String email, String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
     required TResult orElse(),
@@ -86,7 +86,7 @@ abstract class _$$OnboardUserCopyWith<$Res> {
           _$OnboardUser value, $Res Function(_$OnboardUser) then) =
       __$$OnboardUserCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String programme});
+  $Res call({String email, String college});
 }
 
 /// @nodoc
@@ -101,16 +101,16 @@ class __$$OnboardUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = null,
-    Object? programme = null,
+    Object? college = null,
   }) {
     return _then(_$OnboardUser(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      programme: null == programme
-          ? _value.programme
-          : programme // ignore: cast_nullable_to_non_nullable
+      college: null == college
+          ? _value.college
+          : college // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -119,16 +119,16 @@ class __$$OnboardUserCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OnboardUser implements OnboardUser {
-  const _$OnboardUser({required this.email, required this.programme});
+  const _$OnboardUser({required this.email, required this.college});
 
   @override
   final String email;
   @override
-  final String programme;
+  final String college;
 
   @override
   String toString() {
-    return 'UserEvent.onboardUser(email: $email, programme: $programme)';
+    return 'UserEvent.onboardUser(email: $email, college: $college)';
   }
 
   @override
@@ -137,12 +137,11 @@ class _$OnboardUser implements OnboardUser {
         (other.runtimeType == runtimeType &&
             other is _$OnboardUser &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.programme, programme) ||
-                other.programme == programme));
+            (identical(other.college, college) || other.college == college));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, programme);
+  int get hashCode => Object.hash(runtimeType, email, college);
 
   @JsonKey(ignore: true)
   @override
@@ -153,34 +152,34 @@ class _$OnboardUser implements OnboardUser {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String programme) onboardUser,
+    required TResult Function(String email, String college) onboardUser,
     required TResult Function(String email, String filePath)
         uploadProfilePicture,
     required TResult Function() retrieveUser,
   }) {
-    return onboardUser(email, programme);
+    return onboardUser(email, college);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String programme)? onboardUser,
+    TResult? Function(String email, String college)? onboardUser,
     TResult? Function(String email, String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
   }) {
-    return onboardUser?.call(email, programme);
+    return onboardUser?.call(email, college);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String programme)? onboardUser,
+    TResult Function(String email, String college)? onboardUser,
     TResult Function(String email, String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
     required TResult orElse(),
   }) {
     if (onboardUser != null) {
-      return onboardUser(email, programme);
+      return onboardUser(email, college);
     }
     return orElse();
   }
@@ -223,10 +222,10 @@ class _$OnboardUser implements OnboardUser {
 abstract class OnboardUser implements UserEvent {
   const factory OnboardUser(
       {required final String email,
-      required final String programme}) = _$OnboardUser;
+      required final String college}) = _$OnboardUser;
 
   String get email;
-  String get programme;
+  String get college;
   @JsonKey(ignore: true)
   _$$OnboardUserCopyWith<_$OnboardUser> get copyWith =>
       throw _privateConstructorUsedError;
@@ -306,7 +305,7 @@ class _$UploadProfilePicture implements UploadProfilePicture {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String programme) onboardUser,
+    required TResult Function(String email, String college) onboardUser,
     required TResult Function(String email, String filePath)
         uploadProfilePicture,
     required TResult Function() retrieveUser,
@@ -317,7 +316,7 @@ class _$UploadProfilePicture implements UploadProfilePicture {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String programme)? onboardUser,
+    TResult? Function(String email, String college)? onboardUser,
     TResult? Function(String email, String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
   }) {
@@ -327,7 +326,7 @@ class _$UploadProfilePicture implements UploadProfilePicture {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String programme)? onboardUser,
+    TResult Function(String email, String college)? onboardUser,
     TResult Function(String email, String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
     required TResult orElse(),
@@ -423,7 +422,7 @@ class _$RetrieveUser implements RetrieveUser {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String programme) onboardUser,
+    required TResult Function(String email, String college) onboardUser,
     required TResult Function(String email, String filePath)
         uploadProfilePicture,
     required TResult Function() retrieveUser,
@@ -434,7 +433,7 @@ class _$RetrieveUser implements RetrieveUser {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String programme)? onboardUser,
+    TResult? Function(String email, String college)? onboardUser,
     TResult? Function(String email, String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
   }) {
@@ -444,7 +443,7 @@ class _$RetrieveUser implements RetrieveUser {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String programme)? onboardUser,
+    TResult Function(String email, String college)? onboardUser,
     TResult Function(String email, String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
     required TResult orElse(),

@@ -92,7 +92,7 @@ class AuthenticationBloc
 
       // check if user has completed onboarding
       if (loginResponse.user.photo != '' &&
-          loginResponse.user.programme != null) {
+          loginResponse.user.college != null) {
         Helpers.setPrefsData(prefs);
         prefs.setString(Constants.http_token, loginResponse.authToken);
       }

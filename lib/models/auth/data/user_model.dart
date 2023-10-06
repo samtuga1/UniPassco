@@ -5,7 +5,7 @@ class User {
   final String email;
   final String photo;
   final bool isVerified;
-  String? programme;
+  String? college;
 
   User({
     required this.id,
@@ -14,7 +14,7 @@ class User {
     required this.email,
     required this.photo,
     required this.isVerified,
-    required this.programme,
+    required this.college,
   });
 
   factory User.test() => User(
@@ -24,7 +24,7 @@ class User {
         email: 'samuel@gmail.com',
         photo: '',
         isVerified: true,
-        programme: 'Computer Science',
+        college: 'Computer Science',
       );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -34,7 +34,7 @@ class User {
         email: json["email"],
         photo: json["photo"],
         isVerified: json["isVerified"],
-        programme: json["programme"] == null ? null : json['programme'],
+        college: json["college"] == null ? null : json['college'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +44,6 @@ class User {
         "email": email,
         "photo": photo,
         "isVerified": isVerified,
-        "programme": programme,
+        "college": college,
       };
 }

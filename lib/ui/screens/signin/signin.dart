@@ -148,7 +148,7 @@ class _SignInState extends State<SignIn> {
                           }
                         },
                         loginSuccess: (user) {
-                          if (user.programme != null && user.photo != '') {
+                          if (user.college != null && user.photo != '') {
                             // navigate user to verification screen is success
                             Navigator.of(context).pushNamedAndRemoveUntil(
                               Routes.bottomNavigationBar,

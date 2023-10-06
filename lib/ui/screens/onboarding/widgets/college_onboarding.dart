@@ -11,8 +11,8 @@ import 'package:Buddy/data/data.dart';
 import 'package:Buddy/ui/widgets/widgets.dart';
 import 'package:Buddy/utils/utils.dart';
 
-class ProgrammeOnboarding extends StatefulWidget {
-  const ProgrammeOnboarding({
+class CollegeOnboarding extends StatefulWidget {
+  const CollegeOnboarding({
     super.key,
     required this.onTap,
     required this.email,
@@ -21,22 +21,22 @@ class ProgrammeOnboarding extends StatefulWidget {
   final String email;
 
   @override
-  State<ProgrammeOnboarding> createState() => _ProgrammeOnboardingState();
+  State<CollegeOnboarding> createState() => _CollegeOnboardingState();
 }
 
-class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
+class _CollegeOnboardingState extends State<CollegeOnboarding> {
   final list = [
-    'Computer science',
-    'Political Science',
-    'Computer Eng.',
-    'information Technology'
+    'College of Health Sciences',
+    'College of Basic and Applied Sciences',
+    'College of Humanities',
+    'College of Education',
   ];
-  String selectedProgrammeInSheet = '';
-  late TextEditingController selectedProgramme;
+  String selectedCollegeInSheet = '';
+  late TextEditingController selectedCollege;
 
   @override
   void initState() {
-    selectedProgramme = TextEditingController(text: 'Computer Science');
+    selectedCollege = TextEditingController(text: 'Computer Science');
     super.initState();
   }
 
@@ -47,7 +47,7 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
       child: Column(
         children: [
           CustomText(
-            'Tell us about your programme',
+            'Tell us about your college',
             style: context.getTheme.textTheme.displayMedium,
           ),
           const CustomText(
@@ -57,23 +57,23 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
           const Align(
             alignment: Alignment.bottomLeft,
             child: CustomText(
-              'Programme',
+              'College',
             ),
           ),
           6.verticalSpace,
           CustomTextFieldWidget(
-            controller: selectedProgramme,
+            controller: selectedCollege,
             suffixIconConstraints: const BoxConstraints(minWidth: 45),
             suffixIconColor: context.getTheme.hintColor,
             readOnly: true,
             onTap: () => UiUtils.showBottomSheet(
               context,
               onEnd: (value) {
-                if (selectedProgrammeInSheet.isNotEmpty) {
-                  selectedProgramme.text = selectedProgrammeInSheet;
+                if (selectedCollegeInSheet.isNotEmpty) {
+                  selectedCollege.text = selectedCollegeInSheet;
                 }
               },
-              title: 'Change Programme',
+              title: 'Change College',
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -90,7 +90,7 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                         validator: null,
                         prefixIcon: SvgPicture.asset(AppImages.search),
                         borderRadius: 31,
-                        hintText: 'Search Programmes',
+                        hintText: 'Search Colleges',
                       ),
                     ),
                     StatefulBuilder(builder: (ctx, setState) {
@@ -108,9 +108,9 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                             title: CustomText(list[index]),
                             controlAffinity: ListTileControlAffinity.trailing,
                             value: list[index],
-                            groupValue: selectedProgrammeInSheet,
+                            groupValue: selectedCollegeInSheet,
                             onChanged: (val) {
-                              selectedProgrammeInSheet = val!;
+                              selectedCollegeInSheet = val!;
                               HapticFeedback.selectionClick();
                               setState(() {});
                             },
@@ -160,7 +160,7 @@ class _ProgrammeOnboardingState extends State<ProgrammeOnboarding> {
                 onPressed: () => context.read<UserBloc>().add(
                       OnboardUser(
                         email: widget.email.trim(),
-                        programme: selectedProgramme.text.toLowerCase().trim(),
+                        college: selectedCollege.text.toLowerCase().trim(),
                       ),
                     ),
                 title: 'Next',

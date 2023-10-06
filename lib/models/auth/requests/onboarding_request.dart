@@ -1,14 +1,14 @@
 class OnboardingRequestData {
   final String email;
-  final String programme;
+  final String college;
 
   OnboardingRequestData({
     required this.email,
-    required this.programme,
+    required this.college,
   });
 
   Map<String, dynamic> toJson() => {
         "email": email,
-        "programme": programme,
+        "college": college,
       };
 }

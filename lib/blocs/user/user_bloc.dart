@@ -58,7 +58,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     final requestData = OnboardingRequestData(
       email: event.email,
-      programme: event.programme,
+      college: event.college,
     );
     // verify the token that is being sent to the backend
     HttpResponse response = await userService.onboarding(request: requestData);

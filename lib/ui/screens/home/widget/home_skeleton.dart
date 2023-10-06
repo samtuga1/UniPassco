@@ -52,7 +52,7 @@ class HomeSkeleton extends StatelessWidget {
             prefixIcon: SvgPicture.asset(AppImages.search),
             borderColor: context.getTheme.scaffoldBackgroundColor,
             borderRadius: 31,
-            hintText: 'Search Programmes',
+            hintText: 'Search Colleges',
             fillColor: const Color(0xFFF4F5F6),
             filled: true,
           ),

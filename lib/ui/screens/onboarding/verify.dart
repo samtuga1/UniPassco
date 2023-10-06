@@ -202,6 +202,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                               color: !showTimerChip
                                   ? const Color(0xFF0F96FF)
                                   : null,
+                              decorationColor: const Color(0xFF0F96FF),
                               decoration: TextDecoration.underline,
                             ),
                           ),

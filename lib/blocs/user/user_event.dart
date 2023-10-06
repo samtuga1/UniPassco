@@ -4,7 +4,7 @@ part of 'user_bloc.dart';
 sealed class UserEvent with _$UserEvent {
   const factory UserEvent.onboardUser({
     required String email,
-    required String programme,
+    required String college,
   }) = OnboardUser;
 
   const factory UserEvent.uploadProfilePicture({

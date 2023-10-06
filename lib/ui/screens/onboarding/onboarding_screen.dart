@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/ui/screens/onboarding/widgets/onboarding_stepper.dart';
 import 'package:Buddy/ui/screens/onboarding/widgets/profile_photo_onboarding.dart';
-import 'package:Buddy/ui/screens/onboarding/widgets/programme_onboarding.dart';
+import 'package:Buddy/ui/screens/onboarding/widgets/college_onboarding.dart';
 import 'package:Buddy/ui/widgets/widgets.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -71,7 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                ProgrammeOnboarding(
+                CollegeOnboarding(
                   email: email,
                   onTap: () {
                     setState(() {
