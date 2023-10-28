@@ -1,4 +1,4 @@
-# Buddy
+# Budyy
 
 An app to make the lives of university students easier
 
