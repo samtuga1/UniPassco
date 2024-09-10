@@ -1,4 +1,4 @@
-package com.example.buddy1290
+package com.new.package.buddy1290
 
 import io.flutter.embedding.android.FlutterActivity
 

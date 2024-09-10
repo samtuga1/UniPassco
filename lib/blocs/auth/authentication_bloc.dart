@@ -19,8 +19,7 @@ part 'authentication_state.dart';
 part 'authentication_bloc.freezed.dart';
 
 @Injectable()
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   IAuthentication authService;
   IAuthedUserRepository userRepo;
   ISharedPreference prefs;
@@ -65,8 +64,7 @@ class AuthenticationBloc
   ) async {
     emit(const AuthenticationState.requestingPasswordReset());
 
-    final HttpResponse response =
-        await authService.requestResetPasswordToken(email: event.email);
+    final HttpResponse response = await authService.requestResetPasswordToken(email: event.email);
 
     response.when(success: (_) {
       emit(const AuthenticationState.requestPasswordResetSuccess());
@@ -83,16 +81,14 @@ class AuthenticationBloc
       password: event.password,
     );
 
-    final HttpResponse<LoginRegisterUserResponseData> response =
-        await authService.login(request: requestData);
+    final HttpResponse<LoginRegisterUserResponseData> response = await authService.login(request: requestData);
 
     response.when(success: (loginResponse) {
       // save user data to user repository
       userRepo.save(user: loginResponse!.user);
 
       // check if user has completed onboarding
-      if (loginResponse.user.photo != '' &&
-          loginResponse.user.college != null) {
+      if (loginResponse.user.photo != '' && loginResponse.user.college != null) {
         Helpers.setPrefsData(prefs);
         prefs.setString(Constants.http_token, loginResponse.authToken);
       }

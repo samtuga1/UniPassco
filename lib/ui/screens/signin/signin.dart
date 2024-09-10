@@ -103,9 +103,7 @@ class _SignInState extends State<SignIn> {
                             obscurePassword = !obscurePassword;
                             setState(() {});
                           },
-                          icon: obscurePassword
-                              ? const Icon(IconlyLight.show)
-                              : const Icon(IconlyLight.hide),
+                          icon: obscurePassword ? const Icon(IconlyLight.show) : const Icon(IconlyLight.hide),
                         ),
                       );
                     },
@@ -114,8 +112,7 @@ class _SignInState extends State<SignIn> {
                   Align(
                     alignment: Alignment.topRight,
                     child: CustomAdaptiveTextButton(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(Routes.requestPasswordReset),
+                      onTap: () => Navigator.of(context).pushNamed(Routes.requestPasswordReset),
                       text: 'Forgot password?',
                       style: context.getTheme.textTheme.labelMedium!.copyWith(
                         color: const Color(0xFF0F96FF),
@@ -124,16 +121,13 @@ class _SignInState extends State<SignIn> {
                   ),
                   26.verticalSpace,
                   BlocConsumer<AuthenticationBloc, AuthenticationState>(
-                    listenWhen: (previous, current) =>
-                        current is LoginSuccess ||
-                        current is AuthenticationError,
+                    listenWhen: (previous, current) => current is LoginSuccess || current is AuthenticationError,
                     listener: (context, state) {
                       state.maybeWhen(
                         authenticationError: (error) {
                           // show flush message if somwthing is wrong
 
-                          if (HttpErrorUtils.getErrorMessage(error)
-                              .contains('verified')) {
+                          if (HttpErrorUtils.getErrorMessage(error).contains('verified')) {
                             // Take the user to the verification screen if he/she has not beem verified
                             Navigator.of(context).pushNamed(
                               Routes.verificationScreen,
@@ -183,9 +177,7 @@ class _SignInState extends State<SignIn> {
                       );
                     },
                     buildWhen: (previous, current) =>
-                        current is LogingIn ||
-                        current is LoginSuccess ||
-                        current is AuthenticationError,
+                        current is LogingIn || current is LoginSuccess || current is AuthenticationError,
                   ),
                   32.verticalSpace,
                   Center(
@@ -198,8 +190,7 @@ class _SignInState extends State<SignIn> {
                             child: CustomAdaptiveTextButton(
                               onTap: widget.createAccountTapped!,
                               text: 'Sign Up',
-                              style: context.getTheme.textTheme.labelMedium
-                                  ?.copyWith(
+                              style: context.getTheme.textTheme.labelMedium?.copyWith(
                                 color: const Color(0xFF0F96FF),
                               ),
                             ),

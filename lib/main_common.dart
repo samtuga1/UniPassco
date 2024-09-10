@@ -55,20 +55,14 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return BlocBuilder<ThemeCubit, ThemeCubitState>(
-              builder: (context, state) {
+          return BlocBuilder<ThemeCubit, ThemeCubitState>(builder: (context, state) {
             return MaterialApp(
               title: 'Buddy',
-              themeMode: state == const ThemeCubitState.dark()
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
+              themeMode: state == const ThemeCubitState.dark() ? ThemeMode.dark : ThemeMode.light,
               theme: AppTheme.light,
               // darkTheme: AppTheme.darkMode(),
-              onGenerateRoute: (settings) =>
-                  AppRouter().onGenerateRoute(settings),
-              navigatorObservers: [
-                appNavigatorObserver,
-              ],
+              onGenerateRoute: (settings) => AppRouter().onGenerateRoute(settings),
+              navigatorObservers: [appNavigatorObserver],
             );
           });
         },
