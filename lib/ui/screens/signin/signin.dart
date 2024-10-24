@@ -54,7 +54,7 @@ class _SignInState extends State<SignIn> {
                   Align(
                     alignment: Alignment.center,
                     child: CustomText(
-                      'UniPasco Ghana',
+                      'Passco Ghana',
                       style: context.getTheme.textTheme.displaySmall,
                     ),
                   ),
@@ -126,7 +126,6 @@ class _SignInState extends State<SignIn> {
                       state.maybeWhen(
                         authenticationError: (error) {
                           // show flush message if somwthing is wrong
-
                           if (HttpErrorUtils.getErrorMessage(error).contains('verified')) {
                             // Take the user to the verification screen if he/she has not beem verified
                             Navigator.of(context).pushNamed(
@@ -142,7 +141,7 @@ class _SignInState extends State<SignIn> {
                           }
                         },
                         loginSuccess: (user) {
-                          if (user.college != null && user.photo != '') {
+                          if (user.photo != '') {
                             // navigate user to verification screen is success
                             Navigator.of(context).pushNamedAndRemoveUntil(
                               Routes.bottomNavigationBar,

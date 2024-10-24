@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$QuestionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -30,7 +32,8 @@ mixin _$QuestionsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -42,7 +45,8 @@ mixin _$QuestionsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -117,7 +121,7 @@ abstract class _$$FetchQuestionsListCopyWith<$Res> {
           $Res Function(_$FetchQuestionsList) then) =
       __$$FetchQuestionsListCopyWithImpl<$Res>;
   @useResult
-  $Res call({String level});
+  $Res call({String level, String? query, int? limit, int? offset});
 }
 
 /// @nodoc
@@ -132,12 +136,27 @@ class __$$FetchQuestionsListCopyWithImpl<$Res>
   @override
   $Res call({
     Object? level = null,
+    Object? query = freezed,
+    Object? limit = freezed,
+    Object? offset = freezed,
   }) {
     return _then(_$FetchQuestionsList(
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as String,
+      query: freezed == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String?,
+      limit: freezed == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      offset: freezed == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -145,14 +164,21 @@ class __$$FetchQuestionsListCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchQuestionsList implements FetchQuestionsList {
-  const _$FetchQuestionsList({required this.level});
+  const _$FetchQuestionsList(
+      {required this.level, this.query, this.limit, this.offset});
 
   @override
   final String level;
+  @override
+  final String? query;
+  @override
+  final int? limit;
+  @override
+  final int? offset;
 
   @override
   String toString() {
-    return 'QuestionsEvent.fetchQuestionsList(level: $level)';
+    return 'QuestionsEvent.fetchQuestionsList(level: $level, query: $query, limit: $limit, offset: $offset)';
   }
 
   @override
@@ -160,11 +186,14 @@ class _$FetchQuestionsList implements FetchQuestionsList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchQuestionsList &&
-            (identical(other.level, level) || other.level == level));
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.offset, offset) || other.offset == offset));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, level);
+  int get hashCode => Object.hash(runtimeType, level, query, limit, offset);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +205,9 @@ class _$FetchQuestionsList implements FetchQuestionsList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -185,13 +216,14 @@ class _$FetchQuestionsList implements FetchQuestionsList {
     required TResult Function() fetchBookmarks,
     required TResult Function() refreshDownloads,
   }) {
-    return fetchQuestionsList(level);
+    return fetchQuestionsList(level, query, limit, offset);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -200,13 +232,14 @@ class _$FetchQuestionsList implements FetchQuestionsList {
     TResult? Function()? fetchBookmarks,
     TResult? Function()? refreshDownloads,
   }) {
-    return fetchQuestionsList?.call(level);
+    return fetchQuestionsList?.call(level, query, limit, offset);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -217,7 +250,7 @@ class _$FetchQuestionsList implements FetchQuestionsList {
     required TResult orElse(),
   }) {
     if (fetchQuestionsList != null) {
-      return fetchQuestionsList(level);
+      return fetchQuestionsList(level, query, limit, offset);
     }
     return orElse();
   }
@@ -274,10 +307,16 @@ class _$FetchQuestionsList implements FetchQuestionsList {
 }
 
 abstract class FetchQuestionsList implements QuestionsEvent {
-  const factory FetchQuestionsList({required final String level}) =
-      _$FetchQuestionsList;
+  const factory FetchQuestionsList(
+      {required final String level,
+      final String? query,
+      final int? limit,
+      final int? offset}) = _$FetchQuestionsList;
 
   String get level;
+  String? get query;
+  int? get limit;
+  int? get offset;
   @JsonKey(ignore: true)
   _$$FetchQuestionsListCopyWith<_$FetchQuestionsList> get copyWith =>
       throw _privateConstructorUsedError;
@@ -349,7 +388,9 @@ class _$RetrieveQuestionById implements RetrieveQuestionById {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -364,7 +405,8 @@ class _$RetrieveQuestionById implements RetrieveQuestionById {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -379,7 +421,8 @@ class _$RetrieveQuestionById implements RetrieveQuestionById {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -522,7 +565,9 @@ class _$AddBookmarkQuestion implements AddBookmarkQuestion {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -537,7 +582,8 @@ class _$AddBookmarkQuestion implements AddBookmarkQuestion {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -552,7 +598,8 @@ class _$AddBookmarkQuestion implements AddBookmarkQuestion {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -695,7 +742,9 @@ class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -710,7 +759,8 @@ class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -725,7 +775,8 @@ class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -867,7 +918,9 @@ class _$DownloadQuestion implements DownloadQuestion {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -882,7 +935,8 @@ class _$DownloadQuestion implements DownloadQuestion {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -897,7 +951,8 @@ class _$DownloadQuestion implements DownloadQuestion {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -1039,7 +1094,9 @@ class _$DeleteQuestion implements DeleteQuestion {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -1054,7 +1111,8 @@ class _$DeleteQuestion implements DeleteQuestion {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -1069,7 +1127,8 @@ class _$DeleteQuestion implements DeleteQuestion {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -1184,7 +1243,9 @@ class _$FetchBookmarks implements FetchBookmarks {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -1199,7 +1260,8 @@ class _$FetchBookmarks implements FetchBookmarks {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -1214,7 +1276,8 @@ class _$FetchBookmarks implements FetchBookmarks {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,
@@ -1323,7 +1386,9 @@ class _$RefreshDownloads implements RefreshDownloads {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String level) fetchQuestionsList,
+    required TResult Function(
+            String level, String? query, int? limit, int? offset)
+        fetchQuestionsList,
     required TResult Function(String questionId) retrieveQuestionById,
     required TResult Function(String questionId) addBookmarkQuestion,
     required TResult Function(String questionId) removeBookmarkQuestion,
@@ -1338,7 +1403,8 @@ class _$RefreshDownloads implements RefreshDownloads {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String level)? fetchQuestionsList,
+    TResult? Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult? Function(String questionId)? retrieveQuestionById,
     TResult? Function(String questionId)? addBookmarkQuestion,
     TResult? Function(String questionId)? removeBookmarkQuestion,
@@ -1353,7 +1419,8 @@ class _$RefreshDownloads implements RefreshDownloads {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String level)? fetchQuestionsList,
+    TResult Function(String level, String? query, int? limit, int? offset)?
+        fetchQuestionsList,
     TResult Function(String questionId)? retrieveQuestionById,
     TResult Function(String questionId)? addBookmarkQuestion,
     TResult Function(String questionId)? removeBookmarkQuestion,

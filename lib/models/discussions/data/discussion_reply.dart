@@ -2,7 +2,7 @@ import 'package:Buddy/models/auth/data/user_model.dart';
 
 class DiscussionReply {
   final String id;
-  final User user;
+  final UserModel user;
   final String text;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -18,16 +18,14 @@ class DiscussionReply {
   factory DiscussionReply.test() => DiscussionReply(
         createdAt: DateTime.now(),
         id: '',
-        user: User.test(),
-        text:
-            'This is a reply This is a reply This is a reply This is a reply This is a reply This is a reply',
+        user: UserModel.test(),
+        text: 'This is a reply This is a reply This is a reply This is a reply This is a reply This is a reply',
         updatedAt: DateTime.now(),
       );
 
-  factory DiscussionReply.fromJson(Map<String, dynamic> json) =>
-      DiscussionReply(
+  factory DiscussionReply.fromJson(Map<String, dynamic> json) => DiscussionReply(
         id: json["_id"],
-        user: User.fromJson(json["user"]),
+        user: UserModel.fromJson(json["user"]),
         text: json["text"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),

@@ -34,14 +34,14 @@ class AppImages {
   static String animoji_13 = 'assets/images/onboarding/animoji_13.png';
   static String animoji_14 = 'assets/images/onboarding/animoji_14.png';
   static String animoji_15 = 'assets/images/onboarding/animoji_15.png';
-  static String level_container_1 =
-      'assets/images/onboarding/level_container_1.png';
-  static String level_container_2 =
-      'assets/images/onboarding/level_container_2.png';
-  static String level_container_3 =
-      'assets/images/onboarding/level_container_3.png';
-  static String level_container_4 =
-      'assets/images/onboarding/level_container_4.png';
+  static String level_container_1 = 'assets/images/level_container_1.png';
+  static String level_container_2 = 'assets/images/level_container_2.png';
+  static String level_container_3 = 'assets/images/level_container_3.png';
+  static String level_container_4 = 'assets/images/level_container_4.png';
+  static String level_container_dark_1 = 'assets/images/level_container_dark_1.png';
+  static String level_container_dark_2 = 'assets/images/level_container_dark_2.png';
+  static String level_container_dark_3 = 'assets/images/level_container_dark_3.png';
+  static String level_container_dark_4 = 'assets/images/level_container_dark_4.png';
   static String books = 'assets/images/onboarding/books.png';
   static String circle_wave = 'assets/images/circle_wave.png';
 }

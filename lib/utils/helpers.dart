@@ -1,22 +1,17 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
-
+import 'dart:math';
 import 'package:Buddy/blocs/questions/questions_bloc.dart';
 import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/interceptors/http_access_token.interceptor.dart';
-import 'package:Buddy/interfaces/dio_client.interface.dart';
-import 'package:Buddy/interfaces/questions.repository.interface.dart';
-import 'package:Buddy/interfaces/shared_preferences.interface.dart';
 import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/repositories/questions.repository.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
 import 'package:Buddy/utils/enums.dart';
 import 'package:Buddy/utils/ui_utils.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:Buddy/data/data.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -76,12 +71,12 @@ class Helpers {
     }
   }
 
-  static Future<File?> downloadFile(String url) async {
-    var dir = await getApplicationDocumentsDirectory();
-    var path = '${dir.path}/${getFileNameFromUrl(url)}';
-    await getIt<IDioClientService>().download(url, path);
-    return File(path);
-  }
+  // static Future<File?> downloadFile(String url) async {
+  //   var dir = await getApplicationDocumentsDirectory();
+  //   var path = '${dir.path}/${getFileNameFromUrl(url)}';
+  //   await getIt<IDioClientService>().download(url, path);
+  //   return File(path);
+  // }
 
   static Future<File?> downloadFirebaseFile(String url) async {
     var dir = await getApplicationDocumentsDirectory();
@@ -127,24 +122,24 @@ class Helpers {
     }
   }
 
-  static Future<void> downloadQuestion(
+  static Future<void> downloadOrDeleteQuestion(
     BuildContext context, {
     required Question question,
   }) async {
-    question.userHasDownloaded
-        ? getIt<IQuestionsRepository>()
-            .deleteFile(question: question)
-            .then((_) {
-            UiUtils.flush(
-              context,
-              errorState: ErrorState.success,
-              msg: '${question.courseCode} has been removed from downloads',
-            );
-            context.read<QuestionsBloc>().add(const RefreshDownloads());
-          })
-        : context
-            .read<QuestionsBloc>()
-            .add(DownloadQuestion(question: question));
+    if (question.userHasDownloaded) {
+      getIt<QuestionsRepository>().deleteFile(question: question).then(
+        (_) {
+          UiUtils.flush(
+            context,
+            errorState: ErrorState.success,
+            msg: '${question.title} has been removed from downloads',
+          );
+          context.read<QuestionsBloc>().add(const RefreshDownloads());
+        },
+      );
+    } else {
+      context.read<QuestionsBloc>().add(DownloadQuestion(question: question));
+    }
   }
 
   static Future<void> bookmarkQuestion(
@@ -153,50 +148,45 @@ class Helpers {
     required String questionId,
   }) async {
     questionHasBeenBookmarked
-        ? context
-            .read<QuestionsBloc>()
-            .add(RemoveBookmarkQuestion(questionId: questionId))
-        : context
-            .read<QuestionsBloc>()
-            .add(AddBookmarkQuestion(questionId: questionId));
+        ? context.read<QuestionsBloc>().add(RemoveBookmarkQuestion(questionId: questionId))
+        : context.read<QuestionsBloc>().add(AddBookmarkQuestion(questionId: questionId));
   }
 
   // a function to save some needed data to preferences
-  static void setPrefsData(ISharedPreference prefs) {
-    prefs.setBool(
-      Constants.hasLoggedIn,
-      true,
-    );
-    prefs.setBool(
-      Constants.hasSignedUp,
-      true,
-    );
-    prefs.setBool(
-      Constants.hasFinishedOnboarding,
-      true,
-    );
-    prefs.setBool(
-      Constants.hasVerifiedEmail,
-      true,
-    );
+  static void setPrefsData(SharedPreference prefs) {
+    prefs.setBool(Constants.hasLoggedIn, true);
+    prefs.setBool(Constants.hasSignedUp, true);
+    prefs.setBool(Constants.hasFinishedOnboarding, true);
+    prefs.setBool(Constants.hasVerifiedEmail, true);
   }
 
   static Future<bool> questionHasBeeonDownloaded(Question question) async {
     Completer<bool> completer = Completer<bool>();
-    getIt<IQuestionsRepository>().getDownloads().then((downloads) {
-      if (downloads.isEmpty) {
+    getIt<QuestionsRepository>().getDownloads().then((downloads) {
+      var q = downloads.firstWhere(
+        (element) => element.id == question.id,
+        orElse: () => Question.blank(),
+      );
+      if (q.id.isEmpty) {
         question.userHasDownloaded = false;
       } else {
-        for (var element in downloads) {
-          if (element.id == question.id) {
-            question.userHasDownloaded = true;
-          } else {
-            question.userHasDownloaded = false;
-          }
-        }
+        question.userHasDownloaded = true;
       }
       completer.complete(question.userHasDownloaded);
     });
     return completer.future;
+  }
+
+  static String generateRandomString(int length) {
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final random = Random();
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+        (_) => characters.codeUnitAt(
+          random.nextInt(characters.length),
+        ),
+      ),
+    );
   }
 }

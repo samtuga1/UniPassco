@@ -20,8 +20,7 @@ class CustomCacheImage extends StatefulWidget {
   final double loadingDimension;
   final BoxFit fit;
   final double? loaderStrokeWidth;
-  final Function(BuildContext, String, DownloadProgress)?
-      progressIndicatorBuilder;
+  final Function(BuildContext, String, DownloadProgress)? progressIndicatorBuilder;
 
   @override
   State<CustomCacheImage> createState() => _CustomCacheImageState();
@@ -41,16 +40,16 @@ class _CustomCacheImageState extends State<CustomCacheImage> {
             memCacheHeight: widget.height.round(),
             height: widget.height,
             width: widget.width,
+            fit: widget.fit,
             imageUrl: widget.imageUrl,
             imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(image: imageProvider, fit: widget.fit),
-              ),
-            ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image: imageProvider, fit: widget.fit),
+                  ),
+                ),
             progressIndicatorBuilder: widget.progressIndicatorBuilder != null
-                ? (context, url, downloadProgress) => widget
-                    .progressIndicatorBuilder!(context, url, downloadProgress)
+                ? (context, url, downloadProgress) => widget.progressIndicatorBuilder!(context, url, downloadProgress)
                 : (ctx, url, downloadProgress) => Stack(
                       alignment: Alignment.center,
                       children: [
@@ -71,13 +70,15 @@ class _CustomCacheImageState extends State<CustomCacheImage> {
                         ),
                       ],
                     ),
-            errorWidget: (context, url, error) => CircleAvatar(
-              backgroundColor: context.getTheme.primaryColor,
-              child: Icon(
-                IconlyBold.profile,
-                color: context.getTheme.canvasColor,
-              ),
-            ),
-          );
+            errorWidget: (context, url, error) {
+              print(error);
+              return CircleAvatar(
+                backgroundColor: context.getTheme.primaryColor,
+                child: Icon(
+                  IconlyBold.profile,
+                  color: context.getTheme.canvasColor,
+                ),
+              );
+            });
   }
 }

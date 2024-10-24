@@ -1,3 +1,6 @@
 {
-    "base_url" : "https://buddy-api.onrender.com"
+    "base_url": "http://localhost:3000",
+    "superbase_url": "https://joafguqiuzqaenbjjhzc.supabase.co",
+    "superbase_anonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpvYWZndXFpdXpxYWVuYmpqaHpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU5ODUyNjAsImV4cCI6MjA0MTU2MTI2MH0.CJ_vg7FGeJ88lIzwiNtvL_AWpTGrjcQAgBlc8t020Jc",
+    "gemini_key": "AIzaSyDGpm81gxvkRWF0Dtb_7tpceO2qn5hOClo"
 }

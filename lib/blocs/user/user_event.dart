@@ -8,9 +8,13 @@ sealed class UserEvent with _$UserEvent {
   }) = OnboardUser;
 
   const factory UserEvent.uploadProfilePicture({
-    required String email,
     required String filePath,
   }) = UploadProfilePicture;
 
   const factory UserEvent.retrieveUser() = RetrieveUser;
+
+  const factory UserEvent.updateProfile({
+    required String name,
+    required String email,
+  }) = UpdateProfile;
 }

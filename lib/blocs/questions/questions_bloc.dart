@@ -1,23 +1,20 @@
+import 'package:Buddy/repositories/questions.repository.dart';
+import 'package:Buddy/services/questions.service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/interfaces/questions.interface.dart';
-import 'package:Buddy/interfaces/questions.repository.interface.dart';
 import 'package:Buddy/models/questions/data/question_model.dart';
 import 'package:Buddy/models/questions/response/list_questions_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
 
 part 'questions_event.dart';
 part 'questions_state.dart';
 
 part 'questions_bloc.freezed.dart';
 
-@Injectable()
 class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
-  final IQuestionsService _questionsService;
-  final IQuestionsRepository _repository;
-  QuestionsBloc(this._questionsService, this._repository)
-      : super(const QuestionsState.initial()) {
+  final QuestionService _questionsService;
+  final QuestionsRepository _repository;
+  QuestionsBloc(this._questionsService, this._repository) : super(const QuestionsState.initial()) {
     on<FetchQuestionsList>(_fetchQuestionsList);
     on<RetrieveQuestionById>(_retrieveQuestion);
     on<DownloadQuestion>(downloadQuestion);
@@ -79,12 +76,10 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
     try {
       emit(const QuestionsState.downloadingQuestion());
 
-      final downloadedQuestions =
-          await _repository.download(question: event.question);
+      final downloadedQuestions = await _repository.download(question: event.question);
 
       emit(QuestionsState.downloadingQuestionSuccess(
-        message:
-            "${event.question.courseCode} has been downloaded successfully",
+        message: "${event.question.title} has been downloaded successfully",
         downloadedQuestions: downloadedQuestions,
       ));
     } catch (error) {
@@ -96,12 +91,15 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
     }
   }
 
-  Future<void> _fetchQuestionsList(
-      FetchQuestionsList event, Emitter emit) async {
+  Future<void> _fetchQuestionsList(FetchQuestionsList event, Emitter emit) async {
     emit(const QuestionsState.fetchingQuestionsList());
 
-    final result =
-        await _questionsService.listQuestions(level: event.level, page: 1);
+    final result = await _questionsService.listQuestions(
+      level: event.level,
+      query: event.query,
+      limit: event.limit,
+      offset: event.offset,
+    );
 
     result.when(success: (questions) {
       emit(QuestionsState.fetchingQuestionsListSuccess(questions: questions));

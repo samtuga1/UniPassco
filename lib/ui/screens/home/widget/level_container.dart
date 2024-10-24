@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/router/routes.dart';
 import 'package:Buddy/ui/widgets/widgets.dart';
@@ -18,11 +17,16 @@ class LevelContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed(Routes.question_screen, arguments: level),
+      onTap: () => Navigator.of(context).pushNamed(Routes.question_screen, arguments: level),
       child: Stack(
         children: [
-          Image.asset(assetPath),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              assetPath,
+              filterQuality: FilterQuality.medium,
+            ),
+          ),
           Positioned(
             left: 11,
             bottom: 22,
@@ -37,8 +41,7 @@ class LevelContainer extends StatelessWidget {
                 6.verticalSpace,
                 Skeleton.ignore(
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                     decoration: ShapeDecoration(
                       color: context.getTheme.canvasColor,
                       shape: RoundedRectangleBorder(

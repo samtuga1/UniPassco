@@ -23,15 +23,16 @@ class CustomTextFieldWidget extends StatelessWidget {
   final EdgeInsets? prefixIconPadding;
   final Color? fillColor, textColor, suffixIconColor;
   final Color? borderColor;
-  final double? borderRadius, fontSize;
+  final double? borderRadius, fontSize, cursorHeight;
   final String? enteredText;
   final bool expands;
   final InputBorder? focusedBorder, enabledBorder, border;
   final FocusNode? focusNode;
-  final TextStyle? style, prefixStyle, suffixStyle;
+  final TextStyle? style, prefixStyle, suffixStyle, hintStyle;
 
   const CustomTextFieldWidget({
     Key? key,
+    this.cursorHeight,
     this.labelText,
     this.hintText,
     this.controller,
@@ -72,6 +73,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.enabledBorder,
     this.border,
     this.focusNode,
+    this.hintStyle,
     this.fontSize,
   }) : super(key: key);
 
@@ -79,7 +81,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle textStyle = style ?? context.getTheme.textTheme.bodyMedium!;
     return TextFormField(
-      cursorHeight: 15,
+      cursorHeight: cursorHeight,
       cursorColor: context.getTheme.primaryColor,
       focusNode: focusNode,
       textAlign: TextAlign.start,
@@ -102,33 +104,24 @@ class CustomTextFieldWidget extends StatelessWidget {
           ? null
           : [
               LengthLimitingTextInputFormatter(maxLength),
-              if (keyboardType == TextInputType.number)
-                FilteringTextInputFormatter.digitsOnly,
+              if (keyboardType == TextInputType.number) FilteringTextInputFormatter.digitsOnly,
             ],
       decoration: InputDecoration(
-        counterText:
-            enteredText == null ? null : '${enteredText!.length}/$maxLength',
-        fillColor:
-            fillColor ?? context.getTheme.primaryColor.withOpacity(0.025),
-        contentPadding: contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
+        counterText: enteredText == null ? null : '${enteredText!.length}/$maxLength',
+        fillColor: context.getTheme.primaryColor.withOpacity(0.025),
+        contentPadding: contentPadding ?? REdgeInsets.symmetric(horizontal: 17, vertical: 14.5),
         filled: filled,
         isDense: isDense,
         focusedBorder: focusedBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
                 width: 0.50,
-                color: borderColor ??
-                    context.getTheme.primaryColor.withOpacity(0.5),
+                color: borderColor ?? context.getTheme.primaryColor.withOpacity(0.5),
               ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? 8),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 8)),
             ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius ?? 8),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 8)),
         ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
@@ -157,11 +150,9 @@ class CustomTextFieldWidget extends StatelessWidget {
             Radius.circular(borderRadius ?? 8),
           ),
         ),
-        labelText: addHint
-            ? null
-            : ((controller?.text != null || !readOnly) ? labelText : null),
+        labelText: addHint ? null : ((controller?.text != null || !readOnly) ? labelText : null),
+        hintStyle: hintStyle ?? context.getTheme.textTheme.labelMedium,
         hintText: hintText,
-        hintStyle: context.getTheme.textTheme.labelMedium,
         prefixIconConstraints: BoxConstraints(
           maxHeight: 40.h,
           maxWidth: 40.w,
@@ -169,8 +160,7 @@ class CustomTextFieldWidget extends StatelessWidget {
         prefixIcon: prefixIcon == null
             ? null
             : Padding(
-                padding: prefixIconPadding ??
-                    EdgeInsets.only(left: 10.w, right: 8.w),
+                padding: prefixIconPadding ?? EdgeInsets.only(left: 10.w, right: 8.w),
                 child: prefixIcon,
               ),
         prefixText: prefixText,
@@ -189,6 +179,10 @@ class CustomTextFieldWidget extends StatelessWidget {
               maxWidth: 40.w,
             ),
       ),
+      cursorOpacityAnimates: true,
+      onTapOutside: (event) {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
     );
   }
 }

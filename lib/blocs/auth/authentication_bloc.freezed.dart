@@ -24,8 +24,7 @@ mixin _$AuthenticationEvent {
     required TResult Function(String email, String token) verifyEmail,
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
-    required TResult Function(String email, String token, String password)
-        resetPassword,
+    required TResult Function(String email) resetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,8 +34,7 @@ mixin _$AuthenticationEvent {
     TResult? Function(String email, String token)? verifyEmail,
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
-    TResult? Function(String email, String token, String password)?
-        resetPassword,
+    TResult? Function(String email)? resetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,8 +44,7 @@ mixin _$AuthenticationEvent {
     TResult Function(String email, String token)? verifyEmail,
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
-    TResult Function(String email, String token, String password)?
-        resetPassword,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,7 +53,8 @@ mixin _$AuthenticationEvent {
     required TResult Function(SignUpWithEmail value) signUpWithEmail,
     required TResult Function(VerifyEmail value) verifyEmail,
     required TResult Function(LoginAccount value) loginAccount,
-    required TResult Function(RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +63,7 @@ mixin _$AuthenticationEvent {
     TResult? Function(SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(VerifyEmail value)? verifyEmail,
     TResult? Function(LoginAccount value)? loginAccount,
-    TResult? Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,7 +72,7 @@ mixin _$AuthenticationEvent {
     TResult Function(SignUpWithEmail value)? signUpWithEmail,
     TResult Function(VerifyEmail value)? verifyEmail,
     TResult Function(LoginAccount value)? loginAccount,
-    TResult Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
     required TResult orElse(),
   }) =>
@@ -207,8 +205,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     required TResult Function(String email, String token) verifyEmail,
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
-    required TResult Function(String email, String token, String password)
-        resetPassword,
+    required TResult Function(String email) resetPassword,
   }) {
     return signUpWithEmail(name, email, password);
   }
@@ -221,8 +218,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult? Function(String email, String token)? verifyEmail,
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
-    TResult? Function(String email, String token, String password)?
-        resetPassword,
+    TResult? Function(String email)? resetPassword,
   }) {
     return signUpWithEmail?.call(name, email, password);
   }
@@ -235,8 +231,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult Function(String email, String token)? verifyEmail,
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
-    TResult Function(String email, String token, String password)?
-        resetPassword,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (signUpWithEmail != null) {
@@ -251,7 +246,8 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     required TResult Function(SignUpWithEmail value) signUpWithEmail,
     required TResult Function(VerifyEmail value) verifyEmail,
     required TResult Function(LoginAccount value) loginAccount,
-    required TResult Function(RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
   }) {
     return signUpWithEmail(this);
@@ -263,7 +259,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult? Function(SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(VerifyEmail value)? verifyEmail,
     TResult? Function(LoginAccount value)? loginAccount,
-    TResult? Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
   }) {
     return signUpWithEmail?.call(this);
@@ -275,7 +271,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult Function(SignUpWithEmail value)? signUpWithEmail,
     TResult Function(VerifyEmail value)? verifyEmail,
     TResult Function(LoginAccount value)? loginAccount,
-    TResult Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -381,8 +377,7 @@ class _$VerifyEmail implements VerifyEmail {
     required TResult Function(String email, String token) verifyEmail,
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
-    required TResult Function(String email, String token, String password)
-        resetPassword,
+    required TResult Function(String email) resetPassword,
   }) {
     return verifyEmail(email, token);
   }
@@ -395,8 +390,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult? Function(String email, String token)? verifyEmail,
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
-    TResult? Function(String email, String token, String password)?
-        resetPassword,
+    TResult? Function(String email)? resetPassword,
   }) {
     return verifyEmail?.call(email, token);
   }
@@ -409,8 +403,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult Function(String email, String token)? verifyEmail,
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
-    TResult Function(String email, String token, String password)?
-        resetPassword,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (verifyEmail != null) {
@@ -425,7 +418,8 @@ class _$VerifyEmail implements VerifyEmail {
     required TResult Function(SignUpWithEmail value) signUpWithEmail,
     required TResult Function(VerifyEmail value) verifyEmail,
     required TResult Function(LoginAccount value) loginAccount,
-    required TResult Function(RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
   }) {
     return verifyEmail(this);
@@ -437,7 +431,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult? Function(SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(VerifyEmail value)? verifyEmail,
     TResult? Function(LoginAccount value)? loginAccount,
-    TResult? Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
   }) {
     return verifyEmail?.call(this);
@@ -449,7 +443,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult Function(SignUpWithEmail value)? signUpWithEmail,
     TResult Function(VerifyEmail value)? verifyEmail,
     TResult Function(LoginAccount value)? loginAccount,
-    TResult Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -554,8 +548,7 @@ class _$LoginAccount implements LoginAccount {
     required TResult Function(String email, String token) verifyEmail,
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
-    required TResult Function(String email, String token, String password)
-        resetPassword,
+    required TResult Function(String email) resetPassword,
   }) {
     return loginAccount(email, password);
   }
@@ -568,8 +561,7 @@ class _$LoginAccount implements LoginAccount {
     TResult? Function(String email, String token)? verifyEmail,
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
-    TResult? Function(String email, String token, String password)?
-        resetPassword,
+    TResult? Function(String email)? resetPassword,
   }) {
     return loginAccount?.call(email, password);
   }
@@ -582,8 +574,7 @@ class _$LoginAccount implements LoginAccount {
     TResult Function(String email, String token)? verifyEmail,
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
-    TResult Function(String email, String token, String password)?
-        resetPassword,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (loginAccount != null) {
@@ -598,7 +589,8 @@ class _$LoginAccount implements LoginAccount {
     required TResult Function(SignUpWithEmail value) signUpWithEmail,
     required TResult Function(VerifyEmail value) verifyEmail,
     required TResult Function(LoginAccount value) loginAccount,
-    required TResult Function(RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
   }) {
     return loginAccount(this);
@@ -610,7 +602,7 @@ class _$LoginAccount implements LoginAccount {
     TResult? Function(SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(VerifyEmail value)? verifyEmail,
     TResult? Function(LoginAccount value)? loginAccount,
-    TResult? Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
   }) {
     return loginAccount?.call(this);
@@ -622,7 +614,7 @@ class _$LoginAccount implements LoginAccount {
     TResult Function(SignUpWithEmail value)? signUpWithEmail,
     TResult Function(VerifyEmail value)? verifyEmail,
     TResult Function(LoginAccount value)? loginAccount,
-    TResult Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -648,22 +640,22 @@ abstract class LoginAccount implements AuthenticationEvent {
 }
 
 /// @nodoc
-abstract class _$$RequestPasswordResetCopyWith<$Res>
+abstract class _$$ResendVerificationTokenCopyWith<$Res>
     implements $AuthenticationEventCopyWith<$Res> {
-  factory _$$RequestPasswordResetCopyWith(_$RequestPasswordReset value,
-          $Res Function(_$RequestPasswordReset) then) =
-      __$$RequestPasswordResetCopyWithImpl<$Res>;
+  factory _$$ResendVerificationTokenCopyWith(_$ResendVerificationToken value,
+          $Res Function(_$ResendVerificationToken) then) =
+      __$$ResendVerificationTokenCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email});
 }
 
 /// @nodoc
-class __$$RequestPasswordResetCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$RequestPasswordReset>
-    implements _$$RequestPasswordResetCopyWith<$Res> {
-  __$$RequestPasswordResetCopyWithImpl(_$RequestPasswordReset _value,
-      $Res Function(_$RequestPasswordReset) _then)
+class __$$ResendVerificationTokenCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$ResendVerificationToken>
+    implements _$$ResendVerificationTokenCopyWith<$Res> {
+  __$$ResendVerificationTokenCopyWithImpl(_$ResendVerificationToken _value,
+      $Res Function(_$ResendVerificationToken) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -671,7 +663,7 @@ class __$$RequestPasswordResetCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
   }) {
-    return _then(_$RequestPasswordReset(
+    return _then(_$ResendVerificationToken(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -682,8 +674,8 @@ class __$$RequestPasswordResetCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RequestPasswordReset implements RequestPasswordReset {
-  const _$RequestPasswordReset({required this.email});
+class _$ResendVerificationToken implements ResendVerificationToken {
+  const _$ResendVerificationToken({required this.email});
 
   @override
   final String email;
@@ -697,7 +689,7 @@ class _$RequestPasswordReset implements RequestPasswordReset {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestPasswordReset &&
+            other is _$ResendVerificationToken &&
             (identical(other.email, email) || other.email == email));
   }
 
@@ -707,8 +699,8 @@ class _$RequestPasswordReset implements RequestPasswordReset {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RequestPasswordResetCopyWith<_$RequestPasswordReset> get copyWith =>
-      __$$RequestPasswordResetCopyWithImpl<_$RequestPasswordReset>(
+  _$$ResendVerificationTokenCopyWith<_$ResendVerificationToken> get copyWith =>
+      __$$ResendVerificationTokenCopyWithImpl<_$ResendVerificationToken>(
           this, _$identity);
 
   @override
@@ -719,8 +711,7 @@ class _$RequestPasswordReset implements RequestPasswordReset {
     required TResult Function(String email, String token) verifyEmail,
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
-    required TResult Function(String email, String token, String password)
-        resetPassword,
+    required TResult Function(String email) resetPassword,
   }) {
     return requestPasswordReset(email);
   }
@@ -733,8 +724,7 @@ class _$RequestPasswordReset implements RequestPasswordReset {
     TResult? Function(String email, String token)? verifyEmail,
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
-    TResult? Function(String email, String token, String password)?
-        resetPassword,
+    TResult? Function(String email)? resetPassword,
   }) {
     return requestPasswordReset?.call(email);
   }
@@ -747,8 +737,7 @@ class _$RequestPasswordReset implements RequestPasswordReset {
     TResult Function(String email, String token)? verifyEmail,
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
-    TResult Function(String email, String token, String password)?
-        resetPassword,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (requestPasswordReset != null) {
@@ -763,7 +752,8 @@ class _$RequestPasswordReset implements RequestPasswordReset {
     required TResult Function(SignUpWithEmail value) signUpWithEmail,
     required TResult Function(VerifyEmail value) verifyEmail,
     required TResult Function(LoginAccount value) loginAccount,
-    required TResult Function(RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
   }) {
     return requestPasswordReset(this);
@@ -775,7 +765,7 @@ class _$RequestPasswordReset implements RequestPasswordReset {
     TResult? Function(SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(VerifyEmail value)? verifyEmail,
     TResult? Function(LoginAccount value)? loginAccount,
-    TResult? Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
   }) {
     return requestPasswordReset?.call(this);
@@ -787,7 +777,7 @@ class _$RequestPasswordReset implements RequestPasswordReset {
     TResult Function(SignUpWithEmail value)? signUpWithEmail,
     TResult Function(VerifyEmail value)? verifyEmail,
     TResult Function(LoginAccount value)? loginAccount,
-    TResult Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -798,15 +788,15 @@ class _$RequestPasswordReset implements RequestPasswordReset {
   }
 }
 
-abstract class RequestPasswordReset implements AuthenticationEvent {
-  const factory RequestPasswordReset({required final String email}) =
-      _$RequestPasswordReset;
+abstract class ResendVerificationToken implements AuthenticationEvent {
+  const factory ResendVerificationToken({required final String email}) =
+      _$ResendVerificationToken;
 
   @override
   String get email;
   @override
   @JsonKey(ignore: true)
-  _$$RequestPasswordResetCopyWith<_$RequestPasswordReset> get copyWith =>
+  _$$ResendVerificationTokenCopyWith<_$ResendVerificationToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -818,7 +808,7 @@ abstract class _$$ResetPasswordCopyWith<$Res>
       __$$ResetPasswordCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String token, String password});
+  $Res call({String email});
 }
 
 /// @nodoc
@@ -833,21 +823,11 @@ class __$$ResetPasswordCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = null,
-    Object? token = null,
-    Object? password = null,
   }) {
     return _then(_$ResetPassword(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -856,19 +836,14 @@ class __$$ResetPasswordCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ResetPassword implements ResetPassword {
-  const _$ResetPassword(
-      {required this.email, required this.token, required this.password});
+  const _$ResetPassword({required this.email});
 
   @override
   final String email;
-  @override
-  final String token;
-  @override
-  final String password;
 
   @override
   String toString() {
-    return 'AuthenticationEvent.resetPassword(email: $email, token: $token, password: $password)';
+    return 'AuthenticationEvent.resetPassword(email: $email)';
   }
 
   @override
@@ -876,14 +851,11 @@ class _$ResetPassword implements ResetPassword {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResetPassword &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, token, password);
+  int get hashCode => Object.hash(runtimeType, email);
 
   @JsonKey(ignore: true)
   @override
@@ -899,10 +871,9 @@ class _$ResetPassword implements ResetPassword {
     required TResult Function(String email, String token) verifyEmail,
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
-    required TResult Function(String email, String token, String password)
-        resetPassword,
+    required TResult Function(String email) resetPassword,
   }) {
-    return resetPassword(email, token, password);
+    return resetPassword(email);
   }
 
   @override
@@ -913,10 +884,9 @@ class _$ResetPassword implements ResetPassword {
     TResult? Function(String email, String token)? verifyEmail,
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
-    TResult? Function(String email, String token, String password)?
-        resetPassword,
+    TResult? Function(String email)? resetPassword,
   }) {
-    return resetPassword?.call(email, token, password);
+    return resetPassword?.call(email);
   }
 
   @override
@@ -927,12 +897,11 @@ class _$ResetPassword implements ResetPassword {
     TResult Function(String email, String token)? verifyEmail,
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
-    TResult Function(String email, String token, String password)?
-        resetPassword,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
-      return resetPassword(email, token, password);
+      return resetPassword(email);
     }
     return orElse();
   }
@@ -943,7 +912,8 @@ class _$ResetPassword implements ResetPassword {
     required TResult Function(SignUpWithEmail value) signUpWithEmail,
     required TResult Function(VerifyEmail value) verifyEmail,
     required TResult Function(LoginAccount value) loginAccount,
-    required TResult Function(RequestPasswordReset value) requestPasswordReset,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
   }) {
     return resetPassword(this);
@@ -955,7 +925,7 @@ class _$ResetPassword implements ResetPassword {
     TResult? Function(SignUpWithEmail value)? signUpWithEmail,
     TResult? Function(VerifyEmail value)? verifyEmail,
     TResult? Function(LoginAccount value)? loginAccount,
-    TResult? Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
   }) {
     return resetPassword?.call(this);
@@ -967,7 +937,7 @@ class _$ResetPassword implements ResetPassword {
     TResult Function(SignUpWithEmail value)? signUpWithEmail,
     TResult Function(VerifyEmail value)? verifyEmail,
     TResult Function(LoginAccount value)? loginAccount,
-    TResult Function(RequestPasswordReset value)? requestPasswordReset,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
     required TResult orElse(),
   }) {
@@ -979,15 +949,10 @@ class _$ResetPassword implements ResetPassword {
 }
 
 abstract class ResetPassword implements AuthenticationEvent {
-  const factory ResetPassword(
-      {required final String email,
-      required final String token,
-      required final String password}) = _$ResetPassword;
+  const factory ResetPassword({required final String email}) = _$ResetPassword;
 
   @override
   String get email;
-  String get token;
-  String get password;
   @override
   @JsonKey(ignore: true)
   _$$ResetPasswordCopyWith<_$ResetPassword> get copyWith =>
@@ -1004,7 +969,7 @@ mixin _$AuthenticationState<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -1020,7 +985,7 @@ mixin _$AuthenticationState<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -1036,7 +1001,7 @@ mixin _$AuthenticationState<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -1170,7 +1135,7 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -1189,7 +1154,7 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -1208,7 +1173,7 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -1341,7 +1306,7 @@ class _$SigningUp<T> implements SigningUp<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -1360,7 +1325,7 @@ class _$SigningUp<T> implements SigningUp<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -1379,7 +1344,7 @@ class _$SigningUp<T> implements SigningUp<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -1512,7 +1477,7 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -1531,7 +1496,7 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -1550,7 +1515,7 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -1683,7 +1648,7 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -1702,7 +1667,7 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -1721,7 +1686,7 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -1854,7 +1819,7 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -1873,7 +1838,7 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -1892,7 +1857,7 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -2025,7 +1990,7 @@ class _$LogingIn<T> implements LogingIn<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -2044,7 +2009,7 @@ class _$LogingIn<T> implements LogingIn<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -2063,7 +2028,7 @@ class _$LogingIn<T> implements LogingIn<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -2158,7 +2123,7 @@ abstract class _$$LoginSuccessCopyWith<T, $Res> {
           _$LoginSuccess<T> value, $Res Function(_$LoginSuccess<T>) then) =
       __$$LoginSuccessCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({User user});
+  $Res call({UserModel user});
 }
 
 /// @nodoc
@@ -2178,7 +2143,7 @@ class __$$LoginSuccessCopyWithImpl<T, $Res>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as UserModel,
     ));
   }
 }
@@ -2189,7 +2154,7 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
   const _$LoginSuccess({required this.user});
 
   @override
-  final User user;
+  final UserModel user;
 
   @override
   String toString() {
@@ -2222,7 +2187,7 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -2241,7 +2206,7 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -2260,7 +2225,7 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -2346,9 +2311,10 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
 }
 
 abstract class LoginSuccess<T> implements AuthenticationState<T> {
-  const factory LoginSuccess({required final User user}) = _$LoginSuccess<T>;
+  const factory LoginSuccess({required final UserModel user}) =
+      _$LoginSuccess<T>;
 
-  User get user;
+  UserModel get user;
   @JsonKey(ignore: true)
   _$$LoginSuccessCopyWith<T, _$LoginSuccess<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2400,7 +2366,7 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -2419,7 +2385,7 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -2438,7 +2404,7 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -2576,7 +2542,7 @@ class _$RequestPasswordResetSuccess<T>
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -2595,7 +2561,7 @@ class _$RequestPasswordResetSuccess<T>
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -2614,7 +2580,7 @@ class _$RequestPasswordResetSuccess<T>
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -2749,7 +2715,7 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -2768,7 +2734,7 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -2787,7 +2753,7 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -2923,7 +2889,7 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -2942,7 +2908,7 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -2961,7 +2927,7 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
@@ -3121,7 +3087,7 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     required TResult Function() verifyingToken,
     required TResult Function() verifyTokenSuccess,
     required TResult Function() logingIn,
-    required TResult Function(User user) loginSuccess,
+    required TResult Function(UserModel user) loginSuccess,
     required TResult Function() requestingPasswordReset,
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
@@ -3140,7 +3106,7 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     TResult? Function()? verifyingToken,
     TResult? Function()? verifyTokenSuccess,
     TResult? Function()? logingIn,
-    TResult? Function(User user)? loginSuccess,
+    TResult? Function(UserModel user)? loginSuccess,
     TResult? Function()? requestingPasswordReset,
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
@@ -3159,7 +3125,7 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     TResult Function()? verifyingToken,
     TResult Function()? verifyTokenSuccess,
     TResult Function()? logingIn,
-    TResult Function(User user)? loginSuccess,
+    TResult Function(UserModel user)? loginSuccess,
     TResult Function()? requestingPasswordReset,
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,

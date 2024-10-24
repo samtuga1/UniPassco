@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 const PROD_CONFIG = "prod_config";
-const STG_CONFIG = "staging_config";
 const DEV_CONFIG = 'dev_config';
 
 class Constants {
@@ -15,6 +14,5 @@ class Constants {
   static const hasVerifiedEmail = 'hasVerifiedEmail';
   static const userKey = 'user';
   static const userIdKey = 'userId';
-  static String downloadedQuestions(String userId) =>
-      '${userId}downloadedQuestions';
+  static String downloadedQuestions(String userId) => '${userId}downloadedQuestions';
 }

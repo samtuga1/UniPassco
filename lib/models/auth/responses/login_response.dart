@@ -6,12 +6,11 @@ class LoginRegisterUserResponseData {
     required this.authToken,
   });
 
-  final User user;
+  final UserModel user;
   final String authToken;
 
-  factory LoginRegisterUserResponseData.fromJson(Map<String, dynamic> json) =>
-      LoginRegisterUserResponseData(
-        user: User.fromJson(json['user']),
+  factory LoginRegisterUserResponseData.fromJson(Map<String, dynamic> json) => LoginRegisterUserResponseData(
+        user: UserModel.fromJson(json['user']),
         authToken: json['token'],
       );
 

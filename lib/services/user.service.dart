@@ -1,74 +1,91 @@
+import 'dart:io';
+import 'package:Buddy/data/constants.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/handlers/http_response/http_response.handler.dart';
 import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/interceptors/http_access_token.interceptor.dart';
-import 'package:Buddy/interfaces/dio_client.interface.dart';
-import 'package:Buddy/interfaces/user.interface.dart';
+import 'package:Buddy/main_common.dart';
 import 'package:Buddy/models/auth/data/user_model.dart';
 import 'package:Buddy/models/auth/requests/onboarding_request.dart';
-import 'package:Buddy/models/auth/responses/login_response.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-@Injectable(as: IUser)
-class UserService implements IUser {
-  IDioClientService dioClient;
-
-  UserService(this.dioClient);
-
-  @override
-  Future<HttpResponse<LoginRegisterUserResponseData>> uploadProfilePhoto({
-    required String email,
+class UserService {
+  Future<HttpResponse<UserModel>> uploadProfilePhoto({
     required String filePath,
   }) async {
     try {
-      final file = MultipartFile.fromFileSync(filePath);
+      final avatarFile = File(filePath);
+      final userId = await getIt<SharedPreference>().getString(Constants.userIdKey);
 
-      final res = await dioClient.put(
-        '/account/user/upload/photo',
-        data: FormData.fromMap({
-          'email': email,
-          'photo': file,
-        }),
-      );
+      final String downloadUrl = await Supabase.instance.client.storage.from('photos').upload(
+            'users/$userId/${avatarFile.path.split('/').last}',
+            avatarFile,
+            fileOptions: const FileOptions(cacheControl: '3600', upsert: true),
+          );
 
-      final jsonRes = LoginRegisterUserResponseData.fromJson(res);
+      final publicUrl = Supabase.instance.client.storage.from('photos').getPublicUrl(downloadUrl);
 
-      return HttpResponse<LoginRegisterUserResponseData>.success(
-        result: jsonRes,
-      );
+      await Supabase.instance.client.from("profiles").update({"photo": publicUrl}).eq("id", userId);
+      final user = (await Supabase.instance.client.from("profiles").select().eq("id", userId))[0];
+
+      final jsonRes = UserModel.fromJson({
+        "id": user["id"],
+        "name": user["full_name"],
+        "email": user["email"],
+        "photo": user["photo"],
+        "isVerified": user["is_verified"],
+      });
+
+      return HttpResponse<UserModel>.success(result: jsonRes);
     } catch (error) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(error));
     }
   }
 
-  @override
-  Future<HttpResponse<User>> retrieveUser() async {
+  Future<HttpResponse<UserModel>> retrieveUser({String? userId}) async {
     try {
-      final res = await dioClient.get(
-        '/account/user/retrieve',
-        interceptors: [getIt<HttpAccessTokenInterceptor>()],
-      );
+      userId ??= await getIt<SharedPreference>().getString(Constants.userIdKey);
+      final res = (await Supabase.instance.client.from("profiles").select().eq("id", userId))[0];
 
-      final user = User.fromJson(res['user']);
+      final user = UserModel.fromJson({
+        "id": res["id"],
+        "name": res["full_name"],
+        "email": res["email"],
+        "photo": res["photo"],
+        "isVerified": res["is_verified"],
+      });
 
-      return HttpResponse<User>.success(result: user);
+      return HttpResponse<UserModel>.success(result: user);
     } catch (err) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }
   }
 
-  @override
+  Future<HttpResponse<UserModel>> updateProfile({required String name, required String email}) async {
+    try {
+      final userId = await getIt<SharedPreference>().getString(Constants.userIdKey);
+      final res =
+          (await supabase.from('profiles').update({"full_name": name, "email": email}).eq("id", userId).select()).first;
+
+      final user = UserModel.fromJson({
+        "id": res["id"],
+        "name": res["full_name"],
+        "email": res["email"],
+        "photo": res["photo"],
+        "isVerified": res["is_verified"],
+      });
+
+      return HttpResponse<UserModel>.success(result: user);
+    } catch (err) {
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
+    }
+  }
+
   Future<HttpResponse> onboarding({
     required OnboardingRequestData request,
   }) async {
     try {
-      final res = await dioClient.post(
-        '/account/user/onboarding',
-        data: request.toJson(),
-      );
-
-      return HttpResponse.success(result: res);
+      return const HttpResponse.success(result: {});
     } catch (err) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }

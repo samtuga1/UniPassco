@@ -1,6 +1,7 @@
+import 'package:Buddy/blocs/user/user_bloc.dart';
 import 'package:Buddy/data/data.dart';
 import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
 import 'package:Buddy/ui/screens/screens.dart';
 import 'package:Buddy/ui/widgets/signup_login_switcher.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +27,11 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   Future<void> setData() async {
-    hasSignedUp =
-        await getIt<ISharedPreference>().getBool(Constants.hasSignedUp);
-    hasLoggedIn =
-        await getIt<ISharedPreference>().getBool(Constants.hasLoggedIn);
-    hasFinishedOnboarding = await getIt<ISharedPreference>()
-        .getBool(Constants.hasFinishedOnboarding);
-    hasVerifiedEmail =
-        await getIt<ISharedPreference>().getBool(Constants.hasVerifiedEmail);
-    userEmail = await getIt<ISharedPreference>().getString(Constants.userEmail);
+    hasSignedUp = await getIt<SharedPreference>().getBool(Constants.hasSignedUp);
+    hasLoggedIn = await getIt<SharedPreference>().getBool(Constants.hasLoggedIn);
+    hasFinishedOnboarding = await getIt<SharedPreference>().getBool(Constants.hasFinishedOnboarding);
+    hasVerifiedEmail = await getIt<SharedPreference>().getBool(Constants.hasVerifiedEmail);
+    userEmail = await getIt<SharedPreference>().getString(Constants.userEmail);
   }
 
   @override
@@ -61,16 +58,12 @@ class _LandingScreenState extends State<LandingScreen> {
             return VerificationScreen(
               email: userEmail,
             );
-          } else if (hasSignedUp &&
-              hasVerifiedEmail &&
-              !hasFinishedOnboarding) {
+          } else if (hasSignedUp && hasVerifiedEmail && !hasFinishedOnboarding) {
             return OnboardingScreen(
               email: userEmail,
             );
-          } else if (hasSignedUp &&
-              hasVerifiedEmail &&
-              hasFinishedOnboarding &&
-              hasLoggedIn) {
+          } else if (hasSignedUp && hasVerifiedEmail && hasFinishedOnboarding && hasLoggedIn) {
+            // getIt<UserBloc>().add(const RetrieveUser());
             return const BottomNavBar();
           } else {
             return const GetStartedScreen();

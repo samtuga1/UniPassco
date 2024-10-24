@@ -1,9 +1,8 @@
 import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
 import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/ui/widgets/custom_adaptive_button.dart';
+import 'package:Buddy/repositories/authed_user.repository.dart';
 import 'package:Buddy/ui/widgets/custom_cache_image.dart';
 import 'package:Buddy/ui/widgets/custom_loader.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +31,11 @@ class _MessageBoxState extends State<MessageBox> {
   late final TextEditingController textEditingController;
 
   void _handleSendTap() {
-    if (context
-        .read<DiscussionsBloc>()
-        .messageTextFieldLabel
-        .value!
-        .contains('Replying')) {
+    if (context.read<DiscussionsBloc>().messageTextFieldLabel.value!.contains('Replying')) {
       context.read<DiscussionsBloc>().add(
             ReplyDiscussion(
               text: textEditingController.text.trim(),
-              discussionId:
-                  context.read<DiscussionsBloc>().tappedDiscussionToReply.id,
+              discussionId: context.read<DiscussionsBloc>().tappedDiscussionToReply.id,
             ),
           );
     } else {
@@ -68,8 +62,7 @@ class _MessageBoxState extends State<MessageBox> {
       });
 
     // initially set the label text
-    context.read<DiscussionsBloc>().messageTextFieldLabel.value =
-        'Add opinion to forum';
+    context.read<DiscussionsBloc>().messageTextFieldLabel.value = 'Add opinion to forum';
 
     super.initState();
   }
@@ -101,8 +94,8 @@ class _MessageBoxState extends State<MessageBox> {
       child: Row(
         children: [
           FutureBuilder(
-            future: getIt<IAuthedUserRepository>().getUser(),
-            builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+            future: getIt<AuthedUserRepository>().getUser(),
+            builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const ClipOval(
                   child: SizedBox(
@@ -123,8 +116,7 @@ class _MessageBoxState extends State<MessageBox> {
           8.horizontalSpace,
           Expanded(
             child: ValueListenableBuilder<String?>(
-                valueListenable:
-                    context.read<DiscussionsBloc>().messageTextFieldLabel,
+                valueListenable: context.read<DiscussionsBloc>().messageTextFieldLabel,
                 builder: (ctx, hintText, child) {
                   return CustomTextFieldWidget(
                     focusNode: messageBoxTextFieldFocusNode,
@@ -133,8 +125,7 @@ class _MessageBoxState extends State<MessageBox> {
                     maxLines: 4,
                     minLines: 1,
                     maxLength: 300,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 6, horizontal: 11),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 11),
                     borderColor: context.getTheme.scaffoldBackgroundColor,
                     borderRadius: 31,
                     hintText: hintText,
@@ -145,9 +136,7 @@ class _MessageBoxState extends State<MessageBox> {
           ),
           12.horizontalSpace,
           GestureDetector(
-            onTap: () => textEditingController.text.trim().isEmpty
-                ? null
-                : _handleSendTap(),
+            onTap: () => textEditingController.text.trim().isEmpty ? null : _handleSendTap(),
             child: CircleAvatar(
               radius: 13,
               backgroundColor: context.getTheme.indicatorColor,
@@ -161,8 +150,7 @@ class _MessageBoxState extends State<MessageBox> {
                         replyingDiscussionSuccess: (_) {
                           textEditingController.clear();
                         },
-                        discussionsError: (error) =>
-                            UiUtils.showStandardErrorFlushBar(
+                        discussionsError: (error) => UiUtils.showStandardErrorFlushBar(
                           context,
                           message: HttpErrorUtils.getErrorMessage(error),
                         ),

@@ -1,34 +1,34 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:Buddy/data/constants.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
-import 'package:Buddy/interfaces/authentication.interface.dart';
-import 'package:Buddy/interfaces/shared_preferences.interface.dart';
 import 'package:Buddy/models/auth/data/user_model.dart';
 import 'package:Buddy/models/auth/requests/login_request.dart';
-import 'package:Buddy/models/auth/requests/reset_password.dart';
 import 'package:Buddy/models/auth/requests/signup_request.dart';
-import 'package:Buddy/models/auth/responses/login_response.dart';
+import 'package:Buddy/repositories/authed_user.repository.dart';
+import 'package:Buddy/services/authentication.service.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
 import 'package:Buddy/utils/utils.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+part 'authentication_bloc.freezed.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
-part 'authentication_bloc.freezed.dart';
 
-@Injectable()
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
-  IAuthentication authService;
-  IAuthedUserRepository userRepo;
-  ISharedPreference prefs;
+  AuthenticationService authService;
+  AuthedUserRepository userRepo;
+  SharedPreference prefs;
   AuthenticationBloc(this.authService, this.prefs, this.userRepo)
       : super(const AuthenticationState.authenticationInitial()) {
     on<SignUpWithEmail>(_signUpWithEmail);
     on<VerifyEmail>(_verifyEmail);
     on<LoginAccount>(_loginUser);
-    on<RequestPasswordReset>(_requestResetPassword);
+    on<ResendVerificationToken>(_resendVerificationToken);
     on<ResetPassword>(_resetPassword);
   }
 
@@ -38,15 +38,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   ) async {
     emit(const AuthenticationState.resettingPassword());
 
-    final resetPasswordRequest = ResetPasswordRequest(
-      email: event.email,
-      token: event.token,
-      password: event.password,
-    );
-
-    final HttpResponse response = await authService.resetPassword(
-      request: resetPasswordRequest,
-    );
+    final HttpResponse response = await authService.resetPassword(email: event.email);
 
     response.when(
       success: (_) {
@@ -58,13 +50,13 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     );
   }
 
-  Future<void> _requestResetPassword(
-    RequestPasswordReset event,
+  Future<void> _resendVerificationToken(
+    ResendVerificationToken event,
     Emitter emit,
   ) async {
     emit(const AuthenticationState.requestingPasswordReset());
 
-    final HttpResponse response = await authService.requestResetPasswordToken(email: event.email);
+    final HttpResponse response = await authService.resendVerificationToken(email: event.email);
 
     response.when(success: (_) {
       emit(const AuthenticationState.requestPasswordResetSuccess());
@@ -81,19 +73,16 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       password: event.password,
     );
 
-    final HttpResponse<LoginRegisterUserResponseData> response = await authService.login(request: requestData);
+    final HttpResponse<UserModel?> response = await authService.login(request: requestData);
 
     response.when(success: (loginResponse) {
       // save user data to user repository
-      userRepo.save(user: loginResponse!.user);
+      userRepo.save(user: loginResponse!);
 
       // check if user has completed onboarding
-      if (loginResponse.user.photo != '' && loginResponse.user.college != null) {
-        Helpers.setPrefsData(prefs);
-        prefs.setString(Constants.http_token, loginResponse.authToken);
-      }
+      Helpers.setPrefsData(prefs);
 
-      emit(AuthenticationState.loginSuccess(user: loginResponse.user));
+      emit(AuthenticationState.loginSuccess(user: loginResponse));
     }, error: (error) {
       emit(AuthenticationState<HttpError>.authenticationError(error: error));
     });
@@ -109,10 +98,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
 
     response.when(success: (_) {
       // set has verified email to true
-      prefs.setBool(
-        Constants.hasVerifiedEmail,
-        true,
-      );
+      prefs.setBool(Constants.hasVerifiedEmail, true);
 
       emit(const AuthenticationState.verifyTokenSuccess());
     }, error: (error) {
@@ -127,24 +113,20 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     emit(const AuthenticationState.signingUp());
     // setup the sign up request to be sent to the backend
     final userToJson = SignUpRequestData(
-      name: event.name,
-      email: event.email,
-      password: event.password,
+      name: event.name.trim(),
+      email: event.email.trim(),
+      password: event.password.trim(),
     );
     // make the request to sign the user up
-    HttpResponse response = await authService.signUpWithEmailAndPassword(
-      user: userToJson,
-    );
+    HttpResponse<User> response = await authService.signUpWithEmailAndPassword(user: userToJson);
 
-    response.when(success: (_) {
+    response.when(success: (res) {
       // set has signup to true
-      prefs.setBool(
-        Constants.hasSignedUp,
-        true,
-      );
+      prefs.setBool(Constants.hasSignedUp, true);
 
       // save email to preferences
       prefs.setString(Constants.userEmail, event.email);
+      prefs.setString(Constants.userIdKey, res!.id);
       emit(const AuthenticationState.signUpSuccess());
     }, error: (error) {
       emit(AuthenticationState<HttpError>.authenticationError(error: error));

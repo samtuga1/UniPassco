@@ -1,101 +1,97 @@
+import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/models/auth/data/user_model.dart';
 import 'package:Buddy/models/auth/requests/login_request.dart';
-import 'package:Buddy/models/auth/requests/reset_password.dart';
 import 'package:Buddy/models/auth/requests/signup_request.dart';
-import 'package:Buddy/models/auth/responses/login_response.dart';
-import 'package:injectable/injectable.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/interfaces/authentication.interface.dart';
-import 'package:Buddy/interfaces/dio_client.interface.dart';
+import 'package:Buddy/services/user.service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-@Injectable(as: IAuthentication)
-class AuthenticationService implements IAuthentication {
-  late IDioClientService dioClient;
-
-  AuthenticationService(this.dioClient);
-
-  @override
-  Future<HttpResponse> signUpWithEmailAndPassword({
+class AuthenticationService {
+  Future<HttpResponse<User>> signUpWithEmailAndPassword({
     required SignUpRequestData user,
   }) async {
     try {
-      final res = await dioClient.post(
-        '/account/user/signup',
-        data: user.toJson(),
+      final res = await Supabase.instance.client.auth.signUp(
+        password: user.password,
+        email: user.email,
+        data: {
+          "email": user.email,
+          "full_name": user.name,
+          "photo": null,
+          "is_verified": false,
+        },
       );
 
-      return HttpResponse.success(result: res);
+      return HttpResponse<User>.success(result: res.user);
     } catch (err) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }
   }
 
-  @override
   Future<HttpResponse> verify({
     required String email,
     required String verificationToken,
   }) async {
     try {
-      final res = await dioClient.post('/account/user/verify', data: {
-        'email': email,
-        'token': verificationToken,
-      });
+      await Supabase.instance.client.auth.verifyOTP(type: OtpType.email, email: email, token: verificationToken);
+      await Supabase.instance.client.from('profiles').update({"is_verified": true}).eq("email", email);
 
-      return HttpResponse.success(result: res);
+      return const HttpResponse.success();
     } catch (err) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }
   }
 
-  @override
-  Future<HttpResponse<LoginRegisterUserResponseData>> login({
+  Future<HttpResponse<UserModel?>> login({
     required LoginRequestData request,
   }) async {
     try {
-      final res = await dioClient.post(
-        '/account/user/login',
-        data: request.toJson(),
+      final authResponse = await Supabase.instance.client.auth.signInWithPassword(
+        password: request.password,
+        email: request.email,
       );
 
-      final jsonResult = LoginRegisterUserResponseData.fromJson(res);
+      UserModel? userModel;
 
-      return HttpResponse.success(result: jsonResult);
-    } catch (err) {
-      // print(t);
-      print(err);
-      return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
-    }
-  }
+      final response = await getIt<UserService>().retrieveUser(userId: authResponse.user?.id);
 
-  @override
-  Future<HttpResponse> requestResetPasswordToken({
-    required String email,
-  }) async {
-    try {
-      final res = await dioClient.post(
-        '/account/user/request/password/reset',
-        data: {
-          "email": email,
+      response.when(
+        success: (user) {
+          userModel = user!;
+          return userModel;
+        },
+        error: (error) {
+          return error;
         },
       );
 
-      return HttpResponse.success(result: res);
+      return HttpResponse.success(result: userModel);
     } catch (err) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }
   }
 
-  @override
-  Future<HttpResponse> resetPassword({
-    required ResetPasswordRequest request,
+  Future<HttpResponse> resendVerificationToken({
+    required String email,
   }) async {
     try {
-      final res = await dioClient.post(
-        '/account/user/reset/password',
-        data: request.toJson(),
-      );
+      print(email);
+      await Supabase.instance.client.auth.resend(type: OtpType.signup, email: email);
 
-      return HttpResponse.success(result: res);
+      return const HttpResponse.success();
+    } catch (err) {
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
+    }
+  }
+
+  Future<HttpResponse> resetPassword({
+    required String email,
+  }) async {
+    try {
+      await Supabase.instance.client.auth.resetPasswordForEmail(email);
+
+      return const HttpResponse.success();
     } catch (err) {
       return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
     }

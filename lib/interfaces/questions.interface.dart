@@ -1,25 +1,25 @@
-import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/models/questions/response/list_questions_response.dart';
+// import 'package:Buddy/handlers/http_response/http_response.handler.dart';
+// import 'package:Buddy/models/questions/data/question_model.dart';
+// import 'package:Buddy/models/questions/response/list_questions_response.dart';
 
-abstract class IQuestionsService {
-  Future<HttpResponse<ListQuestionsResponse>> listQuestions({
-    required String level,
-    required int page,
-  });
+// abstract class IQuestionsService {
+//   Future<HttpResponse<ListQuestionsResponse>> listQuestions({
+//     required String level,
+//     required int page,
+//   });
 
-  Future<HttpResponse<Question>> retrieveSingleQuestion({
-    required String questionId,
-  });
+//   Future<HttpResponse<Question>> retrieveSingleQuestion({
+//     required String questionId,
+//   });
 
-  Future<HttpResponse<Question>> addBookmarkQuestion({
-    required String questionId,
-  });
+//   Future<HttpResponse<Question>> addBookmarkQuestion({
+//     required String questionId,
+//   });
 
-  Future<HttpResponse<Question>> removeBookmarkQuestion({
-    required String questionId,
-  });
+//   Future<HttpResponse<Question>> removeBookmarkQuestion({
+//     required String questionId,
+//   });
 
-  Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion(
-      {required int page});
-}
+//   Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion(
+//       {required int page});
+// }

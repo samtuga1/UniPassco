@@ -1,16 +1,13 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:Buddy/data/data.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
 import 'package:bloc/bloc.dart';
-import 'package:Buddy/interfaces/shared_preferences.interface.dart';
-
 part 'themes.state.dart';
 part 'themes.cubit.freezed.dart';
 
-@injectable
 class ThemeCubit extends Cubit<ThemeCubitState> {
-  ISharedPreference prefs;
+  SharedPreference prefs;
   ThemeCubit(this.prefs) : super(const ThemeCubitState.light());
 
   void toggleTheme() {
@@ -19,13 +16,12 @@ class ThemeCubit extends Cubit<ThemeCubitState> {
     } else {
       emit(const ThemeCubitState.light());
     }
-    prefs.setBool(
-        Constants.kThemeString, state == const ThemeCubitState.dark());
+    prefs.setBool(Constants.kThemeString, state == const ThemeCubitState.dark());
   }
 
   void setThemeFromSharePreference() async {
     // get theme from shared preferences
-    bool themeVal = (await prefs.getBool(Constants.kThemeString) ?? false);
+    bool themeVal = await prefs.getBool(Constants.kThemeString);
 
     if (themeVal == false) {
       emit(const ThemeCubitState.light());

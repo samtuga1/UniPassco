@@ -46,8 +46,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return StatefulBuilder(builder: (ctx, setState) {
-        final isLightMode =
-            context.read<ThemeCubit>().state == ThemeCubitState.light();
+        final isLightMode = context.read<ThemeCubit>().state == const ThemeCubitState.light();
 
         // check if its light mode
         Color buttonColor = isLightMode ? Colors.black : Colors.white;
@@ -73,7 +72,7 @@ class CustomElevatedButton extends StatelessWidget {
           },
           child: CupertinoButton(
             color: buttonColor,
-            padding: const EdgeInsets.symmetric(vertical: 11.5),
+            padding: const EdgeInsets.symmetric(vertical: 15.5),
             borderRadius: BorderRadius.circular(borderRadius ?? 12),
             onPressed: (isValidated! && isBusy == false) ? onPressed : null,
             disabledColor: buttonColor.withOpacity(0.5),
@@ -104,11 +103,10 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: isValidated! && !isBusy ? onPressed : null,
       style: ElevatedButton.styleFrom(
           elevation: 0,
-          padding: padding ?? const EdgeInsets.symmetric(vertical: 11.5),
+          padding: padding ?? const EdgeInsets.symmetric(vertical: 15.5),
           shape: addBorder
               ? RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                      borderRadius == null ? 12 : borderRadius! + 5),
+                  borderRadius: BorderRadius.circular(borderRadius == null ? 12 : borderRadius! + 5),
                   side: const BorderSide(
                     width: 1.2,
                   ),
@@ -116,28 +114,24 @@ class CustomElevatedButton extends StatelessWidget {
               : RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius ?? 12),
                 ),
-          disabledBackgroundColor:
-              context.getTheme.primaryColor.withOpacity(0.5),
+          disabledBackgroundColor: context.getTheme.primaryColor.withOpacity(0.5),
           backgroundColor: context.getTheme.primaryColor),
-      child: SizedBox(
-        height: 22,
-        child: !isBusy
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  titleWidget ??
-                      Text(
-                        title!,
-                        style: context.getTheme.textTheme.labelLarge,
-                      ),
-                ],
-              )
-            : CustomLoading(
-                color: context.getTheme.canvasColor,
-                height: 15,
-                width: 15,
-              ),
-      ),
+      child: !isBusy
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                titleWidget ??
+                    Text(
+                      title!,
+                      style: context.getTheme.textTheme.labelLarge,
+                    ),
+              ],
+            )
+          : CustomLoading(
+              color: context.getTheme.canvasColor,
+              height: 23,
+              width: 23,
+            ),
     );
   }
 }

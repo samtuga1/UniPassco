@@ -14,7 +14,7 @@ class CustomAdaptiveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS
+    return !Platform.isIOS
         ? CupertinoButton(
             padding: EdgeInsets.zero,
             onPressed: onTap,

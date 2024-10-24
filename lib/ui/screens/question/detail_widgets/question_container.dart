@@ -1,7 +1,6 @@
 import 'package:Buddy/models/questions/data/question_model.dart';
 import 'package:Buddy/router/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/data/data.dart';
 import 'package:Buddy/utils/utils.dart';
@@ -32,39 +31,37 @@ class QuestionContainer extends StatelessWidget {
         children: [
           12.verticalSpace,
           Image.asset(
-            question?.mimeType == 'pdf'
-                ? AppImages.pdf_icon
-                : AppImages.jpeg_icon,
+            question?.mimeType == 'pdf' ? AppImages.pdf_icon : AppImages.jpeg_icon,
             height: 52.h,
             width: 52.w,
           ),
           5.verticalSpace,
           CustomText(
-            '${question?.courseCode}: ${question?.courseName}',
+            '${question?.title}',
             textAlign: TextAlign.center,
             style: context.getTheme.textTheme.titleMedium,
           ),
-          5.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                IconlyLight.timeCircle,
-                size: 18,
-              ),
-              8.horizontalSpace,
-              CustomText(
-                '${question?.year} - ',
-                style: context.getTheme.textTheme.labelMedium,
-                softWrap: true,
-              ),
-              CustomText(
-                Helpers.numberToSemester(question?.semester ?? '1'),
-                style: context.getTheme.textTheme.labelMedium,
-                softWrap: true,
-              ),
-            ],
-          ),
+          // 5.verticalSpace,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     const Icon(
+          //       IconlyLight.timeCircle,
+          //       size: 18,
+          //     ),
+          //     8.horizontalSpace,
+          //     CustomText(
+          //       '${question?.year} - ',
+          //       style: context.getTheme.textTheme.labelMedium,
+          //       softWrap: true,
+          //     ),
+          //     CustomText(
+          //       Helpers.numberToSemester(question?.semester ?? '1'),
+          //       style: context.getTheme.textTheme.labelMedium,
+          //       softWrap: true,
+          //     ),
+          //   ],
+          // ),
           13.verticalSpace,
           GestureDetector(
             onTap: () {

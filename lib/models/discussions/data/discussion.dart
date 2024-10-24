@@ -4,7 +4,7 @@ import 'package:Buddy/utils/utils.dart';
 
 class Discussion {
   final String id;
-  final User user;
+  final UserModel user;
   final String text;
   final int votes;
   final DateTime createdAt;
@@ -31,7 +31,7 @@ class Discussion {
   factory Discussion.fromJson(Map<String, dynamic> json) {
     return Discussion(
       id: json["_id"],
-      user: User.fromJson(json["user"]),
+      user: UserModel.fromJson(json["user"]),
       text: json["text"],
       votes: json["votes"],
       createdAt: DateTime.parse(json["createdAt"]),

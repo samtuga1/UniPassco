@@ -1,7 +1,5 @@
 import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/utils/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/data/data.dart';
 import 'package:Buddy/ui/widgets/widgets.dart';
@@ -27,7 +25,7 @@ class QuestionWidget extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         decoration: ShapeDecoration(
-          color: Colors.white,
+          color: context.getTheme.canvasColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(17),
           ),
@@ -46,30 +44,30 @@ class QuestionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    '${question?.courseCode}: ${question?.courseName}',
+                    '${question?.title}',
                     style: context.getTheme.textTheme.titleMedium,
                   ),
                   3.verticalSpace,
-                  Row(
-                    children: [
-                      const Icon(
-                        IconlyLight.timeCircle,
-                        size: 18,
-                      ),
-                      8.horizontalSpace,
-                      CustomText(
-                        '${question?.year} - ',
-                        style: context.getTheme.textTheme.labelMedium,
-                        softWrap: true,
-                      ),
-                      CustomText(
-                        Helpers.numberToSemester(question?.semester ?? '1'),
-                        style: context.getTheme.textTheme.labelMedium,
-                        softWrap: true,
-                      ),
-                    ],
-                  ),
-                  3.verticalSpace,
+                  // Row(
+                  //   children: [
+                  //     const Icon(
+                  //       IconlyLight.timeCircle,
+                  //       size: 18,
+                  //     ),
+                  //     8.horizontalSpace,
+                  //     CustomText(
+                  //       '${question?.year} - ',
+                  //       style: context.getTheme.textTheme.labelMedium,
+                  //       softWrap: true,
+                  //     ),
+                  //     CustomText(
+                  //       Helpers.numberToSemester(question?.semester ?? '1'),
+                  //       style: context.getTheme.textTheme.labelMedium,
+                  //       softWrap: true,
+                  //     ),
+                  //   ],
+                  // ),
+                  // 3.verticalSpace,
                 ],
               ),
             )

@@ -1,9 +1,9 @@
 import 'dart:ui';
-
-import 'package:Buddy/ui/widgets/custom_fader.dart';
+import 'package:Buddy/cubits/theme/themes.cubit.dart';
 import 'package:Buddy/ui/widgets/custom_loader.dart';
 import 'package:Buddy/utils/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OverlayEntryWidget extends StatefulWidget {
@@ -16,6 +16,7 @@ class OverlayEntryWidget extends StatefulWidget {
 class _OverlayEntryWidgetState extends State<OverlayEntryWidget> {
   @override
   Widget build(BuildContext context) {
+    final isLightMode = context.read<ThemeCubit>().isLightMode;
     return Positioned.fill(
       child: Material(
         color: Colors.transparent,
@@ -24,22 +25,19 @@ class _OverlayEntryWidgetState extends State<OverlayEntryWidget> {
           color: Colors.transparent,
           padding: EdgeInsets.all(MediaQuery.sizeOf(context).height * 0.02),
           child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 5,
-              sigmaY: 5,
-            ),
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: Container(
               width: 100.w,
               height: 100.h,
               decoration: BoxDecoration(
-                color: context.getTheme.primaryColor.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(20),
+                color: isLightMode ? context.getTheme.primaryColor.withOpacity(0.5) : Colors.black45,
+                borderRadius: BorderRadius.circular(10),
               ),
               child: CustomLoading(
                 adaptive: true,
-                height: 45,
-                width: 45,
-                color: context.getTheme.canvasColor,
+                height: 35,
+                width: 35,
+                color: isLightMode ? context.getTheme.canvasColor : Colors.white,
               ),
             ),
           ),

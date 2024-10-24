@@ -11,8 +11,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  dio: ^5.0.2
-  injectable: ^2.3.0
   flutter_iconly: ^1.0.2
   get_it: ^7.6.0
   flutter_screenutil: ^5.9.0
@@ -31,14 +29,25 @@ dependencies:
   animate_to: ^0.1.0
   firebase_core: ^2.15.1
   path_provider: ^2.1.1
+  icons_launcher: ^3.0.0
   another_flushbar: ^1.12.30
   freezed_annotation: ^2.4.1
+  supabase_flutter: ^2.6.0
+  pinput: ^5.0.0
+  soft_edge_blur: ^0.0.2
+  share_plus:
+  screenshot:
+  package_info_plus: ^8.0.2
+  flutter_animate: ^4.5.0
+  flutter_slidable: ^3.1.1
+  google_generative_ai: ^0.4.6
+  toastification: ^2.3.0
+  icons_plus: ^5.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  injectable_generator: ^2.1.3
   build_runner: ^2.3.3
   freezed: ^2.4.2
   rename: ^3.0.0
@@ -76,6 +85,16 @@ flutter:
           weight: 700
         - asset: assets/fonts/Satoshi-Italic.otf
           style: italic
+
+icons_launcher:
+  platforms:
+    android:
+      image_path: "assets/images/passco_icon.png"
+      enable: true
+    ios:
+      image_path: "assets/images/passco_icon.png"
+      enable: true
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

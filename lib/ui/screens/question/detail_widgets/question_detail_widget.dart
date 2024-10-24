@@ -5,8 +5,8 @@ import 'package:Buddy/blocs/questions/questions_bloc.dart';
 import 'package:Buddy/data/data.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/interfaces/questions.repository.interface.dart';
 import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:Buddy/repositories/questions.repository.dart';
 import 'package:Buddy/ui/screens/question/detail_widgets/discussions_list.dart';
 import 'package:Buddy/ui/screens/question/detail_widgets/message_box.dart';
 import 'package:Buddy/ui/screens/question/detail_widgets/question_container.dart';
@@ -20,10 +20,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class QuestionDetailWidget extends StatefulWidget {
-  const QuestionDetailWidget({
-    super.key,
-    required this.question,
-  });
+  const QuestionDetailWidget({super.key, required this.question});
   final Question question;
 
   @override
@@ -37,9 +34,7 @@ class _QuestionDetailWidgetState extends State<QuestionDetailWidget> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       discussionsBloc = context.read<DiscussionsBloc>()
-        ..add(
-          FetchDiscusstions(questionId: widget.question.id, page: 1),
-        );
+        ..add(FetchDiscusstions(questionId: widget.question.id, page: 1));
     });
     super.initState();
   }
@@ -51,39 +46,29 @@ class _QuestionDetailWidgetState extends State<QuestionDetailWidget> {
         actions: [
           IconButton(
             onPressed: () {
-              Helpers.questionHasBeeonDownloaded(widget.question)
-                  .then((questionHasBeeonDownloaded) {
+              Helpers.questionHasBeeonDownloaded(widget.question).then((questionHasBeeonDownloaded) {
                 UiUtils.showActionSheet(context, actions: [
                   CupertinoActionSheetData(
-                    label: questionHasBeeonDownloaded
-                        ? 'Remove from downloads'
-                        : 'Download',
+                    label: questionHasBeeonDownloaded ? 'Remove from downloads' : 'Download',
                     onTap: () {
-                      Helpers.downloadQuestion(
+                      Helpers.downloadOrDeleteQuestion(
                         context,
                         question: widget.question,
                       );
                     },
-                    trailingIcon: Icon(questionHasBeeonDownloaded
-                        ? IconlyBold.download
-                        : IconlyLight.download),
+                    trailingIcon: Icon(questionHasBeeonDownloaded ? IconlyBold.download : IconlyLight.download),
                   ),
-                  CupertinoActionSheetData(
-                    label: widget.question.userHasBookmarked!
-                        ? 'Remove from bookmarks'
-                        : 'Bookmark',
-                    onTap: () {
-                      Helpers.bookmarkQuestion(
-                        context,
-                        questionHasBeenBookmarked:
-                            widget.question.userHasBookmarked!,
-                        questionId: widget.question.id,
-                      );
-                    },
-                    trailingIcon: Icon(widget.question.userHasBookmarked!
-                        ? IconlyBold.bookmark
-                        : IconlyLight.bookmark),
-                  ),
+                  // CupertinoActionSheetData(
+                  //   label: widget.question.userHasBookmarked! ? 'Remove from bookmarks' : 'Bookmark',
+                  //   onTap: () {
+                  //     Helpers.bookmarkQuestion(
+                  //       context,
+                  //       questionHasBeenBookmarked: widget.question.userHasBookmarked!,
+                  //       questionId: widget.question.id,
+                  //     );
+                  //   },
+                  //   trailingIcon: Icon(widget.question.userHasBookmarked! ? IconlyBold.bookmark : IconlyLight.bookmark),
+                  // ),
                   CupertinoActionSheetData(
                     label: 'Share',
                     onTap: () {},
@@ -101,24 +86,24 @@ class _QuestionDetailWidgetState extends State<QuestionDetailWidget> {
           state.maybeWhen(
             retrievingQuestionSuccess: (que) {
               // update the screen to show message box only when retrieving question was successfull
-              getIt<IQuestionsRepository>().getDownloads().then((downloads) {
+              getIt<QuestionsRepository>().getDownloads().then((downloads) {
                 for (var question in downloads) {
                   if (question.id == question.id) {
                     question.userHasDownloaded = que.userHasDownloaded;
                   }
                 }
               });
-              widget.question.userHasBookmarked = que.userHasBookmarked!;
+              // widget.question.userHasBookmarked = que.userHasBookmarked!;
             },
-            addBookmarkSuccess: (que) {
-              context.read<QuestionsBloc>().add(const FetchBookmarks());
-              widget.question.userHasBookmarked = que.userHasBookmarked;
-              UiUtils.flush(
-                context,
-                errorState: ErrorState.success,
-                msg: '${widget.question.courseCode} has been bookmarked',
-              );
-            },
+            // addBookmarkSuccess: (que) {
+            //   context.read<QuestionsBloc>().add(const FetchBookmarks());
+            //   widget.question.userHasBookmarked = que.userHasBookmarked;
+            //   UiUtils.flush(
+            //     context,
+            //     errorState: ErrorState.success,
+            //     msg: '${widget.question.courseCode} has been bookmarked',
+            //   );
+            // },
             questionsError: (error) {
               getIt<CustomOverlayEntry>().hide(context);
               UiUtils.showStandardErrorFlushBar(
@@ -126,17 +111,16 @@ class _QuestionDetailWidgetState extends State<QuestionDetailWidget> {
                 message: HttpErrorUtils.getErrorMessage(error),
               );
             },
-            removeBookmarkSuccess: (que) {
-              context.read<QuestionsBloc>().add(const FetchBookmarks());
-              widget.question.userHasBookmarked = que.userHasBookmarked;
+            // removeBookmarkSuccess: (que) {
+            //   context.read<QuestionsBloc>().add(const FetchBookmarks());
+            //   widget.question.userHasBookmarked = que.userHasBookmarked;
 
-              UiUtils.flush(
-                context,
-                errorState: ErrorState.success,
-                msg:
-                    '${widget.question.courseCode} has been removed from bookmarks',
-              );
-            },
+            //   UiUtils.flush(
+            //     context,
+            //     errorState: ErrorState.success,
+            //     msg: '${widget.question.courseCode} has been removed from bookmarks',
+            //   );
+            // },
             downloadingQuestion: () {
               getIt<CustomOverlayEntry>().show(context);
             },
@@ -155,16 +139,13 @@ class _QuestionDetailWidgetState extends State<QuestionDetailWidget> {
         child: GestureDetector(
           onPanDown: (_) {
             messageBoxTextFieldFocusNode.unfocus();
-            context.read<DiscussionsBloc>().messageTextFieldLabel.value =
-                'Add opinion to forum';
+            context.read<DiscussionsBloc>().messageTextFieldLabel.value = 'Add opinion to forum';
           },
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: QuestionContainer(
-                  question: widget.question,
-                ),
+                child: QuestionContainer(question: widget.question),
               ),
               15.verticalSpace,
               FutureBuilder(
@@ -186,12 +167,7 @@ class _QuestionDetailWidgetState extends State<QuestionDetailWidget> {
       extendBody: true,
       bottomSheet: BlocBuilder<DiscussionsBloc, DiscussionsState>(
         builder: (context, state) => switch (state) {
-          FetchingDiscussionsSuccess(
-            discussions: _,
-          ) =>
-            MessageBox(
-              questionId: widget.question.id,
-            ),
+          FetchingDiscussionsSuccess(discussions: _) => MessageBox(questionId: widget.question.id),
           _ => const SizedBox.shrink(),
         },
         buildWhen: (previous, current) =>

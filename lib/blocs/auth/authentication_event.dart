@@ -18,13 +18,7 @@ sealed class AuthenticationEvent with _$AuthenticationEvent {
     required String password,
   }) = LoginAccount;
 
-  const factory AuthenticationEvent.requestPasswordReset({
-    required String email,
-  }) = RequestPasswordReset;
+  const factory AuthenticationEvent.requestPasswordReset({required String email}) = ResendVerificationToken;
 
-  const factory AuthenticationEvent.resetPassword({
-    required String email,
-    required String token,
-    required String password,
-  }) = ResetPassword;
+  const factory AuthenticationEvent.resetPassword({required String email}) = ResetPassword;
 }

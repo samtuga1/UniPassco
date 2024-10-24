@@ -19,23 +19,25 @@ mixin _$UserEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String college) onboardUser,
-    required TResult Function(String email, String filePath)
-        uploadProfilePicture,
+    required TResult Function(String filePath) uploadProfilePicture,
     required TResult Function() retrieveUser,
+    required TResult Function(String name, String email) updateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String college)? onboardUser,
-    TResult? Function(String email, String filePath)? uploadProfilePicture,
+    TResult? Function(String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
+    TResult? Function(String name, String email)? updateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String college)? onboardUser,
-    TResult Function(String email, String filePath)? uploadProfilePicture,
+    TResult Function(String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
+    TResult Function(String name, String email)? updateProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +46,7 @@ mixin _$UserEvent {
     required TResult Function(OnboardUser value) onboardUser,
     required TResult Function(UploadProfilePicture value) uploadProfilePicture,
     required TResult Function(RetrieveUser value) retrieveUser,
+    required TResult Function(UpdateProfile value) updateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +54,7 @@ mixin _$UserEvent {
     TResult? Function(OnboardUser value)? onboardUser,
     TResult? Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult? Function(RetrieveUser value)? retrieveUser,
+    TResult? Function(UpdateProfile value)? updateProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +62,7 @@ mixin _$UserEvent {
     TResult Function(OnboardUser value)? onboardUser,
     TResult Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult Function(RetrieveUser value)? retrieveUser,
+    TResult Function(UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,9 +158,9 @@ class _$OnboardUser implements OnboardUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String college) onboardUser,
-    required TResult Function(String email, String filePath)
-        uploadProfilePicture,
+    required TResult Function(String filePath) uploadProfilePicture,
     required TResult Function() retrieveUser,
+    required TResult Function(String name, String email) updateProfile,
   }) {
     return onboardUser(email, college);
   }
@@ -164,8 +169,9 @@ class _$OnboardUser implements OnboardUser {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String college)? onboardUser,
-    TResult? Function(String email, String filePath)? uploadProfilePicture,
+    TResult? Function(String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
+    TResult? Function(String name, String email)? updateProfile,
   }) {
     return onboardUser?.call(email, college);
   }
@@ -174,8 +180,9 @@ class _$OnboardUser implements OnboardUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String college)? onboardUser,
-    TResult Function(String email, String filePath)? uploadProfilePicture,
+    TResult Function(String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
+    TResult Function(String name, String email)? updateProfile,
     required TResult orElse(),
   }) {
     if (onboardUser != null) {
@@ -190,6 +197,7 @@ class _$OnboardUser implements OnboardUser {
     required TResult Function(OnboardUser value) onboardUser,
     required TResult Function(UploadProfilePicture value) uploadProfilePicture,
     required TResult Function(RetrieveUser value) retrieveUser,
+    required TResult Function(UpdateProfile value) updateProfile,
   }) {
     return onboardUser(this);
   }
@@ -200,6 +208,7 @@ class _$OnboardUser implements OnboardUser {
     TResult? Function(OnboardUser value)? onboardUser,
     TResult? Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult? Function(RetrieveUser value)? retrieveUser,
+    TResult? Function(UpdateProfile value)? updateProfile,
   }) {
     return onboardUser?.call(this);
   }
@@ -210,6 +219,7 @@ class _$OnboardUser implements OnboardUser {
     TResult Function(OnboardUser value)? onboardUser,
     TResult Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult Function(RetrieveUser value)? retrieveUser,
+    TResult Function(UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
     if (onboardUser != null) {
@@ -237,7 +247,7 @@ abstract class _$$UploadProfilePictureCopyWith<$Res> {
           $Res Function(_$UploadProfilePicture) then) =
       __$$UploadProfilePictureCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String filePath});
+  $Res call({String filePath});
 }
 
 /// @nodoc
@@ -251,14 +261,9 @@ class __$$UploadProfilePictureCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
     Object? filePath = null,
   }) {
     return _then(_$UploadProfilePicture(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
       filePath: null == filePath
           ? _value.filePath
           : filePath // ignore: cast_nullable_to_non_nullable
@@ -270,16 +275,14 @@ class __$$UploadProfilePictureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UploadProfilePicture implements UploadProfilePicture {
-  const _$UploadProfilePicture({required this.email, required this.filePath});
+  const _$UploadProfilePicture({required this.filePath});
 
-  @override
-  final String email;
   @override
   final String filePath;
 
   @override
   String toString() {
-    return 'UserEvent.uploadProfilePicture(email: $email, filePath: $filePath)';
+    return 'UserEvent.uploadProfilePicture(filePath: $filePath)';
   }
 
   @override
@@ -287,13 +290,12 @@ class _$UploadProfilePicture implements UploadProfilePicture {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadProfilePicture &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.filePath, filePath) ||
                 other.filePath == filePath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, filePath);
+  int get hashCode => Object.hash(runtimeType, filePath);
 
   @JsonKey(ignore: true)
   @override
@@ -306,33 +308,35 @@ class _$UploadProfilePicture implements UploadProfilePicture {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String college) onboardUser,
-    required TResult Function(String email, String filePath)
-        uploadProfilePicture,
+    required TResult Function(String filePath) uploadProfilePicture,
     required TResult Function() retrieveUser,
+    required TResult Function(String name, String email) updateProfile,
   }) {
-    return uploadProfilePicture(email, filePath);
+    return uploadProfilePicture(filePath);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String college)? onboardUser,
-    TResult? Function(String email, String filePath)? uploadProfilePicture,
+    TResult? Function(String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
+    TResult? Function(String name, String email)? updateProfile,
   }) {
-    return uploadProfilePicture?.call(email, filePath);
+    return uploadProfilePicture?.call(filePath);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String college)? onboardUser,
-    TResult Function(String email, String filePath)? uploadProfilePicture,
+    TResult Function(String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
+    TResult Function(String name, String email)? updateProfile,
     required TResult orElse(),
   }) {
     if (uploadProfilePicture != null) {
-      return uploadProfilePicture(email, filePath);
+      return uploadProfilePicture(filePath);
     }
     return orElse();
   }
@@ -343,6 +347,7 @@ class _$UploadProfilePicture implements UploadProfilePicture {
     required TResult Function(OnboardUser value) onboardUser,
     required TResult Function(UploadProfilePicture value) uploadProfilePicture,
     required TResult Function(RetrieveUser value) retrieveUser,
+    required TResult Function(UpdateProfile value) updateProfile,
   }) {
     return uploadProfilePicture(this);
   }
@@ -353,6 +358,7 @@ class _$UploadProfilePicture implements UploadProfilePicture {
     TResult? Function(OnboardUser value)? onboardUser,
     TResult? Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult? Function(RetrieveUser value)? retrieveUser,
+    TResult? Function(UpdateProfile value)? updateProfile,
   }) {
     return uploadProfilePicture?.call(this);
   }
@@ -363,6 +369,7 @@ class _$UploadProfilePicture implements UploadProfilePicture {
     TResult Function(OnboardUser value)? onboardUser,
     TResult Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult Function(RetrieveUser value)? retrieveUser,
+    TResult Function(UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
     if (uploadProfilePicture != null) {
@@ -373,11 +380,9 @@ class _$UploadProfilePicture implements UploadProfilePicture {
 }
 
 abstract class UploadProfilePicture implements UserEvent {
-  const factory UploadProfilePicture(
-      {required final String email,
-      required final String filePath}) = _$UploadProfilePicture;
+  const factory UploadProfilePicture({required final String filePath}) =
+      _$UploadProfilePicture;
 
-  String get email;
   String get filePath;
   @JsonKey(ignore: true)
   _$$UploadProfilePictureCopyWith<_$UploadProfilePicture> get copyWith =>
@@ -423,9 +428,9 @@ class _$RetrieveUser implements RetrieveUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String college) onboardUser,
-    required TResult Function(String email, String filePath)
-        uploadProfilePicture,
+    required TResult Function(String filePath) uploadProfilePicture,
     required TResult Function() retrieveUser,
+    required TResult Function(String name, String email) updateProfile,
   }) {
     return retrieveUser();
   }
@@ -434,8 +439,9 @@ class _$RetrieveUser implements RetrieveUser {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String college)? onboardUser,
-    TResult? Function(String email, String filePath)? uploadProfilePicture,
+    TResult? Function(String filePath)? uploadProfilePicture,
     TResult? Function()? retrieveUser,
+    TResult? Function(String name, String email)? updateProfile,
   }) {
     return retrieveUser?.call();
   }
@@ -444,8 +450,9 @@ class _$RetrieveUser implements RetrieveUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String college)? onboardUser,
-    TResult Function(String email, String filePath)? uploadProfilePicture,
+    TResult Function(String filePath)? uploadProfilePicture,
     TResult Function()? retrieveUser,
+    TResult Function(String name, String email)? updateProfile,
     required TResult orElse(),
   }) {
     if (retrieveUser != null) {
@@ -460,6 +467,7 @@ class _$RetrieveUser implements RetrieveUser {
     required TResult Function(OnboardUser value) onboardUser,
     required TResult Function(UploadProfilePicture value) uploadProfilePicture,
     required TResult Function(RetrieveUser value) retrieveUser,
+    required TResult Function(UpdateProfile value) updateProfile,
   }) {
     return retrieveUser(this);
   }
@@ -470,6 +478,7 @@ class _$RetrieveUser implements RetrieveUser {
     TResult? Function(OnboardUser value)? onboardUser,
     TResult? Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult? Function(RetrieveUser value)? retrieveUser,
+    TResult? Function(UpdateProfile value)? updateProfile,
   }) {
     return retrieveUser?.call(this);
   }
@@ -480,6 +489,7 @@ class _$RetrieveUser implements RetrieveUser {
     TResult Function(OnboardUser value)? onboardUser,
     TResult Function(UploadProfilePicture value)? uploadProfilePicture,
     TResult Function(RetrieveUser value)? retrieveUser,
+    TResult Function(UpdateProfile value)? updateProfile,
     required TResult orElse(),
   }) {
     if (retrieveUser != null) {
@@ -494,17 +504,174 @@ abstract class RetrieveUser implements UserEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateProfileCopyWith<$Res> {
+  factory _$$UpdateProfileCopyWith(
+          _$UpdateProfile value, $Res Function(_$UpdateProfile) then) =
+      __$$UpdateProfileCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name, String email});
+}
+
+/// @nodoc
+class __$$UpdateProfileCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$UpdateProfile>
+    implements _$$UpdateProfileCopyWith<$Res> {
+  __$$UpdateProfileCopyWithImpl(
+      _$UpdateProfile _value, $Res Function(_$UpdateProfile) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? email = null,
+  }) {
+    return _then(_$UpdateProfile(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateProfile implements UpdateProfile {
+  const _$UpdateProfile({required this.name, required this.email});
+
+  @override
+  final String name;
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'UserEvent.updateProfile(name: $name, email: $email)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateProfile &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateProfileCopyWith<_$UpdateProfile> get copyWith =>
+      __$$UpdateProfileCopyWithImpl<_$UpdateProfile>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String college) onboardUser,
+    required TResult Function(String filePath) uploadProfilePicture,
+    required TResult Function() retrieveUser,
+    required TResult Function(String name, String email) updateProfile,
+  }) {
+    return updateProfile(name, email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String college)? onboardUser,
+    TResult? Function(String filePath)? uploadProfilePicture,
+    TResult? Function()? retrieveUser,
+    TResult? Function(String name, String email)? updateProfile,
+  }) {
+    return updateProfile?.call(name, email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String college)? onboardUser,
+    TResult Function(String filePath)? uploadProfilePicture,
+    TResult Function()? retrieveUser,
+    TResult Function(String name, String email)? updateProfile,
+    required TResult orElse(),
+  }) {
+    if (updateProfile != null) {
+      return updateProfile(name, email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnboardUser value) onboardUser,
+    required TResult Function(UploadProfilePicture value) uploadProfilePicture,
+    required TResult Function(RetrieveUser value) retrieveUser,
+    required TResult Function(UpdateProfile value) updateProfile,
+  }) {
+    return updateProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnboardUser value)? onboardUser,
+    TResult? Function(UploadProfilePicture value)? uploadProfilePicture,
+    TResult? Function(RetrieveUser value)? retrieveUser,
+    TResult? Function(UpdateProfile value)? updateProfile,
+  }) {
+    return updateProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnboardUser value)? onboardUser,
+    TResult Function(UploadProfilePicture value)? uploadProfilePicture,
+    TResult Function(RetrieveUser value)? retrieveUser,
+    TResult Function(UpdateProfile value)? updateProfile,
+    required TResult orElse(),
+  }) {
+    if (updateProfile != null) {
+      return updateProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateProfile implements UserEvent {
+  const factory UpdateProfile(
+      {required final String name,
+      required final String email}) = _$UpdateProfile;
+
+  String get name;
+  String get email;
+  @JsonKey(ignore: true)
+  _$$UpdateProfileCopyWith<_$UpdateProfile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) =>
@@ -514,11 +681,12 @@ mixin _$UserState<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) =>
@@ -528,11 +696,12 @@ mixin _$UserState<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -543,6 +712,9 @@ mixin _$UserState<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -559,6 +731,8 @@ mixin _$UserState<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -573,6 +747,8 @@ mixin _$UserState<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -644,11 +820,12 @@ class _$Initial<T> implements Initial<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -661,11 +838,12 @@ class _$Initial<T> implements Initial<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -678,11 +856,12 @@ class _$Initial<T> implements Initial<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -699,6 +878,9 @@ class _$Initial<T> implements Initial<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -718,6 +900,8 @@ class _$Initial<T> implements Initial<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -735,6 +919,8 @@ class _$Initial<T> implements Initial<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -796,11 +982,12 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -813,11 +1000,12 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -830,11 +1018,12 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -851,6 +1040,9 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -870,6 +1062,8 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -887,6 +1081,8 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -948,11 +1144,12 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -965,11 +1162,12 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -982,11 +1180,12 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1003,6 +1202,9 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -1022,6 +1224,8 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1039,6 +1243,8 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1057,6 +1263,363 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
 
 abstract class OnboardUserSuccess<T> implements UserState<T> {
   const factory OnboardUserSuccess() = _$OnboardUserSuccess<T>;
+}
+
+/// @nodoc
+abstract class _$$UpdatingProfileCopyWith<T, $Res> {
+  factory _$$UpdatingProfileCopyWith(_$UpdatingProfile<T> value,
+          $Res Function(_$UpdatingProfile<T>) then) =
+      __$$UpdatingProfileCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$UpdatingProfileCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$UpdatingProfile<T>>
+    implements _$$UpdatingProfileCopyWith<T, $Res> {
+  __$$UpdatingProfileCopyWithImpl(
+      _$UpdatingProfile<T> _value, $Res Function(_$UpdatingProfile<T>) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$UpdatingProfile<T> implements UpdatingProfile<T> {
+  const _$UpdatingProfile();
+
+  @override
+  String toString() {
+    return 'UserState<$T>.updatingProfile()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UpdatingProfile<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() onboardingUser,
+    required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
+    required TResult Function() uploadingProfilePhoto,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
+    required TResult Function() retrievingUser,
+    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(HttpError error) retrievingUserError,
+    required TResult Function(HttpError error) userError,
+  }) {
+    return updatingProfile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? onboardingUser,
+    TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
+    TResult? Function()? uploadingProfilePhoto,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
+    TResult? Function()? retrievingUser,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(HttpError error)? retrievingUserError,
+    TResult? Function(HttpError error)? userError,
+  }) {
+    return updatingProfile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? onboardingUser,
+    TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
+    TResult Function()? uploadingProfilePhoto,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
+    TResult Function()? retrievingUser,
+    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(HttpError error)? retrievingUserError,
+    TResult Function(HttpError error)? userError,
+    required TResult orElse(),
+  }) {
+    if (updatingProfile != null) {
+      return updatingProfile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial<T> value) initial,
+    required TResult Function(OnboardingUser<T> value) onboardingUser,
+    required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
+    required TResult Function(UploadingProfilePhoto<T> value)
+        uploadingProfilePhoto,
+    required TResult Function(UploadingProfilePhotoSuccess<T> value)
+        uploadingProfilePhotoSuccess,
+    required TResult Function(RetrievingUser<T> value) retrievingUser,
+    required TResult Function(RetrievingUserSuccess<T> value)
+        retrievingUserSuccess,
+    required TResult Function(RetrievingUserError<T> value) retrievingUserError,
+    required TResult Function(UserError<T> value) userError,
+  }) {
+    return updatingProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial<T> value)? initial,
+    TResult? Function(OnboardingUser<T> value)? onboardingUser,
+    TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
+    TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
+    TResult? Function(UploadingProfilePhotoSuccess<T> value)?
+        uploadingProfilePhotoSuccess,
+    TResult? Function(RetrievingUser<T> value)? retrievingUser,
+    TResult? Function(RetrievingUserSuccess<T> value)? retrievingUserSuccess,
+    TResult? Function(RetrievingUserError<T> value)? retrievingUserError,
+    TResult? Function(UserError<T> value)? userError,
+  }) {
+    return updatingProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial<T> value)? initial,
+    TResult Function(OnboardingUser<T> value)? onboardingUser,
+    TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
+    TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
+    TResult Function(UploadingProfilePhotoSuccess<T> value)?
+        uploadingProfilePhotoSuccess,
+    TResult Function(RetrievingUser<T> value)? retrievingUser,
+    TResult Function(RetrievingUserSuccess<T> value)? retrievingUserSuccess,
+    TResult Function(RetrievingUserError<T> value)? retrievingUserError,
+    TResult Function(UserError<T> value)? userError,
+    required TResult orElse(),
+  }) {
+    if (updatingProfile != null) {
+      return updatingProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdatingProfile<T> implements UserState<T> {
+  const factory UpdatingProfile() = _$UpdatingProfile<T>;
+}
+
+/// @nodoc
+abstract class _$$UpdatingProfileSuccessCopyWith<T, $Res> {
+  factory _$$UpdatingProfileSuccessCopyWith(_$UpdatingProfileSuccess<T> value,
+          $Res Function(_$UpdatingProfileSuccess<T>) then) =
+      __$$UpdatingProfileSuccessCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({UserModel user});
+}
+
+/// @nodoc
+class __$$UpdatingProfileSuccessCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$UpdatingProfileSuccess<T>>
+    implements _$$UpdatingProfileSuccessCopyWith<T, $Res> {
+  __$$UpdatingProfileSuccessCopyWithImpl(_$UpdatingProfileSuccess<T> _value,
+      $Res Function(_$UpdatingProfileSuccess<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$UpdatingProfileSuccess<T>(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
+  const _$UpdatingProfileSuccess({required this.user});
+
+  @override
+  final UserModel user;
+
+  @override
+  String toString() {
+    return 'UserState<$T>.updatingProfileSuccess(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdatingProfileSuccess<T> &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdatingProfileSuccessCopyWith<T, _$UpdatingProfileSuccess<T>>
+      get copyWith => __$$UpdatingProfileSuccessCopyWithImpl<T,
+          _$UpdatingProfileSuccess<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() onboardingUser,
+    required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
+    required TResult Function() uploadingProfilePhoto,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
+    required TResult Function() retrievingUser,
+    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(HttpError error) retrievingUserError,
+    required TResult Function(HttpError error) userError,
+  }) {
+    return updatingProfileSuccess(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? onboardingUser,
+    TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
+    TResult? Function()? uploadingProfilePhoto,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
+    TResult? Function()? retrievingUser,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(HttpError error)? retrievingUserError,
+    TResult? Function(HttpError error)? userError,
+  }) {
+    return updatingProfileSuccess?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? onboardingUser,
+    TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
+    TResult Function()? uploadingProfilePhoto,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
+    TResult Function()? retrievingUser,
+    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(HttpError error)? retrievingUserError,
+    TResult Function(HttpError error)? userError,
+    required TResult orElse(),
+  }) {
+    if (updatingProfileSuccess != null) {
+      return updatingProfileSuccess(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial<T> value) initial,
+    required TResult Function(OnboardingUser<T> value) onboardingUser,
+    required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
+    required TResult Function(UploadingProfilePhoto<T> value)
+        uploadingProfilePhoto,
+    required TResult Function(UploadingProfilePhotoSuccess<T> value)
+        uploadingProfilePhotoSuccess,
+    required TResult Function(RetrievingUser<T> value) retrievingUser,
+    required TResult Function(RetrievingUserSuccess<T> value)
+        retrievingUserSuccess,
+    required TResult Function(RetrievingUserError<T> value) retrievingUserError,
+    required TResult Function(UserError<T> value) userError,
+  }) {
+    return updatingProfileSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial<T> value)? initial,
+    TResult? Function(OnboardingUser<T> value)? onboardingUser,
+    TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
+    TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
+    TResult? Function(UploadingProfilePhotoSuccess<T> value)?
+        uploadingProfilePhotoSuccess,
+    TResult? Function(RetrievingUser<T> value)? retrievingUser,
+    TResult? Function(RetrievingUserSuccess<T> value)? retrievingUserSuccess,
+    TResult? Function(RetrievingUserError<T> value)? retrievingUserError,
+    TResult? Function(UserError<T> value)? userError,
+  }) {
+    return updatingProfileSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial<T> value)? initial,
+    TResult Function(OnboardingUser<T> value)? onboardingUser,
+    TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
+    TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
+    TResult Function(UploadingProfilePhotoSuccess<T> value)?
+        uploadingProfilePhotoSuccess,
+    TResult Function(RetrievingUser<T> value)? retrievingUser,
+    TResult Function(RetrievingUserSuccess<T> value)? retrievingUserSuccess,
+    TResult Function(RetrievingUserError<T> value)? retrievingUserError,
+    TResult Function(UserError<T> value)? userError,
+    required TResult orElse(),
+  }) {
+    if (updatingProfileSuccess != null) {
+      return updatingProfileSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdatingProfileSuccess<T> implements UserState<T> {
+  const factory UpdatingProfileSuccess({required final UserModel user}) =
+      _$UpdatingProfileSuccess<T>;
+
+  UserModel get user;
+  @JsonKey(ignore: true)
+  _$$UpdatingProfileSuccessCopyWith<T, _$UpdatingProfileSuccess<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1101,11 +1664,12 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1118,11 +1682,12 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1135,11 +1700,12 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1156,6 +1722,9 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -1175,6 +1744,8 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1192,6 +1763,8 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1219,7 +1792,7 @@ abstract class _$$UploadingProfilePhotoSuccessCopyWith<T, $Res> {
           $Res Function(_$UploadingProfilePhotoSuccess<T>) then) =
       __$$UploadingProfilePhotoSuccessCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({LoginRegisterUserResponseData loginResponse});
+  $Res call({UserModel user});
 }
 
 /// @nodoc
@@ -1234,13 +1807,13 @@ class __$$UploadingProfilePhotoSuccessCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loginResponse = null,
+    Object? user = null,
   }) {
     return _then(_$UploadingProfilePhotoSuccess<T>(
-      loginResponse: null == loginResponse
-          ? _value.loginResponse
-          : loginResponse // ignore: cast_nullable_to_non_nullable
-              as LoginRegisterUserResponseData,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ));
   }
 }
@@ -1249,14 +1822,14 @@ class __$$UploadingProfilePhotoSuccessCopyWithImpl<T, $Res>
 
 class _$UploadingProfilePhotoSuccess<T>
     implements UploadingProfilePhotoSuccess<T> {
-  const _$UploadingProfilePhotoSuccess({required this.loginResponse});
+  const _$UploadingProfilePhotoSuccess({required this.user});
 
   @override
-  final LoginRegisterUserResponseData loginResponse;
+  final UserModel user;
 
   @override
   String toString() {
-    return 'UserState<$T>.uploadingProfilePhotoSuccess(loginResponse: $loginResponse)';
+    return 'UserState<$T>.uploadingProfilePhotoSuccess(user: $user)';
   }
 
   @override
@@ -1264,12 +1837,11 @@ class _$UploadingProfilePhotoSuccess<T>
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadingProfilePhotoSuccess<T> &&
-            (identical(other.loginResponse, loginResponse) ||
-                other.loginResponse == loginResponse));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loginResponse);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -1284,15 +1856,16 @@ class _$UploadingProfilePhotoSuccess<T>
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
-    return uploadingProfilePhotoSuccess(loginResponse);
+    return uploadingProfilePhotoSuccess(user);
   }
 
   @override
@@ -1301,15 +1874,16 @@ class _$UploadingProfilePhotoSuccess<T>
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
-    return uploadingProfilePhotoSuccess?.call(loginResponse);
+    return uploadingProfilePhotoSuccess?.call(user);
   }
 
   @override
@@ -1318,17 +1892,18 @@ class _$UploadingProfilePhotoSuccess<T>
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
   }) {
     if (uploadingProfilePhotoSuccess != null) {
-      return uploadingProfilePhotoSuccess(loginResponse);
+      return uploadingProfilePhotoSuccess(user);
     }
     return orElse();
   }
@@ -1339,6 +1914,9 @@ class _$UploadingProfilePhotoSuccess<T>
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -1358,6 +1936,8 @@ class _$UploadingProfilePhotoSuccess<T>
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1375,6 +1955,8 @@ class _$UploadingProfilePhotoSuccess<T>
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1392,11 +1974,10 @@ class _$UploadingProfilePhotoSuccess<T>
 }
 
 abstract class UploadingProfilePhotoSuccess<T> implements UserState<T> {
-  const factory UploadingProfilePhotoSuccess(
-          {required final LoginRegisterUserResponseData loginResponse}) =
+  const factory UploadingProfilePhotoSuccess({required final UserModel user}) =
       _$UploadingProfilePhotoSuccess<T>;
 
-  LoginRegisterUserResponseData get loginResponse;
+  UserModel get user;
   @JsonKey(ignore: true)
   _$$UploadingProfilePhotoSuccessCopyWith<T, _$UploadingProfilePhotoSuccess<T>>
       get copyWith => throw _privateConstructorUsedError;
@@ -1443,11 +2024,12 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1460,11 +2042,12 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1477,11 +2060,12 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1498,6 +2082,9 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -1517,6 +2104,8 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1534,6 +2123,8 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1560,7 +2151,7 @@ abstract class _$$RetrievingUserSuccessCopyWith<T, $Res> {
           $Res Function(_$RetrievingUserSuccess<T>) then) =
       __$$RetrievingUserSuccessCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({User user});
+  $Res call({UserModel user});
 }
 
 /// @nodoc
@@ -1580,7 +2171,7 @@ class __$$RetrievingUserSuccessCopyWithImpl<T, $Res>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as UserModel,
     ));
   }
 }
@@ -1591,7 +2182,7 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
   const _$RetrievingUserSuccess({required this.user});
 
   @override
-  final User user;
+  final UserModel user;
 
   @override
   String toString() {
@@ -1623,11 +2214,12 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1640,11 +2232,12 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1657,11 +2250,12 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1678,6 +2272,9 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -1697,6 +2294,8 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1714,6 +2313,8 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1731,10 +2332,10 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
 }
 
 abstract class RetrievingUserSuccess<T> implements UserState<T> {
-  const factory RetrievingUserSuccess({required final User user}) =
+  const factory RetrievingUserSuccess({required final UserModel user}) =
       _$RetrievingUserSuccess<T>;
 
-  User get user;
+  UserModel get user;
   @JsonKey(ignore: true)
   _$$RetrievingUserSuccessCopyWith<T, _$RetrievingUserSuccess<T>>
       get copyWith => throw _privateConstructorUsedError;
@@ -1808,11 +2409,12 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1825,11 +2427,12 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1842,11 +2445,12 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1863,6 +2467,9 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -1882,6 +2489,8 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1899,6 +2508,8 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -1992,11 +2603,12 @@ class _$UserError<T> implements UserError<T> {
     required TResult Function() initial,
     required TResult Function() onboardingUser,
     required TResult Function() onboardUserSuccess,
+    required TResult Function() updatingProfile,
+    required TResult Function(UserModel user) updatingProfileSuccess,
     required TResult Function() uploadingProfilePhoto,
-    required TResult Function(LoginRegisterUserResponseData loginResponse)
-        uploadingProfilePhotoSuccess,
+    required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(User user) retrievingUserSuccess,
+    required TResult Function(UserModel user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -2009,11 +2621,12 @@ class _$UserError<T> implements UserError<T> {
     TResult? Function()? initial,
     TResult? Function()? onboardingUser,
     TResult? Function()? onboardUserSuccess,
+    TResult? Function()? updatingProfile,
+    TResult? Function(UserModel user)? updatingProfileSuccess,
     TResult? Function()? uploadingProfilePhoto,
-    TResult? Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(User user)? retrievingUserSuccess,
+    TResult? Function(UserModel user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -2026,11 +2639,12 @@ class _$UserError<T> implements UserError<T> {
     TResult Function()? initial,
     TResult Function()? onboardingUser,
     TResult Function()? onboardUserSuccess,
+    TResult Function()? updatingProfile,
+    TResult Function(UserModel user)? updatingProfileSuccess,
     TResult Function()? uploadingProfilePhoto,
-    TResult Function(LoginRegisterUserResponseData loginResponse)?
-        uploadingProfilePhotoSuccess,
+    TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(User user)? retrievingUserSuccess,
+    TResult Function(UserModel user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -2047,6 +2661,9 @@ class _$UserError<T> implements UserError<T> {
     required TResult Function(Initial<T> value) initial,
     required TResult Function(OnboardingUser<T> value) onboardingUser,
     required TResult Function(OnboardUserSuccess<T> value) onboardUserSuccess,
+    required TResult Function(UpdatingProfile<T> value) updatingProfile,
+    required TResult Function(UpdatingProfileSuccess<T> value)
+        updatingProfileSuccess,
     required TResult Function(UploadingProfilePhoto<T> value)
         uploadingProfilePhoto,
     required TResult Function(UploadingProfilePhotoSuccess<T> value)
@@ -2066,6 +2683,8 @@ class _$UserError<T> implements UserError<T> {
     TResult? Function(Initial<T> value)? initial,
     TResult? Function(OnboardingUser<T> value)? onboardingUser,
     TResult? Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult? Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult? Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult? Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult? Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,
@@ -2083,6 +2702,8 @@ class _$UserError<T> implements UserError<T> {
     TResult Function(Initial<T> value)? initial,
     TResult Function(OnboardingUser<T> value)? onboardingUser,
     TResult Function(OnboardUserSuccess<T> value)? onboardUserSuccess,
+    TResult Function(UpdatingProfile<T> value)? updatingProfile,
+    TResult Function(UpdatingProfileSuccess<T> value)? updatingProfileSuccess,
     TResult Function(UploadingProfilePhoto<T> value)? uploadingProfilePhoto,
     TResult Function(UploadingProfilePhotoSuccess<T> value)?
         uploadingProfilePhotoSuccess,

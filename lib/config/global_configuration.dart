@@ -1,9 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
-import 'package:injectable/injectable.dart';
 
-@Injectable(order: -1)
 class GlobalConfiguration {
   static final GlobalConfiguration _singleton = GlobalConfiguration._internal();
 

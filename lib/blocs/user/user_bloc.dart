@@ -1,81 +1,81 @@
+import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:Buddy/repositories/authed_user.repository.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
+import 'package:Buddy/services/user.service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:Buddy/data/constants.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
-import 'package:Buddy/interfaces/shared_preferences.interface.dart';
-import 'package:Buddy/interfaces/user.interface.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/models/auth/requests/onboarding_request.dart';
-import 'package:Buddy/models/auth/responses/login_response.dart';
 import 'package:Buddy/utils/helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
 part 'user_bloc.freezed.dart';
 
-@Injectable()
 class UserBloc extends Bloc<UserEvent, UserState> {
-  IAuthedUserRepository userRepo;
-  IUser userService;
-  ISharedPreference prefs;
+  AuthedUserRepository userRepo;
+  UserService userService;
+  SharedPreference prefs;
 
-  UserBloc(this.userRepo, this.prefs, this.userService)
-      : super(const UserState.initial()) {
-    on<OnboardUser>(_onboardUser);
+  UserBloc(this.userRepo, this.prefs, this.userService) : super(const UserState.initial()) {
+    // on<OnboardUser>(_onboardUser);
     on<UploadProfilePicture>(_uploadProfilePicture);
     on<RetrieveUser>(_retrieveUser);
+    on<UpdateProfile>(_updateProfile);
   }
 
-  Future<void> _uploadProfilePicture(
-      UploadProfilePicture event, Emitter emit) async {
+  Future<void> _uploadProfilePicture(UploadProfilePicture event, Emitter emit) async {
     emit(const UserState.uploadingProfilePhoto());
 
-    final HttpResponse<LoginRegisterUserResponseData> response =
-        await userService.uploadProfilePhoto(
-      email: event.email,
-      filePath: event.filePath,
-    );
+    final HttpResponse<UserModel> response = await userService.uploadProfilePhoto(filePath: event.filePath);
 
-    response.when(success: (loginResponse) {
+    response.when(success: (user) {
       // get the user data from the backend
-      userRepo.save(user: loginResponse!.user);
-
+      userRepo.save(user: user!);
       Helpers.setPrefsData(prefs);
-      prefs.setString(Constants.http_token, loginResponse.authToken);
-
-      emit(
-          UserState.uploadingProfilePhotoSuccess(loginResponse: loginResponse));
+      emit(UserState.uploadingProfilePhotoSuccess(user: user));
     }, error: (error) {
       emit(UserState.userError(error: error));
     });
   }
 
-  Future<void> _onboardUser(OnboardUser event, Emitter emit) async {
-    emit(const UserState.onboardingUser());
+  Future<void> _updateProfile(UpdateProfile event, Emitter emit) async {
+    emit(const UserState.updatingProfile());
 
-    final requestData = OnboardingRequestData(
-      email: event.email,
-      college: event.college,
-    );
-    // verify the token that is being sent to the backend
-    HttpResponse response = await userService.onboarding(request: requestData);
+    final HttpResponse<UserModel> response = await userService.updateProfile(name: event.name, email: event.email);
 
-    // Perform actions based on the response
-    response.when(success: (_) {
-      emit(const UserState.onboardUserSuccess());
+    response.when(success: (user) {
+      // get the user data from the backend
+      userRepo.save(user: user!);
+      emit(UserState.updatingProfileSuccess(user: user));
     }, error: (error) {
       emit(UserState.userError(error: error));
     });
   }
+
+  // Future<void> _onboardUser(OnboardUser event, Emitter emit) async {
+  //   emit(const UserState.onboardingUser());
+
+  //   final requestData = OnboardingRequestData(
+  //     email: event.email,
+  //     college: event.college,
+  //   );
+  //   // verify the token that is being sent to the backend
+  //   HttpResponse response = await userService.onboarding(request: requestData);
+
+  //   // Perform actions based on the response
+  //   response.when(success: (_) {
+  //     emit(const UserState.onboardUserSuccess());
+  //   }, error: (error) {
+  //     emit(UserState.userError(error: error));
+  //   });
+  // }
 
   Future<void> _retrieveUser(RetrieveUser event, Emitter emit) async {
     emit(const RetrievingUser());
 
     // get the user data from backend
-    final HttpResponse<User> response = await userService.retrieveUser();
+    final HttpResponse<UserModel> response = await userService.retrieveUser();
 
     response.when(success: (user) {
       // save user data to user repository

@@ -1,7 +1,7 @@
+import 'package:Buddy/services/discussions.service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/interfaces/question_discussions.interface.dart';
 import 'package:Buddy/models/discussions/data/discussion.dart';
 import 'package:Buddy/models/discussions/data/discussion_reply.dart';
 import 'package:Buddy/models/discussions/requests/add_discussion.dart';
@@ -11,17 +11,13 @@ import 'package:Buddy/models/discussions/requests/update_discussion_likes_count.
 import 'package:Buddy/models/discussions/responses/list_discussions.dart';
 import 'package:Buddy/utils/enums.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
-
 part 'discussions_event.dart';
 part 'discussions_state.dart';
 part 'discussions_bloc.freezed.dart';
 
-@Injectable()
 class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
-  final IDiscussions _service;
+  final DiscussionService _service;
   DiscussionsBloc(this._service) : super(const DiscussionsState.initial()) {
     on<FetchDiscusstions>(_fetchDiscussions);
     on<AddDiscussion>(_addDiscussion);
@@ -30,8 +26,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
     on<ListDiscussionReplies>(_fetchDiscussionReplies);
   }
 
-  ValueNotifier<String?> messageTextFieldLabel =
-      ValueNotifier('Add opinion to forum');
+  ValueNotifier<String?> messageTextFieldLabel = ValueNotifier('Add opinion to forum');
   late Discussion tappedDiscussionToReply;
   late String tappedDiscussionIdFetchReplies;
 
@@ -60,8 +55,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
     );
   }
 
-  Future<void> _fetchDiscussionReplies(
-      ListDiscussionReplies event, Emitter emit) async {
+  Future<void> _fetchDiscussionReplies(ListDiscussionReplies event, Emitter emit) async {
     emit(const FetchingDiscussionReplies());
 
     final request = ListDiscussionRepliesRequest(
@@ -69,8 +63,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
       page: event.page,
     );
 
-    final HttpResponse<List<DiscussionReply>> response =
-        await _service.listReplies(
+    final HttpResponse<List<DiscussionReply>> response = await _service.listReplies(
       listDiscussionRepliesRequest: request,
     );
 
@@ -90,8 +83,8 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
   Future<void> _fetchDiscussions(FetchDiscusstions event, Emitter emit) async {
     emit(const DiscussionsState.fetchingDiscussions());
 
-    final HttpResponse<ListDiscussionsResponse> response = await _service
-        .listDiscussions(questionId: event.questionId, page: event.page);
+    final HttpResponse<ListDiscussionsResponse> response =
+        await _service.listDiscussions(questionId: event.questionId, page: event.page);
 
     response.maybeWhen(
       success: (discussions) {
@@ -109,8 +102,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
   Future<void> _addDiscussion(AddDiscussion event, Emitter emit) async {
     emit(const AddingDiscussionOrReply());
 
-    final request =
-        AddDiscussionRequest(text: event.text, questionId: event.questionId);
+    final request = AddDiscussionRequest(text: event.text, questionId: event.questionId);
 
     final HttpResponse<Discussion> response = await _service.addDiscussion(
       addDiscussionRequest: request,

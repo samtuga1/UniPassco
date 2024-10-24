@@ -13,12 +13,10 @@ class RequestPasswordResetScreen extends StatefulWidget {
   const RequestPasswordResetScreen({super.key});
 
   @override
-  State<RequestPasswordResetScreen> createState() =>
-      _RequestPasswordResetScreenState();
+  State<RequestPasswordResetScreen> createState() => _RequestPasswordResetScreenState();
 }
 
-class _RequestPasswordResetScreenState
-    extends State<RequestPasswordResetScreen> {
+class _RequestPasswordResetScreenState extends State<RequestPasswordResetScreen> {
   late final TextEditingController emailController;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -94,10 +92,10 @@ class _RequestPasswordResetScreenState
                     );
                   },
                   requestPasswordResetSuccess: () {
-                    Navigator.of(context).pushNamed(
-                      Routes.checkEmailScreen,
-                      arguments: emailController.text.trim(),
-                    );
+                    // Navigator.of(context).pushNamed(
+                    //   Routes.checkEmailScreen,
+                    //   arguments: emailController.text.trim(),
+                    // );
                   },
                   orElse: () {},
                 );
@@ -109,7 +107,7 @@ class _RequestPasswordResetScreenState
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       context.read<AuthenticationBloc>().add(
-                            RequestPasswordReset(
+                            ResetPassword(
                               email: emailController.text.trim(),
                             ),
                           );
@@ -122,8 +120,7 @@ class _RequestPasswordResetScreenState
                   current is AuthenticationError ||
                   current is RequestPasswordResetSuccess,
               listenWhen: (previous, current) =>
-                  current is AuthenticationError ||
-                  current is RequestPasswordResetSuccess,
+                  current is AuthenticationError || current is RequestPasswordResetSuccess,
             ),
             32.verticalSpace,
             Center(

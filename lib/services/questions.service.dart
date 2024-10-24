@@ -1,35 +1,38 @@
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/interceptors/http_access_token.interceptor.dart';
-import 'package:Buddy/interfaces/dio_client.interface.dart';
-import 'package:Buddy/interfaces/questions.interface.dart';
+import 'package:Buddy/main_common.dart';
 import 'package:Buddy/models/questions/data/question_model.dart';
 import 'package:Buddy/models/questions/response/list_questions_response.dart';
-import 'package:injectable/injectable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-@Injectable(as: IQuestionsService)
-class QuestionService implements IQuestionsService {
-  final IDioClientService _dioClient;
+class QuestionService {
+  // final IDioClientService _dioClient;
 
-  QuestionService(this._dioClient);
-
-  @override
-  Future<HttpResponse<ListQuestionsResponse>> listQuestions({
+  QuestionService();
+  Future<HttpResponse<List<Question>>> listQuestions({
     required String level,
-    required int page,
+    String? query,
+    int? limit = 10,
+    int? offset,
   }) async {
     try {
-      final results = await _dioClient.get(
-        '/questions/list/',
-        queryParameters: {
-          'page': page,
-          'level': level,
-        },
-        interceptors: [getIt<HttpAccessTokenInterceptor>()],
-      );
+      final files = await supabase.storage.from("questions").list(
+            path: 'UG/$level',
+            searchOptions: SearchOptions(offset: offset, limit: limit ?? 10, search: query),
+          );
 
-      ListQuestionsResponse questions = ListQuestionsResponse.fromJson(results);
+      String getPublicUrl(String name) =>
+          'https://joafguqiuzqaenbjjhzc.supabase.co/storage/v1/object/questions/UG/$level/$name';
+
+      List<Question> questions = files.map((e) {
+        return Question(
+          id: e.id!,
+          mimeType: (e.metadata?['mimetype'] as dynamic).split('/').last,
+          title: e.name,
+          fileUrl: getPublicUrl(e.name),
+          level: level,
+        );
+      }).toList();
 
       return HttpResponse.success(result: questions);
     } catch (error) {
@@ -37,17 +40,16 @@ class QuestionService implements IQuestionsService {
     }
   }
 
-  @override
   Future<HttpResponse<Question>> retrieveSingleQuestion({
     required String questionId,
   }) async {
     try {
-      final results = await _dioClient.get(
-        '/questions/retrieve/$questionId',
-        interceptors: [getIt<HttpAccessTokenInterceptor>()],
-      );
+      // final results = await _dioClient.get(
+      //   '/questions/retrieve/$questionId',
+      //   interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      // );
 
-      Question question = Question.fromJson(results);
+      Question question = Question.fromJson({});
 
       return HttpResponse.success(result: question);
     } catch (error) {
@@ -55,20 +57,19 @@ class QuestionService implements IQuestionsService {
     }
   }
 
-  @override
   Future<HttpResponse<Question>> addBookmarkQuestion({
     required String questionId,
   }) async {
     try {
-      final results = await _dioClient.post(
-        '/questions/bookmark/add',
-        data: {
-          "questionId": questionId,
-        },
-        interceptors: [getIt<HttpAccessTokenInterceptor>()],
-      );
+      // final results = await _dioClient.post(
+      //   '/questions/bookmark/add',
+      //   data: {
+      //     "questionId": questionId,
+      //   },
+      //   interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      // );
 
-      Question questions = Question.fromJson(results);
+      Question questions = Question.fromJson({});
 
       return HttpResponse.success(result: questions);
     } catch (error) {
@@ -76,20 +77,19 @@ class QuestionService implements IQuestionsService {
     }
   }
 
-  @override
   Future<HttpResponse<ListQuestionsResponse>> listBookmarkedQuestion({
     required int page,
   }) async {
     try {
-      final results = await _dioClient.get(
-        '/questions/bookmark/list/',
-        queryParameters: {
-          'page': page,
-        },
-        interceptors: [getIt<HttpAccessTokenInterceptor>()],
-      );
+      // final results = await _dioClient.get(
+      //   '/questions/bookmark/list/',
+      //   queryParameters: {
+      //     'page': page,
+      //   },
+      //   interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      // );
 
-      ListQuestionsResponse questions = ListQuestionsResponse.fromJson(results);
+      ListQuestionsResponse questions = ListQuestionsResponse.fromJson({});
 
       return HttpResponse.success(result: questions);
     } catch (error) {
@@ -97,20 +97,19 @@ class QuestionService implements IQuestionsService {
     }
   }
 
-  @override
   Future<HttpResponse<Question>> removeBookmarkQuestion({
     required String questionId,
   }) async {
     try {
-      final results = await _dioClient.delete(
-        '/questions/bookmark/remove',
-        data: {
-          "questionId": questionId,
-        },
-        interceptors: [getIt<HttpAccessTokenInterceptor>()],
-      );
+      // final results = await _dioClient.delete(
+      //   '/questions/bookmark/remove',
+      //   data: {
+      //     "questionId": questionId,
+      //   },
+      //   interceptors: [getIt<HttpAccessTokenInterceptor>()],
+      // );
 
-      Question questions = Question.fromJson(results);
+      Question questions = Question.fromJson({});
 
       return HttpResponse.success(result: questions);
     } catch (error) {

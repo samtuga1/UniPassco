@@ -7,12 +7,14 @@ class CustomLoading extends StatelessWidget {
     this.height = 50,
     this.width = 50,
     this.adaptive = false,
+    this.value,
   }) : super(key: key);
 
   final Color? color;
   final double height;
   final double width;
   final bool adaptive;
+  final double? value;
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +26,15 @@ class CustomLoading extends StatelessWidget {
             ? FittedBox(
                 child: CircularProgressIndicator.adaptive(
                   backgroundColor: color,
-                  strokeWidth: 2.0,
+                  strokeWidth: 5.0,
+                  strokeCap: StrokeCap.round,
                 ),
               )
             : CircularProgressIndicator(
                 color: color,
-                strokeWidth: 2.0,
+                strokeWidth: 5.0,
+                value: value,
+                strokeCap: StrokeCap.round,
               ),
       ),
     );

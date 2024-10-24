@@ -9,28 +9,33 @@ class CustomListTile extends StatelessWidget {
     required this.title,
     this.trailing,
     this.leading,
+    this.padding,
     this.onTap,
+    this.titleStyle,
   });
   final String title;
   final Widget? trailing;
   final Widget? leading;
   final VoidCallback? onTap;
+  final TextStyle? titleStyle;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      minLeadingWidth: 30,
       dense: true,
-      tileColor: context.getTheme.canvasColor,
+      minVerticalPadding: 0,
+      contentPadding: padding ?? EdgeInsets.zero,
       onTap: onTap,
       title: CustomText(
         title,
-        style: context.getTheme.textTheme.titleMedium!.copyWith(
-          fontSize: 19.sp,
-          fontWeight: FontWeight.w500,
-        ),
+        style: titleStyle ??
+            context.getTheme.textTheme.titleMedium!.copyWith(
+              fontSize: 19.sp,
+              fontWeight: FontWeight.w500,
+            ),
       ),
-      leading: leading ?? const Icon(Icons.palette),
+      leading: leading,
       trailing: trailing ??
           const Icon(
             Icons.arrow_forward_ios,

@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 sealed class HttpError {}
 
@@ -19,6 +17,11 @@ class BadRequest extends HttpError {
 class NotFound extends HttpError {
   late String message;
   NotFound({required this.message});
+}
+
+class CustomError extends HttpError {
+  late String message;
+  CustomError({required this.message});
 }
 
 class NotAcceptable extends HttpError {}
@@ -52,72 +55,17 @@ class UnexpectedError extends HttpError {}
 
 class HttpErrorUtils {
   static HttpError getDioException(error) {
+    print(error);
     if (error is Exception) {
+      print(error);
       try {
-        //TODO: Better error handling
         HttpError httpError = DefaultError(500);
-        if (error is DioException) {
-          switch (error.type) {
-            case DioExceptionType.cancel:
-              httpError = RequestCancelled();
-              break;
-            case DioExceptionType.connectionTimeout:
-              httpError = RequestTimeout();
-              break;
-            case DioExceptionType.unknown:
-              httpError = Unknown();
-              break;
-            case DioExceptionType.receiveTimeout:
-              httpError = SendTimeout();
-              break;
-            case DioExceptionType.badResponse:
-              switch (error.response!.statusCode) {
-                case 400:
-                  httpError =
-                      BadRequest(message: error.response!.data['message']);
-                  break;
-                case 401:
-                  httpError = UnauthorisedRequest(
-                    message: error.response!.data['message'],
-                  );
-                  break;
-                case 403:
-                  httpError = InternalServerError();
-                  break;
-                case 404:
-                  httpError =
-                      NotFound(message: error.response!.data['message']);
-                  break;
-                case 409:
-                  httpError = Conflict();
-                  break;
-                case 408:
-                  httpError = RequestTimeout();
-                  break;
-                case 500:
-                  httpError = InternalServerError();
-                  break;
-                case 503:
-                  httpError = ServiceUnavailable();
-                  break;
-                default:
-                  httpError = DefaultError(error.response!.statusCode!);
-              }
-              break;
-            case DioExceptionType.sendTimeout:
-              httpError = SendTimeout();
-              break;
-            case DioExceptionType.badCertificate:
-              // TODO: Handle this case.
-              break;
-            case DioExceptionType.connectionError:
-              // TODO: Handle this case.
-              break;
-          }
-        } else if (error is SocketException) {
-          httpError = NoInternetConnection();
-        } else {
-          httpError = UnexpectedError();
+        if (error is AuthException) {
+          return CustomError(message: error.message);
+        } else if (error is PostgrestException) {
+          return UnexpectedError();
+        } else if (error is StorageException) {
+          return CustomError(message: error.message);
         }
         return httpError;
       } on FormatException catch (_) {
@@ -135,13 +83,11 @@ class HttpErrorUtils {
     }
   }
 
-  static String getErrorMessage(HttpError networkExceptions) =>
-      switch (networkExceptions) {
+  static String getErrorMessage(HttpError networkExceptions) => switch (networkExceptions) {
         RequestCancelled() => 'Request Cancelled',
         UnauthorisedRequest(message: String message) => message,
         BadRequest(message: String message) => message,
-        NotFound(message: String message) =>
-          message.isEmpty ? 'Not found, please try again' : message,
+        NotFound(message: String message) => message.isEmpty ? 'Not found, please try again' : message,
         NotAcceptable() => 'Not accepted',
         RequestTimeout() => 'Connection request timeout',
         SendTimeout() => 'Connection request timeout',
@@ -152,9 +98,9 @@ class HttpErrorUtils {
         NoInternetConnection() => 'No internet connection, please try again',
         FormatException() => 'Unexpected error occurred, please try again',
         UnableToProcess() => 'Unable to process the data, please try again',
-        DefaultError(errorCode: int responseCode) =>
-          'Unexpected error $responseCode occurred, please try again',
+        DefaultError(errorCode: int responseCode) => 'Unexpected error $responseCode occurred, please try again',
         UnexpectedError() => 'Unexpected error occurred, please try again',
         Unknown() => 'Something went wrong, please try again later',
+        CustomError(message: String message) => message,
       };
 }

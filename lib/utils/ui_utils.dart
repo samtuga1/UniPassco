@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:Buddy/cubits/theme/themes.cubit.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:Buddy/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/ui/widgets/widgets.dart';
 
@@ -18,20 +20,29 @@ class UiUtils {
     bool showOnlyYesButton = false,
     VoidCallback? onTap,
   }) async {
+    final isLightMode = context.read<ThemeCubit>().state == const ThemeCubitState.light();
+
     Platform.isAndroid
         ? await showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
+                  backgroundColor: isLightMode ? null : Colors.black,
                   title: Center(
                     child: Text(
                       title,
+                      style: context.getTheme.textTheme.displayMedium?.copyWith(
+                        color: isLightMode ? Colors.black : Colors.white,
+                        fontSize: 17.sp,
+                      ),
                     ),
                   ),
                   content: Text(
                     message!,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w400,
+                    style: context.getTheme.textTheme.displayMedium?.copyWith(
+                      color: isLightMode ? Colors.black : Colors.white,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w200,
                     ),
                   ),
                   actions: <Widget>[
@@ -57,11 +68,24 @@ class UiUtils {
                     ),
                   ],
                 ))
-        : await showCupertinoModalPopup(
+        : await showCupertinoDialog(
             context: context,
             builder: (BuildContext context) => CupertinoAlertDialog(
-              title: Text(title),
-              content: Text(message!),
+              title: Text(
+                title,
+                style: context.getTheme.textTheme.displayMedium?.copyWith(
+                  color: Colors.black,
+                  fontSize: 17.sp,
+                ),
+              ),
+              content: Text(
+                message!,
+                style: context.getTheme.textTheme.displayMedium?.copyWith(
+                  color: Colors.black,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w200,
+                ),
+              ),
               actions: <CupertinoDialogAction>[
                 if (!showOnlyYesButton)
                   CupertinoDialogAction(
@@ -71,6 +95,10 @@ class UiUtils {
                     },
                     child: Text(
                       noButtonText,
+                      style: context.getTheme.textTheme.displayMedium?.copyWith(
+                        color: Colors.black,
+                        fontSize: 14.sp,
+                      ),
                     ),
                   ),
                 CupertinoDialogAction(
@@ -81,6 +109,10 @@ class UiUtils {
                   },
                   child: Text(
                     yesButtonText,
+                    style: context.getTheme.textTheme.displayMedium?.copyWith(
+                      color: Colors.red,
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ),
               ],
@@ -97,8 +129,7 @@ class UiUtils {
   }) async {
     return await showModalBottomSheet(
       context: context,
-      constraints:
-          BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.9),
+      constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * 0.9),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -169,20 +200,10 @@ class UiUtils {
         borderRadius: BorderRadius.circular(8),
         barBlur: 50.0,
         icon: errorState == ErrorState.error
-            ? const Icon(
-                Icons.cancel,
-                color: Colors.white,
-              )
+            ? const Icon(Icons.cancel, color: Colors.white)
             : errorState == ErrorState.warning
-                ? const Icon(
-                    Icons.warning_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  )
-                : const Icon(
-                    Icons.check,
-                    color: Colors.white,
-                  ),
+                ? const Icon(Icons.warning_rounded, color: Colors.white, size: 30)
+                : const Icon(Icons.check, color: Colors.white),
         duration: const Duration(milliseconds: 4000),
         flushbarPosition: FlushbarPosition.TOP,
         backgroundGradient: LinearGradient(
@@ -206,7 +227,7 @@ class UiUtils {
         titleText: CustomText(
           title ?? 'Alert',
           style: context.getTheme.textTheme.displayMedium!.copyWith(
-            color: context.getTheme.canvasColor,
+            color: Colors.white,
             fontWeight: FontWeight.w600,
             fontSize: 17.sp,
           ),
@@ -214,7 +235,7 @@ class UiUtils {
         messageText: CustomText(
           msg,
           style: context.getTheme.textTheme.bodyMedium!.copyWith(
-            color: context.getTheme.canvasColor,
+            color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 15.sp,
           ),

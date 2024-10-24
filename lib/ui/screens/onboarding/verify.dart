@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Buddy/blocs/auth/authentication_bloc.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:Buddy/ui/widgets/pinput_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,8 +54,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    email =
-        widget.email ?? ModalRoute.of(context)!.settings.arguments as String;
+    email = widget.email ?? ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: CustomAppBar(
         leadingTapped: () => UiUtils.customDialog(
@@ -89,29 +89,37 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
                 31.verticalSpace,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                  child: OTPTextField(
-                    spaceBetween: 8.24.w,
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 14.5,
-                      horizontal: 20.5,
-                    ),
-                    outlineBorderRadius: 14.3.sp,
-                    otpFieldStyle: OtpFieldStyle(
-                      focusBorderColor: context.getTheme.primaryColor,
-                      enabledBorderColor: const Color(0xFFE4E4E4),
-                    ),
-                    length: 4,
-                    style: context.getTheme.textTheme.displayMedium!,
-                    textFieldAlignment: MainAxisAlignment.spaceAround,
-                    fieldStyle: FieldStyle.box,
-                    onChanged: (value) => pin = value,
-                    onCompleted: (pin) {
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: PinInputField(
+                    length: 6,
+                    onSubmit: (pin) {
                       context.read<AuthenticationBloc>().add(
                             VerifyEmail(email: email, token: pin),
                           );
                     },
                   ),
+                  //   OTPTextField(
+                  //     spaceBetween: 8.24.w,
+                  //     contentPadding: const EdgeInsets.symmetric(
+                  //       vertical: 14.5,
+                  //       horizontal: 20.5,
+                  //     ),
+                  //     outlineBorderRadius: 14.3.sp,
+                  //     otpFieldStyle: OtpFieldStyle(
+                  //       focusBorderColor: context.getTheme.primaryColor,
+                  //       enabledBorderColor: const Color(0xFFE4E4E4),
+                  //     ),
+                  //     length: 4,
+                  //     style: context.getTheme.textTheme.displayMedium!,
+                  //     textFieldAlignment: MainAxisAlignment.spaceAround,
+                  //     fieldStyle: FieldStyle.box,
+                  //     onChanged: (value) => pin = value,
+                  //     onCompleted: (pin) {
+                  // context.read<AuthenticationBloc>().add(
+                  //       VerifyEmail(email: email, token: pin),
+                  //     );
+                  //     },
+                  //   ),
                 ),
                 51.verticalSpace,
                 Padding(
@@ -143,14 +151,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         orElse: () {},
                       );
                     },
-                    listenWhen: (previous, current) =>
-                        current is AuthenticationError ||
-                        current is VerifyTokenSuccess,
+                    listenWhen: (previous, current) => current is AuthenticationError || current is VerifyTokenSuccess,
                     builder: (context, state) {
                       return CustomElevatedButton(
                         isBusy: state is VerifyingToken,
                         onPressed: () {
-                          if (pin.trim().length != 4) {
+                          if (pin.trim().length != 6) {
                             UiUtils.flush(
                               context,
                               errorState: ErrorState.warning,
@@ -166,17 +172,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       );
                     },
                     buildWhen: (previous, current) =>
-                        current is VerifyingToken ||
-                        current is VerifyTokenSuccess ||
-                        current is AuthenticationError,
+                        current is VerifyingToken || current is VerifyTokenSuccess || current is AuthenticationError,
                   ),
                 ),
                 24.verticalSpace,
                 if (showTimerChip)
                   Chip(
                     label: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       child: CustomText(
                         'Retry after ${time}s',
                       ),
@@ -194,14 +197,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             onTap: !showTimerChip
                                 ? () {
                                     startTimer();
+                                    context.read<AuthenticationBloc>().add(
+                                          ResendVerificationToken(email: email),
+                                        );
                                   }
                                 : null,
                             text: 'Click to resend',
-                            style: context.getTheme.textTheme.labelMedium
-                                ?.copyWith(
-                              color: !showTimerChip
-                                  ? const Color(0xFF0F96FF)
-                                  : null,
+                            style: context.getTheme.textTheme.labelMedium?.copyWith(
+                              color: !showTimerChip ? const Color(0xFF0F96FF) : null,
                               decorationColor: const Color(0xFF0F96FF),
                               decoration: TextDecoration.underline,
                             ),

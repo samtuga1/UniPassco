@@ -2,7 +2,6 @@ import 'package:Buddy/blocs/auth/authentication_bloc.dart';
 import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
 import 'package:Buddy/blocs/questions/questions_bloc.dart';
 import 'package:Buddy/blocs/user/user_bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/config/global_configuration.dart';
@@ -12,17 +11,24 @@ import 'package:Buddy/injectable/injection.dart';
 import 'package:Buddy/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:Buddy/utils/helpers.dart';
-import 'firebase_options.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 final appNavigatorObserver = NavigatorObserver();
+final globalConfig = GlobalConfiguration();
+
+late SupabaseClient supabase;
 
 Future<void> mainCommon(String envConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await GlobalConfiguration().loadFromAsset(envConfig);
   await configureDependencies();
+  final config = await globalConfig.loadFromAsset(envConfig);
+  final supa = await Supabase.initialize(
+    url: config.appConfig['superbase_url'],
+    anonKey: config.appConfig['superbase_anonKey'],
+  );
+
+  supabase = supa.client;
+
   await Helpers.precacheSvgs();
   runApp(const MyApp());
 }
@@ -57,10 +63,10 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return BlocBuilder<ThemeCubit, ThemeCubitState>(builder: (context, state) {
             return MaterialApp(
-              title: 'Buddy',
+              title: 'Passco',
               themeMode: state == const ThemeCubitState.dark() ? ThemeMode.dark : ThemeMode.light,
               theme: AppTheme.light,
-              // darkTheme: AppTheme.darkMode(),
+              darkTheme: AppTheme.dark,
               onGenerateRoute: (settings) => AppRouter().onGenerateRoute(settings),
               navigatorObservers: [appNavigatorObserver],
             );

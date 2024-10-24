@@ -1,49 +1,39 @@
-class User {
+class UserModel {
   final String id;
-  final String school;
   final String name;
   final String email;
   final String photo;
   final bool isVerified;
-  String? college;
 
-  User({
+  UserModel({
     required this.id,
-    required this.school,
     required this.name,
     required this.email,
     required this.photo,
     required this.isVerified,
-    required this.college,
   });
 
-  factory User.test() => User(
+  factory UserModel.test() => UserModel(
         id: '',
-        school: 'University of Ghana',
         name: 'Samuel Twumasi',
         email: 'samuel@gmail.com',
         photo: '',
         isVerified: true,
-        college: 'Computer Science',
       );
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["_id"],
-        school: json['school'],
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json["id"],
         name: json["name"],
         email: json["email"],
         photo: json["photo"],
         isVerified: json["isVerified"],
-        college: json["college"] == null ? null : json['college'],
       );
 
   Map<String, dynamic> toJson() => {
-        "_id": id,
-        "school": school,
+        "id": id,
         "name": name,
         "email": email,
         "photo": photo,
         "isVerified": isVerified,
-        "college": college,
       };
 }

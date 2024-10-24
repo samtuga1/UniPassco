@@ -2,7 +2,6 @@ import 'package:Buddy/blocs/auth/authentication_bloc.dart';
 import 'package:Buddy/data/data.dart';
 import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
 import 'package:Buddy/utils/utils.dart';
-import 'package:Buddy/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -126,9 +125,7 @@ class _SignUpState extends State<SignUp> {
                             obscurePassword = !obscurePassword;
                             setState(() {});
                           },
-                          icon: obscurePassword
-                              ? const Icon(IconlyLight.show)
-                              : const Icon(IconlyLight.hide),
+                          icon: obscurePassword ? const Icon(IconlyLight.show) : const Icon(IconlyLight.hide),
                         ),
                       );
                     },
@@ -137,8 +134,7 @@ class _SignUpState extends State<SignUp> {
                   Align(
                     alignment: Alignment.topRight,
                     child: CustomAdaptiveTextButton(
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(Routes.requestPasswordReset),
+                      onTap: () => Navigator.of(context).pushNamed(Routes.requestPasswordReset),
                       text: 'Forgot password?',
                       style: context.getTheme.textTheme.labelMedium!.copyWith(
                         color: const Color(0xFF0F96FF),
@@ -147,14 +143,11 @@ class _SignUpState extends State<SignUp> {
                   ),
                   26.verticalSpace,
                   BlocConsumer<AuthenticationBloc, AuthenticationState>(
-                    listenWhen: (previous, current) =>
-                        current is SignUpSuccess ||
-                        current is AuthenticationError,
+                    listenWhen: (previous, current) => current is SignUpSuccess || current is AuthenticationError,
                     listener: (context, state) {
                       state.maybeWhen(
                         authenticationError: (error) {
                           // show flush message when somwthing is wrong
-
                           return UiUtils.showStandardErrorFlushBar(
                             context,
                             message: HttpErrorUtils.getErrorMessage(error),
@@ -189,9 +182,7 @@ class _SignUpState extends State<SignUp> {
                       );
                     },
                     buildWhen: (previous, current) =>
-                        current is SigningUp ||
-                        current is SignUpSuccess ||
-                        current is AuthenticationError,
+                        current is SigningUp || current is SignUpSuccess || current is AuthenticationError,
                   ),
                   32.verticalSpace,
                   Center(
@@ -204,8 +195,7 @@ class _SignUpState extends State<SignUp> {
                             child: CustomAdaptiveTextButton(
                               onTap: widget.loginTapped!,
                               text: 'Sign In',
-                              style: context.getTheme.textTheme.labelMedium
-                                  ?.copyWith(
+                              style: context.getTheme.textTheme.labelMedium?.copyWith(
                                 color: const Color(0xFF0F96FF),
                               ),
                             ),

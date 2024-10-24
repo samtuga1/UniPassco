@@ -1,44 +1,50 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:Buddy/data/data.dart';
-import 'package:Buddy/interfaces/authed_user.repository.interface.dart';
-import 'package:Buddy/interfaces/questions.repository.interface.dart';
-import 'package:Buddy/interfaces/shared_preferences.interface.dart';
+import 'package:Buddy/main_common.dart';
 import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/utils/helpers.dart';
-import 'package:injectable/injectable.dart';
+import 'package:Buddy/repositories/authed_user.repository.dart';
+import 'package:Buddy/services/shared_preferences.service.dart';
+import 'package:Buddy/utils/utils.dart';
+import 'package:path_provider/path_provider.dart';
 
-@Injectable(as: IQuestionsRepository)
-class QuestionsRepository implements IQuestionsRepository {
-  final ISharedPreference _prefs;
-  final IAuthedUserRepository _userRepository;
+class QuestionsRepository {
+  final SharedPreference _prefs;
+  final AuthedUserRepository _userRepository;
 
   QuestionsRepository(this._prefs, this._userRepository);
 
-  @override
   Future<List<Question>> download({required Question question}) async {
     // get initially downloaded questions if any
+
     List<Question> downloadedQuestions = await getDownloads();
 
-    if (downloadedQuestions.contains(question)) {
+    final fullUrl = question.fileUrl.split('/').sublist(7).join('/');
+    final pathUrl = fullUrl.replaceAll('/', '-').replaceAll(' ', '-');
+
+    var dir = await getApplicationDocumentsDirectory();
+    String randomString = Helpers.generateRandomString(5);
+    var path = '${dir.path}/$randomString$pathUrl';
+
+    var file = File(path);
+    if (await file.exists()) {
       return downloadedQuestions;
     }
 
-    // download the question pdf to storage
-    final file = await Helpers.downloadFirebaseFile(question.fileUrl);
-    if (file == null) return downloadedQuestions;
+    final result = await supabase.storage.from('questions').download(fullUrl);
+
+    file = await file.writeAsBytes(result);
 
     // new question to save
     // mutate the filepath to make it reference a path in memory
-    final finalQuestion = question.copyWith(
-      fileUrl: file.path,
-    );
+    final finalQuestion = question.copyWith(pathUrl: file.path);
 
     // add the new question to be added
     downloadedQuestions.add(finalQuestion);
 
-    _prefs.setString(
+    await _prefs.setString(
       Constants.downloadedQuestions(await _userRepository.getUserId()),
       jsonEncode(downloadedQuestions),
     );
@@ -46,7 +52,11 @@ class QuestionsRepository implements IQuestionsRepository {
     return downloadedQuestions;
   }
 
-  @override
+  Future<Uint8List> downloadData(Question question) async {
+    final fullUrl = question.fileUrl.split('/').sublist(7).join('/');
+    return await supabase.storage.from('questions').download(fullUrl);
+  }
+
   Future<List<Question>> getDownloads() async {
     final String result = await _prefs.getString(
       Constants.downloadedQuestions(await _userRepository.getUserId()),
@@ -62,12 +72,11 @@ class QuestionsRepository implements IQuestionsRepository {
     return decodedQuestions.map((json) => Question.fromJson(json)).toList();
   }
 
-  @override
   Future<void> clearDownloads() async {
     final questions = await getDownloads();
 
     for (var question in questions) {
-      File file = File(question.fileUrl);
+      File file = File(question.pathUrl ?? "");
 
       if (await file.exists()) {
         await file.delete();
@@ -79,10 +88,7 @@ class QuestionsRepository implements IQuestionsRepository {
     );
   }
 
-  @override
-  Future<void> deleteFile({
-    required Question question,
-  }) async {
+  Future<void> deleteFile({required Question question}) async {
     List<Question> questions = await getDownloads();
 
     Question result = questions.firstWhere(
@@ -92,15 +98,15 @@ class QuestionsRepository implements IQuestionsRepository {
 
     if (result.id.isEmpty) return;
 
-    final file = File(result.fileUrl);
+    final file = File(result.pathUrl!);
 
     if (await file.exists()) {
       await file.delete();
     }
 
-    questions.remove(result);
+    questions.removeWhere((element) => element.id == result.id);
 
-    _prefs.setString(
+    await _prefs.setString(
       Constants.downloadedQuestions(await _userRepository.getUserId()),
       jsonEncode(questions),
     );
