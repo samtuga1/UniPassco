@@ -1,4 +1,5 @@
 import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/main_common.dart';
 import 'package:Buddy/models/auth/data/user_model.dart';
 import 'package:Buddy/models/auth/requests/login_request.dart';
 import 'package:Buddy/models/auth/requests/signup_request.dart';
@@ -12,7 +13,7 @@ class AuthenticationService {
     required SignUpRequestData user,
   }) async {
     try {
-      final res = await Supabase.instance.client.auth.signUp(
+      final res = await supabase.auth.signUp(
         password: user.password,
         email: user.email,
         data: {
@@ -34,8 +35,8 @@ class AuthenticationService {
     required String verificationToken,
   }) async {
     try {
-      await Supabase.instance.client.auth.verifyOTP(type: OtpType.email, email: email, token: verificationToken);
-      await Supabase.instance.client.from('profiles').update({"is_verified": true}).eq("email", email);
+      await supabase.auth.verifyOTP(type: OtpType.email, email: email, token: verificationToken);
+      await supabase.from('profiles').update({"is_verified": true}).eq("email", email);
 
       return const HttpResponse.success();
     } catch (err) {
@@ -47,7 +48,7 @@ class AuthenticationService {
     required LoginRequestData request,
   }) async {
     try {
-      final authResponse = await Supabase.instance.client.auth.signInWithPassword(
+      final authResponse = await supabase.auth.signInWithPassword(
         password: request.password,
         email: request.email,
       );
@@ -76,8 +77,7 @@ class AuthenticationService {
     required String email,
   }) async {
     try {
-      print(email);
-      await Supabase.instance.client.auth.resend(type: OtpType.signup, email: email);
+      await supabase.auth.resend(type: OtpType.signup, email: email);
 
       return const HttpResponse.success();
     } catch (err) {
@@ -89,7 +89,7 @@ class AuthenticationService {
     required String email,
   }) async {
     try {
-      await Supabase.instance.client.auth.resetPasswordForEmail(email);
+      await supabase.auth.resetPasswordForEmail(email);
 
       return const HttpResponse.success();
     } catch (err) {

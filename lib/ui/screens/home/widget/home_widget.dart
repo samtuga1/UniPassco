@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:Buddy/blocs/user/user_bloc.dart';
 import 'package:Buddy/cubits/theme/themes.cubit.dart';
 import 'package:Buddy/repositories/authed_user.repository.dart';
@@ -176,7 +174,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   child: Hero(
                     tag: 'profile',
                     child: CustomCacheImage(
-                      imageUrl: snapshot.data!.photo,
+                      imageUrl: snapshot.data!.photo!,
                       height: 46,
                       width: 46,
                     ),

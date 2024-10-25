@@ -29,6 +29,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final InputBorder? focusedBorder, enabledBorder, border;
   final FocusNode? focusNode;
   final TextStyle? style, prefixStyle, suffixStyle, hintStyle;
+  final Function(String)? onFieldSubmitted;
 
   const CustomTextFieldWidget({
     Key? key,
@@ -38,6 +39,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.controller,
     this.prefixIcon,
     this.suffixIcon,
+    this.onFieldSubmitted,
     this.suffixIconColor,
     this.keyboardType = TextInputType.text,
     this.validator = Validators.validateEmpty,
@@ -79,7 +81,7 @@ class CustomTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = style ?? context.getTheme.textTheme.bodyMedium!;
+    TextStyle textStyle = style ?? context.getTheme.textTheme.bodyMedium!.copyWith(fontSize: 16.sp);
     return TextFormField(
       cursorHeight: cursorHeight,
       cursorColor: context.getTheme.primaryColor,
@@ -87,6 +89,7 @@ class CustomTextFieldWidget extends StatelessWidget {
       textAlign: TextAlign.start,
       style: textStyle,
       expands: expands,
+      onFieldSubmitted: onFieldSubmitted,
       onTap: onTap,
       readOnly: readOnly,
       initialValue: initialValue,
@@ -151,7 +154,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           ),
         ),
         labelText: addHint ? null : ((controller?.text != null || !readOnly) ? labelText : null),
-        hintStyle: hintStyle ?? context.getTheme.textTheme.labelMedium,
+        hintStyle: hintStyle ?? context.getTheme.textTheme.labelMedium?.copyWith(fontSize: 15.sp),
         hintText: hintText,
         prefixIconConstraints: BoxConstraints(
           maxHeight: 40.h,

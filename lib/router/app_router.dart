@@ -30,7 +30,7 @@ class AppRouter {
         Routes.downloadsPdfScreen => route(const DownloadsPdfScreen(), settings: settings),
         Routes.resetPasswordScreen => route(const ResetPasswordScreen(), settings: settings),
         Routes.aiScreen => PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) => CustomPageRoutes.slidingUpTransition(
+            pageBuilder: (context, animation, secondaryAnimation) => CustomPageRoutes.slidingLeftTransition(
               context,
               animation,
               secondaryAnimation,

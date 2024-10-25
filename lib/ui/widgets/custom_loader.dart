@@ -26,13 +26,13 @@ class CustomLoading extends StatelessWidget {
             ? FittedBox(
                 child: CircularProgressIndicator.adaptive(
                   backgroundColor: color,
-                  strokeWidth: 5.0,
+                  strokeWidth: 3.0,
                   strokeCap: StrokeCap.round,
                 ),
               )
             : CircularProgressIndicator(
                 color: color,
-                strokeWidth: 5.0,
+                strokeWidth: 3.0,
                 value: value,
                 strokeCap: StrokeCap.round,
               ),

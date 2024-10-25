@@ -23,9 +23,12 @@ class UserService {
             fileOptions: const FileOptions(cacheControl: '3600', upsert: true),
           );
 
-      final publicUrl = Supabase.instance.client.storage.from('photos').getPublicUrl(downloadUrl);
+      String publicUrl = Supabase.instance.client.storage.from('photos').getPublicUrl(downloadUrl);
+
+      publicUrl = publicUrl.replaceFirst('/photos', '');
 
       await Supabase.instance.client.from("profiles").update({"photo": publicUrl}).eq("id", userId);
+
       final user = (await Supabase.instance.client.from("profiles").select().eq("id", userId))[0];
 
       final jsonRes = UserModel.fromJson({

@@ -133,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
                     },
                     child: Hero(
                       tag: 'profile1',
-                      child: CustomCacheImage(imageUrl: user.photo, height: 85, width: 85),
+                      child: CustomCacheImage(imageUrl: user.photo!, height: 85, width: 85),
                     ),
                   ),
                 ),

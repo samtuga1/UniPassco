@@ -1,11 +1,13 @@
-import 'package:Buddy/injectable/injection.dart';
+import 'package:Buddy/blocs/ai/ai_bloc.dart';
 import 'package:Buddy/main_common.dart';
 import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/repositories/questions.repository.dart';
 import 'package:Buddy/ui/widgets/widgets.dart';
 import 'package:Buddy/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class AiScreen extends StatefulWidget {
   const AiScreen({super.key});
@@ -17,8 +19,7 @@ class AiScreen extends StatefulWidget {
 class _AiScreenState extends State<AiScreen> {
   final textController = TextEditingController();
   final scrollController = ScrollController();
-  bool isLoading = false;
-  bool initialLoading = false;
+  String text = "";
   late final GenerativeModel _model;
   late final ChatSession _chat;
 
@@ -28,98 +29,158 @@ class _AiScreenState extends State<AiScreen> {
     _model = GenerativeModel(model: 'gemini-1.5-pro', apiKey: globalConfig.appConfig['gemini_key']);
     _chat = _model.startChat();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      initialize();
+      final question = ModalRoute.of(context)?.settings.arguments as Question;
+      context.read<AiBloc>().add(InitializeAIEvent(question: question, chat: _chat));
     });
   }
 
-  void initialize() async {
-    try {
-      setState(() {
-        initialLoading = true;
-      });
-      final question = ModalRoute.of(context)?.settings.arguments as Question;
-
-      final data = await getIt<QuestionsRepository>().downloadData(question);
-      await _chat.sendMessage(
-        Content.multi(
-          [
-            DataPart('application/pdf', data),
-            TextPart("Consider these questions"),
-          ],
-        ),
-      );
-      setState(() {
-        initialLoading = false;
-      });
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    } catch (error) {
-      print(error);
-    }
+  void _sendMessage() async {
+    textController.clear();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      scrollToBottom();
+    });
+    context.read<AiBloc>().add(AiEvent.send(message: text, chat: _chat));
   }
 
-  // void _sendMessage() async {
-  //   try {
-  //     _chat.sendMessage(Content.data('file', []));
-  //   } catch (error) {}
-  // }
+  void scrollToBottom() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
       body: SafeArea(
-        child: switch (initialLoading) {
-          true => const CustomLoading(
+          child: BlocConsumer<AiBloc, AiState>(
+        listener: (context, state) {
+          if (state is SendingAiMessageSuccess) {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              scrollToBottom();
+            });
+          }
+        },
+        builder: (context, state) {
+          if (state is AiInitializing) {
+            return const CustomLoading(
               height: 35,
               width: 35,
               adaptive: true,
-            ),
-          false => Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    controller: scrollController,
-                    itemCount: _chat.history.length,
-                    itemBuilder: (context, index) {
-                      var content = _chat.history.toList()[index];
-                      var text = content.parts.whereType<TextPart>().map((e) => e.text).join();
+            );
+          }
+          final isLoading = state is SendingAiMessage;
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  controller: scrollController,
+                  itemCount: _chat.history.length,
+                  itemBuilder: (context, index) {
+                    var content = _chat.history.toList()[index];
+                    var text = content.parts.whereType<TextPart>().map((e) => e.text).join();
 
-                      return Align(
-                        alignment: content.role == "user" ? Alignment.topRight : Alignment.topLeft,
-                        child: ColoredBox(
-                          color: context.getTheme.colorScheme.tertiary,
-                          child: Text(text),
+                    return Column(
+                      children: [
+                        Align(
+                          alignment: content.role == "user" ? Alignment.topRight : Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: ClipRRect(
+                              borderRadius: switch (content.role == "user") {
+                                true => const BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    topRight: Radius.circular(8),
+                                    bottomLeft: Radius.circular(8),
+                                  ),
+                                false => const BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    topRight: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                  ),
+                              },
+                              child: ColoredBox(
+                                color: context.getTheme.colorScheme.outline.withOpacity(.15),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: MarkdownBody(
+                                    data: text,
+                                    selectable: true,
+                                    styleSheet: MarkdownStyleSheet(
+                                      textScaler: const TextScaler.linear(1.033),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                  ),
+                        switch (isLoading && (index == _chat.history.toList().length - 1)) {
+                          true => const SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: LoadingIndicator(
+                                indicatorType: Indicator.ballPulseSync,
+                                colors: [Colors.red, Colors.green, Colors.amber],
+                              ),
+                            ),
+                          false => const SizedBox.shrink(),
+                        },
+                      ],
+                    );
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CustomTextFieldWidget(
-                          hintText: "Enter a promt...",
-                          controller: textController,
-                        ),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        icon: const Icon(Icons.send),
-                      ),
-                    ],
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 8, top: 10, bottom: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: textController,
+                          builder: (context, val, _) {
+                            return CustomTextFieldWidget(
+                              hintText: "Enter a promt...",
+                              controller: textController,
+                              onFieldSubmitted: switch ((textController.text.isEmpty, isLoading)) {
+                                (false, false) => (_) => _sendMessage(),
+                                _ => null,
+                              },
+                              validator: (_) => null,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  text = value.trim();
+                                }
+                              },
+                              maxLines: 5,
+                              minLines: 1,
+                            );
+                          }),
+                    ),
+                    ValueListenableBuilder(
+                      valueListenable: textController,
+                      builder: (context, val, _) {
+                        return IconButton(
+                          disabledColor: context.getTheme.colorScheme.onSurface,
+                          padding: EdgeInsets.zero,
+                          onPressed: switch ((textController.text.isEmpty, isLoading)) {
+                            (false, false) => () => _sendMessage(),
+                            _ => null,
+                          },
+                          icon: const Icon(Icons.send),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
+          );
         },
-      ),
+      )),
     );
   }
 }

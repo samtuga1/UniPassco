@@ -1,4 +1,3 @@
-import 'package:Buddy/models/discussions/data/discussion.dart';
 import 'package:Buddy/models/discussions/data/discussion_reply.dart';
 import 'package:Buddy/utils/utils.dart';
 import 'package:date_time_format/date_time_format.dart';
@@ -18,15 +17,14 @@ class DiscussionReplyItem extends StatefulWidget {
 class _DiscussionReplyItemState extends State<DiscussionReplyItem> {
   @override
   Widget build(BuildContext context) {
-    final dateTime =
-        DateTimeFormat.relative(widget.discussion.createdAt, abbr: true);
+    final dateTime = DateTimeFormat.relative(widget.discussion.createdAt, abbr: true);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ClipOval(
           child: CustomCacheImage(
-            imageUrl: widget.discussion.user.photo,
+            imageUrl: widget.discussion.user.photo!,
             height: 27,
             width: 27,
           ),

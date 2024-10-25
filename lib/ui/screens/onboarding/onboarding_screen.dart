@@ -55,24 +55,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: CustomAdaptiveButton(
-                          child: CustomText(
-                            'Skip',
-                            textAlign: TextAlign.center,
-                            style: context.getTheme.textTheme.displayMedium?.copyWith(
-                              color: Colors.blue[700],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                              Routes.bottomNavigationBar,
-                              (_) => false,
-                            );
-                          },
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.topRight,
+                      //   child: CustomAdaptiveButton(
+                      //     child: CustomText(
+                      //       'Skip',
+                      //       textAlign: TextAlign.center,
+                      //       style: context.getTheme.textTheme.displayMedium?.copyWith(
+                      //         color: Colors.blue[700],
+                      //       ),
+                      //     ),
+                      //     onTap: () {
+                      //       Navigator.of(context).pushNamedAndRemoveUntil(
+                      //         Routes.bottomNavigationBar,
+                      //         (_) => false,
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
                       10.verticalSpace,
                       CustomText(
                         'Select Avatar',
@@ -154,7 +154,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     top: 10,
                     right: 24,
                     left: 24,
-                    bottom: MediaQuery.viewPaddingOf(context).bottom + 20.r,
+                    bottom: MediaQuery.viewPaddingOf(context).bottom,
                   ),
                   child: BlocConsumer<UserBloc, UserState>(
                     listener: (context, state) {

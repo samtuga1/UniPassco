@@ -1,12 +1,9 @@
-import 'package:Buddy/ui/widgets/loading_screen.dart';
 import 'package:animated_digit/animated_digit.dart';
 import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
-import 'package:Buddy/injectable/injection.dart';
 import 'package:Buddy/models/discussions/data/discussion.dart';
 import 'package:Buddy/ui/screens/question/detail_widgets/message_box.dart';
 import 'package:Buddy/ui/screens/question/detail_widgets/reply_item.dart';
 import 'package:Buddy/ui/widgets/custom_adaptive_button.dart';
-import 'package:Buddy/ui/widgets/custom_overlay_entry.dart';
 import 'package:Buddy/utils/debouncer.dart';
 import 'package:Buddy/utils/utils.dart';
 import 'package:date_time_format/date_time_format.dart';
@@ -57,15 +54,14 @@ class _DiscussionItemState extends State<DiscussionItem> {
 
   @override
   Widget build(BuildContext context) {
-    final dateTime =
-        DateTimeFormat.relative(widget.discussion.createdAt, abbr: true);
+    final dateTime = DateTimeFormat.relative(widget.discussion.createdAt, abbr: true);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ClipOval(
           child: CustomCacheImage(
-            imageUrl: widget.discussion.user.photo,
+            imageUrl: widget.discussion.user.photo!,
             height: 27,
             width: 27,
           ),
@@ -103,8 +99,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                 messageBoxTextFieldFocusNode.requestFocus();
                 context.read<DiscussionsBloc>().messageTextFieldLabel.value =
                     'Replying to ${widget.discussion.user.name}';
-                context.read<DiscussionsBloc>().tappedDiscussionToReply =
-                    widget.discussion;
+                context.read<DiscussionsBloc>().tappedDiscussionToReply = widget.discussion;
               },
               child: SizedBox(
                 width: MediaQuery.sizeOf(context).width - 86,
@@ -133,8 +128,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                                     context.read<DiscussionsBloc>().add(
                                           VoteDiscussion(
                                             discussionId: widget.discussion.id,
-                                            voteType: _handleVoteType(
-                                                upArrowClicked: true),
+                                            voteType: _handleVoteType(upArrowClicked: true),
                                           ),
                                         );
                                   },
@@ -143,8 +137,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                               child: Icon(
                                 CupertinoIcons.chevron_up,
                                 size: 27,
-                                color: (widget.discussion.userVoteType ==
-                                        DiscussionVoteType.upvote)
+                                color: (widget.discussion.userVoteType == DiscussionVoteType.upvote)
                                     ? context.getTheme.primaryColor
                                     : Colors.grey,
                               ),
@@ -152,8 +145,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                             5.verticalSpace,
                             AnimatedDigitWidget(
                               value: widget.discussion.votes,
-                              textStyle: context.getTheme.textTheme.bodyMedium
-                                  ?.copyWith(
+                              textStyle: context.getTheme.textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 14,
                               ),
@@ -165,8 +157,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                                   context.read<DiscussionsBloc>().add(
                                         VoteDiscussion(
                                           discussionId: widget.discussion.id,
-                                          voteType: _handleVoteType(
-                                              upArrowClicked: false),
+                                          voteType: _handleVoteType(upArrowClicked: false),
                                         ),
                                       );
                                 });
@@ -174,8 +165,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                               child: Icon(
                                 CupertinoIcons.chevron_down,
                                 size: 27,
-                                color: (widget.discussion.userVoteType ==
-                                        DiscussionVoteType.downvote)
+                                color: (widget.discussion.userVoteType == DiscussionVoteType.downvote)
                                     ? context.getTheme.primaryColor
                                     : Colors.grey,
                               ),
@@ -202,10 +192,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
               builder: (context, state) {
                 return widget.discussion.totalRepliesLeft > 0
                     ? (state is FetchingDiscussionReplies &&
-                            context
-                                    .read<DiscussionsBloc>()
-                                    .tappedDiscussionIdFetchReplies ==
-                                widget.discussion.id)
+                            context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies == widget.discussion.id)
                         ? SizedBox(
                             width: MediaQuery.sizeOf(context).width * 0.74,
                             child: const Align(
@@ -221,10 +208,7 @@ class _DiscussionItemState extends State<DiscussionItem> {
                             alignment: Alignment.bottomLeft,
                             child: CustomAdaptiveTextButton(
                               onTap: () {
-                                context
-                                        .read<DiscussionsBloc>()
-                                        .tappedDiscussionIdFetchReplies =
-                                    widget.discussion.id;
+                                context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies = widget.discussion.id;
 
                                 context.read<DiscussionsBloc>().add(
                                       ListDiscussionReplies(
@@ -233,10 +217,8 @@ class _DiscussionItemState extends State<DiscussionItem> {
                                       ),
                                     );
                               },
-                              text:
-                                  'Show more ${widget.discussion.totalRepliesLeft} replies',
-                              style: context.getTheme.textTheme.labelSmall
-                                  ?.copyWith(
+                              text: 'Show more ${widget.discussion.totalRepliesLeft} replies',
+                              style: context.getTheme.textTheme.labelSmall?.copyWith(
                                 color: const Color(0xFF0F96FF),
                                 fontSize: 12,
                                 letterSpacing: -0.37,

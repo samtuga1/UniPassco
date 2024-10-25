@@ -13,7 +13,8 @@ class AppImages {
   static String email = 'assets/svgs/email.svg';
   static String pdf_icon = 'assets/images/pdf.png';
   static String jpeg_icon = 'assets/images/jpeg.png';
-  static String logo = 'assets/images/logo.png';
+  static String logo = 'assets/svgs/logo.svg';
+  static String passco_icon = 'assets/images/passco_icon.png';
   static String lock = 'assets/svgs/lock.svg';
   static String profile = 'assets/svgs/profile.svg';
   static String toggle_password = 'assets/svgs/toggle_password.svg';

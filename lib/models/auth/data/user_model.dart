@@ -1,8 +1,8 @@
 class UserModel {
   final String id;
-  final String name;
+  final String? name;
   final String email;
-  final String photo;
+  final String? photo;
   final bool isVerified;
 
   UserModel({

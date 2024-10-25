@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -73,7 +71,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       password: event.password,
     );
 
-    final HttpResponse<UserModel?> response = await authService.login(request: requestData);
+    final response = await authService.login(request: requestData);
 
     response.when(success: (loginResponse) {
       // save user data to user repository

@@ -57,11 +57,14 @@ class HttpErrorUtils {
   static HttpError getDioException(error) {
     print(error);
     if (error is Exception) {
-      print(error);
       try {
         HttpError httpError = DefaultError(500);
         if (error is AuthException) {
-          return CustomError(message: error.message);
+          String message = error.message;
+          if (error.message is Map) {
+            message = (error.message as dynamic)['message'];
+          }
+          return CustomError(message: message);
         } else if (error is PostgrestException) {
           return UnexpectedError();
         } else if (error is StorageException) {

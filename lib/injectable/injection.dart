@@ -11,6 +11,7 @@
 // )
 // Future<void> configureDependencies() async => getIt.init();
 
+import 'package:Buddy/blocs/ai/ai_bloc.dart';
 import 'package:Buddy/blocs/auth/authentication_bloc.dart';
 import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
 import 'package:Buddy/blocs/questions/questions_bloc.dart';
@@ -74,4 +75,5 @@ Future<void> configureDependencies() async {
         getIt<SharedPreference>(),
         getIt<AuthedUserRepository>(),
       ));
+  getIt.registerLazySingleton<AiBloc>(() => AiBloc());
 }

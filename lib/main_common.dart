@@ -1,3 +1,4 @@
+import 'package:Buddy/blocs/ai/ai_bloc.dart';
 import 'package:Buddy/blocs/auth/authentication_bloc.dart';
 import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
 import 'package:Buddy/blocs/questions/questions_bloc.dart';
@@ -54,6 +55,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<DiscussionsBloc>(
           create: (_) => getIt<DiscussionsBloc>(),
+        ),
+        BlocProvider<AiBloc>(
+          create: (_) => getIt<AiBloc>(),
         ),
       ],
       child: ScreenUtilInit(

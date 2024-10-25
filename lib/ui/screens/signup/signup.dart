@@ -8,6 +8,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/data/images.dart';
 import 'package:Buddy/router/routes.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/widgets.dart';
 
 class SignUp extends StatefulWidget {
@@ -57,18 +58,7 @@ class _SignUpState extends State<SignUp> {
                   62.verticalSpace,
                   Align(
                     alignment: Alignment.center,
-                    child: Image.asset(
-                      AppImages.logo,
-                      height: 58.h,
-                      width: 58.w,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: CustomText(
-                      'UniPasco Ghana',
-                      style: context.getTheme.textTheme.displaySmall,
-                    ),
+                    child: SvgPicture.asset(AppImages.logo),
                   ),
                   36.verticalSpace,
                   Align(
@@ -156,8 +146,8 @@ class _SignUpState extends State<SignUp> {
                         signUpSuccess: () {
                           // navigate user to verification screen is success
                           Navigator.of(context).pushNamed(
-                            Routes.verificationScreen,
-                            arguments: emailController.text,
+                            Routes.onbardingScreen,
+                            arguments: emailController.text.trim(),
                           );
                         },
                         orElse: () {},

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:Buddy/data/data.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/widgets.dart';
 
 class SignIn extends StatefulWidget {
@@ -45,18 +46,7 @@ class _SignInState extends State<SignIn> {
                   62.verticalSpace,
                   Align(
                     alignment: Alignment.center,
-                    child: Image.asset(
-                      AppImages.logo,
-                      height: 58.h,
-                      width: 58.w,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: CustomText(
-                      'Passco Ghana',
-                      style: context.getTheme.textTheme.displaySmall,
-                    ),
+                    child: SvgPicture.asset(AppImages.logo),
                   ),
                   36.verticalSpace,
                   Align(
@@ -109,16 +99,16 @@ class _SignInState extends State<SignIn> {
                     },
                   ),
                   27.verticalSpace,
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: CustomAdaptiveTextButton(
-                      onTap: () => Navigator.of(context).pushNamed(Routes.requestPasswordReset),
-                      text: 'Forgot password?',
-                      style: context.getTheme.textTheme.labelMedium!.copyWith(
-                        color: const Color(0xFF0F96FF),
-                      ),
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: Alignment.topRight,
+                  //   child: CustomAdaptiveTextButton(
+                  //     onTap: () => Navigator.of(context).pushNamed(Routes.requestPasswordReset),
+                  //     text: 'Forgot password?',
+                  //     style: context.getTheme.textTheme.labelMedium!.copyWith(
+                  //       color: const Color(0xFF0F96FF),
+                  //     ),
+                  //   ),
+                  // ),
                   26.verticalSpace,
                   BlocConsumer<AuthenticationBloc, AuthenticationState>(
                     listenWhen: (previous, current) => current is LoginSuccess || current is AuthenticationError,
@@ -141,17 +131,17 @@ class _SignInState extends State<SignIn> {
                           }
                         },
                         loginSuccess: (user) {
-                          if (user.photo != '') {
-                            // navigate user to verification screen is success
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                              Routes.bottomNavigationBar,
-                              (_) => false,
-                            );
-                          } else {
+                          if (user.photo == '' || user.photo == null) {
                             // navigate to onboarding if user has not finished with the onboarding
                             Navigator.of(context).pushNamed(
                               Routes.onbardingScreen,
                               arguments: emailController.text.trim(),
+                            );
+                          } else {
+                            // navigate user to verification screen is success
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.bottomNavigationBar,
+                              (_) => false,
                             );
                           }
                         },
