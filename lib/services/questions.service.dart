@@ -1,8 +1,8 @@
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/main_common.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/models/questions/response/list_questions_response.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/main_common.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/models/questions/response/list_questions_response.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class QuestionService {

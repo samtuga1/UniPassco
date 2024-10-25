@@ -1,9 +1,9 @@
-import 'package:Buddy/models/questions/data/question_model.dart';
+import 'package:passco/models/questions/data/question_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/extensions.dart';
 
 class QuestionWidget extends StatelessWidget {
   const QuestionWidget({

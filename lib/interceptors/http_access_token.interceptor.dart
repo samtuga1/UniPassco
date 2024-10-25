@@ -1,5 +1,5 @@
-// import 'package:Buddy/data/data.dart';
-// import 'package:Buddy/services/shared_preferences.service.dart';
+// import 'package:passco/data/data.dart';
+// import 'package:passco/services/shared_preferences.service.dart';
 // import 'package:dio/dio.dart';
 
 // class HttpAccessTokenInterceptor extends Interceptor {

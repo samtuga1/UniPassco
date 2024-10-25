@@ -1,9 +1,9 @@
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/router/routes.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/router/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
 class QuestionContainer extends StatelessWidget {

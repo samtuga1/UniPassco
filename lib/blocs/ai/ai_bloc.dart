@@ -1,6 +1,6 @@
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/repositories/questions.repository.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/repositories/questions.repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';

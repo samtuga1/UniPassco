@@ -1,8 +1,8 @@
-import 'package:Buddy/blocs/user/user_bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/ui/screens/home/widget/home_widget.dart';
-import 'package:Buddy/ui/screens/home/widget/home_skeleton.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/ui/screens/home/widget/home_widget.dart';
+import 'package:passco/ui/screens/home/widget/home_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

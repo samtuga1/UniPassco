@@ -1,4 +1,4 @@
-import 'package:Buddy/utils/enums.dart';
+import 'package:passco/utils/enums.dart';
 
 class UpdateDiscussionVotesCountRequest {
   final String discussionId;

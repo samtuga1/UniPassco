@@ -1,6 +1,6 @@
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/models/discussions/data/discussion_reply.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/models/discussions/data/discussion_reply.dart';
+import 'package:passco/utils/utils.dart';
 
 class Discussion {
   final String id;

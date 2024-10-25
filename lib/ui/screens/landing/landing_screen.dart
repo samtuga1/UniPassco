@@ -1,9 +1,9 @@
-import 'package:Buddy/blocs/user/user_bloc.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
-import 'package:Buddy/ui/screens/screens.dart';
-import 'package:Buddy/ui/widgets/signup_login_switcher.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/services/shared_preferences.service.dart';
+import 'package:passco/ui/screens/screens.dart';
+import 'package:passco/ui/widgets/signup_login_switcher.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatefulWidget {

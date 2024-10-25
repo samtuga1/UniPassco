@@ -1,10 +1,10 @@
-import 'package:Buddy/models/discussions/data/discussion_reply.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/models/discussions/data/discussion_reply.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:passco/ui/widgets/widgets.dart';
 
 class DiscussionReplyItem extends StatefulWidget {
   const DiscussionReplyItem({super.key, required this.discussion});

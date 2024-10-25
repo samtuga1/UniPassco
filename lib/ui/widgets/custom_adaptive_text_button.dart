@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/extensions.dart';
 
 class CustomAdaptiveTextButton extends StatelessWidget {
   const CustomAdaptiveTextButton({

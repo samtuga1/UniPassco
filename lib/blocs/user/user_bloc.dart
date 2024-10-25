@@ -1,11 +1,11 @@
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/repositories/authed_user.repository.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
-import 'package:Buddy/services/user.service.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/services/shared_preferences.service.dart';
+import 'package:passco/services/user.service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/utils/helpers.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/utils/helpers.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_event.dart';

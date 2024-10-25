@@ -1,4 +1,4 @@
-import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:passco/models/auth/data/user_model.dart';
 
 class LoginRegisterUserResponseData {
   LoginRegisterUserResponseData({

@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/services/shared_preferences.service.dart';
 
 class AuthedUserRepository {
   SharedPreference prefs;

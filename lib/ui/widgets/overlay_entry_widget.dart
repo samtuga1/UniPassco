@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
-import 'package:Buddy/ui/widgets/custom_loader.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
+import 'package:passco/ui/widgets/custom_loader.dart';
+import 'package:passco/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

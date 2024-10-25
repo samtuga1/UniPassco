@@ -1,8 +1,8 @@
-import 'package:Buddy/blocs/ai/ai_bloc.dart';
-import 'package:Buddy/main_common.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/blocs/ai/ai_bloc.dart';
+import 'package:passco/main_common.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';

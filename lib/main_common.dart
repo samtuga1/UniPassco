@@ -1,17 +1,17 @@
-import 'package:Buddy/blocs/ai/ai_bloc.dart';
-import 'package:Buddy/blocs/auth/authentication_bloc.dart';
-import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
-import 'package:Buddy/blocs/questions/questions_bloc.dart';
-import 'package:Buddy/blocs/user/user_bloc.dart';
+import 'package:passco/blocs/ai/ai_bloc.dart';
+import 'package:passco/blocs/auth/authentication_bloc.dart';
+import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/blocs/questions/questions_bloc.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/config/global_configuration.dart';
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/router/app_router.dart';
+import 'package:passco/config/global_configuration.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/router/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:Buddy/utils/helpers.dart';
+import 'package:passco/utils/helpers.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final appNavigatorObserver = NavigatorObserver();

@@ -1,18 +1,18 @@
-// import 'package:Buddy/blocs/questions/questions_bloc.dart';
-// import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-// import 'package:Buddy/models/questions/response/list_questions_response.dart';
-// import 'package:Buddy/router/routes.dart';
-// import 'package:Buddy/ui/screens/question/question_detail_screen.dart';
-// import 'package:Buddy/ui/screens/question/widget/questions_skeletonizer.dart';
-// import 'package:Buddy/ui/widgets/custom_error_screen.dart';
+// import 'package:passco/blocs/questions/questions_bloc.dart';
+// import 'package:passco/handlers/http_error/http_errors.handler.dart';
+// import 'package:passco/models/questions/response/list_questions_response.dart';
+// import 'package:passco/router/routes.dart';
+// import 'package:passco/ui/screens/question/question_detail_screen.dart';
+// import 'package:passco/ui/screens/question/widget/questions_skeletonizer.dart';
+// import 'package:passco/ui/widgets/custom_error_screen.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_iconly/flutter_iconly.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_svg/svg.dart';
-// import 'package:Buddy/data/data.dart';
-// import 'package:Buddy/ui/widgets/widgets.dart';
-// import 'package:Buddy/utils/utils.dart';
+// import 'package:passco/data/data.dart';
+// import 'package:passco/ui/widgets/widgets.dart';
+// import 'package:passco/utils/utils.dart';
 
 // class BookmarksScreen extends StatefulWidget {
 //   const BookmarksScreen({super.key});

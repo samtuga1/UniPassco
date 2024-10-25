@@ -1,17 +1,17 @@
 import 'package:animated_digit/animated_digit.dart';
-import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
-import 'package:Buddy/models/discussions/data/discussion.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/message_box.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/reply_item.dart';
-import 'package:Buddy/ui/widgets/custom_adaptive_button.dart';
-import 'package:Buddy/utils/debouncer.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/models/discussions/data/discussion.dart';
+import 'package:passco/ui/screens/question/detail_widgets/message_box.dart';
+import 'package:passco/ui/screens/question/detail_widgets/reply_item.dart';
+import 'package:passco/ui/widgets/custom_adaptive_button.dart';
+import 'package:passco/utils/debouncer.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:passco/ui/widgets/widgets.dart';
 
 class DiscussionItem extends StatefulWidget {
   const DiscussionItem({

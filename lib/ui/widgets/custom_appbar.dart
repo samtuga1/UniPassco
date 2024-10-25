@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/utils.dart';
 
 class CustomAppBar extends PreferredSize {
   CustomAppBar({
@@ -39,9 +39,7 @@ class CustomAppBar extends PreferredSize {
               child: IconButton(
                 onPressed: leadingTapped ?? () => Navigator.of(context).pop(),
                 icon: Icon(
-                  Platform.isIOS
-                      ? CupertinoIcons.chevron_left
-                      : Icons.keyboard_backspace_outlined,
+                  Platform.isIOS ? CupertinoIcons.chevron_left : Icons.keyboard_backspace_outlined,
                   size: 24,
                 ),
               ),

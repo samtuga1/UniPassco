@@ -1,6 +1,6 @@
-// import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-// import 'package:Buddy/models/questions/data/question_model.dart';
-// import 'package:Buddy/models/questions/response/list_questions_response.dart';
+// import 'package:passco/handlers/http_response/http_response.handler.dart';
+// import 'package:passco/models/questions/data/question_model.dart';
+// import 'package:passco/models/questions/response/list_questions_response.dart';
 
 // abstract class IQuestionsService {
 //   Future<HttpResponse<ListQuestionsResponse>> listQuestions({

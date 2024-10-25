@@ -1,7 +1,7 @@
-// import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-// import 'package:Buddy/models/auth/data/user_model.dart';
-// import 'package:Buddy/models/auth/requests/onboarding_request.dart';
-// import 'package:Buddy/models/auth/responses/login_response.dart';
+// import 'package:passco/handlers/http_response/http_response.handler.dart';
+// import 'package:passco/models/auth/data/user_model.dart';
+// import 'package:passco/models/auth/requests/onboarding_request.dart';
+// import 'package:passco/models/auth/responses/login_response.dart';
 
 // abstract class IUser {
 //   Future<HttpResponse> onboarding({required OnboardingRequestData request});

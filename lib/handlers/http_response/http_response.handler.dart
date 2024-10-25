@@ -1,4 +1,4 @@
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'http_response.handler.freezed.dart';

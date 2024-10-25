@@ -1,15 +1,15 @@
-import 'package:Buddy/blocs/questions/questions_bloc.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/repositories/questions.repository.dart';
-import 'package:Buddy/ui/screens/downloads/widgets/download_screen_widget.dart';
+import 'package:passco/blocs/questions/questions_bloc.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/repositories/questions.repository.dart';
+import 'package:passco/ui/screens/downloads/widgets/download_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/utils.dart';
 
 class DownloadsScreen extends StatefulWidget {
   const DownloadsScreen({super.key});

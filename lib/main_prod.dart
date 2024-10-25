@@ -1,4 +1,4 @@
-import 'package:Buddy/main_common.dart';
+import 'package:passco/main_common.dart';
 
 import 'data/data.dart';
 

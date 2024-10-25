@@ -1,16 +1,16 @@
-import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/repositories/authed_user.repository.dart';
-import 'package:Buddy/ui/widgets/custom_cache_image.dart';
-import 'package:Buddy/ui/widgets/custom_loader.dart';
+import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/ui/widgets/custom_cache_image.dart';
+import 'package:passco/ui/widgets/custom_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/ui/widgets/custom_text_field.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/ui/widgets/custom_text_field.dart';
+import 'package:passco/utils/utils.dart';
 
 final FocusNode messageBoxTextFieldFocusNode = FocusNode();
 

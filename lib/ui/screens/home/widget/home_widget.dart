@@ -1,17 +1,17 @@
-import 'package:Buddy/blocs/user/user_bloc.dart';
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
-import 'package:Buddy/repositories/authed_user.repository.dart';
-import 'package:Buddy/ui/screens/bottom_navigation/bottom_nav_bar.dart';
-import 'package:Buddy/ui/screens/home/widget/profile_photo_detail.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/ui/screens/bottom_navigation/bottom_nav_bar.dart';
+import 'package:passco/ui/screens/home/widget/profile_photo_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/auth/data/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/ui/screens/home/widget/level_container.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/ui/screens/home/widget/level_container.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeWidget extends StatefulWidget {

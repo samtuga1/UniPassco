@@ -1,9 +1,9 @@
-import 'package:Buddy/repositories/questions.repository.dart';
-import 'package:Buddy/services/questions.service.dart';
+import 'package:passco/repositories/questions.repository.dart';
+import 'package:passco/services/questions.service.dart';
 import 'package:bloc/bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/models/questions/response/list_questions_response.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/models/questions/response/list_questions_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'questions_event.dart';

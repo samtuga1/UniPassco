@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/services/shared_preferences.service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
 part 'themes.state.dart';

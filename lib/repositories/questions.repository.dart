@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/main_common.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/repositories/authed_user.repository.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/main_common.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/services/shared_preferences.service.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 class QuestionsRepository {

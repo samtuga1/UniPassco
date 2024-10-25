@@ -1,7 +1,7 @@
-import 'package:Buddy/data/images.dart';
-import 'package:Buddy/ui/widgets/custom_adaptive_text_button.dart';
-import 'package:Buddy/ui/widgets/custom_text.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/data/images.dart';
+import 'package:passco/ui/widgets/custom_adaptive_text_button.dart';
+import 'package:passco/ui/widgets/custom_text.dart';
+import 'package:passco/utils/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,8 +34,7 @@ class DiscussionItemsSkeletonizer extends StatelessWidget {
                       children: [
                         CustomText(
                           '@samuel twumasi . 5m ago',
-                          style:
-                              context.getTheme.textTheme.labelSmall!.copyWith(
+                          style: context.getTheme.textTheme.labelSmall!.copyWith(
                             fontWeight: FontWeight.w400,
                             letterSpacing: -0.25,
                           ),
@@ -53,8 +52,7 @@ class DiscussionItemsSkeletonizer extends StatelessWidget {
                     children: [
                       IconButton(
                         padding: const EdgeInsets.only(right: 30),
-                        constraints:
-                            const BoxConstraints(maxHeight: 20, maxWidth: 22),
+                        constraints: const BoxConstraints(maxHeight: 20, maxWidth: 22),
                         icon: const Icon(
                           Icons.more_horiz,
                           size: 19,
@@ -63,8 +61,7 @@ class DiscussionItemsSkeletonizer extends StatelessWidget {
                       ),
                       IconButton(
                         padding: const EdgeInsets.only(bottom: 7),
-                        constraints:
-                            const BoxConstraints(maxHeight: 50, maxWidth: 36),
+                        constraints: const BoxConstraints(maxHeight: 50, maxWidth: 36),
                         onPressed: () {},
                         icon: const Icon(
                           CupertinoIcons.chevron_up,
@@ -81,8 +78,7 @@ class DiscussionItemsSkeletonizer extends StatelessWidget {
                         splashColor: Colors.red,
                         splashRadius: 10,
                         padding: const EdgeInsets.only(top: 7),
-                        constraints:
-                            const BoxConstraints(maxHeight: 50, maxWidth: 36),
+                        constraints: const BoxConstraints(maxHeight: 50, maxWidth: 36),
                         onPressed: () {
                           print('press');
                         },

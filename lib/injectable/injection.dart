@@ -1,6 +1,6 @@
 // import 'package:get_it/get_it.dart';
 // import 'package:injectable/injectable.dart';
-// import 'package:Buddy/injectable/injection.config.dart';
+// import 'package:passco/injectable/injection.config.dart';
 
 // final getIt = GetIt.instance;
 
@@ -11,22 +11,22 @@
 // )
 // Future<void> configureDependencies() async => getIt.init();
 
-import 'package:Buddy/blocs/ai/ai_bloc.dart';
-import 'package:Buddy/blocs/auth/authentication_bloc.dart';
-import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
-import 'package:Buddy/blocs/questions/questions_bloc.dart';
-import 'package:Buddy/blocs/user/user_bloc.dart';
-import 'package:Buddy/config/global_configuration.dart';
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
-import 'package:Buddy/repositories/authed_user.repository.dart';
-import 'package:Buddy/repositories/questions.repository.dart';
-import 'package:Buddy/services/authentication.service.dart';
-import 'package:Buddy/services/discussions.service.dart';
-import 'package:Buddy/services/questions.service.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
-import 'package:Buddy/services/user.service.dart';
-import 'package:Buddy/ui/widgets/custom_overlay_entry.dart';
-import 'package:Buddy/ui/widgets/overlay_entry_widget.dart';
+import 'package:passco/blocs/ai/ai_bloc.dart';
+import 'package:passco/blocs/auth/authentication_bloc.dart';
+import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/blocs/questions/questions_bloc.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
+import 'package:passco/config/global_configuration.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/repositories/questions.repository.dart';
+import 'package:passco/services/authentication.service.dart';
+import 'package:passco/services/discussions.service.dart';
+import 'package:passco/services/questions.service.dart';
+import 'package:passco/services/shared_preferences.service.dart';
+import 'package:passco/services/user.service.dart';
+import 'package:passco/ui/widgets/custom_overlay_entry.dart';
+import 'package:passco/ui/widgets/overlay_entry_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';

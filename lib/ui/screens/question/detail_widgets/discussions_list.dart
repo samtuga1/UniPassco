@@ -1,18 +1,18 @@
-import 'package:Buddy/blocs/discussions/discussions_bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/models/discussions/data/discussion_reply.dart';
-import 'package:Buddy/models/discussions/responses/list_discussions.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/discussion_item.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/discussion_item_skeletonizer.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/no_discussion_widget.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/reply_item.dart';
-import 'package:Buddy/ui/widgets/custom_adaptive_text_button.dart';
-import 'package:Buddy/ui/widgets/custom_error_screen.dart';
-import 'package:Buddy/ui/widgets/custom_overlay_entry.dart';
-import 'package:Buddy/ui/widgets/custom_text.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/discussions/data/discussion_reply.dart';
+import 'package:passco/models/discussions/responses/list_discussions.dart';
+import 'package:passco/ui/screens/question/detail_widgets/discussion_item.dart';
+import 'package:passco/ui/screens/question/detail_widgets/discussion_item_skeletonizer.dart';
+import 'package:passco/ui/screens/question/detail_widgets/no_discussion_widget.dart';
+import 'package:passco/ui/screens/question/detail_widgets/reply_item.dart';
+import 'package:passco/ui/widgets/custom_adaptive_text_button.dart';
+import 'package:passco/ui/widgets/custom_error_screen.dart';
+import 'package:passco/ui/widgets/custom_overlay_entry.dart';
+import 'package:passco/ui/widgets/custom_text.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,16 +51,14 @@ class _DiscussionsListState extends State<DiscussionsList> {
               },
               updatingDiscussionVotesCountSuccess: (discussion) {
                 getIt<CustomOverlayEntry>().hide(context);
-                final updatedDiscussionIndex =
-                    discussionsList.discussions.indexWhere(
+                final updatedDiscussionIndex = discussionsList.discussions.indexWhere(
                   (element) {
                     return element.id == discussion.id;
                   },
                 );
 
                 setState(() {
-                  discussionsList.discussions[updatedDiscussionIndex] =
-                      discussion;
+                  discussionsList.discussions[updatedDiscussionIndex] = discussion;
                 });
               },
               addingDiscussionSuccess: (discussion) {
@@ -78,14 +76,11 @@ class _DiscussionsListState extends State<DiscussionsList> {
                   var fetchedReplies = _getUnmodifiableFetchedReplies(replies);
 
                   // assign the fetched lists tot the new [_getUnmodifiableFetchedReplies]
-                  discussionsList.discussions[discussionIndex].fetchedReplies =
-                      fetchedReplies;
+                  discussionsList.discussions[discussionIndex].fetchedReplies = fetchedReplies;
 
-                  int totalReplies =
-                      discussionsList.discussions[discussionIndex].totalReplies;
+                  int totalReplies = discussionsList.discussions[discussionIndex].totalReplies;
 
-                  discussionsList.discussions[discussionIndex]
-                      .totalRepliesLeft = totalReplies - fetchedReplies.length;
+                  discussionsList.discussions[discussionIndex].totalRepliesLeft = totalReplies - fetchedReplies.length;
 
                   discussionsList.discussions[discussionIndex].replyPage += 1;
                 });
@@ -93,17 +88,13 @@ class _DiscussionsListState extends State<DiscussionsList> {
               replyingDiscussionSuccess: (discussionReply) {
                 setState(
                   () {
-                    final discussionId = context
-                        .read<DiscussionsBloc>()
-                        .tappedDiscussionToReply
-                        .id;
+                    final discussionId = context.read<DiscussionsBloc>().tappedDiscussionToReply.id;
 
                     final discussionIndex = _getDiscussionIndex(
                       tappedIndex: discussionId,
                     );
 
-                    discussionsList
-                            .discussions[discussionIndex].fetchedReplies =
+                    discussionsList.discussions[discussionIndex].fetchedReplies =
                         _getUnmodifiableFetchedReplies([discussionReply]);
                   },
                 );
@@ -123,8 +114,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
           },
           builder: (context, state) => switch (state) {
             FetchingDiscussions() => const DiscussionItemsSkeletonizer(),
-            FetchingDiscussionsSuccess(discussions: _) =>
-              _discussions(discussionsList, context),
+            FetchingDiscussionsSuccess(discussions: _) => _discussions(discussionsList, context),
             FetchingDiscussionsError(error: HttpError error) => CustomErrorPage(
                 errorDescription: HttpErrorUtils.getErrorMessage(error),
                 onRefreshTap: () => widget.discussionsBloc.add(
@@ -152,8 +142,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
     );
   }
 
-  Widget _discussions(
-      ListDiscussionsResponse discussions, BuildContext context) {
+  Widget _discussions(ListDiscussionsResponse discussions, BuildContext context) {
     return Column(
       children: [
         16.verticalSpace,
@@ -162,9 +151,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
           children: [
             20.horizontalSpace,
             CustomText(
-              discussions.discussions.isEmpty
-                  ? 'No discussions yet'
-                  : '${discussions.totalCount} discussions',
+              discussions.discussions.isEmpty ? 'No discussions yet' : '${discussions.totalCount} discussions',
               style: context.getTheme.textTheme.titleMedium!.copyWith(
                 fontSize: 13,
               ),
@@ -204,19 +191,16 @@ class _DiscussionsListState extends State<DiscussionsList> {
     );
   }
 
-  List<DiscussionReply> _getUnmodifiableFetchedReplies(
-      List<DiscussionReply> replies) {
+  List<DiscussionReply> _getUnmodifiableFetchedReplies(List<DiscussionReply> replies) {
     List<DiscussionReply> modifiableFetchedReplies = [];
     final discussionIndex = discussionsList.discussions.indexWhere(
-      (discussion) =>
-          discussion.id ==
-          context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies,
+      (discussion) => discussion.id == context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies,
     );
 
     if (discussionIndex != -1) {
       // Create a modifiable copy of fetchedReplies
-      modifiableFetchedReplies = List<DiscussionReply>.from(
-          discussionsList.discussions[discussionIndex].fetchedReplies);
+      modifiableFetchedReplies =
+          List<DiscussionReply>.from(discussionsList.discussions[discussionIndex].fetchedReplies);
 
       // Add the newly fetched replies to the modifiable copy
       modifiableFetchedReplies.addAll(replies);
@@ -225,12 +209,10 @@ class _DiscussionsListState extends State<DiscussionsList> {
     return modifiableFetchedReplies;
   }
 
-  int _getDiscussionIndex({String? tappedIndex}) =>
-      discussionsList.discussions.indexWhere(
+  int _getDiscussionIndex({String? tappedIndex}) => discussionsList.discussions.indexWhere(
         (discussion) {
           if (tappedIndex == null) {
-            return discussion.id ==
-                context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies;
+            return discussion.id == context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies;
           } else {
             return discussion.id == tappedIndex;
           }

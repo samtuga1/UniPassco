@@ -1,18 +1,18 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-import 'package:Buddy/blocs/questions/questions_bloc.dart';
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/repositories/questions.repository.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
-import 'package:Buddy/utils/enums.dart';
-import 'package:Buddy/utils/ui_utils.dart';
+import 'package:passco/blocs/questions/questions_bloc.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/repositories/questions.repository.dart';
+import 'package:passco/services/shared_preferences.service.dart';
+import 'package:passco/utils/enums.dart';
+import 'package:passco/utils/ui_utils.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:Buddy/data/data.dart';
+import 'package:passco/data/data.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

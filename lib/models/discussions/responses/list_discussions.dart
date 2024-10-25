@@ -1,4 +1,4 @@
-import 'package:Buddy/models/discussions/data/discussion.dart';
+import 'package:passco/models/discussions/data/discussion.dart';
 
 class ListDiscussionsResponse {
   final List<Discussion> discussions;
@@ -9,8 +9,7 @@ class ListDiscussionsResponse {
     required this.totalCount,
   });
 
-  static ListDiscussionsResponse blank() =>
-      ListDiscussionsResponse(discussions: [], totalCount: 0);
+  static ListDiscussionsResponse blank() => ListDiscussionsResponse(discussions: [], totalCount: 0);
 
   ListDiscussionsResponse copyWith({
     List<Discussion>? discussions,
@@ -21,8 +20,7 @@ class ListDiscussionsResponse {
         totalCount: totalCount ?? this.totalCount,
       );
 
-  factory ListDiscussionsResponse.fromJson(Map<String, dynamic> json) =>
-      ListDiscussionsResponse(
+  factory ListDiscussionsResponse.fromJson(Map<String, dynamic> json) => ListDiscussionsResponse(
         discussions: List<Discussion>.from(
           json["result"].map((x) => Discussion.fromJson(x)),
         ),

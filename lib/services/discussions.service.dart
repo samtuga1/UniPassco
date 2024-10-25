@@ -1,12 +1,12 @@
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/models/discussions/data/discussion.dart';
-import 'package:Buddy/models/discussions/data/discussion_reply.dart';
-import 'package:Buddy/models/discussions/requests/add_discussion.dart';
-import 'package:Buddy/models/discussions/requests/list_replies.dart';
-import 'package:Buddy/models/discussions/requests/reply_discussion.dart';
-import 'package:Buddy/models/discussions/requests/update_discussion_likes_count.dart';
-import 'package:Buddy/models/discussions/responses/list_discussions.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/models/discussions/data/discussion.dart';
+import 'package:passco/models/discussions/data/discussion_reply.dart';
+import 'package:passco/models/discussions/requests/add_discussion.dart';
+import 'package:passco/models/discussions/requests/list_replies.dart';
+import 'package:passco/models/discussions/requests/reply_discussion.dart';
+import 'package:passco/models/discussions/requests/update_discussion_likes_count.dart';
+import 'package:passco/models/discussions/responses/list_discussions.dart';
 
 class DiscussionService {
   // IDioClientService dioClientService;

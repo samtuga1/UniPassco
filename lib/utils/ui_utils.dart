@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:passco/ui/widgets/widgets.dart';
 
 class UiUtils {
   UiUtils._();

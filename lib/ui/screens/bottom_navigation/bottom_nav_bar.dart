@@ -1,9 +1,9 @@
-import 'package:Buddy/ui/screens/downloads/downloads_screen.dart';
-import 'package:Buddy/ui/screens/profile/profile.dart';
+import 'package:passco/ui/screens/downloads/downloads_screen.dart';
+import 'package:passco/ui/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:Buddy/ui/screens/home/home.dart';
+import 'package:passco/ui/screens/home/home.dart';
 import 'package:screenshot/screenshot.dart';
 
 final navBarScreenshotController = ScreenshotController();

@@ -1,9 +1,9 @@
-import 'package:Buddy/blocs/questions/questions_bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/question_detail_skeletonizer.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/question_detail_widget.dart';
-import 'package:Buddy/ui/widgets/custom_error_screen.dart';
+import 'package:passco/blocs/questions/questions_bloc.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/ui/screens/question/detail_widgets/question_detail_skeletonizer.dart';
+import 'package:passco/ui/screens/question/detail_widgets/question_detail_widget.dart';
+import 'package:passco/ui/widgets/custom_error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:Buddy/ui/widgets/custom_loader.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/ui/widgets/custom_loader.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

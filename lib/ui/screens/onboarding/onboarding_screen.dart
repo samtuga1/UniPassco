@@ -1,21 +1,21 @@
 import 'dart:math';
 
-import 'package:Buddy/blocs/user/user_bloc.dart';
-import 'package:Buddy/data/images.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/router/routes.dart';
-import 'package:Buddy/ui/widgets/custom_adaptive_button.dart';
-import 'package:Buddy/ui/widgets/custom_elevated_button.dart';
-import 'package:Buddy/ui/widgets/custom_profile_photo_container.dart';
-import 'package:Buddy/ui/widgets/custom_text.dart';
-import 'package:Buddy/utils/helpers.dart';
-import 'package:Buddy/utils/ui_utils.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
+import 'package:passco/data/images.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/router/routes.dart';
+import 'package:passco/ui/widgets/custom_adaptive_button.dart';
+import 'package:passco/ui/widgets/custom_elevated_button.dart';
+import 'package:passco/ui/widgets/custom_profile_photo_container.dart';
+import 'package:passco/ui/widgets/custom_text.dart';
+import 'package:passco/utils/helpers.dart';
+import 'package:passco/utils/ui_utils.dart';
 import 'package:animate_to/animate_to.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/utils/extensions.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
 
 class OnboardingScreen extends StatefulWidget {

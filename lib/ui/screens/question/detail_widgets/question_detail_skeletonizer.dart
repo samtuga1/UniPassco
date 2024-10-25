@@ -1,7 +1,7 @@
-import 'package:Buddy/ui/screens/question/detail_widgets/discussion_item.dart';
-import 'package:Buddy/ui/screens/question/detail_widgets/question_container.dart';
-import 'package:Buddy/ui/widgets/custom_text.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/ui/screens/question/detail_widgets/discussion_item.dart';
+import 'package:passco/ui/screens/question/detail_widgets/question_container.dart';
+import 'package:passco/ui/widgets/custom_text.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -38,8 +38,7 @@ class QuestionsDetailSkeletonizer extends StatelessWidget {
                         20.horizontalSpace,
                         CustomText(
                           '20 discussions',
-                          style:
-                              context.getTheme.textTheme.titleMedium!.copyWith(
+                          style: context.getTheme.textTheme.titleMedium!.copyWith(
                             fontSize: 13,
                           ),
                         ),

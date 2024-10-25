@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/ui/screens/home/widget/level_container.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/ui/screens/home/widget/level_container.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/extensions.dart';
 
 class HomeSkeleton extends StatelessWidget {
   const HomeSkeleton({super.key});
@@ -37,8 +37,7 @@ class HomeSkeleton extends StatelessWidget {
                     CustomText(
                       'Find the resources you need to pass your exams',
                       softWrap: true,
-                      style: context.getTheme.textTheme.labelMedium!
-                          .copyWith(fontSize: 13.5),
+                      style: context.getTheme.textTheme.labelMedium!.copyWith(fontSize: 13.5),
                     ),
                   ],
                 ),

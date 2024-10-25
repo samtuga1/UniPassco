@@ -1,6 +1,6 @@
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
-import 'package:Buddy/ui/widgets/custom_listview.dart';
-import 'package:Buddy/ui/screens/question/widget/question_widget.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
+import 'package:passco/ui/widgets/custom_listview.dart';
+import 'package:passco/ui/screens/question/widget/question_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';

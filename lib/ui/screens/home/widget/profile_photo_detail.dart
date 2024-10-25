@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:Buddy/ui/widgets/custom_cache_image.dart';
+import 'package:passco/ui/widgets/custom_cache_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

@@ -1,8 +1,8 @@
-import 'package:Buddy/utils/validators.dart';
+import 'package:passco/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/utils/extensions.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final String? labelText, hintText;

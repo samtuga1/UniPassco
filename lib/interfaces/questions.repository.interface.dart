@@ -1,4 +1,4 @@
-// import 'package:Buddy/models/questions/data/question_model.dart';
+// import 'package:passco/models/questions/data/question_model.dart';
 
 // abstract class IQuestionsRepository {
 //   Future<List<Question>> download({required Question question});

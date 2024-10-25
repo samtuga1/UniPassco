@@ -1,12 +1,12 @@
-import 'package:Buddy/blocs/auth/authentication_bloc.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/router/routes.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/blocs/auth/authentication_bloc.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/router/routes.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/data/data.dart';
+import 'package:passco/data/data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/widgets.dart';
 

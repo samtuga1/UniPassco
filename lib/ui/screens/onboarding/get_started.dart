@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:Buddy/data/data.dart';
-import 'package:Buddy/router/routes.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/data/data.dart';
+import 'package:passco/router/routes.dart';
+import 'package:passco/ui/widgets/widgets.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class GetStartedScreen extends StatelessWidget {

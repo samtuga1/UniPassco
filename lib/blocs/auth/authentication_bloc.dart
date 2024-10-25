@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:Buddy/data/constants.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/models/auth/requests/login_request.dart';
-import 'package:Buddy/models/auth/requests/signup_request.dart';
-import 'package:Buddy/repositories/authed_user.repository.dart';
-import 'package:Buddy/services/authentication.service.dart';
-import 'package:Buddy/services/shared_preferences.service.dart';
-import 'package:Buddy/utils/utils.dart';
+import 'package:passco/data/constants.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/models/auth/requests/login_request.dart';
+import 'package:passco/models/auth/requests/signup_request.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/services/authentication.service.dart';
+import 'package:passco/services/shared_preferences.service.dart';
+import 'package:passco/utils/utils.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'authentication_bloc.freezed.dart';

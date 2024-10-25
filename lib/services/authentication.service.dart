@@ -1,11 +1,11 @@
-import 'package:Buddy/injectable/injection.dart';
-import 'package:Buddy/main_common.dart';
-import 'package:Buddy/models/auth/data/user_model.dart';
-import 'package:Buddy/models/auth/requests/login_request.dart';
-import 'package:Buddy/models/auth/requests/signup_request.dart';
-import 'package:Buddy/handlers/http_error/http_errors.handler.dart';
-import 'package:Buddy/handlers/http_response/http_response.handler.dart';
-import 'package:Buddy/services/user.service.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/main_common.dart';
+import 'package:passco/models/auth/data/user_model.dart';
+import 'package:passco/models/auth/requests/login_request.dart';
+import 'package:passco/models/auth/requests/signup_request.dart';
+import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/services/user.service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthenticationService {

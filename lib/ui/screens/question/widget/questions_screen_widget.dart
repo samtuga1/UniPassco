@@ -1,6 +1,6 @@
-import 'package:Buddy/models/questions/data/question_model.dart';
-import 'package:Buddy/router/routes.dart';
-import 'package:Buddy/ui/widgets/widgets.dart';
+import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/router/routes.dart';
+import 'package:passco/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:soft_edge_blur/soft_edge_blur.dart';
 

@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:Buddy/ui/screens/signin/signin.dart';
-import 'package:Buddy/ui/screens/signup/signup.dart';
+import 'package:passco/ui/screens/signin/signin.dart';
+import 'package:passco/ui/screens/signup/signup.dart';
 
 class LoginSignUpSwitch extends StatefulWidget {
   const LoginSignUpSwitch({super.key, this.showLogin = true});
@@ -25,8 +25,7 @@ class _LoginSignUpSwitchState extends State<LoginSignUpSwitch> {
     return PageTransitionSwitcher(
       reverse: !showLogin,
       duration: const Duration(milliseconds: 400),
-      transitionBuilder: (child, primaryAnimation, secondaryAnimation) =>
-          SharedAxisTransition(
+      transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
         transitionType: SharedAxisTransitionType.horizontal,
         animation: primaryAnimation,
         secondaryAnimation: secondaryAnimation,

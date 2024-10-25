@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:Buddy/cubits/theme/themes.cubit.dart';
-import 'package:Buddy/utils/extensions.dart';
+import 'package:passco/cubits/theme/themes.cubit.dart';
+import 'package:passco/utils/extensions.dart';
 
 import 'widgets.dart';
 
