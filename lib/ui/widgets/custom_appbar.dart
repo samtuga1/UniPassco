@@ -15,6 +15,7 @@ class CustomAppBar extends PreferredSize {
     this.actions,
     this.addBackBtn = true,
     this.showActions = true,
+    this.scrolledUnderElevation,
   }) : super(
           child: const SizedBox.shrink(),
           preferredSize: Size.fromHeight(
@@ -28,10 +29,12 @@ class CustomAppBar extends PreferredSize {
   final List<Widget>? actions;
   final bool addBackBtn;
   final bool showActions;
+  final double? scrolledUnderElevation;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: scrolledUnderElevation,
       actions: showActions ? actions : null,
       leading: addBackBtn
           ? Padding(

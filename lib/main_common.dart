@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return BlocBuilder<ThemeCubit, ThemeCubitState>(builder: (context, state) {
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'Passco',
               themeMode: state == const ThemeCubitState.dark() ? ThemeMode.dark : ThemeMode.light,
               theme: AppTheme.light,

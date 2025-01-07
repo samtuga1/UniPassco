@@ -19,29 +19,35 @@ mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
-    required TResult Function(String questionId, int page) fetchDiscusstions,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
         vote,
     required TResult Function(String discussionId, String text) reply,
-    required TResult Function(String discussionId, int page) listReplies,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
-    TResult? Function(String questionId, int page)? fetchDiscusstions,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult? Function(String discussionId, String text)? reply,
-    TResult? Function(String discussionId, int page)? listReplies,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
-    TResult Function(String questionId, int page)? fetchDiscusstions,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult Function(String discussionId, String text)? reply,
-    TResult Function(String discussionId, int page)? listReplies,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -176,11 +182,13 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
-    required TResult Function(String questionId, int page) fetchDiscusstions,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
         vote,
     required TResult Function(String discussionId, String text) reply,
-    required TResult Function(String discussionId, int page) listReplies,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
   }) {
     return addDiscussion(text, questionId);
   }
@@ -189,10 +197,12 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
-    TResult? Function(String questionId, int page)? fetchDiscusstions,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult? Function(String discussionId, String text)? reply,
-    TResult? Function(String discussionId, int page)? listReplies,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
   }) {
     return addDiscussion?.call(text, questionId);
   }
@@ -201,10 +211,12 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
-    TResult Function(String questionId, int page)? fetchDiscusstions,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult Function(String discussionId, String text)? reply,
-    TResult Function(String discussionId, int page)? listReplies,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
     required TResult orElse(),
   }) {
     if (addDiscussion != null) {
@@ -272,7 +284,7 @@ abstract class _$$FetchDiscusstionsCopyWith<$Res> {
           _$FetchDiscusstions value, $Res Function(_$FetchDiscusstions) then) =
       __$$FetchDiscusstionsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String questionId, int page});
+  $Res call({String questionId, int minRange, int maxRange});
 }
 
 /// @nodoc
@@ -287,16 +299,21 @@ class __$$FetchDiscusstionsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? questionId = null,
-    Object? page = null,
+    Object? minRange = null,
+    Object? maxRange = null,
   }) {
     return _then(_$FetchDiscusstions(
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
               as String,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
+      minRange: null == minRange
+          ? _value.minRange
+          : minRange // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxRange: null == maxRange
+          ? _value.maxRange
+          : maxRange // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -307,16 +324,21 @@ class __$$FetchDiscusstionsCopyWithImpl<$Res>
 class _$FetchDiscusstions
     with DiagnosticableTreeMixin
     implements FetchDiscusstions {
-  const _$FetchDiscusstions({required this.questionId, required this.page});
+  const _$FetchDiscusstions(
+      {required this.questionId,
+      required this.minRange,
+      required this.maxRange});
 
   @override
   final String questionId;
   @override
-  final int page;
+  final int minRange;
+  @override
+  final int maxRange;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DiscussionsEvent.fetchDiscusstions(questionId: $questionId, page: $page)';
+    return 'DiscussionsEvent.fetchDiscusstions(questionId: $questionId, minRange: $minRange, maxRange: $maxRange)';
   }
 
   @override
@@ -325,7 +347,8 @@ class _$FetchDiscusstions
     properties
       ..add(DiagnosticsProperty('type', 'DiscussionsEvent.fetchDiscusstions'))
       ..add(DiagnosticsProperty('questionId', questionId))
-      ..add(DiagnosticsProperty('page', page));
+      ..add(DiagnosticsProperty('minRange', minRange))
+      ..add(DiagnosticsProperty('maxRange', maxRange));
   }
 
   @override
@@ -335,11 +358,14 @@ class _$FetchDiscusstions
             other is _$FetchDiscusstions &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.minRange, minRange) ||
+                other.minRange == minRange) &&
+            (identical(other.maxRange, maxRange) ||
+                other.maxRange == maxRange));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, questionId, page);
+  int get hashCode => Object.hash(runtimeType, questionId, minRange, maxRange);
 
   @JsonKey(ignore: true)
   @override
@@ -351,39 +377,45 @@ class _$FetchDiscusstions
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
-    required TResult Function(String questionId, int page) fetchDiscusstions,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
         vote,
     required TResult Function(String discussionId, String text) reply,
-    required TResult Function(String discussionId, int page) listReplies,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
   }) {
-    return fetchDiscusstions(questionId, page);
+    return fetchDiscusstions(questionId, minRange, maxRange);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
-    TResult? Function(String questionId, int page)? fetchDiscusstions,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult? Function(String discussionId, String text)? reply,
-    TResult? Function(String discussionId, int page)? listReplies,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
   }) {
-    return fetchDiscusstions?.call(questionId, page);
+    return fetchDiscusstions?.call(questionId, minRange, maxRange);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
-    TResult Function(String questionId, int page)? fetchDiscusstions,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult Function(String discussionId, String text)? reply,
-    TResult Function(String discussionId, int page)? listReplies,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
     required TResult orElse(),
   }) {
     if (fetchDiscusstions != null) {
-      return fetchDiscusstions(questionId, page);
+      return fetchDiscusstions(questionId, minRange, maxRange);
     }
     return orElse();
   }
@@ -432,10 +464,12 @@ class _$FetchDiscusstions
 abstract class FetchDiscusstions implements DiscussionsEvent {
   const factory FetchDiscusstions(
       {required final String questionId,
-      required final int page}) = _$FetchDiscusstions;
+      required final int minRange,
+      required final int maxRange}) = _$FetchDiscusstions;
 
   String get questionId;
-  int get page;
+  int get minRange;
+  int get maxRange;
   @JsonKey(ignore: true)
   _$$FetchDiscusstionsCopyWith<_$FetchDiscusstions> get copyWith =>
       throw _privateConstructorUsedError;
@@ -525,11 +559,13 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
-    required TResult Function(String questionId, int page) fetchDiscusstions,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
         vote,
     required TResult Function(String discussionId, String text) reply,
-    required TResult Function(String discussionId, int page) listReplies,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
   }) {
     return vote(discussionId, voteType);
   }
@@ -538,10 +574,12 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
-    TResult? Function(String questionId, int page)? fetchDiscusstions,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult? Function(String discussionId, String text)? reply,
-    TResult? Function(String discussionId, int page)? listReplies,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
   }) {
     return vote?.call(discussionId, voteType);
   }
@@ -550,10 +588,12 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
-    TResult Function(String questionId, int page)? fetchDiscusstions,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult Function(String discussionId, String text)? reply,
-    TResult Function(String discussionId, int page)? listReplies,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
     required TResult orElse(),
   }) {
     if (vote != null) {
@@ -700,11 +740,13 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
-    required TResult Function(String questionId, int page) fetchDiscusstions,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
         vote,
     required TResult Function(String discussionId, String text) reply,
-    required TResult Function(String discussionId, int page) listReplies,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
   }) {
     return reply(discussionId, text);
   }
@@ -713,10 +755,12 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
-    TResult? Function(String questionId, int page)? fetchDiscusstions,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult? Function(String discussionId, String text)? reply,
-    TResult? Function(String discussionId, int page)? listReplies,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
   }) {
     return reply?.call(discussionId, text);
   }
@@ -725,10 +769,12 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
-    TResult Function(String questionId, int page)? fetchDiscusstions,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult Function(String discussionId, String text)? reply,
-    TResult Function(String discussionId, int page)? listReplies,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
     required TResult orElse(),
   }) {
     if (reply != null) {
@@ -796,7 +842,7 @@ abstract class _$$ListDiscussionRepliesCopyWith<$Res> {
           $Res Function(_$ListDiscussionReplies) then) =
       __$$ListDiscussionRepliesCopyWithImpl<$Res>;
   @useResult
-  $Res call({String discussionId, int page});
+  $Res call({String discussionId, int minRange, int maxRange});
 }
 
 /// @nodoc
@@ -811,16 +857,21 @@ class __$$ListDiscussionRepliesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? discussionId = null,
-    Object? page = null,
+    Object? minRange = null,
+    Object? maxRange = null,
   }) {
     return _then(_$ListDiscussionReplies(
       discussionId: null == discussionId
           ? _value.discussionId
           : discussionId // ignore: cast_nullable_to_non_nullable
               as String,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
+      minRange: null == minRange
+          ? _value.minRange
+          : minRange // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxRange: null == maxRange
+          ? _value.maxRange
+          : maxRange // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -832,16 +883,20 @@ class _$ListDiscussionReplies
     with DiagnosticableTreeMixin
     implements ListDiscussionReplies {
   const _$ListDiscussionReplies(
-      {required this.discussionId, required this.page});
+      {required this.discussionId,
+      required this.minRange,
+      required this.maxRange});
 
   @override
   final String discussionId;
   @override
-  final int page;
+  final int minRange;
+  @override
+  final int maxRange;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DiscussionsEvent.listReplies(discussionId: $discussionId, page: $page)';
+    return 'DiscussionsEvent.listReplies(discussionId: $discussionId, minRange: $minRange, maxRange: $maxRange)';
   }
 
   @override
@@ -850,7 +905,8 @@ class _$ListDiscussionReplies
     properties
       ..add(DiagnosticsProperty('type', 'DiscussionsEvent.listReplies'))
       ..add(DiagnosticsProperty('discussionId', discussionId))
-      ..add(DiagnosticsProperty('page', page));
+      ..add(DiagnosticsProperty('minRange', minRange))
+      ..add(DiagnosticsProperty('maxRange', maxRange));
   }
 
   @override
@@ -860,11 +916,15 @@ class _$ListDiscussionReplies
             other is _$ListDiscussionReplies &&
             (identical(other.discussionId, discussionId) ||
                 other.discussionId == discussionId) &&
-            (identical(other.page, page) || other.page == page));
+            (identical(other.minRange, minRange) ||
+                other.minRange == minRange) &&
+            (identical(other.maxRange, maxRange) ||
+                other.maxRange == maxRange));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, discussionId, page);
+  int get hashCode =>
+      Object.hash(runtimeType, discussionId, minRange, maxRange);
 
   @JsonKey(ignore: true)
   @override
@@ -877,39 +937,45 @@ class _$ListDiscussionReplies
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
-    required TResult Function(String questionId, int page) fetchDiscusstions,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
         vote,
     required TResult Function(String discussionId, String text) reply,
-    required TResult Function(String discussionId, int page) listReplies,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
   }) {
-    return listReplies(discussionId, page);
+    return listReplies(discussionId, minRange, maxRange);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
-    TResult? Function(String questionId, int page)? fetchDiscusstions,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult? Function(String discussionId, String text)? reply,
-    TResult? Function(String discussionId, int page)? listReplies,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
   }) {
-    return listReplies?.call(discussionId, page);
+    return listReplies?.call(discussionId, minRange, maxRange);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
-    TResult Function(String questionId, int page)? fetchDiscusstions,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
     TResult Function(String discussionId, String text)? reply,
-    TResult Function(String discussionId, int page)? listReplies,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
     required TResult orElse(),
   }) {
     if (listReplies != null) {
-      return listReplies(discussionId, page);
+      return listReplies(discussionId, minRange, maxRange);
     }
     return orElse();
   }
@@ -958,10 +1024,12 @@ class _$ListDiscussionReplies
 abstract class ListDiscussionReplies implements DiscussionsEvent {
   const factory ListDiscussionReplies(
       {required final String discussionId,
-      required final int page}) = _$ListDiscussionReplies;
+      required final int minRange,
+      required final int maxRange}) = _$ListDiscussionReplies;
 
   String get discussionId;
-  int get page;
+  int get minRange;
+  int get maxRange;
   @JsonKey(ignore: true)
   _$$ListDiscussionRepliesCopyWith<_$ListDiscussionReplies> get copyWith =>
       throw _privateConstructorUsedError;

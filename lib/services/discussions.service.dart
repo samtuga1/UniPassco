@@ -1,5 +1,6 @@
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
 import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/main_common.dart';
 import 'package:passco/models/discussions/data/discussion.dart';
 import 'package:passco/models/discussions/data/discussion_reply.dart';
 import 'package:passco/models/discussions/requests/add_discussion.dart';
@@ -13,20 +14,12 @@ class DiscussionService {
 
   DiscussionService();
   Future<HttpResponse<Discussion>> addDiscussion({
-    required AddDiscussionRequest addDiscussionRequest,
+    required AddDiscussionRequest request,
   }) async {
     try {
-      // final result = await dioClientService.put(
-      //   '/discussions/add',
-      //   data: addDiscussionRequest.toJson(),
-      //   interceptors: [
-      // getIt<HttpAccessTokenInterceptor>(),
-      //   ],
-      // );
+      final response = (await supabase.from('discussions').insert(request.toJson()).select('*, user:profiles(*)'))[0];
 
-      // print(result);
-
-      final discussion = Discussion.fromJson({});
+      final discussion = Discussion.fromJson(response);
 
       return HttpResponse.success(result: discussion);
     } catch (error) {
@@ -36,24 +29,25 @@ class DiscussionService {
 
   Future<HttpResponse<ListDiscussionsResponse>> listDiscussions({
     required String questionId,
-    int? page,
+    int minRange = 0,
+    int maxRange = 20,
   }) async {
     try {
-      // final result = await dioClientService.get(
-      //   '/discussions/list/',
-      //   queryParameters: {
-      //     "page": page ?? 1,
-      //   },
-      //   data: {
-      //     "questionId": questionId,
-      //   },
-      //   interceptors: [
-      //     getIt<HttpAccessTokenInterceptor>(),
-      //   ],
-      // );
+      final response = await supabase
+          .from('discussions')
+          .select('*, user:profiles(*)')
+          .eq('questionId', questionId)
+          .range(minRange, maxRange);
+
+      final count = await supabase.from('discussions').select().eq('questionId', questionId).count();
+
+      final result = {
+        'result': response,
+        'totalCount': count.count,
+      };
 
       // get the list of discussion under this question
-      final discussions = ListDiscussionsResponse.fromJson({});
+      final discussions = ListDiscussionsResponse.fromJson(result);
 
       return HttpResponse.success(result: discussions);
     } catch (error) {
@@ -85,21 +79,17 @@ class DiscussionService {
   }
 
   Future<HttpResponse<List<DiscussionReply>>> listReplies({
-    required ListDiscussionRepliesRequest listDiscussionRepliesRequest,
+    required ListDiscussionRepliesRequest request,
   }) async {
     try {
-      // List result = await dioClientService.get(
-      //   '/discussions/${listDiscussionRepliesRequest.discussionId}/list/replies/',
-      //   queryParameters: {
-      //     'page': listDiscussionRepliesRequest.page,
-      //   },
-      //   interceptors: [
-      //     getIt<HttpAccessTokenInterceptor>(),
-      //   ],
-      // );
+      final response = await supabase
+          .from('discussion_replies')
+          .select('*, user:profiles(*)')
+          .eq('discussion', request.discussionId)
+          .range(request.minRange, request.maxRange);
 
       List<DiscussionReply> discussionReplies = List<DiscussionReply>.from(
-        [].map(
+        response.map(
           (reply) => DiscussionReply.fromJson(reply),
         ),
       );
@@ -110,21 +100,18 @@ class DiscussionService {
     }
   }
 
-  Future<HttpResponse<DiscussionReply>> reply({
-    required ReplyDiscussionRequest replyDiscussionRequest,
-  }) async {
+  Future<HttpResponse<DiscussionReply>> reply({required ReplyDiscussionRequest request}) async {
     try {
-      // final result = await dioClientService.post(
-      //   '/discussions/${replyDiscussionRequest.discussionId}/reply',
-      //   data: {
-      //     'text': replyDiscussionRequest.text,
-      //   },
-      //   interceptors: [
-      //     getIt<HttpAccessTokenInterceptor>(),
-      //   ],
-      // );
+      final response =
+          (await supabase.from('discussion_replies').insert(request.toJson()).select('*, user:profiles(*)'))[0];
 
-      final discussionReply = DiscussionReply.fromJson({});
+      final discussion = (await supabase.from('discussions').select('*').eq('id', response['discussion']))[0];
+
+      int totalReplies = discussion['totalReplies'] + 1;
+
+      await supabase.from('discussions').update({'totalReplies': totalReplies}).eq('id', discussion['id']);
+
+      final discussionReply = DiscussionReply.fromJson(response);
 
       return HttpResponse.success(result: discussionReply);
     } catch (error) {

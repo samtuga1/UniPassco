@@ -1,3 +1,5 @@
+import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/injectable/injection.dart';
 import 'package:passco/models/questions/data/question_model.dart';
 import 'package:passco/router/routes.dart';
 import 'package:flutter/material.dart';
@@ -17,19 +19,9 @@ class QuestionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(
-            width: 0.50,
-            color: Color(0xFFE4E4E4),
-          ),
-          borderRadius: BorderRadius.circular(46.r),
-        ),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          12.verticalSpace,
           Image.asset(
             question?.mimeType == 'pdf' ? AppImages.pdf_icon : AppImages.jpeg_icon,
             height: 52.h,
@@ -64,11 +56,13 @@ class QuestionContainer extends StatelessWidget {
           // ),
           13.verticalSpace,
           GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(
+            onTap: () async {
+              await Navigator.of(context).pushNamed(
                 Routes.questionsPdfScreen,
                 arguments: question,
               );
+
+              getIt<DiscussionsBloc>().add(FetchDiscusstions(questionId: question!.id, minRange: 0, maxRange: 0));
             },
             child: DecoratedBox(
               decoration: BoxDecoration(

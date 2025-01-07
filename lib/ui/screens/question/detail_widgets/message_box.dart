@@ -84,12 +84,12 @@ class _MessageBoxState extends State<MessageBox> {
       ),
       decoration: BoxDecoration(
         color: context.getTheme.scaffoldBackgroundColor,
-        border: Border(
-          top: BorderSide(
-            color: const Color(0xFFF0F0F0),
-            width: 0.5.w,
-          ),
-        ),
+        // border: Border(
+        //   top: BorderSide(
+        //     color: Colors.grey,
+        //     width: 0.5.w,
+        //   ),
+        // ),
       ),
       child: Row(
         children: [

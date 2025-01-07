@@ -24,7 +24,7 @@ class _DiscussionReplyItemState extends State<DiscussionReplyItem> {
       children: [
         ClipOval(
           child: CustomCacheImage(
-            imageUrl: widget.discussion.user.photo!,
+            imageUrl: widget.discussion.user.photo,
             height: 27,
             width: 27,
           ),
@@ -35,7 +35,7 @@ class _DiscussionReplyItemState extends State<DiscussionReplyItem> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomText(
-              '@${widget.discussion.user.name}  •  $dateTime ago',
+              '@${widget.discussion.user.fullName}  •  $dateTime ago',
               style: context.getTheme.textTheme.labelSmall?.copyWith(
                 fontWeight: FontWeight.w400,
                 letterSpacing: -0.25,

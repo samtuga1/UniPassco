@@ -1,58 +1,88 @@
-import 'package:passco/models/auth/data/user_model.dart';
 import 'package:passco/models/discussions/data/discussion_reply.dart';
-import 'package:passco/utils/utils.dart';
 
 class Discussion {
   final String id;
-  final UserModel user;
-  final String text;
-  final int votes;
   final DateTime createdAt;
-  final DateTime updatedAt;
-  final int totalReplies;
+  final String text;
+  final UserProfile user;
+  final String questionId;
   List<DiscussionReply> fetchedReplies;
-  int replyPage;
   int totalRepliesLeft;
-  final DiscussionVoteType? userVoteType;
+  int minRange;
+  int maxRange;
+  final int totalReplies;
 
   Discussion({
     required this.id,
-    required this.user,
-    required this.text,
-    required this.votes,
     required this.createdAt,
-    required this.updatedAt,
-    required this.totalReplies,
-    this.replyPage = 1,
+    required this.text,
+    required this.user,
+    required this.questionId,
     this.fetchedReplies = const [],
-    this.userVoteType,
-  }) : totalRepliesLeft = totalReplies;
+    required this.totalReplies,
+  })  : totalRepliesLeft = totalReplies,
+        minRange = 0,
+        maxRange = 5;
 
-  factory Discussion.fromJson(Map<String, dynamic> json) {
-    return Discussion(
-      id: json["_id"],
-      user: UserModel.fromJson(json["user"]),
-      text: json["text"],
-      votes: json["votes"],
-      createdAt: DateTime.parse(json["createdAt"]),
-      updatedAt: DateTime.parse(json["updatedAt"]),
-      totalReplies: json['totalReplies'],
-      userVoteType: json['userVoteType'] == null
-          ? null
-          : DiscussionVoteType.values.byName(
-              (json['userVoteType'] as String).toLowerCase(),
-            ),
-    );
-  }
+  factory Discussion.fromJson(Map<String, dynamic> json) => Discussion(
+        id: json["id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        text: json["text"],
+        totalReplies: json['totalReplies'],
+        user: UserProfile.fromJson(json["user"]),
+        questionId: json["questionId"],
+      );
 
   Map<String, dynamic> toJson() => {
-        "_id": id,
-        "user": user.toJson(),
+        "id": id,
+        "created_at": createdAt.toIso8601String(),
         "text": text,
-        "votes": votes,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "totalReplies": totalReplies,
-        'userVoteType': userVoteType,
+        "user": user.toJson(),
+        "questionId": questionId,
+      };
+}
+
+class UserProfile {
+  final String id;
+  final String email;
+  final String photo;
+  final String fullName;
+  final DateTime createdAt;
+  final bool isVerified;
+
+  UserProfile({
+    required this.id,
+    required this.email,
+    required this.photo,
+    required this.fullName,
+    required this.createdAt,
+    required this.isVerified,
+  });
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
+        id: json["id"],
+        email: json["email"],
+        photo: json["photo"],
+        fullName: json["full_name"],
+        createdAt: DateTime.parse(json["created_at"]),
+        isVerified: json["is_verified"],
+      );
+
+  factory UserProfile.test() => UserProfile(
+        id: '',
+        fullName: 'Samuel Twumasi',
+        email: 'samuel@gmail.com',
+        photo: '',
+        isVerified: true,
+        createdAt: DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "email": email,
+        "photo": photo,
+        "full_name": fullName,
+        "created_at": createdAt.toIso8601String(),
+        "is_verified": isVerified,
       };
 }

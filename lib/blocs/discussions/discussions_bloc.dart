@@ -28,7 +28,9 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
 
   ValueNotifier<String?> messageTextFieldLabel = ValueNotifier('Add opinion to forum');
   late Discussion tappedDiscussionToReply;
-  late String tappedDiscussionIdFetchReplies;
+  String? tappedDiscussionIdFetchReplies;
+  // int minDiscussionRange = 0;
+  // int maxDiscussionRange = 20;
 
   Future<void> _replyDiscussion(ReplyDiscussion event, Emitter emit) async {
     emit(const AddingDiscussionOrReply());
@@ -38,9 +40,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
       text: event.text,
     );
 
-    final HttpResponse<DiscussionReply> response = await _service.reply(
-      replyDiscussionRequest: request,
-    );
+    final HttpResponse<DiscussionReply> response = await _service.reply(request: request);
 
     response.maybeWhen(
       success: (discussionReply) {
@@ -60,12 +60,11 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
 
     final request = ListDiscussionRepliesRequest(
       discussionId: event.discussionId,
-      page: event.page,
+      minRange: event.minRange,
+      maxRange: event.maxRange,
     );
 
-    final HttpResponse<List<DiscussionReply>> response = await _service.listReplies(
-      listDiscussionRepliesRequest: request,
-    );
+    final HttpResponse<List<DiscussionReply>> response = await _service.listReplies(request: request);
 
     response.maybeWhen(
       success: (discussionReplies) {
@@ -83,8 +82,11 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
   Future<void> _fetchDiscussions(FetchDiscusstions event, Emitter emit) async {
     emit(const DiscussionsState.fetchingDiscussions());
 
-    final HttpResponse<ListDiscussionsResponse> response =
-        await _service.listDiscussions(questionId: event.questionId, page: event.page);
+    final HttpResponse<ListDiscussionsResponse> response = await _service.listDiscussions(
+      questionId: event.questionId,
+      minRange: event.minRange,
+      maxRange: event.maxRange,
+    );
 
     response.maybeWhen(
       success: (discussions) {
@@ -104,9 +106,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
 
     final request = AddDiscussionRequest(text: event.text, questionId: event.questionId);
 
-    final HttpResponse<Discussion> response = await _service.addDiscussion(
-      addDiscussionRequest: request,
-    );
+    final HttpResponse<Discussion> response = await _service.addDiscussion(request: request);
 
     response.maybeWhen(
       success: (discussion) {

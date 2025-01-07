@@ -174,7 +174,7 @@ class Helpers {
       }
       completer.complete(question.userHasDownloaded);
     });
-    return completer.future;
+    return await completer.future;
   }
 
   static String generateRandomString(int length) {

@@ -24,14 +24,15 @@ class QuestionsScreenWidget extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 14),
               child: QuestionWidget(
                 question: questions[index],
-                onTap: () => Navigator.of(context).pushNamed(
-                  Routes.questionsPdfScreen,
+                onTap: () =>
+                    // Navigator.of(context).pushNamed(
+                    //   Routes.questionsPdfScreen,
+                    //   arguments: questions[index],
+                    // ),
+                    Navigator.of(context).pushNamed(
+                  Routes.question_detail,
                   arguments: questions[index],
                 ),
-                // Navigator.of(context).pushNamed(
-                //   Routes.question_detail,
-                //   arguments: questions[index],
-                // ),
               ),
             ),
           ),

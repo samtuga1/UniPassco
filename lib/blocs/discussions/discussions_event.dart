@@ -8,7 +8,8 @@ class DiscussionsEvent with _$DiscussionsEvent {
   }) = AddDiscussion;
   const factory DiscussionsEvent.fetchDiscusstions({
     required String questionId,
-    required int page,
+    required int minRange,
+    required int maxRange,
   }) = FetchDiscusstions;
   const factory DiscussionsEvent.vote({
     required String discussionId,
@@ -22,6 +23,7 @@ class DiscussionsEvent with _$DiscussionsEvent {
 
   const factory DiscussionsEvent.listReplies({
     required String discussionId,
-    required int page,
+    required int minRange,
+    required int maxRange,
   }) = ListDiscussionReplies;
 }

@@ -25,6 +25,7 @@ class _AiScreenState extends State<AiScreen> {
 
   @override
   void initState() {
+    print(globalConfig.appConfig['gemini_key']);
     super.initState();
     _model = GenerativeModel(model: 'gemini-1.5-pro', apiKey: globalConfig.appConfig['gemini_key']);
     _chat = _model.startChat();

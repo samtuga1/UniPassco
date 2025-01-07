@@ -6,4 +6,9 @@ class ReplyDiscussionRequest {
     required this.discussionId,
     required this.text,
   });
+
+  Map<String, dynamic> toJson() => {
+        "text": text,
+        "discussion": discussionId,
+      };
 }

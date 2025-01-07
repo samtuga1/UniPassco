@@ -1,9 +1,11 @@
 class ListDiscussionRepliesRequest {
   final String discussionId;
-  final int page;
+  final int minRange;
+  final int maxRange;
 
   ListDiscussionRepliesRequest({
     required this.discussionId,
-    required this.page,
+    required this.minRange,
+    required this.maxRange,
   });
 }
