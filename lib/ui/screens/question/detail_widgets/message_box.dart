@@ -93,17 +93,13 @@ class _MessageBoxState extends State<MessageBox> {
       ),
       child: Row(
         children: [
-          FutureBuilder(
+          FutureBuilder<UserModel?>(
             future: getIt<AuthedUserRepository>().getUser(),
-            builder: (BuildContext context, AsyncSnapshot<UserModel> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<UserModel?> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const ClipOval(
-                  child: SizedBox(
-                    height: 30,
-                    width: 30,
-                  ),
-                );
+                return const ClipOval(child: SizedBox(height: 30, width: 30));
               }
+              if (snapshot.data == null) return const ClipOval(child: SizedBox(height: 30, width: 30));
               return ClipOval(
                 child: CustomCacheImage(
                   imageUrl: snapshot.data?.photo ?? '',

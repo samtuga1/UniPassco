@@ -1,7 +1,7 @@
 name: passco
 description: A new Flutter project.
 
-version: 1.0.0+1
+version: 1.0.1+5
 
 environment:
   sdk: ">=3.0.0 <=3.13.2"
@@ -36,7 +36,7 @@ dependencies:
   pinput: ^5.0.0
   soft_edge_blur: ^0.0.2
   share_plus:
-  screenshot:
+  screenshot: ^3.0.0
   package_info_plus: ^8.0.2
   flutter_animate: ^4.5.0
   flutter_slidable: ^3.1.1
@@ -49,11 +49,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
   build_runner: ^2.3.3
   freezed: ^2.4.2
   rename: ^3.0.0
   flutter_native_splash:
+
+dependency_overrides:
+  win32: ^5.5.3
 
 flutter:
   uses-material-design: true

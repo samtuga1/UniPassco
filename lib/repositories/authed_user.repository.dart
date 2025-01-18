@@ -8,8 +8,9 @@ class AuthedUserRepository {
 
   AuthedUserRepository(this.prefs);
 
-  Future<UserModel> getUser() async {
+  Future<UserModel?> getUser() async {
     final user = await prefs.getString(Constants.userKey);
+    if (user == null) return null;
     final decodedUser = await jsonDecode(user);
     return UserModel.fromJson(decodedUser);
   }
@@ -25,8 +26,10 @@ class AuthedUserRepository {
     await prefs.remove(Constants.userKey);
   }
 
-  Future<String> getUserId() async {
+  Future<String?> getUserId() async {
     final user = await prefs.getString(Constants.userKey);
+
+    if (user == null) return null;
 
     final decodedUser = jsonDecode(user);
 

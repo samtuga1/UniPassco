@@ -15,7 +15,7 @@ class UserService {
   }) async {
     try {
       final avatarFile = File(filePath);
-      final userId = await getIt<SharedPreference>().getString(Constants.userIdKey);
+      final userId = (await getIt<SharedPreference>().getString(Constants.userIdKey))!;
 
       final String downloadUrl = await Supabase.instance.client.storage.from('photos').upload(
             'users/$userId/${avatarFile.path.split('/').last}',
@@ -45,9 +45,12 @@ class UserService {
     }
   }
 
-  Future<HttpResponse<UserModel>> retrieveUser({String? userId}) async {
+  Future<HttpResponse<UserModel?>> retrieveUser({String? userId}) async {
     try {
       userId ??= await getIt<SharedPreference>().getString(Constants.userIdKey);
+
+      if (userId == null) return const HttpResponse<UserModel>.success(result: null);
+
       final res = (await Supabase.instance.client.from("profiles").select().eq("id", userId))[0];
 
       final user = UserModel.fromJson({
@@ -66,7 +69,7 @@ class UserService {
 
   Future<HttpResponse<UserModel>> updateProfile({required String name, required String email}) async {
     try {
-      final userId = await getIt<SharedPreference>().getString(Constants.userIdKey);
+      final userId = (await getIt<SharedPreference>().getString(Constants.userIdKey))!;
       final res =
           (await supabase.from('profiles').update({"full_name": name, "email": email}).eq("id", userId).select()).first;
 

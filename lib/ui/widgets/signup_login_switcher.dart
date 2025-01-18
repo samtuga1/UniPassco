@@ -22,30 +22,39 @@ class _LoginSignUpSwitchState extends State<LoginSignUpSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return PageTransitionSwitcher(
-      reverse: !showLogin,
-      duration: const Duration(milliseconds: 400),
-      transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
-        transitionType: SharedAxisTransitionType.horizontal,
-        animation: primaryAnimation,
-        secondaryAnimation: secondaryAnimation,
-        child: child,
-      ),
-      child: showLogin
-          ? SignIn(
-              createAccountTapped: () {
-                setState(() {
-                  showLogin = false;
-                });
-              },
-            )
-          : SignUp(
-              loginTapped: () {
-                setState(() {
-                  showLogin = true;
-                });
-              },
-            ),
+    return Stack(
+      children: [
+        PageTransitionSwitcher(
+          reverse: !showLogin,
+          duration: const Duration(milliseconds: 400),
+          transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
+            transitionType: SharedAxisTransitionType.horizontal,
+            animation: primaryAnimation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          ),
+          child: showLogin
+              ? SignIn(
+                  createAccountTapped: () {
+                    setState(() {
+                      showLogin = false;
+                    });
+                  },
+                )
+              : SignUp(
+                  loginTapped: () {
+                    setState(() {
+                      showLogin = true;
+                    });
+                  },
+                ),
+        ),
+        Positioned(
+          top: MediaQuery.paddingOf(context).top + 10,
+          left: 5,
+          child: const BackButton(),
+        ),
+      ],
     );
   }
 }

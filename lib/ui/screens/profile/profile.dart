@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:passco/blocs/auth/authentication_bloc.dart';
 import 'package:passco/blocs/user/user_bloc.dart';
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
 import 'package:passco/models/auth/data/user_model.dart';
@@ -8,6 +8,7 @@ import 'package:passco/router/routes.dart';
 import 'package:passco/services/shared_preferences.service.dart';
 import 'package:passco/ui/screens/bottom_navigation/bottom_nav_bar.dart';
 import 'package:passco/ui/screens/home/widget/profile_photo_detail.dart';
+import 'package:passco/ui/widgets/custom_overlay_entry.dart';
 import 'package:passco/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,15 +22,17 @@ import 'package:passco/ui/widgets/custom_listtile.dart';
 import 'package:passco/utils/utils.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({super.key, required this.user});
+  final UserModel user;
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
+class _ProfileWidgetState extends State<ProfileWidget> with TickerProviderStateMixin {
   late AnimationController themeSwitchController;
   late AnimationController themeScaleController;
   late Animation<double> themeSwitchAngle;
@@ -39,12 +42,15 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   late TextEditingController emailController;
 
   late UserModel user;
-  bool isInitializing = true;
+  // bool isInitializing = true;
   bool isEditing = false;
 
   @override
   void initState() {
-    getUser();
+    // getUser();
+    user = widget.user;
+    nameController = TextEditingController(text: user.name);
+    emailController = TextEditingController(text: user.email);
     // get the theme from get it
     themeStatus = getIt<SharedPreferences>().getBool(Constants.kThemeString) ?? false;
     themeSwitchController = AnimationController(
@@ -66,14 +72,6 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       curve: Curves.fastOutSlowIn,
     );
     super.initState();
-  }
-
-  void getUser() async {
-    user = await getIt<AuthedUserRepository>().getUser();
-    nameController = TextEditingController(text: user.name);
-    emailController = TextEditingController(text: user.email);
-    isInitializing = false;
-    setState(() {});
   }
 
   @override
@@ -105,189 +103,240 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: switch (isInitializing) {
-        true => const CustomLoading(),
-        false => ListView(
-            children: [
-              40.verticalSpace,
-              Padding(
-                padding: REdgeInsets.symmetric(horizontal: 24),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: GestureDetector(
-                    onTap: () async {
-                      navBarScreenshotController.capture().then(
-                            (image) => Navigator.of(context).push(
-                              PageRouteBuilder(
-                                pageBuilder: (ctx, primary, sec) {
-                                  return ProfilePhotoDetail(
-                                    heroKey: 'profile1',
-                                    image: user.photo,
-                                    screenshot: image!,
-                                    primary: primary,
-                                  );
-                                },
-                              ),
+        child: ListView(
+          children: [
+            40.verticalSpace,
+            Padding(
+              padding: REdgeInsets.symmetric(horizontal: 24),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () async {
+                    navBarScreenshotController.capture().then(
+                          (image) => Navigator.of(context).push(
+                            PageRouteBuilder(
+                              pageBuilder: (ctx, primary, sec) {
+                                return ProfilePhotoDetail(
+                                  heroKey: 'profile1',
+                                  image: user.photo,
+                                  screenshot: image!,
+                                  primary: primary,
+                                );
+                              },
                             ),
-                          );
-                    },
-                    child: Hero(
-                      tag: 'profile1',
-                      child: CustomCacheImage(imageUrl: user.photo!, height: 85, width: 85),
-                    ),
+                          ),
+                        );
+                  },
+                  child: Hero(
+                    tag: 'profile1',
+                    child: CustomCacheImage(imageUrl: user.photo!, height: 85, width: 85),
                   ),
                 ),
               ),
-              30.verticalSpace,
-              Padding(
-                padding: REdgeInsets.symmetric(horizontal: 24),
-                child: _buildListItem(
-                  onTap: () {},
-                  title: "Full name",
-                  controller: nameController,
-                ),
+            ),
+            30.verticalSpace,
+            Padding(
+              padding: REdgeInsets.symmetric(horizontal: 24),
+              child: _buildListItem(
+                onTap: () {},
+                title: "Full name",
+                controller: nameController,
               ),
-              20.verticalSpace,
-              Padding(
-                padding: REdgeInsets.symmetric(horizontal: 24),
-                child: _buildListItem(
-                  onTap: null,
-                  title: "Email",
-                  controller: emailController,
-                ),
+            ),
+            20.verticalSpace,
+            Padding(
+              padding: REdgeInsets.symmetric(horizontal: 24),
+              child: _buildListItem(
+                onTap: null,
+                title: "Email",
+                controller: emailController,
               ),
-              20.verticalSpace,
-              Padding(
-                padding: REdgeInsets.symmetric(horizontal: 24),
-                child: _buildListItem(
-                  title: "School",
-                  value: "University of Ghana",
-                ),
+            ),
+            20.verticalSpace,
+            Padding(
+              padding: REdgeInsets.symmetric(horizontal: 24),
+              child: _buildListItem(
+                title: "School",
+                value: "University of Ghana",
               ),
-              13.verticalSpace,
-              switch (isEditing) {
-                true => Column(
-                    children: [
-                      89.verticalSpace,
-                      Padding(
-                        padding: REdgeInsets.symmetric(horizontal: 24),
-                        child: BlocConsumer<UserBloc, UserState>(
-                          listener: (context, state) {
-                            if (state is UpdatingProfileSuccess) {
-                              UiUtils.flush(
-                                context,
-                                msg: 'User profile updated successfully',
-                                errorState: ErrorState.success,
-                              );
-                            }
-                            if (state is UserError) {
-                              UiUtils.showStandardErrorFlushBar(
-                                context,
-                                message: HttpErrorUtils.getErrorMessage(state.error),
-                              );
-                            }
-                          },
-                          listenWhen: (previous, current) =>
-                              (previous is UpdatingProfile && current is UserError) ||
-                              current is UpdatingProfileSuccess,
-                          builder: (context, state) {
-                            return CustomElevatedButton(
-                              isBusy: state is UpdatingProfile,
-                              onPressed: () => context.read<UserBloc>().add(
-                                    UpdateProfile(
-                                      name: nameController.text.trim(),
-                                      email: emailController.text.trim(),
-                                    ),
-                                  ),
-                              title: 'Update',
+            ),
+            13.verticalSpace,
+            switch (isEditing) {
+              true => Column(
+                  children: [
+                    89.verticalSpace,
+                    Padding(
+                      padding: REdgeInsets.symmetric(horizontal: 24),
+                      child: BlocConsumer<UserBloc, UserState>(
+                        listener: (context, state) {
+                          if (state is UpdatingProfileSuccess) {
+                            UiUtils.flush(
+                              context,
+                              msg: 'User profile updated successfully',
+                              errorState: ErrorState.success,
                             );
-                          },
-                          buildWhen: (previous, current) =>
-                              current is UpdatingProfile || current is UpdatingProfileSuccess || current is UserError,
-                        ),
+                          }
+                          if (state is UserError) {
+                            UiUtils.showStandardErrorFlushBar(
+                              context,
+                              message: HttpErrorUtils.getErrorMessage(state.error),
+                            );
+                          }
+                        },
+                        listenWhen: (previous, current) =>
+                            (previous is UpdatingProfile && current is UserError) || current is UpdatingProfileSuccess,
+                        builder: (context, state) {
+                          return CustomElevatedButton(
+                            isBusy: state is UpdatingProfile,
+                            onPressed: () => context.read<UserBloc>().add(
+                                  UpdateProfile(
+                                    name: nameController.text.trim(),
+                                    email: emailController.text.trim(),
+                                  ),
+                                ),
+                            title: 'Update',
+                          );
+                        },
+                        buildWhen: (previous, current) =>
+                            current is UpdatingProfile || current is UpdatingProfileSuccess || current is UserError,
                       ),
-                    ],
-                  )
-                      .animate(key: ValueKey(isEditing))
-                      .fadeIn(duration: Durations.short4)
-                      .slideX(duration: Durations.short4, begin: -0.05),
-                false => Column(
-                    children: [
-                      Padding(
-                        padding: REdgeInsets.symmetric(horizontal: 24),
-                        child: StatefulBuilder(builder: (ctx, setState) {
-                          return CustomListTile(
-                            titleStyle: context.getTheme.textTheme.titleLarge,
-                            trailing: Switch.adaptive(
-                              activeColor: context.getTheme.primaryColor,
-                              value: themeStatus,
-                              onChanged: themeSwitchTapped,
-                            ),
-                            title: 'Theme',
-                            leading: AnimatedBuilder(
-                              animation: themeSwitchAngle,
-                              builder: (ctx, child) => AnimatedBuilder(
-                                animation: themeScaleController,
-                                builder: (ctx, _) => Transform.scale(
-                                  scale: (themeScaleValue.value + 1),
-                                  child: Transform.rotate(
-                                    angle: themeSwitchAngle.value * pi,
-                                    child: Image.asset(
-                                      AppImages.colorPalette,
-                                      height: 25,
-                                      width: 25,
-                                    ),
+                    ),
+                  ],
+                )
+                    .animate(key: ValueKey(isEditing))
+                    .fadeIn(duration: Durations.short4)
+                    .slideX(duration: Durations.short4, begin: -0.05),
+              false => Column(
+                  children: [
+                    Padding(
+                      padding: REdgeInsets.symmetric(horizontal: 24),
+                      child: StatefulBuilder(builder: (ctx, setState) {
+                        return CustomListTile(
+                          titleStyle: context.getTheme.textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                          trailing: Switch.adaptive(
+                            activeColor: context.getTheme.primaryColor,
+                            value: themeStatus,
+                            onChanged: themeSwitchTapped,
+                          ),
+                          title: 'Theme',
+                          leading: AnimatedBuilder(
+                            animation: themeSwitchAngle,
+                            builder: (ctx, child) => AnimatedBuilder(
+                              animation: themeScaleController,
+                              builder: (ctx, _) => Transform.scale(
+                                scale: (themeScaleValue.value + 1),
+                                child: Transform.rotate(
+                                  angle: themeSwitchAngle.value * pi,
+                                  child: Image.asset(
+                                    AppImages.colorPalette,
+                                    height: 25,
+                                    width: 25,
                                   ),
                                 ),
                               ),
                             ),
-                            //const Icon(Icons.palette),
-                          );
-                        }),
+                          ),
+                          //const Icon(Icons.palette),
+                        );
+                      }),
+                    ),
+                    // CustomListTile(
+                    //   padding: REdgeInsets.symmetric(horizontal: 24),
+                    //   title: 'Rate the app',
+                    //   titleStyle: context.getTheme.textTheme.titleLarge,
+                    //   onTap: () {},
+                    // ),
+                    CustomListTile(
+                      padding: REdgeInsets.symmetric(horizontal: 24),
+                      title: 'Log out',
+                      titleStyle: context.getTheme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w500,
                       ),
-                      CustomListTile(
-                        padding: REdgeInsets.symmetric(horizontal: 24),
-                        title: 'Rate the app',
-                        titleStyle: context.getTheme.textTheme.titleLarge,
-                        onTap: () {},
+                      onTap: () => UiUtils.customDialog(
+                        context,
+                        title: 'Are you sure you want to logout ?',
+                        'You will be required to log in when you open Buddy app again',
+                        onTap: () {
+                          getIt<SharedPreference>().clear();
+                          // Navigator.of(context).pushNamedAndRemoveUntil(
+                          //   Routes.signin_signup,
+                          //   (route) => false,
+                          // );
+                          getIt<UserBloc>().add(const RetrieveUser());
+                          bottomNavBarKey.currentState?.onBottomNavItemTap(0);
+                        },
                       ),
-                      CustomListTile(
+                    ),
+                    BlocListener<AuthenticationBloc, AuthenticationState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                          deletingAccount: () => getIt<CustomOverlayEntry>().show(context),
+                          authenticationError: (error) {
+                            getIt<CustomOverlayEntry>().hide(context);
+
+                            UiUtils.showStandardErrorFlushBar(
+                              context,
+                              message: HttpErrorUtils.getErrorMessage(error),
+                            );
+                          },
+                          deletingAccountSuccess: () {
+                            getIt<CustomOverlayEntry>().hide(context);
+                            getIt<SharedPreference>().clear();
+                            Navigator.of(context).pushNamedAndRemoveUntil(Routes.signin_signup, (route) => false);
+                          },
+                          orElse: () {},
+                        );
+                      },
+                      listenWhen: (previous, current) =>
+                          (previous is DeletingAccount && current is DeletingAccountSuccess) ||
+                          (previous is DeletingAccount && current is AuthenticationError),
+                      child: CustomListTile(
                         padding: REdgeInsets.symmetric(horizontal: 24),
-                        title: 'Log out',
-                        titleStyle: context.getTheme.textTheme.titleLarge,
+                        title: 'Request account Deletion',
+                        titleStyle: context.getTheme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                         onTap: () => UiUtils.customDialog(
                           context,
-                          title: 'Are you sure you want to logout ?',
-                          'You will be required to log in when you open Buddy app again',
+                          title: 'Are you sure you want to delete account ?',
+                          'Your account will be permanently lost and will not be able to be retrieved',
                           onTap: () {
-                            getIt<SharedPreference>().clear();
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                              Routes.signin_signup,
-                              (route) => false,
-                            );
+                            // getIt<AuthenticationBloc>().add(const DeleteAccount());
+                            // final user = await getIt<AuthedUserRepository>().getUser();
+
+                            _launchUrl();
                           },
                         ),
                       ),
-                    ],
-                  )
-                      .animate(key: ValueKey(isEditing))
-                      .fadeIn(duration: Durations.short4)
-                      .slideX(duration: Durations.short4, begin: -0.05),
-              },
-              // .animate().fadeIn(duration: Durations.short4).slideX(begin: -0.02, duration: Durations.short4),
-              15.verticalSpace,
-              Center(
-                child: FutureBuilder(
-                  future: PackageInfo.fromPlatform(),
-                  builder: (context, snapshot) {
-                    return Text("Version ${snapshot.data?.version}");
-                  },
-                ),
+                    )
+                  ],
+                )
+                    .animate(key: ValueKey(isEditing))
+                    .fadeIn(duration: Durations.short4)
+                    .slideX(duration: Durations.short4, begin: -0.05),
+            },
+            // .animate().fadeIn(duration: Durations.short4).slideX(begin: -0.02, duration: Durations.short4),
+            15.verticalSpace,
+            Center(
+              child: FutureBuilder(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  return Text("Version ${snapshot.data?.version}");
+                },
               ),
-            ],
-          ),
-      }),
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(Uri.parse('https://forms.gle/3vJtPLvsT93KuCrD7'), mode: LaunchMode.inAppWebView)) {
+      // throw Exception('Could not launch $_url');
+    }
   }
 
   Column _buildListItem({
@@ -304,7 +353,9 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
           children: [
             CustomText(
               title,
-              style: context.getTheme.textTheme.titleLarge,
+              style: context.getTheme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
             ),
             SizedBox.square(
               dimension: 28,

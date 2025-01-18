@@ -1,5 +1,7 @@
 import 'package:passco/blocs/auth/authentication_bloc.dart';
+import 'package:passco/blocs/user/user_bloc.dart';
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
+import 'package:passco/injectable/injection.dart';
 import 'package:passco/router/routes.dart';
 import 'package:passco/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -118,10 +120,10 @@ class _SignInState extends State<SignIn> {
                           // show flush message if somwthing is wrong
                           if (HttpErrorUtils.getErrorMessage(error).contains('verified')) {
                             // Take the user to the verification screen if he/she has not beem verified
-                            Navigator.of(context).pushNamed(
-                              Routes.verificationScreen,
-                              arguments: emailController.text.trim(),
-                            );
+                            // Navigator.of(context).pushNamed(
+                            //   Routes.verificationScreen,
+                            //   arguments: emailController.text.trim(),
+                            // );
                           } else {
                             // else show the standard error flush
                             UiUtils.showStandardErrorFlushBar(
@@ -139,10 +141,10 @@ class _SignInState extends State<SignIn> {
                             );
                           } else {
                             // navigate user to verification screen is success
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                              Routes.bottomNavigationBar,
-                              (_) => false,
-                            );
+                            // Navigator.of(context).pushNamedAndRemoveUntil(Routes.bottomNavigationBar, (_) => false);
+                            getIt<UserBloc>().add(const RetrieveUser());
+
+                            Navigator.of(context).pop();
                           }
                         },
                         orElse: () {},

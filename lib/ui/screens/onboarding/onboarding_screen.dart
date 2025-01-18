@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:passco/blocs/user/user_bloc.dart';
 import 'package:passco/data/images.dart';
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
-import 'package:passco/router/routes.dart';
-import 'package:passco/ui/widgets/custom_adaptive_button.dart';
+import 'package:passco/injectable/injection.dart';
 import 'package:passco/ui/widgets/custom_elevated_button.dart';
 import 'package:passco/ui/widgets/custom_profile_photo_container.dart';
 import 'package:passco/ui/widgets/custom_text.dart';
@@ -160,10 +159,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     listener: (context, state) {
                       state.maybeWhen(
                         uploadingProfilePhotoSuccess: (_) {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                            Routes.bottomNavigationBar,
-                            (_) => false,
-                          );
+                          getIt<UserBloc>().add(const RetrieveUser());
+                          Navigator.of(context)
+                            ..pop()
+                            ..pop();
                         },
                         userError: (error) {
                           UiUtils.showStandardErrorFlushBar(

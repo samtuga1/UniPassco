@@ -37,7 +37,8 @@ class DiscussionService {
           .from('discussions')
           .select('*, user:profiles(*)')
           .eq('questionId', questionId)
-          .range(minRange, maxRange);
+          .range(minRange, maxRange)
+          .order('created_at');
 
       final count = await supabase.from('discussions').select().eq('questionId', questionId).count();
 
@@ -86,7 +87,8 @@ class DiscussionService {
           .from('discussion_replies')
           .select('*, user:profiles(*)')
           .eq('discussion', request.discussionId)
-          .range(request.minRange, request.maxRange);
+          .range(request.minRange, request.maxRange)
+          .order('created_at');
 
       List<DiscussionReply> discussionReplies = List<DiscussionReply>.from(
         response.map(

@@ -12,7 +12,7 @@ part of 'ai_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AiEvent {
@@ -56,7 +56,9 @@ mixin _$AiEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AiEventCopyWith<AiEvent> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -78,6 +80,8 @@ class _$AiEventCopyWithImpl<$Res, $Val extends AiEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,31 +97,33 @@ class _$AiEventCopyWithImpl<$Res, $Val extends AiEvent>
 }
 
 /// @nodoc
-abstract class _$$InitializeAIEventCopyWith<$Res>
+abstract class _$$InitializeAIEventImplCopyWith<$Res>
     implements $AiEventCopyWith<$Res> {
-  factory _$$InitializeAIEventCopyWith(
-          _$InitializeAIEvent value, $Res Function(_$InitializeAIEvent) then) =
-      __$$InitializeAIEventCopyWithImpl<$Res>;
+  factory _$$InitializeAIEventImplCopyWith(_$InitializeAIEventImpl value,
+          $Res Function(_$InitializeAIEventImpl) then) =
+      __$$InitializeAIEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Question question, ChatSession chat});
 }
 
 /// @nodoc
-class __$$InitializeAIEventCopyWithImpl<$Res>
-    extends _$AiEventCopyWithImpl<$Res, _$InitializeAIEvent>
-    implements _$$InitializeAIEventCopyWith<$Res> {
-  __$$InitializeAIEventCopyWithImpl(
-      _$InitializeAIEvent _value, $Res Function(_$InitializeAIEvent) _then)
+class __$$InitializeAIEventImplCopyWithImpl<$Res>
+    extends _$AiEventCopyWithImpl<$Res, _$InitializeAIEventImpl>
+    implements _$$InitializeAIEventImplCopyWith<$Res> {
+  __$$InitializeAIEventImplCopyWithImpl(_$InitializeAIEventImpl _value,
+      $Res Function(_$InitializeAIEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? question = null,
     Object? chat = null,
   }) {
-    return _then(_$InitializeAIEvent(
+    return _then(_$InitializeAIEventImpl(
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -132,8 +138,8 @@ class __$$InitializeAIEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitializeAIEvent implements InitializeAIEvent {
-  const _$InitializeAIEvent({required this.question, required this.chat});
+class _$InitializeAIEventImpl implements InitializeAIEvent {
+  const _$InitializeAIEventImpl({required this.question, required this.chat});
 
   @override
   final Question question;
@@ -146,10 +152,10 @@ class _$InitializeAIEvent implements InitializeAIEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InitializeAIEvent &&
+            other is _$InitializeAIEventImpl &&
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.chat, chat) || other.chat == chat));
@@ -158,11 +164,14 @@ class _$InitializeAIEvent implements InitializeAIEvent {
   @override
   int get hashCode => Object.hash(runtimeType, question, chat);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$InitializeAIEventCopyWith<_$InitializeAIEvent> get copyWith =>
-      __$$InitializeAIEventCopyWithImpl<_$InitializeAIEvent>(this, _$identity);
+  _$$InitializeAIEventImplCopyWith<_$InitializeAIEventImpl> get copyWith =>
+      __$$InitializeAIEventImplCopyWithImpl<_$InitializeAIEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -230,43 +239,48 @@ class _$InitializeAIEvent implements InitializeAIEvent {
 abstract class InitializeAIEvent implements AiEvent {
   const factory InitializeAIEvent(
       {required final Question question,
-      required final ChatSession chat}) = _$InitializeAIEvent;
+      required final ChatSession chat}) = _$InitializeAIEventImpl;
 
   Question get question;
   @override
   ChatSession get chat;
+
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$InitializeAIEventCopyWith<_$InitializeAIEvent> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$InitializeAIEventImplCopyWith<_$InitializeAIEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$SendAiMessageCopyWith<$Res>
+abstract class _$$SendAiMessageImplCopyWith<$Res>
     implements $AiEventCopyWith<$Res> {
-  factory _$$SendAiMessageCopyWith(
-          _$SendAiMessage value, $Res Function(_$SendAiMessage) then) =
-      __$$SendAiMessageCopyWithImpl<$Res>;
+  factory _$$SendAiMessageImplCopyWith(
+          _$SendAiMessageImpl value, $Res Function(_$SendAiMessageImpl) then) =
+      __$$SendAiMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, ChatSession chat});
 }
 
 /// @nodoc
-class __$$SendAiMessageCopyWithImpl<$Res>
-    extends _$AiEventCopyWithImpl<$Res, _$SendAiMessage>
-    implements _$$SendAiMessageCopyWith<$Res> {
-  __$$SendAiMessageCopyWithImpl(
-      _$SendAiMessage _value, $Res Function(_$SendAiMessage) _then)
+class __$$SendAiMessageImplCopyWithImpl<$Res>
+    extends _$AiEventCopyWithImpl<$Res, _$SendAiMessageImpl>
+    implements _$$SendAiMessageImplCopyWith<$Res> {
+  __$$SendAiMessageImplCopyWithImpl(
+      _$SendAiMessageImpl _value, $Res Function(_$SendAiMessageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
     Object? chat = null,
   }) {
-    return _then(_$SendAiMessage(
+    return _then(_$SendAiMessageImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -281,8 +295,8 @@ class __$$SendAiMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SendAiMessage implements SendAiMessage {
-  const _$SendAiMessage({required this.message, required this.chat});
+class _$SendAiMessageImpl implements SendAiMessage {
+  const _$SendAiMessageImpl({required this.message, required this.chat});
 
   @override
   final String message;
@@ -295,10 +309,10 @@ class _$SendAiMessage implements SendAiMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SendAiMessage &&
+            other is _$SendAiMessageImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.chat, chat) || other.chat == chat));
   }
@@ -306,11 +320,13 @@ class _$SendAiMessage implements SendAiMessage {
   @override
   int get hashCode => Object.hash(runtimeType, message, chat);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SendAiMessageCopyWith<_$SendAiMessage> get copyWith =>
-      __$$SendAiMessageCopyWithImpl<_$SendAiMessage>(this, _$identity);
+  _$$SendAiMessageImplCopyWith<_$SendAiMessageImpl> get copyWith =>
+      __$$SendAiMessageImplCopyWithImpl<_$SendAiMessageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -378,14 +394,17 @@ class _$SendAiMessage implements SendAiMessage {
 abstract class SendAiMessage implements AiEvent {
   const factory SendAiMessage(
       {required final String message,
-      required final ChatSession chat}) = _$SendAiMessage;
+      required final ChatSession chat}) = _$SendAiMessageImpl;
 
   String get message;
   @override
   ChatSession get chat;
+
+  /// Create a copy of AiEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$SendAiMessageCopyWith<_$SendAiMessage> get copyWith =>
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendAiMessageImplCopyWith<_$SendAiMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -476,28 +495,34 @@ class _$AiStateCopyWithImpl<T, $Res, $Val extends AiState<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$AiInitializeCopyWith<T, $Res> {
-  factory _$$AiInitializeCopyWith(
-          _$AiInitialize<T> value, $Res Function(_$AiInitialize<T>) then) =
-      __$$AiInitializeCopyWithImpl<T, $Res>;
+abstract class _$$AiInitializeImplCopyWith<T, $Res> {
+  factory _$$AiInitializeImplCopyWith(_$AiInitializeImpl<T> value,
+          $Res Function(_$AiInitializeImpl<T>) then) =
+      __$$AiInitializeImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$AiInitializeCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$AiInitialize<T>>
-    implements _$$AiInitializeCopyWith<T, $Res> {
-  __$$AiInitializeCopyWithImpl(
-      _$AiInitialize<T> _value, $Res Function(_$AiInitialize<T>) _then)
+class __$$AiInitializeImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$AiInitializeImpl<T>>
+    implements _$$AiInitializeImplCopyWith<T, $Res> {
+  __$$AiInitializeImplCopyWithImpl(
+      _$AiInitializeImpl<T> _value, $Res Function(_$AiInitializeImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$AiInitialize<T> implements AiInitialize<T> {
-  const _$AiInitialize();
+class _$AiInitializeImpl<T> implements AiInitialize<T> {
+  const _$AiInitializeImpl();
 
   @override
   String toString() {
@@ -505,9 +530,9 @@ class _$AiInitialize<T> implements AiInitialize<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AiInitialize<T>);
+        (other.runtimeType == runtimeType && other is _$AiInitializeImpl<T>);
   }
 
   @override
@@ -607,29 +632,32 @@ class _$AiInitialize<T> implements AiInitialize<T> {
 }
 
 abstract class AiInitialize<T> implements AiState<T> {
-  const factory AiInitialize() = _$AiInitialize<T>;
+  const factory AiInitialize() = _$AiInitializeImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$AiInitializingCopyWith<T, $Res> {
-  factory _$$AiInitializingCopyWith(
-          _$AiInitializing<T> value, $Res Function(_$AiInitializing<T>) then) =
-      __$$AiInitializingCopyWithImpl<T, $Res>;
+abstract class _$$AiInitializingImplCopyWith<T, $Res> {
+  factory _$$AiInitializingImplCopyWith(_$AiInitializingImpl<T> value,
+          $Res Function(_$AiInitializingImpl<T>) then) =
+      __$$AiInitializingImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$AiInitializingCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$AiInitializing<T>>
-    implements _$$AiInitializingCopyWith<T, $Res> {
-  __$$AiInitializingCopyWithImpl(
-      _$AiInitializing<T> _value, $Res Function(_$AiInitializing<T>) _then)
+class __$$AiInitializingImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$AiInitializingImpl<T>>
+    implements _$$AiInitializingImplCopyWith<T, $Res> {
+  __$$AiInitializingImplCopyWithImpl(_$AiInitializingImpl<T> _value,
+      $Res Function(_$AiInitializingImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$AiInitializing<T> implements AiInitializing<T> {
-  const _$AiInitializing();
+class _$AiInitializingImpl<T> implements AiInitializing<T> {
+  const _$AiInitializingImpl();
 
   @override
   String toString() {
@@ -637,9 +665,9 @@ class _$AiInitializing<T> implements AiInitializing<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AiInitializing<T>);
+        (other.runtimeType == runtimeType && other is _$AiInitializingImpl<T>);
   }
 
   @override
@@ -739,29 +767,32 @@ class _$AiInitializing<T> implements AiInitializing<T> {
 }
 
 abstract class AiInitializing<T> implements AiState<T> {
-  const factory AiInitializing() = _$AiInitializing<T>;
+  const factory AiInitializing() = _$AiInitializingImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$InitializingSuccessCopyWith<T, $Res> {
-  factory _$$InitializingSuccessCopyWith(_$InitializingSuccess<T> value,
-          $Res Function(_$InitializingSuccess<T>) then) =
-      __$$InitializingSuccessCopyWithImpl<T, $Res>;
+abstract class _$$InitializingSuccessImplCopyWith<T, $Res> {
+  factory _$$InitializingSuccessImplCopyWith(_$InitializingSuccessImpl<T> value,
+          $Res Function(_$InitializingSuccessImpl<T>) then) =
+      __$$InitializingSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$InitializingSuccessCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$InitializingSuccess<T>>
-    implements _$$InitializingSuccessCopyWith<T, $Res> {
-  __$$InitializingSuccessCopyWithImpl(_$InitializingSuccess<T> _value,
-      $Res Function(_$InitializingSuccess<T>) _then)
+class __$$InitializingSuccessImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$InitializingSuccessImpl<T>>
+    implements _$$InitializingSuccessImplCopyWith<T, $Res> {
+  __$$InitializingSuccessImplCopyWithImpl(_$InitializingSuccessImpl<T> _value,
+      $Res Function(_$InitializingSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$InitializingSuccess<T> implements InitializingSuccess<T> {
-  const _$InitializingSuccess();
+class _$InitializingSuccessImpl<T> implements InitializingSuccess<T> {
+  const _$InitializingSuccessImpl();
 
   @override
   String toString() {
@@ -769,9 +800,10 @@ class _$InitializingSuccess<T> implements InitializingSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializingSuccess<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$InitializingSuccessImpl<T>);
   }
 
   @override
@@ -871,29 +903,32 @@ class _$InitializingSuccess<T> implements InitializingSuccess<T> {
 }
 
 abstract class InitializingSuccess<T> implements AiState<T> {
-  const factory InitializingSuccess() = _$InitializingSuccess<T>;
+  const factory InitializingSuccess() = _$InitializingSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$InitializingErrorCopyWith<T, $Res> {
-  factory _$$InitializingErrorCopyWith(_$InitializingError<T> value,
-          $Res Function(_$InitializingError<T>) then) =
-      __$$InitializingErrorCopyWithImpl<T, $Res>;
+abstract class _$$InitializingErrorImplCopyWith<T, $Res> {
+  factory _$$InitializingErrorImplCopyWith(_$InitializingErrorImpl<T> value,
+          $Res Function(_$InitializingErrorImpl<T>) then) =
+      __$$InitializingErrorImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$InitializingErrorCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$InitializingError<T>>
-    implements _$$InitializingErrorCopyWith<T, $Res> {
-  __$$InitializingErrorCopyWithImpl(_$InitializingError<T> _value,
-      $Res Function(_$InitializingError<T>) _then)
+class __$$InitializingErrorImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$InitializingErrorImpl<T>>
+    implements _$$InitializingErrorImplCopyWith<T, $Res> {
+  __$$InitializingErrorImplCopyWithImpl(_$InitializingErrorImpl<T> _value,
+      $Res Function(_$InitializingErrorImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$InitializingError<T> implements InitializingError<T> {
-  const _$InitializingError();
+class _$InitializingErrorImpl<T> implements InitializingError<T> {
+  const _$InitializingErrorImpl();
 
   @override
   String toString() {
@@ -901,9 +936,10 @@ class _$InitializingError<T> implements InitializingError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializingError<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$InitializingErrorImpl<T>);
   }
 
   @override
@@ -1003,29 +1039,32 @@ class _$InitializingError<T> implements InitializingError<T> {
 }
 
 abstract class InitializingError<T> implements AiState<T> {
-  const factory InitializingError() = _$InitializingError<T>;
+  const factory InitializingError() = _$InitializingErrorImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SendingAiMessageCopyWith<T, $Res> {
-  factory _$$SendingAiMessageCopyWith(_$SendingAiMessage<T> value,
-          $Res Function(_$SendingAiMessage<T>) then) =
-      __$$SendingAiMessageCopyWithImpl<T, $Res>;
+abstract class _$$SendingAiMessageImplCopyWith<T, $Res> {
+  factory _$$SendingAiMessageImplCopyWith(_$SendingAiMessageImpl<T> value,
+          $Res Function(_$SendingAiMessageImpl<T>) then) =
+      __$$SendingAiMessageImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$SendingAiMessageCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$SendingAiMessage<T>>
-    implements _$$SendingAiMessageCopyWith<T, $Res> {
-  __$$SendingAiMessageCopyWithImpl(
-      _$SendingAiMessage<T> _value, $Res Function(_$SendingAiMessage<T>) _then)
+class __$$SendingAiMessageImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$SendingAiMessageImpl<T>>
+    implements _$$SendingAiMessageImplCopyWith<T, $Res> {
+  __$$SendingAiMessageImplCopyWithImpl(_$SendingAiMessageImpl<T> _value,
+      $Res Function(_$SendingAiMessageImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SendingAiMessage<T> implements SendingAiMessage<T> {
-  const _$SendingAiMessage();
+class _$SendingAiMessageImpl<T> implements SendingAiMessage<T> {
+  const _$SendingAiMessageImpl();
 
   @override
   String toString() {
@@ -1033,9 +1072,10 @@ class _$SendingAiMessage<T> implements SendingAiMessage<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SendingAiMessage<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$SendingAiMessageImpl<T>);
   }
 
   @override
@@ -1135,29 +1175,34 @@ class _$SendingAiMessage<T> implements SendingAiMessage<T> {
 }
 
 abstract class SendingAiMessage<T> implements AiState<T> {
-  const factory SendingAiMessage() = _$SendingAiMessage<T>;
+  const factory SendingAiMessage() = _$SendingAiMessageImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SendingAiMessageSuccessCopyWith<T, $Res> {
-  factory _$$SendingAiMessageSuccessCopyWith(_$SendingAiMessageSuccess<T> value,
-          $Res Function(_$SendingAiMessageSuccess<T>) then) =
-      __$$SendingAiMessageSuccessCopyWithImpl<T, $Res>;
+abstract class _$$SendingAiMessageSuccessImplCopyWith<T, $Res> {
+  factory _$$SendingAiMessageSuccessImplCopyWith(
+          _$SendingAiMessageSuccessImpl<T> value,
+          $Res Function(_$SendingAiMessageSuccessImpl<T>) then) =
+      __$$SendingAiMessageSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$SendingAiMessageSuccessCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$SendingAiMessageSuccess<T>>
-    implements _$$SendingAiMessageSuccessCopyWith<T, $Res> {
-  __$$SendingAiMessageSuccessCopyWithImpl(_$SendingAiMessageSuccess<T> _value,
-      $Res Function(_$SendingAiMessageSuccess<T>) _then)
+class __$$SendingAiMessageSuccessImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$SendingAiMessageSuccessImpl<T>>
+    implements _$$SendingAiMessageSuccessImplCopyWith<T, $Res> {
+  __$$SendingAiMessageSuccessImplCopyWithImpl(
+      _$SendingAiMessageSuccessImpl<T> _value,
+      $Res Function(_$SendingAiMessageSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SendingAiMessageSuccess<T> implements SendingAiMessageSuccess<T> {
-  const _$SendingAiMessageSuccess();
+class _$SendingAiMessageSuccessImpl<T> implements SendingAiMessageSuccess<T> {
+  const _$SendingAiMessageSuccessImpl();
 
   @override
   String toString() {
@@ -1165,10 +1210,10 @@ class _$SendingAiMessageSuccess<T> implements SendingAiMessageSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SendingAiMessageSuccess<T>);
+            other is _$SendingAiMessageSuccessImpl<T>);
   }
 
   @override
@@ -1268,32 +1313,36 @@ class _$SendingAiMessageSuccess<T> implements SendingAiMessageSuccess<T> {
 }
 
 abstract class SendingAiMessageSuccess<T> implements AiState<T> {
-  const factory SendingAiMessageSuccess() = _$SendingAiMessageSuccess<T>;
+  const factory SendingAiMessageSuccess() = _$SendingAiMessageSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SendingAiMessageErrorCopyWith<T, $Res> {
-  factory _$$SendingAiMessageErrorCopyWith(_$SendingAiMessageError<T> value,
-          $Res Function(_$SendingAiMessageError<T>) then) =
-      __$$SendingAiMessageErrorCopyWithImpl<T, $Res>;
+abstract class _$$SendingAiMessageErrorImplCopyWith<T, $Res> {
+  factory _$$SendingAiMessageErrorImplCopyWith(
+          _$SendingAiMessageErrorImpl<T> value,
+          $Res Function(_$SendingAiMessageErrorImpl<T>) then) =
+      __$$SendingAiMessageErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String? error});
 }
 
 /// @nodoc
-class __$$SendingAiMessageErrorCopyWithImpl<T, $Res>
-    extends _$AiStateCopyWithImpl<T, $Res, _$SendingAiMessageError<T>>
-    implements _$$SendingAiMessageErrorCopyWith<T, $Res> {
-  __$$SendingAiMessageErrorCopyWithImpl(_$SendingAiMessageError<T> _value,
-      $Res Function(_$SendingAiMessageError<T>) _then)
+class __$$SendingAiMessageErrorImplCopyWithImpl<T, $Res>
+    extends _$AiStateCopyWithImpl<T, $Res, _$SendingAiMessageErrorImpl<T>>
+    implements _$$SendingAiMessageErrorImplCopyWith<T, $Res> {
+  __$$SendingAiMessageErrorImplCopyWithImpl(
+      _$SendingAiMessageErrorImpl<T> _value,
+      $Res Function(_$SendingAiMessageErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_$SendingAiMessageError<T>(
+    return _then(_$SendingAiMessageErrorImpl<T>(
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -1304,8 +1353,8 @@ class __$$SendingAiMessageErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$SendingAiMessageError<T> implements SendingAiMessageError<T> {
-  const _$SendingAiMessageError({this.error});
+class _$SendingAiMessageErrorImpl<T> implements SendingAiMessageError<T> {
+  const _$SendingAiMessageErrorImpl({this.error});
 
   @override
   final String? error;
@@ -1316,23 +1365,24 @@ class _$SendingAiMessageError<T> implements SendingAiMessageError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SendingAiMessageError<T> &&
+            other is _$SendingAiMessageErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SendingAiMessageErrorCopyWith<T, _$SendingAiMessageError<T>>
-      get copyWith =>
-          __$$SendingAiMessageErrorCopyWithImpl<T, _$SendingAiMessageError<T>>(
-              this, _$identity);
+  _$$SendingAiMessageErrorImplCopyWith<T, _$SendingAiMessageErrorImpl<T>>
+      get copyWith => __$$SendingAiMessageErrorImplCopyWithImpl<T,
+          _$SendingAiMessageErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1429,10 +1479,13 @@ class _$SendingAiMessageError<T> implements SendingAiMessageError<T> {
 
 abstract class SendingAiMessageError<T> implements AiState<T> {
   const factory SendingAiMessageError({final String? error}) =
-      _$SendingAiMessageError<T>;
+      _$SendingAiMessageErrorImpl<T>;
 
   String? get error;
-  @JsonKey(ignore: true)
-  _$$SendingAiMessageErrorCopyWith<T, _$SendingAiMessageError<T>>
+
+  /// Create a copy of AiState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendingAiMessageErrorImplCopyWith<T, _$SendingAiMessageErrorImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }

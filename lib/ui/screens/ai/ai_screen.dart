@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:passco/blocs/ai/ai_bloc.dart';
 import 'package:passco/main_common.dart';
 import 'package:passco/models/questions/data/question_model.dart';
@@ -25,7 +27,11 @@ class _AiScreenState extends State<AiScreen> {
 
   @override
   void initState() {
-    print(globalConfig.appConfig['gemini_key']);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.initState();
     _model = GenerativeModel(model: 'gemini-1.5-pro', apiKey: globalConfig.appConfig['gemini_key']);
     _chat = _model.startChat();
@@ -33,6 +39,12 @@ class _AiScreenState extends State<AiScreen> {
       final question = ModalRoute.of(context)?.settings.arguments as Question;
       context.read<AiBloc>().add(InitializeAIEvent(question: question, chat: _chat));
     });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    super.dispose();
   }
 
   void _sendMessage() async {
@@ -66,10 +78,20 @@ class _AiScreenState extends State<AiScreen> {
         },
         builder: (context, state) {
           if (state is AiInitializing) {
-            return const CustomLoading(
-              height: 35,
-              width: 35,
-              adaptive: true,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CustomLoading(height: 35, width: 35, adaptive: true),
+                  10.verticalSpace,
+                  CustomText(
+                    'Please wait while we initialize Passco AI. This might take a while...',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             );
           }
           final isLoading = state is SendingAiMessage;

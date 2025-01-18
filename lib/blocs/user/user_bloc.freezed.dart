@@ -12,7 +12,7 @@ part of 'user_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserEvent {
@@ -83,32 +83,37 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$OnboardUserCopyWith<$Res> {
-  factory _$$OnboardUserCopyWith(
-          _$OnboardUser value, $Res Function(_$OnboardUser) then) =
-      __$$OnboardUserCopyWithImpl<$Res>;
+abstract class _$$OnboardUserImplCopyWith<$Res> {
+  factory _$$OnboardUserImplCopyWith(
+          _$OnboardUserImpl value, $Res Function(_$OnboardUserImpl) then) =
+      __$$OnboardUserImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String college});
 }
 
 /// @nodoc
-class __$$OnboardUserCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$OnboardUser>
-    implements _$$OnboardUserCopyWith<$Res> {
-  __$$OnboardUserCopyWithImpl(
-      _$OnboardUser _value, $Res Function(_$OnboardUser) _then)
+class __$$OnboardUserImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$OnboardUserImpl>
+    implements _$$OnboardUserImplCopyWith<$Res> {
+  __$$OnboardUserImplCopyWithImpl(
+      _$OnboardUserImpl _value, $Res Function(_$OnboardUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? college = null,
   }) {
-    return _then(_$OnboardUser(
+    return _then(_$OnboardUserImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -123,8 +128,8 @@ class __$$OnboardUserCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OnboardUser implements OnboardUser {
-  const _$OnboardUser({required this.email, required this.college});
+class _$OnboardUserImpl implements OnboardUser {
+  const _$OnboardUserImpl({required this.email, required this.college});
 
   @override
   final String email;
@@ -137,10 +142,10 @@ class _$OnboardUser implements OnboardUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OnboardUser &&
+            other is _$OnboardUserImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.college, college) || other.college == college));
   }
@@ -148,11 +153,13 @@ class _$OnboardUser implements OnboardUser {
   @override
   int get hashCode => Object.hash(runtimeType, email, college);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$OnboardUserCopyWith<_$OnboardUser> get copyWith =>
-      __$$OnboardUserCopyWithImpl<_$OnboardUser>(this, _$identity);
+  _$$OnboardUserImplCopyWith<_$OnboardUserImpl> get copyWith =>
+      __$$OnboardUserImplCopyWithImpl<_$OnboardUserImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -232,38 +239,43 @@ class _$OnboardUser implements OnboardUser {
 abstract class OnboardUser implements UserEvent {
   const factory OnboardUser(
       {required final String email,
-      required final String college}) = _$OnboardUser;
+      required final String college}) = _$OnboardUserImpl;
 
   String get email;
   String get college;
-  @JsonKey(ignore: true)
-  _$$OnboardUserCopyWith<_$OnboardUser> get copyWith =>
+
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$OnboardUserImplCopyWith<_$OnboardUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UploadProfilePictureCopyWith<$Res> {
-  factory _$$UploadProfilePictureCopyWith(_$UploadProfilePicture value,
-          $Res Function(_$UploadProfilePicture) then) =
-      __$$UploadProfilePictureCopyWithImpl<$Res>;
+abstract class _$$UploadProfilePictureImplCopyWith<$Res> {
+  factory _$$UploadProfilePictureImplCopyWith(_$UploadProfilePictureImpl value,
+          $Res Function(_$UploadProfilePictureImpl) then) =
+      __$$UploadProfilePictureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String filePath});
 }
 
 /// @nodoc
-class __$$UploadProfilePictureCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$UploadProfilePicture>
-    implements _$$UploadProfilePictureCopyWith<$Res> {
-  __$$UploadProfilePictureCopyWithImpl(_$UploadProfilePicture _value,
-      $Res Function(_$UploadProfilePicture) _then)
+class __$$UploadProfilePictureImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$UploadProfilePictureImpl>
+    implements _$$UploadProfilePictureImplCopyWith<$Res> {
+  __$$UploadProfilePictureImplCopyWithImpl(_$UploadProfilePictureImpl _value,
+      $Res Function(_$UploadProfilePictureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? filePath = null,
   }) {
-    return _then(_$UploadProfilePicture(
+    return _then(_$UploadProfilePictureImpl(
       filePath: null == filePath
           ? _value.filePath
           : filePath // ignore: cast_nullable_to_non_nullable
@@ -274,8 +286,8 @@ class __$$UploadProfilePictureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UploadProfilePicture implements UploadProfilePicture {
-  const _$UploadProfilePicture({required this.filePath});
+class _$UploadProfilePictureImpl implements UploadProfilePicture {
+  const _$UploadProfilePictureImpl({required this.filePath});
 
   @override
   final String filePath;
@@ -286,10 +298,10 @@ class _$UploadProfilePicture implements UploadProfilePicture {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadProfilePicture &&
+            other is _$UploadProfilePictureImpl &&
             (identical(other.filePath, filePath) ||
                 other.filePath == filePath));
   }
@@ -297,12 +309,15 @@ class _$UploadProfilePicture implements UploadProfilePicture {
   @override
   int get hashCode => Object.hash(runtimeType, filePath);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UploadProfilePictureCopyWith<_$UploadProfilePicture> get copyWith =>
-      __$$UploadProfilePictureCopyWithImpl<_$UploadProfilePicture>(
-          this, _$identity);
+  _$$UploadProfilePictureImplCopyWith<_$UploadProfilePictureImpl>
+      get copyWith =>
+          __$$UploadProfilePictureImplCopyWithImpl<_$UploadProfilePictureImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -381,34 +396,40 @@ class _$UploadProfilePicture implements UploadProfilePicture {
 
 abstract class UploadProfilePicture implements UserEvent {
   const factory UploadProfilePicture({required final String filePath}) =
-      _$UploadProfilePicture;
+      _$UploadProfilePictureImpl;
 
   String get filePath;
-  @JsonKey(ignore: true)
-  _$$UploadProfilePictureCopyWith<_$UploadProfilePicture> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UploadProfilePictureImplCopyWith<_$UploadProfilePictureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RetrieveUserCopyWith<$Res> {
-  factory _$$RetrieveUserCopyWith(
-          _$RetrieveUser value, $Res Function(_$RetrieveUser) then) =
-      __$$RetrieveUserCopyWithImpl<$Res>;
+abstract class _$$RetrieveUserImplCopyWith<$Res> {
+  factory _$$RetrieveUserImplCopyWith(
+          _$RetrieveUserImpl value, $Res Function(_$RetrieveUserImpl) then) =
+      __$$RetrieveUserImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RetrieveUserCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$RetrieveUser>
-    implements _$$RetrieveUserCopyWith<$Res> {
-  __$$RetrieveUserCopyWithImpl(
-      _$RetrieveUser _value, $Res Function(_$RetrieveUser) _then)
+class __$$RetrieveUserImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$RetrieveUserImpl>
+    implements _$$RetrieveUserImplCopyWith<$Res> {
+  __$$RetrieveUserImplCopyWithImpl(
+      _$RetrieveUserImpl _value, $Res Function(_$RetrieveUserImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RetrieveUser implements RetrieveUser {
-  const _$RetrieveUser();
+class _$RetrieveUserImpl implements RetrieveUser {
+  const _$RetrieveUserImpl();
 
   @override
   String toString() {
@@ -416,9 +437,9 @@ class _$RetrieveUser implements RetrieveUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RetrieveUser);
+        (other.runtimeType == runtimeType && other is _$RetrieveUserImpl);
   }
 
   @override
@@ -500,33 +521,35 @@ class _$RetrieveUser implements RetrieveUser {
 }
 
 abstract class RetrieveUser implements UserEvent {
-  const factory RetrieveUser() = _$RetrieveUser;
+  const factory RetrieveUser() = _$RetrieveUserImpl;
 }
 
 /// @nodoc
-abstract class _$$UpdateProfileCopyWith<$Res> {
-  factory _$$UpdateProfileCopyWith(
-          _$UpdateProfile value, $Res Function(_$UpdateProfile) then) =
-      __$$UpdateProfileCopyWithImpl<$Res>;
+abstract class _$$UpdateProfileImplCopyWith<$Res> {
+  factory _$$UpdateProfileImplCopyWith(
+          _$UpdateProfileImpl value, $Res Function(_$UpdateProfileImpl) then) =
+      __$$UpdateProfileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String name, String email});
 }
 
 /// @nodoc
-class __$$UpdateProfileCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$UpdateProfile>
-    implements _$$UpdateProfileCopyWith<$Res> {
-  __$$UpdateProfileCopyWithImpl(
-      _$UpdateProfile _value, $Res Function(_$UpdateProfile) _then)
+class __$$UpdateProfileImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$UpdateProfileImpl>
+    implements _$$UpdateProfileImplCopyWith<$Res> {
+  __$$UpdateProfileImplCopyWithImpl(
+      _$UpdateProfileImpl _value, $Res Function(_$UpdateProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? name = null,
     Object? email = null,
   }) {
-    return _then(_$UpdateProfile(
+    return _then(_$UpdateProfileImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -541,8 +564,8 @@ class __$$UpdateProfileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdateProfile implements UpdateProfile {
-  const _$UpdateProfile({required this.name, required this.email});
+class _$UpdateProfileImpl implements UpdateProfile {
+  const _$UpdateProfileImpl({required this.name, required this.email});
 
   @override
   final String name;
@@ -555,10 +578,10 @@ class _$UpdateProfile implements UpdateProfile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateProfile &&
+            other is _$UpdateProfileImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email));
   }
@@ -566,11 +589,13 @@ class _$UpdateProfile implements UpdateProfile {
   @override
   int get hashCode => Object.hash(runtimeType, name, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdateProfileCopyWith<_$UpdateProfile> get copyWith =>
-      __$$UpdateProfileCopyWithImpl<_$UpdateProfile>(this, _$identity);
+  _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
+      __$$UpdateProfileImplCopyWithImpl<_$UpdateProfileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -650,12 +675,15 @@ class _$UpdateProfile implements UpdateProfile {
 abstract class UpdateProfile implements UserEvent {
   const factory UpdateProfile(
       {required final String name,
-      required final String email}) = _$UpdateProfile;
+      required final String email}) = _$UpdateProfileImpl;
 
   String get name;
   String get email;
-  @JsonKey(ignore: true)
-  _$$UpdateProfileCopyWith<_$UpdateProfile> get copyWith =>
+
+  /// Create a copy of UserEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -671,7 +699,7 @@ mixin _$UserState<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) =>
@@ -686,7 +714,7 @@ mixin _$UserState<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) =>
@@ -701,7 +729,7 @@ mixin _$UserState<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -777,28 +805,34 @@ class _$UserStateCopyWithImpl<T, $Res, $Val extends UserState<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<T, $Res> {
-  factory _$$InitialCopyWith(
-          _$Initial<T> value, $Res Function(_$Initial<T>) then) =
-      __$$InitialCopyWithImpl<T, $Res>;
+abstract class _$$InitialImplCopyWith<T, $Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl<T> value, $Res Function(_$InitialImpl<T>) then) =
+      __$$InitialImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$Initial<T>>
-    implements _$$InitialCopyWith<T, $Res> {
-  __$$InitialCopyWithImpl(
-      _$Initial<T> _value, $Res Function(_$Initial<T>) _then)
+class __$$InitialImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$InitialImpl<T>>
+    implements _$$InitialImplCopyWith<T, $Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$Initial<T> implements Initial<T> {
-  const _$Initial();
+class _$InitialImpl<T> implements Initial<T> {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -806,9 +840,9 @@ class _$Initial<T> implements Initial<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial<T>);
+        (other.runtimeType == runtimeType && other is _$InitialImpl<T>);
   }
 
   @override
@@ -825,7 +859,7 @@ class _$Initial<T> implements Initial<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -843,7 +877,7 @@ class _$Initial<T> implements Initial<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -861,7 +895,7 @@ class _$Initial<T> implements Initial<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -938,29 +972,32 @@ class _$Initial<T> implements Initial<T> {
 }
 
 abstract class Initial<T> implements UserState<T> {
-  const factory Initial() = _$Initial<T>;
+  const factory Initial() = _$InitialImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$OnboardingUserCopyWith<T, $Res> {
-  factory _$$OnboardingUserCopyWith(
-          _$OnboardingUser<T> value, $Res Function(_$OnboardingUser<T>) then) =
-      __$$OnboardingUserCopyWithImpl<T, $Res>;
+abstract class _$$OnboardingUserImplCopyWith<T, $Res> {
+  factory _$$OnboardingUserImplCopyWith(_$OnboardingUserImpl<T> value,
+          $Res Function(_$OnboardingUserImpl<T>) then) =
+      __$$OnboardingUserImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$OnboardingUserCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$OnboardingUser<T>>
-    implements _$$OnboardingUserCopyWith<T, $Res> {
-  __$$OnboardingUserCopyWithImpl(
-      _$OnboardingUser<T> _value, $Res Function(_$OnboardingUser<T>) _then)
+class __$$OnboardingUserImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$OnboardingUserImpl<T>>
+    implements _$$OnboardingUserImplCopyWith<T, $Res> {
+  __$$OnboardingUserImplCopyWithImpl(_$OnboardingUserImpl<T> _value,
+      $Res Function(_$OnboardingUserImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$OnboardingUser<T> implements OnboardingUser<T> {
-  const _$OnboardingUser();
+class _$OnboardingUserImpl<T> implements OnboardingUser<T> {
+  const _$OnboardingUserImpl();
 
   @override
   String toString() {
@@ -968,9 +1005,9 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OnboardingUser<T>);
+        (other.runtimeType == runtimeType && other is _$OnboardingUserImpl<T>);
   }
 
   @override
@@ -987,7 +1024,7 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1005,7 +1042,7 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1023,7 +1060,7 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1100,29 +1137,32 @@ class _$OnboardingUser<T> implements OnboardingUser<T> {
 }
 
 abstract class OnboardingUser<T> implements UserState<T> {
-  const factory OnboardingUser() = _$OnboardingUser<T>;
+  const factory OnboardingUser() = _$OnboardingUserImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$OnboardUserSuccessCopyWith<T, $Res> {
-  factory _$$OnboardUserSuccessCopyWith(_$OnboardUserSuccess<T> value,
-          $Res Function(_$OnboardUserSuccess<T>) then) =
-      __$$OnboardUserSuccessCopyWithImpl<T, $Res>;
+abstract class _$$OnboardUserSuccessImplCopyWith<T, $Res> {
+  factory _$$OnboardUserSuccessImplCopyWith(_$OnboardUserSuccessImpl<T> value,
+          $Res Function(_$OnboardUserSuccessImpl<T>) then) =
+      __$$OnboardUserSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$OnboardUserSuccessCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$OnboardUserSuccess<T>>
-    implements _$$OnboardUserSuccessCopyWith<T, $Res> {
-  __$$OnboardUserSuccessCopyWithImpl(_$OnboardUserSuccess<T> _value,
-      $Res Function(_$OnboardUserSuccess<T>) _then)
+class __$$OnboardUserSuccessImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$OnboardUserSuccessImpl<T>>
+    implements _$$OnboardUserSuccessImplCopyWith<T, $Res> {
+  __$$OnboardUserSuccessImplCopyWithImpl(_$OnboardUserSuccessImpl<T> _value,
+      $Res Function(_$OnboardUserSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
-  const _$OnboardUserSuccess();
+class _$OnboardUserSuccessImpl<T> implements OnboardUserSuccess<T> {
+  const _$OnboardUserSuccessImpl();
 
   @override
   String toString() {
@@ -1130,9 +1170,10 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$OnboardUserSuccess<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$OnboardUserSuccessImpl<T>);
   }
 
   @override
@@ -1149,7 +1190,7 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1167,7 +1208,7 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1185,7 +1226,7 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1262,29 +1303,32 @@ class _$OnboardUserSuccess<T> implements OnboardUserSuccess<T> {
 }
 
 abstract class OnboardUserSuccess<T> implements UserState<T> {
-  const factory OnboardUserSuccess() = _$OnboardUserSuccess<T>;
+  const factory OnboardUserSuccess() = _$OnboardUserSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$UpdatingProfileCopyWith<T, $Res> {
-  factory _$$UpdatingProfileCopyWith(_$UpdatingProfile<T> value,
-          $Res Function(_$UpdatingProfile<T>) then) =
-      __$$UpdatingProfileCopyWithImpl<T, $Res>;
+abstract class _$$UpdatingProfileImplCopyWith<T, $Res> {
+  factory _$$UpdatingProfileImplCopyWith(_$UpdatingProfileImpl<T> value,
+          $Res Function(_$UpdatingProfileImpl<T>) then) =
+      __$$UpdatingProfileImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$UpdatingProfileCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$UpdatingProfile<T>>
-    implements _$$UpdatingProfileCopyWith<T, $Res> {
-  __$$UpdatingProfileCopyWithImpl(
-      _$UpdatingProfile<T> _value, $Res Function(_$UpdatingProfile<T>) _then)
+class __$$UpdatingProfileImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$UpdatingProfileImpl<T>>
+    implements _$$UpdatingProfileImplCopyWith<T, $Res> {
+  __$$UpdatingProfileImplCopyWithImpl(_$UpdatingProfileImpl<T> _value,
+      $Res Function(_$UpdatingProfileImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UpdatingProfile<T> implements UpdatingProfile<T> {
-  const _$UpdatingProfile();
+class _$UpdatingProfileImpl<T> implements UpdatingProfile<T> {
+  const _$UpdatingProfileImpl();
 
   @override
   String toString() {
@@ -1292,9 +1336,9 @@ class _$UpdatingProfile<T> implements UpdatingProfile<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UpdatingProfile<T>);
+        (other.runtimeType == runtimeType && other is _$UpdatingProfileImpl<T>);
   }
 
   @override
@@ -1311,7 +1355,7 @@ class _$UpdatingProfile<T> implements UpdatingProfile<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1329,7 +1373,7 @@ class _$UpdatingProfile<T> implements UpdatingProfile<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1347,7 +1391,7 @@ class _$UpdatingProfile<T> implements UpdatingProfile<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1424,32 +1468,36 @@ class _$UpdatingProfile<T> implements UpdatingProfile<T> {
 }
 
 abstract class UpdatingProfile<T> implements UserState<T> {
-  const factory UpdatingProfile() = _$UpdatingProfile<T>;
+  const factory UpdatingProfile() = _$UpdatingProfileImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$UpdatingProfileSuccessCopyWith<T, $Res> {
-  factory _$$UpdatingProfileSuccessCopyWith(_$UpdatingProfileSuccess<T> value,
-          $Res Function(_$UpdatingProfileSuccess<T>) then) =
-      __$$UpdatingProfileSuccessCopyWithImpl<T, $Res>;
+abstract class _$$UpdatingProfileSuccessImplCopyWith<T, $Res> {
+  factory _$$UpdatingProfileSuccessImplCopyWith(
+          _$UpdatingProfileSuccessImpl<T> value,
+          $Res Function(_$UpdatingProfileSuccessImpl<T>) then) =
+      __$$UpdatingProfileSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({UserModel user});
 }
 
 /// @nodoc
-class __$$UpdatingProfileSuccessCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$UpdatingProfileSuccess<T>>
-    implements _$$UpdatingProfileSuccessCopyWith<T, $Res> {
-  __$$UpdatingProfileSuccessCopyWithImpl(_$UpdatingProfileSuccess<T> _value,
-      $Res Function(_$UpdatingProfileSuccess<T>) _then)
+class __$$UpdatingProfileSuccessImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$UpdatingProfileSuccessImpl<T>>
+    implements _$$UpdatingProfileSuccessImplCopyWith<T, $Res> {
+  __$$UpdatingProfileSuccessImplCopyWithImpl(
+      _$UpdatingProfileSuccessImpl<T> _value,
+      $Res Function(_$UpdatingProfileSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$UpdatingProfileSuccess<T>(
+    return _then(_$UpdatingProfileSuccessImpl<T>(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1460,8 +1508,8 @@ class __$$UpdatingProfileSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
-  const _$UpdatingProfileSuccess({required this.user});
+class _$UpdatingProfileSuccessImpl<T> implements UpdatingProfileSuccess<T> {
+  const _$UpdatingProfileSuccessImpl({required this.user});
 
   @override
   final UserModel user;
@@ -1472,22 +1520,24 @@ class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdatingProfileSuccess<T> &&
+            other is _$UpdatingProfileSuccessImpl<T> &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdatingProfileSuccessCopyWith<T, _$UpdatingProfileSuccess<T>>
-      get copyWith => __$$UpdatingProfileSuccessCopyWithImpl<T,
-          _$UpdatingProfileSuccess<T>>(this, _$identity);
+  _$$UpdatingProfileSuccessImplCopyWith<T, _$UpdatingProfileSuccessImpl<T>>
+      get copyWith => __$$UpdatingProfileSuccessImplCopyWithImpl<T,
+          _$UpdatingProfileSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1500,7 +1550,7 @@ class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1518,7 +1568,7 @@ class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1536,7 +1586,7 @@ class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1614,34 +1664,42 @@ class _$UpdatingProfileSuccess<T> implements UpdatingProfileSuccess<T> {
 
 abstract class UpdatingProfileSuccess<T> implements UserState<T> {
   const factory UpdatingProfileSuccess({required final UserModel user}) =
-      _$UpdatingProfileSuccess<T>;
+      _$UpdatingProfileSuccessImpl<T>;
 
   UserModel get user;
-  @JsonKey(ignore: true)
-  _$$UpdatingProfileSuccessCopyWith<T, _$UpdatingProfileSuccess<T>>
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdatingProfileSuccessImplCopyWith<T, _$UpdatingProfileSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UploadingProfilePhotoCopyWith<T, $Res> {
-  factory _$$UploadingProfilePhotoCopyWith(_$UploadingProfilePhoto<T> value,
-          $Res Function(_$UploadingProfilePhoto<T>) then) =
-      __$$UploadingProfilePhotoCopyWithImpl<T, $Res>;
+abstract class _$$UploadingProfilePhotoImplCopyWith<T, $Res> {
+  factory _$$UploadingProfilePhotoImplCopyWith(
+          _$UploadingProfilePhotoImpl<T> value,
+          $Res Function(_$UploadingProfilePhotoImpl<T>) then) =
+      __$$UploadingProfilePhotoImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$UploadingProfilePhotoCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$UploadingProfilePhoto<T>>
-    implements _$$UploadingProfilePhotoCopyWith<T, $Res> {
-  __$$UploadingProfilePhotoCopyWithImpl(_$UploadingProfilePhoto<T> _value,
-      $Res Function(_$UploadingProfilePhoto<T>) _then)
+class __$$UploadingProfilePhotoImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$UploadingProfilePhotoImpl<T>>
+    implements _$$UploadingProfilePhotoImplCopyWith<T, $Res> {
+  __$$UploadingProfilePhotoImplCopyWithImpl(
+      _$UploadingProfilePhotoImpl<T> _value,
+      $Res Function(_$UploadingProfilePhotoImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
-  const _$UploadingProfilePhoto();
+class _$UploadingProfilePhotoImpl<T> implements UploadingProfilePhoto<T> {
+  const _$UploadingProfilePhotoImpl();
 
   @override
   String toString() {
@@ -1649,10 +1707,10 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadingProfilePhoto<T>);
+            other is _$UploadingProfilePhotoImpl<T>);
   }
 
   @override
@@ -1669,7 +1727,7 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1687,7 +1745,7 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1705,7 +1763,7 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1782,34 +1840,37 @@ class _$UploadingProfilePhoto<T> implements UploadingProfilePhoto<T> {
 }
 
 abstract class UploadingProfilePhoto<T> implements UserState<T> {
-  const factory UploadingProfilePhoto() = _$UploadingProfilePhoto<T>;
+  const factory UploadingProfilePhoto() = _$UploadingProfilePhotoImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$UploadingProfilePhotoSuccessCopyWith<T, $Res> {
-  factory _$$UploadingProfilePhotoSuccessCopyWith(
-          _$UploadingProfilePhotoSuccess<T> value,
-          $Res Function(_$UploadingProfilePhotoSuccess<T>) then) =
-      __$$UploadingProfilePhotoSuccessCopyWithImpl<T, $Res>;
+abstract class _$$UploadingProfilePhotoSuccessImplCopyWith<T, $Res> {
+  factory _$$UploadingProfilePhotoSuccessImplCopyWith(
+          _$UploadingProfilePhotoSuccessImpl<T> value,
+          $Res Function(_$UploadingProfilePhotoSuccessImpl<T>) then) =
+      __$$UploadingProfilePhotoSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({UserModel user});
 }
 
 /// @nodoc
-class __$$UploadingProfilePhotoSuccessCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$UploadingProfilePhotoSuccess<T>>
-    implements _$$UploadingProfilePhotoSuccessCopyWith<T, $Res> {
-  __$$UploadingProfilePhotoSuccessCopyWithImpl(
-      _$UploadingProfilePhotoSuccess<T> _value,
-      $Res Function(_$UploadingProfilePhotoSuccess<T>) _then)
+class __$$UploadingProfilePhotoSuccessImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res,
+        _$UploadingProfilePhotoSuccessImpl<T>>
+    implements _$$UploadingProfilePhotoSuccessImplCopyWith<T, $Res> {
+  __$$UploadingProfilePhotoSuccessImplCopyWithImpl(
+      _$UploadingProfilePhotoSuccessImpl<T> _value,
+      $Res Function(_$UploadingProfilePhotoSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$UploadingProfilePhotoSuccess<T>(
+    return _then(_$UploadingProfilePhotoSuccessImpl<T>(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1820,9 +1881,9 @@ class __$$UploadingProfilePhotoSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$UploadingProfilePhotoSuccess<T>
+class _$UploadingProfilePhotoSuccessImpl<T>
     implements UploadingProfilePhotoSuccess<T> {
-  const _$UploadingProfilePhotoSuccess({required this.user});
+  const _$UploadingProfilePhotoSuccessImpl({required this.user});
 
   @override
   final UserModel user;
@@ -1833,22 +1894,25 @@ class _$UploadingProfilePhotoSuccess<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadingProfilePhotoSuccess<T> &&
+            other is _$UploadingProfilePhotoSuccessImpl<T> &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UploadingProfilePhotoSuccessCopyWith<T, _$UploadingProfilePhotoSuccess<T>>
-      get copyWith => __$$UploadingProfilePhotoSuccessCopyWithImpl<T,
-          _$UploadingProfilePhotoSuccess<T>>(this, _$identity);
+  _$$UploadingProfilePhotoSuccessImplCopyWith<T,
+          _$UploadingProfilePhotoSuccessImpl<T>>
+      get copyWith => __$$UploadingProfilePhotoSuccessImplCopyWithImpl<T,
+          _$UploadingProfilePhotoSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1861,7 +1925,7 @@ class _$UploadingProfilePhotoSuccess<T>
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -1879,7 +1943,7 @@ class _$UploadingProfilePhotoSuccess<T>
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -1897,7 +1961,7 @@ class _$UploadingProfilePhotoSuccess<T>
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -1975,34 +2039,41 @@ class _$UploadingProfilePhotoSuccess<T>
 
 abstract class UploadingProfilePhotoSuccess<T> implements UserState<T> {
   const factory UploadingProfilePhotoSuccess({required final UserModel user}) =
-      _$UploadingProfilePhotoSuccess<T>;
+      _$UploadingProfilePhotoSuccessImpl<T>;
 
   UserModel get user;
-  @JsonKey(ignore: true)
-  _$$UploadingProfilePhotoSuccessCopyWith<T, _$UploadingProfilePhotoSuccess<T>>
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UploadingProfilePhotoSuccessImplCopyWith<T,
+          _$UploadingProfilePhotoSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RetrievingUserCopyWith<T, $Res> {
-  factory _$$RetrievingUserCopyWith(
-          _$RetrievingUser<T> value, $Res Function(_$RetrievingUser<T>) then) =
-      __$$RetrievingUserCopyWithImpl<T, $Res>;
+abstract class _$$RetrievingUserImplCopyWith<T, $Res> {
+  factory _$$RetrievingUserImplCopyWith(_$RetrievingUserImpl<T> value,
+          $Res Function(_$RetrievingUserImpl<T>) then) =
+      __$$RetrievingUserImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$RetrievingUserCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$RetrievingUser<T>>
-    implements _$$RetrievingUserCopyWith<T, $Res> {
-  __$$RetrievingUserCopyWithImpl(
-      _$RetrievingUser<T> _value, $Res Function(_$RetrievingUser<T>) _then)
+class __$$RetrievingUserImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$RetrievingUserImpl<T>>
+    implements _$$RetrievingUserImplCopyWith<T, $Res> {
+  __$$RetrievingUserImplCopyWithImpl(_$RetrievingUserImpl<T> _value,
+      $Res Function(_$RetrievingUserImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RetrievingUser<T> implements RetrievingUser<T> {
-  const _$RetrievingUser();
+class _$RetrievingUserImpl<T> implements RetrievingUser<T> {
+  const _$RetrievingUserImpl();
 
   @override
   String toString() {
@@ -2010,9 +2081,9 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RetrievingUser<T>);
+        (other.runtimeType == runtimeType && other is _$RetrievingUserImpl<T>);
   }
 
   @override
@@ -2029,7 +2100,7 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -2047,7 +2118,7 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -2065,7 +2136,7 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -2142,47 +2213,51 @@ class _$RetrievingUser<T> implements RetrievingUser<T> {
 }
 
 abstract class RetrievingUser<T> implements UserState<T> {
-  const factory RetrievingUser() = _$RetrievingUser<T>;
+  const factory RetrievingUser() = _$RetrievingUserImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$RetrievingUserSuccessCopyWith<T, $Res> {
-  factory _$$RetrievingUserSuccessCopyWith(_$RetrievingUserSuccess<T> value,
-          $Res Function(_$RetrievingUserSuccess<T>) then) =
-      __$$RetrievingUserSuccessCopyWithImpl<T, $Res>;
+abstract class _$$RetrievingUserSuccessImplCopyWith<T, $Res> {
+  factory _$$RetrievingUserSuccessImplCopyWith(
+          _$RetrievingUserSuccessImpl<T> value,
+          $Res Function(_$RetrievingUserSuccessImpl<T>) then) =
+      __$$RetrievingUserSuccessImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({UserModel user});
+  $Res call({UserModel? user});
 }
 
 /// @nodoc
-class __$$RetrievingUserSuccessCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$RetrievingUserSuccess<T>>
-    implements _$$RetrievingUserSuccessCopyWith<T, $Res> {
-  __$$RetrievingUserSuccessCopyWithImpl(_$RetrievingUserSuccess<T> _value,
-      $Res Function(_$RetrievingUserSuccess<T>) _then)
+class __$$RetrievingUserSuccessImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$RetrievingUserSuccessImpl<T>>
+    implements _$$RetrievingUserSuccessImplCopyWith<T, $Res> {
+  __$$RetrievingUserSuccessImplCopyWithImpl(
+      _$RetrievingUserSuccessImpl<T> _value,
+      $Res Function(_$RetrievingUserSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? user = freezed,
   }) {
-    return _then(_$RetrievingUserSuccess<T>(
-      user: null == user
+    return _then(_$RetrievingUserSuccessImpl<T>(
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+              as UserModel?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
-  const _$RetrievingUserSuccess({required this.user});
+class _$RetrievingUserSuccessImpl<T> implements RetrievingUserSuccess<T> {
+  const _$RetrievingUserSuccessImpl({required this.user});
 
   @override
-  final UserModel user;
+  final UserModel? user;
 
   @override
   String toString() {
@@ -2190,23 +2265,24 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RetrievingUserSuccess<T> &&
+            other is _$RetrievingUserSuccessImpl<T> &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RetrievingUserSuccessCopyWith<T, _$RetrievingUserSuccess<T>>
-      get copyWith =>
-          __$$RetrievingUserSuccessCopyWithImpl<T, _$RetrievingUserSuccess<T>>(
-              this, _$identity);
+  _$$RetrievingUserSuccessImplCopyWith<T, _$RetrievingUserSuccessImpl<T>>
+      get copyWith => __$$RetrievingUserSuccessImplCopyWithImpl<T,
+          _$RetrievingUserSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2219,7 +2295,7 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -2237,7 +2313,7 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -2255,7 +2331,7 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -2332,38 +2408,43 @@ class _$RetrievingUserSuccess<T> implements RetrievingUserSuccess<T> {
 }
 
 abstract class RetrievingUserSuccess<T> implements UserState<T> {
-  const factory RetrievingUserSuccess({required final UserModel user}) =
-      _$RetrievingUserSuccess<T>;
+  const factory RetrievingUserSuccess({required final UserModel? user}) =
+      _$RetrievingUserSuccessImpl<T>;
 
-  UserModel get user;
-  @JsonKey(ignore: true)
-  _$$RetrievingUserSuccessCopyWith<T, _$RetrievingUserSuccess<T>>
+  UserModel? get user;
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RetrievingUserSuccessImplCopyWith<T, _$RetrievingUserSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RetrievingUserErrorCopyWith<T, $Res> {
-  factory _$$RetrievingUserErrorCopyWith(_$RetrievingUserError<T> value,
-          $Res Function(_$RetrievingUserError<T>) then) =
-      __$$RetrievingUserErrorCopyWithImpl<T, $Res>;
+abstract class _$$RetrievingUserErrorImplCopyWith<T, $Res> {
+  factory _$$RetrievingUserErrorImplCopyWith(_$RetrievingUserErrorImpl<T> value,
+          $Res Function(_$RetrievingUserErrorImpl<T>) then) =
+      __$$RetrievingUserErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$RetrievingUserErrorCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$RetrievingUserError<T>>
-    implements _$$RetrievingUserErrorCopyWith<T, $Res> {
-  __$$RetrievingUserErrorCopyWithImpl(_$RetrievingUserError<T> _value,
-      $Res Function(_$RetrievingUserError<T>) _then)
+class __$$RetrievingUserErrorImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$RetrievingUserErrorImpl<T>>
+    implements _$$RetrievingUserErrorImplCopyWith<T, $Res> {
+  __$$RetrievingUserErrorImplCopyWithImpl(_$RetrievingUserErrorImpl<T> _value,
+      $Res Function(_$RetrievingUserErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$RetrievingUserError<T>(
+    return _then(_$RetrievingUserErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -2374,8 +2455,8 @@ class __$$RetrievingUserErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$RetrievingUserError<T> implements RetrievingUserError<T> {
-  const _$RetrievingUserError({required this.error});
+class _$RetrievingUserErrorImpl<T> implements RetrievingUserError<T> {
+  const _$RetrievingUserErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -2386,22 +2467,24 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RetrievingUserError<T> &&
+            other is _$RetrievingUserErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RetrievingUserErrorCopyWith<T, _$RetrievingUserError<T>> get copyWith =>
-      __$$RetrievingUserErrorCopyWithImpl<T, _$RetrievingUserError<T>>(
-          this, _$identity);
+  _$$RetrievingUserErrorImplCopyWith<T, _$RetrievingUserErrorImpl<T>>
+      get copyWith => __$$RetrievingUserErrorImplCopyWithImpl<T,
+          _$RetrievingUserErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2414,7 +2497,7 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -2432,7 +2515,7 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -2450,7 +2533,7 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -2528,37 +2611,42 @@ class _$RetrievingUserError<T> implements RetrievingUserError<T> {
 
 abstract class RetrievingUserError<T> implements UserState<T> {
   const factory RetrievingUserError({required final HttpError error}) =
-      _$RetrievingUserError<T>;
+      _$RetrievingUserErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$RetrievingUserErrorCopyWith<T, _$RetrievingUserError<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RetrievingUserErrorImplCopyWith<T, _$RetrievingUserErrorImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UserErrorCopyWith<T, $Res> {
-  factory _$$UserErrorCopyWith(
-          _$UserError<T> value, $Res Function(_$UserError<T>) then) =
-      __$$UserErrorCopyWithImpl<T, $Res>;
+abstract class _$$UserErrorImplCopyWith<T, $Res> {
+  factory _$$UserErrorImplCopyWith(
+          _$UserErrorImpl<T> value, $Res Function(_$UserErrorImpl<T>) then) =
+      __$$UserErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$UserErrorCopyWithImpl<T, $Res>
-    extends _$UserStateCopyWithImpl<T, $Res, _$UserError<T>>
-    implements _$$UserErrorCopyWith<T, $Res> {
-  __$$UserErrorCopyWithImpl(
-      _$UserError<T> _value, $Res Function(_$UserError<T>) _then)
+class __$$UserErrorImplCopyWithImpl<T, $Res>
+    extends _$UserStateCopyWithImpl<T, $Res, _$UserErrorImpl<T>>
+    implements _$$UserErrorImplCopyWith<T, $Res> {
+  __$$UserErrorImplCopyWithImpl(
+      _$UserErrorImpl<T> _value, $Res Function(_$UserErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$UserError<T>(
+    return _then(_$UserErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -2569,8 +2657,8 @@ class __$$UserErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$UserError<T> implements UserError<T> {
-  const _$UserError({required this.error});
+class _$UserErrorImpl<T> implements UserError<T> {
+  const _$UserErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -2581,21 +2669,23 @@ class _$UserError<T> implements UserError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserError<T> &&
+            other is _$UserErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserErrorCopyWith<T, _$UserError<T>> get copyWith =>
-      __$$UserErrorCopyWithImpl<T, _$UserError<T>>(this, _$identity);
+  _$$UserErrorImplCopyWith<T, _$UserErrorImpl<T>> get copyWith =>
+      __$$UserErrorImplCopyWithImpl<T, _$UserErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2608,7 +2698,7 @@ class _$UserError<T> implements UserError<T> {
     required TResult Function() uploadingProfilePhoto,
     required TResult Function(UserModel user) uploadingProfilePhotoSuccess,
     required TResult Function() retrievingUser,
-    required TResult Function(UserModel user) retrievingUserSuccess,
+    required TResult Function(UserModel? user) retrievingUserSuccess,
     required TResult Function(HttpError error) retrievingUserError,
     required TResult Function(HttpError error) userError,
   }) {
@@ -2626,7 +2716,7 @@ class _$UserError<T> implements UserError<T> {
     TResult? Function()? uploadingProfilePhoto,
     TResult? Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult? Function()? retrievingUser,
-    TResult? Function(UserModel user)? retrievingUserSuccess,
+    TResult? Function(UserModel? user)? retrievingUserSuccess,
     TResult? Function(HttpError error)? retrievingUserError,
     TResult? Function(HttpError error)? userError,
   }) {
@@ -2644,7 +2734,7 @@ class _$UserError<T> implements UserError<T> {
     TResult Function()? uploadingProfilePhoto,
     TResult Function(UserModel user)? uploadingProfilePhotoSuccess,
     TResult Function()? retrievingUser,
-    TResult Function(UserModel user)? retrievingUserSuccess,
+    TResult Function(UserModel? user)? retrievingUserSuccess,
     TResult Function(HttpError error)? retrievingUserError,
     TResult Function(HttpError error)? userError,
     required TResult orElse(),
@@ -2721,10 +2811,14 @@ class _$UserError<T> implements UserError<T> {
 }
 
 abstract class UserError<T> implements UserState<T> {
-  const factory UserError({required final HttpError error}) = _$UserError<T>;
+  const factory UserError({required final HttpError error}) =
+      _$UserErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$UserErrorCopyWith<T, _$UserError<T>> get copyWith =>
+
+  /// Create a copy of UserState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UserErrorImplCopyWith<T, _$UserErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

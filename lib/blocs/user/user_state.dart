@@ -11,7 +11,7 @@ sealed class UserState<T> with _$UserState<T> {
   const factory UserState.uploadingProfilePhotoSuccess({required UserModel user}) = UploadingProfilePhotoSuccess<T>;
   const factory UserState.retrievingUser() = RetrievingUser<T>;
   const factory UserState.retrievingUserSuccess({
-    required UserModel user,
+    required UserModel? user,
   }) = RetrievingUserSuccess;
   const factory UserState.retrievingUserError({required HttpError error}) = RetrievingUserError<T>;
   const factory UserState.userError({required HttpError error}) = UserError<T>;

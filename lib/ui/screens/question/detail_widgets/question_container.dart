@@ -62,7 +62,7 @@ class QuestionContainer extends StatelessWidget {
                 arguments: question,
               );
 
-              getIt<DiscussionsBloc>().add(FetchDiscusstions(questionId: question!.id, minRange: 0, maxRange: 0));
+              getIt<DiscussionsBloc>().add(FetchDiscusstions(questionId: question!.id, minRange: 0, maxRange: 200));
             },
             child: DecoratedBox(
               decoration: BoxDecoration(

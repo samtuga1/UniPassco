@@ -12,13 +12,14 @@ part of 'discussions_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
     required TResult Function(String questionId, int minRange, int maxRange)
         fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
@@ -31,6 +32,7 @@ mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
     TResult? Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -42,6 +44,7 @@ mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
     TResult Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -54,6 +57,7 @@ mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
     required TResult Function(FetchDiscusstions value) fetchDiscusstions,
     required TResult Function(VoteDiscussion value) vote,
     required TResult Function(ReplyDiscussion value) reply,
@@ -63,6 +67,7 @@ mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
     TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult? Function(VoteDiscussion value)? vote,
     TResult? Function(ReplyDiscussion value)? reply,
@@ -72,6 +77,7 @@ mixin _$DiscussionsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
     TResult Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult Function(VoteDiscussion value)? vote,
     TResult Function(ReplyDiscussion value)? reply,
@@ -97,32 +103,37 @@ class _$DiscussionsEventCopyWithImpl<$Res, $Val extends DiscussionsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$AddDiscussionCopyWith<$Res> {
-  factory _$$AddDiscussionCopyWith(
-          _$AddDiscussion value, $Res Function(_$AddDiscussion) then) =
-      __$$AddDiscussionCopyWithImpl<$Res>;
+abstract class _$$AddDiscussionImplCopyWith<$Res> {
+  factory _$$AddDiscussionImplCopyWith(
+          _$AddDiscussionImpl value, $Res Function(_$AddDiscussionImpl) then) =
+      __$$AddDiscussionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String text, String questionId});
 }
 
 /// @nodoc
-class __$$AddDiscussionCopyWithImpl<$Res>
-    extends _$DiscussionsEventCopyWithImpl<$Res, _$AddDiscussion>
-    implements _$$AddDiscussionCopyWith<$Res> {
-  __$$AddDiscussionCopyWithImpl(
-      _$AddDiscussion _value, $Res Function(_$AddDiscussion) _then)
+class __$$AddDiscussionImplCopyWithImpl<$Res>
+    extends _$DiscussionsEventCopyWithImpl<$Res, _$AddDiscussionImpl>
+    implements _$$AddDiscussionImplCopyWith<$Res> {
+  __$$AddDiscussionImplCopyWithImpl(
+      _$AddDiscussionImpl _value, $Res Function(_$AddDiscussionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? text = null,
     Object? questionId = null,
   }) {
-    return _then(_$AddDiscussion(
+    return _then(_$AddDiscussionImpl(
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -137,8 +148,10 @@ class __$$AddDiscussionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
-  const _$AddDiscussion({required this.text, required this.questionId});
+class _$AddDiscussionImpl
+    with DiagnosticableTreeMixin
+    implements AddDiscussion {
+  const _$AddDiscussionImpl({required this.text, required this.questionId});
 
   @override
   final String text;
@@ -160,10 +173,10 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddDiscussion &&
+            other is _$AddDiscussionImpl &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId));
@@ -172,16 +185,19 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @override
   int get hashCode => Object.hash(runtimeType, text, questionId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddDiscussionCopyWith<_$AddDiscussion> get copyWith =>
-      __$$AddDiscussionCopyWithImpl<_$AddDiscussion>(this, _$identity);
+  _$$AddDiscussionImplCopyWith<_$AddDiscussionImpl> get copyWith =>
+      __$$AddDiscussionImplCopyWithImpl<_$AddDiscussionImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
     required TResult Function(String questionId, int minRange, int maxRange)
         fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
@@ -197,6 +213,7 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
     TResult? Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -211,6 +228,7 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
     TResult Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -229,6 +247,7 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
     required TResult Function(FetchDiscusstions value) fetchDiscusstions,
     required TResult Function(VoteDiscussion value) vote,
     required TResult Function(ReplyDiscussion value) reply,
@@ -241,6 +260,7 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
     TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult? Function(VoteDiscussion value)? vote,
     TResult? Function(ReplyDiscussion value)? reply,
@@ -253,6 +273,7 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
     TResult Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult Function(VoteDiscussion value)? vote,
     TResult Function(ReplyDiscussion value)? reply,
@@ -269,32 +290,221 @@ class _$AddDiscussion with DiagnosticableTreeMixin implements AddDiscussion {
 abstract class AddDiscussion implements DiscussionsEvent {
   const factory AddDiscussion(
       {required final String text,
-      required final String questionId}) = _$AddDiscussion;
+      required final String questionId}) = _$AddDiscussionImpl;
 
   String get text;
   String get questionId;
-  @JsonKey(ignore: true)
-  _$$AddDiscussionCopyWith<_$AddDiscussion> get copyWith =>
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddDiscussionImplCopyWith<_$AddDiscussionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchDiscusstionsCopyWith<$Res> {
-  factory _$$FetchDiscusstionsCopyWith(
-          _$FetchDiscusstions value, $Res Function(_$FetchDiscusstions) then) =
-      __$$FetchDiscusstionsCopyWithImpl<$Res>;
+abstract class _$$ReportDiscussionImplCopyWith<$Res> {
+  factory _$$ReportDiscussionImplCopyWith(_$ReportDiscussionImpl value,
+          $Res Function(_$ReportDiscussionImpl) then) =
+      __$$ReportDiscussionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String discussionId});
+}
+
+/// @nodoc
+class __$$ReportDiscussionImplCopyWithImpl<$Res>
+    extends _$DiscussionsEventCopyWithImpl<$Res, _$ReportDiscussionImpl>
+    implements _$$ReportDiscussionImplCopyWith<$Res> {
+  __$$ReportDiscussionImplCopyWithImpl(_$ReportDiscussionImpl _value,
+      $Res Function(_$ReportDiscussionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? discussionId = null,
+  }) {
+    return _then(_$ReportDiscussionImpl(
+      discussionId: null == discussionId
+          ? _value.discussionId
+          : discussionId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ReportDiscussionImpl
+    with DiagnosticableTreeMixin
+    implements ReportDiscussion {
+  const _$ReportDiscussionImpl({required this.discussionId});
+
+  @override
+  final String discussionId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DiscussionsEvent.reportDiscussion(discussionId: $discussionId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DiscussionsEvent.reportDiscussion'))
+      ..add(DiagnosticsProperty('discussionId', discussionId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReportDiscussionImpl &&
+            (identical(other.discussionId, discussionId) ||
+                other.discussionId == discussionId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, discussionId);
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ReportDiscussionImplCopyWith<_$ReportDiscussionImpl> get copyWith =>
+      __$$ReportDiscussionImplCopyWithImpl<_$ReportDiscussionImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
+    required TResult Function(String questionId, int minRange, int maxRange)
+        fetchDiscusstions,
+    required TResult Function(String discussionId, DiscussionVoteType? voteType)
+        vote,
+    required TResult Function(String discussionId, String text) reply,
+    required TResult Function(String discussionId, int minRange, int maxRange)
+        listReplies,
+  }) {
+    return reportDiscussion(discussionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
+    TResult? Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
+    TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
+    TResult? Function(String discussionId, String text)? reply,
+    TResult? Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
+  }) {
+    return reportDiscussion?.call(discussionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
+    TResult Function(String questionId, int minRange, int maxRange)?
+        fetchDiscusstions,
+    TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
+    TResult Function(String discussionId, String text)? reply,
+    TResult Function(String discussionId, int minRange, int maxRange)?
+        listReplies,
+    required TResult orElse(),
+  }) {
+    if (reportDiscussion != null) {
+      return reportDiscussion(discussionId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
+    required TResult Function(FetchDiscusstions value) fetchDiscusstions,
+    required TResult Function(VoteDiscussion value) vote,
+    required TResult Function(ReplyDiscussion value) reply,
+    required TResult Function(ListDiscussionReplies value) listReplies,
+  }) {
+    return reportDiscussion(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
+    TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
+    TResult? Function(VoteDiscussion value)? vote,
+    TResult? Function(ReplyDiscussion value)? reply,
+    TResult? Function(ListDiscussionReplies value)? listReplies,
+  }) {
+    return reportDiscussion?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
+    TResult Function(FetchDiscusstions value)? fetchDiscusstions,
+    TResult Function(VoteDiscussion value)? vote,
+    TResult Function(ReplyDiscussion value)? reply,
+    TResult Function(ListDiscussionReplies value)? listReplies,
+    required TResult orElse(),
+  }) {
+    if (reportDiscussion != null) {
+      return reportDiscussion(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ReportDiscussion implements DiscussionsEvent {
+  const factory ReportDiscussion({required final String discussionId}) =
+      _$ReportDiscussionImpl;
+
+  String get discussionId;
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReportDiscussionImplCopyWith<_$ReportDiscussionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchDiscusstionsImplCopyWith<$Res> {
+  factory _$$FetchDiscusstionsImplCopyWith(_$FetchDiscusstionsImpl value,
+          $Res Function(_$FetchDiscusstionsImpl) then) =
+      __$$FetchDiscusstionsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String questionId, int minRange, int maxRange});
 }
 
 /// @nodoc
-class __$$FetchDiscusstionsCopyWithImpl<$Res>
-    extends _$DiscussionsEventCopyWithImpl<$Res, _$FetchDiscusstions>
-    implements _$$FetchDiscusstionsCopyWith<$Res> {
-  __$$FetchDiscusstionsCopyWithImpl(
-      _$FetchDiscusstions _value, $Res Function(_$FetchDiscusstions) _then)
+class __$$FetchDiscusstionsImplCopyWithImpl<$Res>
+    extends _$DiscussionsEventCopyWithImpl<$Res, _$FetchDiscusstionsImpl>
+    implements _$$FetchDiscusstionsImplCopyWith<$Res> {
+  __$$FetchDiscusstionsImplCopyWithImpl(_$FetchDiscusstionsImpl _value,
+      $Res Function(_$FetchDiscusstionsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -302,7 +512,7 @@ class __$$FetchDiscusstionsCopyWithImpl<$Res>
     Object? minRange = null,
     Object? maxRange = null,
   }) {
-    return _then(_$FetchDiscusstions(
+    return _then(_$FetchDiscusstionsImpl(
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
@@ -321,10 +531,10 @@ class __$$FetchDiscusstionsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchDiscusstions
+class _$FetchDiscusstionsImpl
     with DiagnosticableTreeMixin
     implements FetchDiscusstions {
-  const _$FetchDiscusstions(
+  const _$FetchDiscusstionsImpl(
       {required this.questionId,
       required this.minRange,
       required this.maxRange});
@@ -352,10 +562,10 @@ class _$FetchDiscusstions
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchDiscusstions &&
+            other is _$FetchDiscusstionsImpl &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId) &&
             (identical(other.minRange, minRange) ||
@@ -367,16 +577,20 @@ class _$FetchDiscusstions
   @override
   int get hashCode => Object.hash(runtimeType, questionId, minRange, maxRange);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchDiscusstionsCopyWith<_$FetchDiscusstions> get copyWith =>
-      __$$FetchDiscusstionsCopyWithImpl<_$FetchDiscusstions>(this, _$identity);
+  _$$FetchDiscusstionsImplCopyWith<_$FetchDiscusstionsImpl> get copyWith =>
+      __$$FetchDiscusstionsImplCopyWithImpl<_$FetchDiscusstionsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
     required TResult Function(String questionId, int minRange, int maxRange)
         fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
@@ -392,6 +606,7 @@ class _$FetchDiscusstions
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
     TResult? Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -406,6 +621,7 @@ class _$FetchDiscusstions
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
     TResult Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -424,6 +640,7 @@ class _$FetchDiscusstions
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
     required TResult Function(FetchDiscusstions value) fetchDiscusstions,
     required TResult Function(VoteDiscussion value) vote,
     required TResult Function(ReplyDiscussion value) reply,
@@ -436,6 +653,7 @@ class _$FetchDiscusstions
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
     TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult? Function(VoteDiscussion value)? vote,
     TResult? Function(ReplyDiscussion value)? reply,
@@ -448,6 +666,7 @@ class _$FetchDiscusstions
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
     TResult Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult Function(VoteDiscussion value)? vote,
     TResult Function(ReplyDiscussion value)? reply,
@@ -465,40 +684,45 @@ abstract class FetchDiscusstions implements DiscussionsEvent {
   const factory FetchDiscusstions(
       {required final String questionId,
       required final int minRange,
-      required final int maxRange}) = _$FetchDiscusstions;
+      required final int maxRange}) = _$FetchDiscusstionsImpl;
 
   String get questionId;
   int get minRange;
   int get maxRange;
-  @JsonKey(ignore: true)
-  _$$FetchDiscusstionsCopyWith<_$FetchDiscusstions> get copyWith =>
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchDiscusstionsImplCopyWith<_$FetchDiscusstionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$VoteDiscussionCopyWith<$Res> {
-  factory _$$VoteDiscussionCopyWith(
-          _$VoteDiscussion value, $Res Function(_$VoteDiscussion) then) =
-      __$$VoteDiscussionCopyWithImpl<$Res>;
+abstract class _$$VoteDiscussionImplCopyWith<$Res> {
+  factory _$$VoteDiscussionImplCopyWith(_$VoteDiscussionImpl value,
+          $Res Function(_$VoteDiscussionImpl) then) =
+      __$$VoteDiscussionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String discussionId, DiscussionVoteType? voteType});
 }
 
 /// @nodoc
-class __$$VoteDiscussionCopyWithImpl<$Res>
-    extends _$DiscussionsEventCopyWithImpl<$Res, _$VoteDiscussion>
-    implements _$$VoteDiscussionCopyWith<$Res> {
-  __$$VoteDiscussionCopyWithImpl(
-      _$VoteDiscussion _value, $Res Function(_$VoteDiscussion) _then)
+class __$$VoteDiscussionImplCopyWithImpl<$Res>
+    extends _$DiscussionsEventCopyWithImpl<$Res, _$VoteDiscussionImpl>
+    implements _$$VoteDiscussionImplCopyWith<$Res> {
+  __$$VoteDiscussionImplCopyWithImpl(
+      _$VoteDiscussionImpl _value, $Res Function(_$VoteDiscussionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? discussionId = null,
     Object? voteType = freezed,
   }) {
-    return _then(_$VoteDiscussion(
+    return _then(_$VoteDiscussionImpl(
       discussionId: null == discussionId
           ? _value.discussionId
           : discussionId // ignore: cast_nullable_to_non_nullable
@@ -513,8 +737,11 @@ class __$$VoteDiscussionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
-  const _$VoteDiscussion({required this.discussionId, required this.voteType});
+class _$VoteDiscussionImpl
+    with DiagnosticableTreeMixin
+    implements VoteDiscussion {
+  const _$VoteDiscussionImpl(
+      {required this.discussionId, required this.voteType});
 
   @override
   final String discussionId;
@@ -536,10 +763,10 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VoteDiscussion &&
+            other is _$VoteDiscussionImpl &&
             (identical(other.discussionId, discussionId) ||
                 other.discussionId == discussionId) &&
             (identical(other.voteType, voteType) ||
@@ -549,16 +776,20 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @override
   int get hashCode => Object.hash(runtimeType, discussionId, voteType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VoteDiscussionCopyWith<_$VoteDiscussion> get copyWith =>
-      __$$VoteDiscussionCopyWithImpl<_$VoteDiscussion>(this, _$identity);
+  _$$VoteDiscussionImplCopyWith<_$VoteDiscussionImpl> get copyWith =>
+      __$$VoteDiscussionImplCopyWithImpl<_$VoteDiscussionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
     required TResult Function(String questionId, int minRange, int maxRange)
         fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
@@ -574,6 +805,7 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
     TResult? Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -588,6 +820,7 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
     TResult Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -606,6 +839,7 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
     required TResult Function(FetchDiscusstions value) fetchDiscusstions,
     required TResult Function(VoteDiscussion value) vote,
     required TResult Function(ReplyDiscussion value) reply,
@@ -618,6 +852,7 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
     TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult? Function(VoteDiscussion value)? vote,
     TResult? Function(ReplyDiscussion value)? reply,
@@ -630,6 +865,7 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
     TResult Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult Function(VoteDiscussion value)? vote,
     TResult Function(ReplyDiscussion value)? reply,
@@ -646,39 +882,44 @@ class _$VoteDiscussion with DiagnosticableTreeMixin implements VoteDiscussion {
 abstract class VoteDiscussion implements DiscussionsEvent {
   const factory VoteDiscussion(
       {required final String discussionId,
-      required final DiscussionVoteType? voteType}) = _$VoteDiscussion;
+      required final DiscussionVoteType? voteType}) = _$VoteDiscussionImpl;
 
   String get discussionId;
   DiscussionVoteType? get voteType;
-  @JsonKey(ignore: true)
-  _$$VoteDiscussionCopyWith<_$VoteDiscussion> get copyWith =>
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VoteDiscussionImplCopyWith<_$VoteDiscussionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReplyDiscussionCopyWith<$Res> {
-  factory _$$ReplyDiscussionCopyWith(
-          _$ReplyDiscussion value, $Res Function(_$ReplyDiscussion) then) =
-      __$$ReplyDiscussionCopyWithImpl<$Res>;
+abstract class _$$ReplyDiscussionImplCopyWith<$Res> {
+  factory _$$ReplyDiscussionImplCopyWith(_$ReplyDiscussionImpl value,
+          $Res Function(_$ReplyDiscussionImpl) then) =
+      __$$ReplyDiscussionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String discussionId, String text});
 }
 
 /// @nodoc
-class __$$ReplyDiscussionCopyWithImpl<$Res>
-    extends _$DiscussionsEventCopyWithImpl<$Res, _$ReplyDiscussion>
-    implements _$$ReplyDiscussionCopyWith<$Res> {
-  __$$ReplyDiscussionCopyWithImpl(
-      _$ReplyDiscussion _value, $Res Function(_$ReplyDiscussion) _then)
+class __$$ReplyDiscussionImplCopyWithImpl<$Res>
+    extends _$DiscussionsEventCopyWithImpl<$Res, _$ReplyDiscussionImpl>
+    implements _$$ReplyDiscussionImplCopyWith<$Res> {
+  __$$ReplyDiscussionImplCopyWithImpl(
+      _$ReplyDiscussionImpl _value, $Res Function(_$ReplyDiscussionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? discussionId = null,
     Object? text = null,
   }) {
-    return _then(_$ReplyDiscussion(
+    return _then(_$ReplyDiscussionImpl(
       discussionId: null == discussionId
           ? _value.discussionId
           : discussionId // ignore: cast_nullable_to_non_nullable
@@ -693,10 +934,10 @@ class __$$ReplyDiscussionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReplyDiscussion
+class _$ReplyDiscussionImpl
     with DiagnosticableTreeMixin
     implements ReplyDiscussion {
-  const _$ReplyDiscussion({required this.discussionId, required this.text});
+  const _$ReplyDiscussionImpl({required this.discussionId, required this.text});
 
   @override
   final String discussionId;
@@ -718,10 +959,10 @@ class _$ReplyDiscussion
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReplyDiscussion &&
+            other is _$ReplyDiscussionImpl &&
             (identical(other.discussionId, discussionId) ||
                 other.discussionId == discussionId) &&
             (identical(other.text, text) || other.text == text));
@@ -730,16 +971,20 @@ class _$ReplyDiscussion
   @override
   int get hashCode => Object.hash(runtimeType, discussionId, text);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReplyDiscussionCopyWith<_$ReplyDiscussion> get copyWith =>
-      __$$ReplyDiscussionCopyWithImpl<_$ReplyDiscussion>(this, _$identity);
+  _$$ReplyDiscussionImplCopyWith<_$ReplyDiscussionImpl> get copyWith =>
+      __$$ReplyDiscussionImplCopyWithImpl<_$ReplyDiscussionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
     required TResult Function(String questionId, int minRange, int maxRange)
         fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
@@ -755,6 +1000,7 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
     TResult? Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -769,6 +1015,7 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
     TResult Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -787,6 +1034,7 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
     required TResult Function(FetchDiscusstions value) fetchDiscusstions,
     required TResult Function(VoteDiscussion value) vote,
     required TResult Function(ReplyDiscussion value) reply,
@@ -799,6 +1047,7 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
     TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult? Function(VoteDiscussion value)? vote,
     TResult? Function(ReplyDiscussion value)? reply,
@@ -811,6 +1060,7 @@ class _$ReplyDiscussion
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
     TResult Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult Function(VoteDiscussion value)? vote,
     TResult Function(ReplyDiscussion value)? reply,
@@ -827,32 +1077,38 @@ class _$ReplyDiscussion
 abstract class ReplyDiscussion implements DiscussionsEvent {
   const factory ReplyDiscussion(
       {required final String discussionId,
-      required final String text}) = _$ReplyDiscussion;
+      required final String text}) = _$ReplyDiscussionImpl;
 
   String get discussionId;
   String get text;
-  @JsonKey(ignore: true)
-  _$$ReplyDiscussionCopyWith<_$ReplyDiscussion> get copyWith =>
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReplyDiscussionImplCopyWith<_$ReplyDiscussionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ListDiscussionRepliesCopyWith<$Res> {
-  factory _$$ListDiscussionRepliesCopyWith(_$ListDiscussionReplies value,
-          $Res Function(_$ListDiscussionReplies) then) =
-      __$$ListDiscussionRepliesCopyWithImpl<$Res>;
+abstract class _$$ListDiscussionRepliesImplCopyWith<$Res> {
+  factory _$$ListDiscussionRepliesImplCopyWith(
+          _$ListDiscussionRepliesImpl value,
+          $Res Function(_$ListDiscussionRepliesImpl) then) =
+      __$$ListDiscussionRepliesImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String discussionId, int minRange, int maxRange});
 }
 
 /// @nodoc
-class __$$ListDiscussionRepliesCopyWithImpl<$Res>
-    extends _$DiscussionsEventCopyWithImpl<$Res, _$ListDiscussionReplies>
-    implements _$$ListDiscussionRepliesCopyWith<$Res> {
-  __$$ListDiscussionRepliesCopyWithImpl(_$ListDiscussionReplies _value,
-      $Res Function(_$ListDiscussionReplies) _then)
+class __$$ListDiscussionRepliesImplCopyWithImpl<$Res>
+    extends _$DiscussionsEventCopyWithImpl<$Res, _$ListDiscussionRepliesImpl>
+    implements _$$ListDiscussionRepliesImplCopyWith<$Res> {
+  __$$ListDiscussionRepliesImplCopyWithImpl(_$ListDiscussionRepliesImpl _value,
+      $Res Function(_$ListDiscussionRepliesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -860,7 +1116,7 @@ class __$$ListDiscussionRepliesCopyWithImpl<$Res>
     Object? minRange = null,
     Object? maxRange = null,
   }) {
-    return _then(_$ListDiscussionReplies(
+    return _then(_$ListDiscussionRepliesImpl(
       discussionId: null == discussionId
           ? _value.discussionId
           : discussionId // ignore: cast_nullable_to_non_nullable
@@ -879,10 +1135,10 @@ class __$$ListDiscussionRepliesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ListDiscussionReplies
+class _$ListDiscussionRepliesImpl
     with DiagnosticableTreeMixin
     implements ListDiscussionReplies {
-  const _$ListDiscussionReplies(
+  const _$ListDiscussionRepliesImpl(
       {required this.discussionId,
       required this.minRange,
       required this.maxRange});
@@ -910,10 +1166,10 @@ class _$ListDiscussionReplies
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ListDiscussionReplies &&
+            other is _$ListDiscussionRepliesImpl &&
             (identical(other.discussionId, discussionId) ||
                 other.discussionId == discussionId) &&
             (identical(other.minRange, minRange) ||
@@ -926,17 +1182,20 @@ class _$ListDiscussionReplies
   int get hashCode =>
       Object.hash(runtimeType, discussionId, minRange, maxRange);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ListDiscussionRepliesCopyWith<_$ListDiscussionReplies> get copyWith =>
-      __$$ListDiscussionRepliesCopyWithImpl<_$ListDiscussionReplies>(
-          this, _$identity);
+  _$$ListDiscussionRepliesImplCopyWith<_$ListDiscussionRepliesImpl>
+      get copyWith => __$$ListDiscussionRepliesImplCopyWithImpl<
+          _$ListDiscussionRepliesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text, String questionId) addDiscussion,
+    required TResult Function(String discussionId) reportDiscussion,
     required TResult Function(String questionId, int minRange, int maxRange)
         fetchDiscusstions,
     required TResult Function(String discussionId, DiscussionVoteType? voteType)
@@ -952,6 +1211,7 @@ class _$ListDiscussionReplies
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String text, String questionId)? addDiscussion,
+    TResult? Function(String discussionId)? reportDiscussion,
     TResult? Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult? Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -966,6 +1226,7 @@ class _$ListDiscussionReplies
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text, String questionId)? addDiscussion,
+    TResult Function(String discussionId)? reportDiscussion,
     TResult Function(String questionId, int minRange, int maxRange)?
         fetchDiscusstions,
     TResult Function(String discussionId, DiscussionVoteType? voteType)? vote,
@@ -984,6 +1245,7 @@ class _$ListDiscussionReplies
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AddDiscussion value) addDiscussion,
+    required TResult Function(ReportDiscussion value) reportDiscussion,
     required TResult Function(FetchDiscusstions value) fetchDiscusstions,
     required TResult Function(VoteDiscussion value) vote,
     required TResult Function(ReplyDiscussion value) reply,
@@ -996,6 +1258,7 @@ class _$ListDiscussionReplies
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AddDiscussion value)? addDiscussion,
+    TResult? Function(ReportDiscussion value)? reportDiscussion,
     TResult? Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult? Function(VoteDiscussion value)? vote,
     TResult? Function(ReplyDiscussion value)? reply,
@@ -1008,6 +1271,7 @@ class _$ListDiscussionReplies
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AddDiscussion value)? addDiscussion,
+    TResult Function(ReportDiscussion value)? reportDiscussion,
     TResult Function(FetchDiscusstions value)? fetchDiscusstions,
     TResult Function(VoteDiscussion value)? vote,
     TResult Function(ReplyDiscussion value)? reply,
@@ -1025,14 +1289,17 @@ abstract class ListDiscussionReplies implements DiscussionsEvent {
   const factory ListDiscussionReplies(
       {required final String discussionId,
       required final int minRange,
-      required final int maxRange}) = _$ListDiscussionReplies;
+      required final int maxRange}) = _$ListDiscussionRepliesImpl;
 
   String get discussionId;
   int get minRange;
   int get maxRange;
-  @JsonKey(ignore: true)
-  _$$ListDiscussionRepliesCopyWith<_$ListDiscussionReplies> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DiscussionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ListDiscussionRepliesImplCopyWith<_$ListDiscussionRepliesImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1056,6 +1323,8 @@ mixin _$DiscussionsState {
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1077,6 +1346,8 @@ mixin _$DiscussionsState {
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1098,6 +1369,8 @@ mixin _$DiscussionsState {
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1126,6 +1399,9 @@ mixin _$DiscussionsState {
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1150,6 +1426,9 @@ mixin _$DiscussionsState {
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1174,6 +1453,9 @@ mixin _$DiscussionsState {
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1195,27 +1477,34 @@ class _$DiscussionsStateCopyWithImpl<$Res, $Val extends DiscussionsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$_Initial with DiagnosticableTreeMixin implements _Initial {
-  const _$_Initial();
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1229,9 +1518,9 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -1257,6 +1546,8 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return initial();
   }
@@ -1281,6 +1572,8 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return initial?.call();
   }
@@ -1305,6 +1598,8 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1339,6 +1634,9 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return initial(this);
   }
@@ -1366,6 +1664,9 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return initial?.call(this);
   }
@@ -1393,6 +1694,9 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1403,31 +1707,34 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
 }
 
 abstract class _Initial implements DiscussionsState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$FetchingDiscussionsCopyWith<$Res> {
-  factory _$$FetchingDiscussionsCopyWith(_$FetchingDiscussions value,
-          $Res Function(_$FetchingDiscussions) then) =
-      __$$FetchingDiscussionsCopyWithImpl<$Res>;
+abstract class _$$FetchingDiscussionsImplCopyWith<$Res> {
+  factory _$$FetchingDiscussionsImplCopyWith(_$FetchingDiscussionsImpl value,
+          $Res Function(_$FetchingDiscussionsImpl) then) =
+      __$$FetchingDiscussionsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchingDiscussionsCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$FetchingDiscussions>
-    implements _$$FetchingDiscussionsCopyWith<$Res> {
-  __$$FetchingDiscussionsCopyWithImpl(
-      _$FetchingDiscussions _value, $Res Function(_$FetchingDiscussions) _then)
+class __$$FetchingDiscussionsImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$FetchingDiscussionsImpl>
+    implements _$$FetchingDiscussionsImplCopyWith<$Res> {
+  __$$FetchingDiscussionsImplCopyWithImpl(_$FetchingDiscussionsImpl _value,
+      $Res Function(_$FetchingDiscussionsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FetchingDiscussions
+class _$FetchingDiscussionsImpl
     with DiagnosticableTreeMixin
     implements FetchingDiscussions {
-  const _$FetchingDiscussions();
+  const _$FetchingDiscussionsImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1442,9 +1749,10 @@ class _$FetchingDiscussions
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchingDiscussions);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchingDiscussionsImpl);
   }
 
   @override
@@ -1470,6 +1778,8 @@ class _$FetchingDiscussions
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussions();
   }
@@ -1494,6 +1804,8 @@ class _$FetchingDiscussions
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussions?.call();
   }
@@ -1518,6 +1830,8 @@ class _$FetchingDiscussions
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussions != null) {
@@ -1552,6 +1866,9 @@ class _$FetchingDiscussions
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussions(this);
   }
@@ -1579,6 +1896,9 @@ class _$FetchingDiscussions
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussions?.call(this);
   }
@@ -1606,6 +1926,9 @@ class _$FetchingDiscussions
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussions != null) {
@@ -1616,34 +1939,37 @@ class _$FetchingDiscussions
 }
 
 abstract class FetchingDiscussions implements DiscussionsState {
-  const factory FetchingDiscussions() = _$FetchingDiscussions;
+  const factory FetchingDiscussions() = _$FetchingDiscussionsImpl;
 }
 
 /// @nodoc
-abstract class _$$FetchingDiscussionsSuccessCopyWith<$Res> {
-  factory _$$FetchingDiscussionsSuccessCopyWith(
-          _$FetchingDiscussionsSuccess value,
-          $Res Function(_$FetchingDiscussionsSuccess) then) =
-      __$$FetchingDiscussionsSuccessCopyWithImpl<$Res>;
+abstract class _$$FetchingDiscussionsSuccessImplCopyWith<$Res> {
+  factory _$$FetchingDiscussionsSuccessImplCopyWith(
+          _$FetchingDiscussionsSuccessImpl value,
+          $Res Function(_$FetchingDiscussionsSuccessImpl) then) =
+      __$$FetchingDiscussionsSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ListDiscussionsResponse discussions});
 }
 
 /// @nodoc
-class __$$FetchingDiscussionsSuccessCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$FetchingDiscussionsSuccess>
-    implements _$$FetchingDiscussionsSuccessCopyWith<$Res> {
-  __$$FetchingDiscussionsSuccessCopyWithImpl(
-      _$FetchingDiscussionsSuccess _value,
-      $Res Function(_$FetchingDiscussionsSuccess) _then)
+class __$$FetchingDiscussionsSuccessImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res,
+        _$FetchingDiscussionsSuccessImpl>
+    implements _$$FetchingDiscussionsSuccessImplCopyWith<$Res> {
+  __$$FetchingDiscussionsSuccessImplCopyWithImpl(
+      _$FetchingDiscussionsSuccessImpl _value,
+      $Res Function(_$FetchingDiscussionsSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? discussions = null,
   }) {
-    return _then(_$FetchingDiscussionsSuccess(
+    return _then(_$FetchingDiscussionsSuccessImpl(
       discussions: null == discussions
           ? _value.discussions
           : discussions // ignore: cast_nullable_to_non_nullable
@@ -1654,10 +1980,10 @@ class __$$FetchingDiscussionsSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchingDiscussionsSuccess
+class _$FetchingDiscussionsSuccessImpl
     with DiagnosticableTreeMixin
     implements FetchingDiscussionsSuccess {
-  const _$FetchingDiscussionsSuccess({required this.discussions});
+  const _$FetchingDiscussionsSuccessImpl({required this.discussions});
 
   @override
   final ListDiscussionsResponse discussions;
@@ -1677,10 +2003,10 @@ class _$FetchingDiscussionsSuccess
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingDiscussionsSuccess &&
+            other is _$FetchingDiscussionsSuccessImpl &&
             (identical(other.discussions, discussions) ||
                 other.discussions == discussions));
   }
@@ -1688,12 +2014,14 @@ class _$FetchingDiscussionsSuccess
   @override
   int get hashCode => Object.hash(runtimeType, discussions);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingDiscussionsSuccessCopyWith<_$FetchingDiscussionsSuccess>
-      get copyWith => __$$FetchingDiscussionsSuccessCopyWithImpl<
-          _$FetchingDiscussionsSuccess>(this, _$identity);
+  _$$FetchingDiscussionsSuccessImplCopyWith<_$FetchingDiscussionsSuccessImpl>
+      get copyWith => __$$FetchingDiscussionsSuccessImplCopyWithImpl<
+          _$FetchingDiscussionsSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1715,6 +2043,8 @@ class _$FetchingDiscussionsSuccess
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsSuccess(discussions);
   }
@@ -1739,6 +2069,8 @@ class _$FetchingDiscussionsSuccess
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsSuccess?.call(discussions);
   }
@@ -1763,6 +2095,8 @@ class _$FetchingDiscussionsSuccess
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionsSuccess != null) {
@@ -1797,6 +2131,9 @@ class _$FetchingDiscussionsSuccess
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsSuccess(this);
   }
@@ -1824,6 +2161,9 @@ class _$FetchingDiscussionsSuccess
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsSuccess?.call(this);
   }
@@ -1851,6 +2191,9 @@ class _$FetchingDiscussionsSuccess
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionsSuccess != null) {
@@ -1863,37 +2206,44 @@ class _$FetchingDiscussionsSuccess
 abstract class FetchingDiscussionsSuccess implements DiscussionsState {
   const factory FetchingDiscussionsSuccess(
           {required final ListDiscussionsResponse discussions}) =
-      _$FetchingDiscussionsSuccess;
+      _$FetchingDiscussionsSuccessImpl;
 
   ListDiscussionsResponse get discussions;
-  @JsonKey(ignore: true)
-  _$$FetchingDiscussionsSuccessCopyWith<_$FetchingDiscussionsSuccess>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingDiscussionsSuccessImplCopyWith<_$FetchingDiscussionsSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchingDiscussionsErrorCopyWith<$Res> {
-  factory _$$FetchingDiscussionsErrorCopyWith(_$FetchingDiscussionsError value,
-          $Res Function(_$FetchingDiscussionsError) then) =
-      __$$FetchingDiscussionsErrorCopyWithImpl<$Res>;
+abstract class _$$FetchingDiscussionsErrorImplCopyWith<$Res> {
+  factory _$$FetchingDiscussionsErrorImplCopyWith(
+          _$FetchingDiscussionsErrorImpl value,
+          $Res Function(_$FetchingDiscussionsErrorImpl) then) =
+      __$$FetchingDiscussionsErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$FetchingDiscussionsErrorCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$FetchingDiscussionsError>
-    implements _$$FetchingDiscussionsErrorCopyWith<$Res> {
-  __$$FetchingDiscussionsErrorCopyWithImpl(_$FetchingDiscussionsError _value,
-      $Res Function(_$FetchingDiscussionsError) _then)
+class __$$FetchingDiscussionsErrorImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$FetchingDiscussionsErrorImpl>
+    implements _$$FetchingDiscussionsErrorImplCopyWith<$Res> {
+  __$$FetchingDiscussionsErrorImplCopyWithImpl(
+      _$FetchingDiscussionsErrorImpl _value,
+      $Res Function(_$FetchingDiscussionsErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$FetchingDiscussionsError(
+    return _then(_$FetchingDiscussionsErrorImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -1904,10 +2254,10 @@ class __$$FetchingDiscussionsErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchingDiscussionsError
+class _$FetchingDiscussionsErrorImpl
     with DiagnosticableTreeMixin
     implements FetchingDiscussionsError {
-  const _$FetchingDiscussionsError({required this.error});
+  const _$FetchingDiscussionsErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -1927,23 +2277,24 @@ class _$FetchingDiscussionsError
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingDiscussionsError &&
+            other is _$FetchingDiscussionsErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingDiscussionsErrorCopyWith<_$FetchingDiscussionsError>
-      get copyWith =>
-          __$$FetchingDiscussionsErrorCopyWithImpl<_$FetchingDiscussionsError>(
-              this, _$identity);
+  _$$FetchingDiscussionsErrorImplCopyWith<_$FetchingDiscussionsErrorImpl>
+      get copyWith => __$$FetchingDiscussionsErrorImplCopyWithImpl<
+          _$FetchingDiscussionsErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1965,6 +2316,8 @@ class _$FetchingDiscussionsError
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsError(error);
   }
@@ -1989,6 +2342,8 @@ class _$FetchingDiscussionsError
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsError?.call(error);
   }
@@ -2013,6 +2368,8 @@ class _$FetchingDiscussionsError
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionsError != null) {
@@ -2047,6 +2404,9 @@ class _$FetchingDiscussionsError
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsError(this);
   }
@@ -2074,6 +2434,9 @@ class _$FetchingDiscussionsError
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionsError?.call(this);
   }
@@ -2101,6 +2464,9 @@ class _$FetchingDiscussionsError
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionsError != null) {
@@ -2112,37 +2478,45 @@ class _$FetchingDiscussionsError
 
 abstract class FetchingDiscussionsError implements DiscussionsState {
   const factory FetchingDiscussionsError({required final HttpError error}) =
-      _$FetchingDiscussionsError;
+      _$FetchingDiscussionsErrorImpl;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$FetchingDiscussionsErrorCopyWith<_$FetchingDiscussionsError>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingDiscussionsErrorImplCopyWith<_$FetchingDiscussionsErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchingDiscussionRepliesCopyWith<$Res> {
-  factory _$$FetchingDiscussionRepliesCopyWith(
-          _$FetchingDiscussionReplies value,
-          $Res Function(_$FetchingDiscussionReplies) then) =
-      __$$FetchingDiscussionRepliesCopyWithImpl<$Res>;
+abstract class _$$FetchingDiscussionRepliesImplCopyWith<$Res> {
+  factory _$$FetchingDiscussionRepliesImplCopyWith(
+          _$FetchingDiscussionRepliesImpl value,
+          $Res Function(_$FetchingDiscussionRepliesImpl) then) =
+      __$$FetchingDiscussionRepliesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchingDiscussionRepliesCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$FetchingDiscussionReplies>
-    implements _$$FetchingDiscussionRepliesCopyWith<$Res> {
-  __$$FetchingDiscussionRepliesCopyWithImpl(_$FetchingDiscussionReplies _value,
-      $Res Function(_$FetchingDiscussionReplies) _then)
+class __$$FetchingDiscussionRepliesImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res,
+        _$FetchingDiscussionRepliesImpl>
+    implements _$$FetchingDiscussionRepliesImplCopyWith<$Res> {
+  __$$FetchingDiscussionRepliesImplCopyWithImpl(
+      _$FetchingDiscussionRepliesImpl _value,
+      $Res Function(_$FetchingDiscussionRepliesImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FetchingDiscussionReplies
+class _$FetchingDiscussionRepliesImpl
     with DiagnosticableTreeMixin
     implements FetchingDiscussionReplies {
-  const _$FetchingDiscussionReplies();
+  const _$FetchingDiscussionRepliesImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2157,10 +2531,10 @@ class _$FetchingDiscussionReplies
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingDiscussionReplies);
+            other is _$FetchingDiscussionRepliesImpl);
   }
 
   @override
@@ -2186,6 +2560,8 @@ class _$FetchingDiscussionReplies
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionReplies();
   }
@@ -2210,6 +2586,8 @@ class _$FetchingDiscussionReplies
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionReplies?.call();
   }
@@ -2234,6 +2612,8 @@ class _$FetchingDiscussionReplies
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionReplies != null) {
@@ -2268,6 +2648,9 @@ class _$FetchingDiscussionReplies
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionReplies(this);
   }
@@ -2295,6 +2678,9 @@ class _$FetchingDiscussionReplies
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionReplies?.call(this);
   }
@@ -2322,6 +2708,9 @@ class _$FetchingDiscussionReplies
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionReplies != null) {
@@ -2332,35 +2721,37 @@ class _$FetchingDiscussionReplies
 }
 
 abstract class FetchingDiscussionReplies implements DiscussionsState {
-  const factory FetchingDiscussionReplies() = _$FetchingDiscussionReplies;
+  const factory FetchingDiscussionReplies() = _$FetchingDiscussionRepliesImpl;
 }
 
 /// @nodoc
-abstract class _$$FetchingDiscussionRepliesSuccessCopyWith<$Res> {
-  factory _$$FetchingDiscussionRepliesSuccessCopyWith(
-          _$FetchingDiscussionRepliesSuccess value,
-          $Res Function(_$FetchingDiscussionRepliesSuccess) then) =
-      __$$FetchingDiscussionRepliesSuccessCopyWithImpl<$Res>;
+abstract class _$$FetchingDiscussionRepliesSuccessImplCopyWith<$Res> {
+  factory _$$FetchingDiscussionRepliesSuccessImplCopyWith(
+          _$FetchingDiscussionRepliesSuccessImpl value,
+          $Res Function(_$FetchingDiscussionRepliesSuccessImpl) then) =
+      __$$FetchingDiscussionRepliesSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<DiscussionReply> replies});
 }
 
 /// @nodoc
-class __$$FetchingDiscussionRepliesSuccessCopyWithImpl<$Res>
+class __$$FetchingDiscussionRepliesSuccessImplCopyWithImpl<$Res>
     extends _$DiscussionsStateCopyWithImpl<$Res,
-        _$FetchingDiscussionRepliesSuccess>
-    implements _$$FetchingDiscussionRepliesSuccessCopyWith<$Res> {
-  __$$FetchingDiscussionRepliesSuccessCopyWithImpl(
-      _$FetchingDiscussionRepliesSuccess _value,
-      $Res Function(_$FetchingDiscussionRepliesSuccess) _then)
+        _$FetchingDiscussionRepliesSuccessImpl>
+    implements _$$FetchingDiscussionRepliesSuccessImplCopyWith<$Res> {
+  __$$FetchingDiscussionRepliesSuccessImplCopyWithImpl(
+      _$FetchingDiscussionRepliesSuccessImpl _value,
+      $Res Function(_$FetchingDiscussionRepliesSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? replies = null,
   }) {
-    return _then(_$FetchingDiscussionRepliesSuccess(
+    return _then(_$FetchingDiscussionRepliesSuccessImpl(
       replies: null == replies
           ? _value._replies
           : replies // ignore: cast_nullable_to_non_nullable
@@ -2371,10 +2762,10 @@ class __$$FetchingDiscussionRepliesSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchingDiscussionRepliesSuccess
+class _$FetchingDiscussionRepliesSuccessImpl
     with DiagnosticableTreeMixin
     implements FetchingDiscussionRepliesSuccess {
-  const _$FetchingDiscussionRepliesSuccess(
+  const _$FetchingDiscussionRepliesSuccessImpl(
       {required final List<DiscussionReply> replies})
       : _replies = replies;
 
@@ -2401,10 +2792,10 @@ class _$FetchingDiscussionRepliesSuccess
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingDiscussionRepliesSuccess &&
+            other is _$FetchingDiscussionRepliesSuccessImpl &&
             const DeepCollectionEquality().equals(other._replies, _replies));
   }
 
@@ -2412,13 +2803,15 @@ class _$FetchingDiscussionRepliesSuccess
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_replies));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingDiscussionRepliesSuccessCopyWith<
-          _$FetchingDiscussionRepliesSuccess>
-      get copyWith => __$$FetchingDiscussionRepliesSuccessCopyWithImpl<
-          _$FetchingDiscussionRepliesSuccess>(this, _$identity);
+  _$$FetchingDiscussionRepliesSuccessImplCopyWith<
+          _$FetchingDiscussionRepliesSuccessImpl>
+      get copyWith => __$$FetchingDiscussionRepliesSuccessImplCopyWithImpl<
+          _$FetchingDiscussionRepliesSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2440,6 +2833,8 @@ class _$FetchingDiscussionRepliesSuccess
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesSuccess(replies);
   }
@@ -2464,6 +2859,8 @@ class _$FetchingDiscussionRepliesSuccess
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesSuccess?.call(replies);
   }
@@ -2488,6 +2885,8 @@ class _$FetchingDiscussionRepliesSuccess
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionRepliesSuccess != null) {
@@ -2522,6 +2921,9 @@ class _$FetchingDiscussionRepliesSuccess
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesSuccess(this);
   }
@@ -2549,6 +2951,9 @@ class _$FetchingDiscussionRepliesSuccess
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesSuccess?.call(this);
   }
@@ -2576,6 +2981,9 @@ class _$FetchingDiscussionRepliesSuccess
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionRepliesSuccess != null) {
@@ -2588,41 +2996,46 @@ class _$FetchingDiscussionRepliesSuccess
 abstract class FetchingDiscussionRepliesSuccess implements DiscussionsState {
   const factory FetchingDiscussionRepliesSuccess(
           {required final List<DiscussionReply> replies}) =
-      _$FetchingDiscussionRepliesSuccess;
+      _$FetchingDiscussionRepliesSuccessImpl;
 
   List<DiscussionReply> get replies;
-  @JsonKey(ignore: true)
-  _$$FetchingDiscussionRepliesSuccessCopyWith<
-          _$FetchingDiscussionRepliesSuccess>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingDiscussionRepliesSuccessImplCopyWith<
+          _$FetchingDiscussionRepliesSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchingDiscussionRepliesErrorCopyWith<$Res> {
-  factory _$$FetchingDiscussionRepliesErrorCopyWith(
-          _$FetchingDiscussionRepliesError value,
-          $Res Function(_$FetchingDiscussionRepliesError) then) =
-      __$$FetchingDiscussionRepliesErrorCopyWithImpl<$Res>;
+abstract class _$$FetchingDiscussionRepliesErrorImplCopyWith<$Res> {
+  factory _$$FetchingDiscussionRepliesErrorImplCopyWith(
+          _$FetchingDiscussionRepliesErrorImpl value,
+          $Res Function(_$FetchingDiscussionRepliesErrorImpl) then) =
+      __$$FetchingDiscussionRepliesErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$FetchingDiscussionRepliesErrorCopyWithImpl<$Res>
+class __$$FetchingDiscussionRepliesErrorImplCopyWithImpl<$Res>
     extends _$DiscussionsStateCopyWithImpl<$Res,
-        _$FetchingDiscussionRepliesError>
-    implements _$$FetchingDiscussionRepliesErrorCopyWith<$Res> {
-  __$$FetchingDiscussionRepliesErrorCopyWithImpl(
-      _$FetchingDiscussionRepliesError _value,
-      $Res Function(_$FetchingDiscussionRepliesError) _then)
+        _$FetchingDiscussionRepliesErrorImpl>
+    implements _$$FetchingDiscussionRepliesErrorImplCopyWith<$Res> {
+  __$$FetchingDiscussionRepliesErrorImplCopyWithImpl(
+      _$FetchingDiscussionRepliesErrorImpl _value,
+      $Res Function(_$FetchingDiscussionRepliesErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$FetchingDiscussionRepliesError(
+    return _then(_$FetchingDiscussionRepliesErrorImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -2633,10 +3046,10 @@ class __$$FetchingDiscussionRepliesErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchingDiscussionRepliesError
+class _$FetchingDiscussionRepliesErrorImpl
     with DiagnosticableTreeMixin
     implements FetchingDiscussionRepliesError {
-  const _$FetchingDiscussionRepliesError({required this.error});
+  const _$FetchingDiscussionRepliesErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -2656,22 +3069,25 @@ class _$FetchingDiscussionRepliesError
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingDiscussionRepliesError &&
+            other is _$FetchingDiscussionRepliesErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingDiscussionRepliesErrorCopyWith<_$FetchingDiscussionRepliesError>
-      get copyWith => __$$FetchingDiscussionRepliesErrorCopyWithImpl<
-          _$FetchingDiscussionRepliesError>(this, _$identity);
+  _$$FetchingDiscussionRepliesErrorImplCopyWith<
+          _$FetchingDiscussionRepliesErrorImpl>
+      get copyWith => __$$FetchingDiscussionRepliesErrorImplCopyWithImpl<
+          _$FetchingDiscussionRepliesErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2693,6 +3109,8 @@ class _$FetchingDiscussionRepliesError
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesError(error);
   }
@@ -2717,6 +3135,8 @@ class _$FetchingDiscussionRepliesError
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesError?.call(error);
   }
@@ -2741,6 +3161,8 @@ class _$FetchingDiscussionRepliesError
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionRepliesError != null) {
@@ -2775,6 +3197,9 @@ class _$FetchingDiscussionRepliesError
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesError(this);
   }
@@ -2802,6 +3227,9 @@ class _$FetchingDiscussionRepliesError
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return fetchingDiscussionRepliesError?.call(this);
   }
@@ -2829,6 +3257,9 @@ class _$FetchingDiscussionRepliesError
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (fetchingDiscussionRepliesError != null) {
@@ -2840,36 +3271,45 @@ class _$FetchingDiscussionRepliesError
 
 abstract class FetchingDiscussionRepliesError implements DiscussionsState {
   const factory FetchingDiscussionRepliesError(
-      {required final HttpError error}) = _$FetchingDiscussionRepliesError;
+      {required final HttpError error}) = _$FetchingDiscussionRepliesErrorImpl;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$FetchingDiscussionRepliesErrorCopyWith<_$FetchingDiscussionRepliesError>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingDiscussionRepliesErrorImplCopyWith<
+          _$FetchingDiscussionRepliesErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddingDiscussionOrReplyCopyWith<$Res> {
-  factory _$$AddingDiscussionOrReplyCopyWith(_$AddingDiscussionOrReply value,
-          $Res Function(_$AddingDiscussionOrReply) then) =
-      __$$AddingDiscussionOrReplyCopyWithImpl<$Res>;
+abstract class _$$AddingDiscussionOrReplyImplCopyWith<$Res> {
+  factory _$$AddingDiscussionOrReplyImplCopyWith(
+          _$AddingDiscussionOrReplyImpl value,
+          $Res Function(_$AddingDiscussionOrReplyImpl) then) =
+      __$$AddingDiscussionOrReplyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AddingDiscussionOrReplyCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$AddingDiscussionOrReply>
-    implements _$$AddingDiscussionOrReplyCopyWith<$Res> {
-  __$$AddingDiscussionOrReplyCopyWithImpl(_$AddingDiscussionOrReply _value,
-      $Res Function(_$AddingDiscussionOrReply) _then)
+class __$$AddingDiscussionOrReplyImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$AddingDiscussionOrReplyImpl>
+    implements _$$AddingDiscussionOrReplyImplCopyWith<$Res> {
+  __$$AddingDiscussionOrReplyImplCopyWithImpl(
+      _$AddingDiscussionOrReplyImpl _value,
+      $Res Function(_$AddingDiscussionOrReplyImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$AddingDiscussionOrReply
+class _$AddingDiscussionOrReplyImpl
     with DiagnosticableTreeMixin
     implements AddingDiscussionOrReply {
-  const _$AddingDiscussionOrReply();
+  const _$AddingDiscussionOrReplyImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2884,10 +3324,10 @@ class _$AddingDiscussionOrReply
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddingDiscussionOrReply);
+            other is _$AddingDiscussionOrReplyImpl);
   }
 
   @override
@@ -2913,6 +3353,8 @@ class _$AddingDiscussionOrReply
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return addingDiscussionOrReply();
   }
@@ -2937,6 +3379,8 @@ class _$AddingDiscussionOrReply
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return addingDiscussionOrReply?.call();
   }
@@ -2961,6 +3405,8 @@ class _$AddingDiscussionOrReply
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (addingDiscussionOrReply != null) {
@@ -2995,6 +3441,9 @@ class _$AddingDiscussionOrReply
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return addingDiscussionOrReply(this);
   }
@@ -3022,6 +3471,9 @@ class _$AddingDiscussionOrReply
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return addingDiscussionOrReply?.call(this);
   }
@@ -3049,6 +3501,9 @@ class _$AddingDiscussionOrReply
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (addingDiscussionOrReply != null) {
@@ -3059,32 +3514,36 @@ class _$AddingDiscussionOrReply
 }
 
 abstract class AddingDiscussionOrReply implements DiscussionsState {
-  const factory AddingDiscussionOrReply() = _$AddingDiscussionOrReply;
+  const factory AddingDiscussionOrReply() = _$AddingDiscussionOrReplyImpl;
 }
 
 /// @nodoc
-abstract class _$$AddingDiscussionSuccessCopyWith<$Res> {
-  factory _$$AddingDiscussionSuccessCopyWith(_$AddingDiscussionSuccess value,
-          $Res Function(_$AddingDiscussionSuccess) then) =
-      __$$AddingDiscussionSuccessCopyWithImpl<$Res>;
+abstract class _$$AddingDiscussionSuccessImplCopyWith<$Res> {
+  factory _$$AddingDiscussionSuccessImplCopyWith(
+          _$AddingDiscussionSuccessImpl value,
+          $Res Function(_$AddingDiscussionSuccessImpl) then) =
+      __$$AddingDiscussionSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Discussion discussion});
 }
 
 /// @nodoc
-class __$$AddingDiscussionSuccessCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$AddingDiscussionSuccess>
-    implements _$$AddingDiscussionSuccessCopyWith<$Res> {
-  __$$AddingDiscussionSuccessCopyWithImpl(_$AddingDiscussionSuccess _value,
-      $Res Function(_$AddingDiscussionSuccess) _then)
+class __$$AddingDiscussionSuccessImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$AddingDiscussionSuccessImpl>
+    implements _$$AddingDiscussionSuccessImplCopyWith<$Res> {
+  __$$AddingDiscussionSuccessImplCopyWithImpl(
+      _$AddingDiscussionSuccessImpl _value,
+      $Res Function(_$AddingDiscussionSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? discussion = null,
   }) {
-    return _then(_$AddingDiscussionSuccess(
+    return _then(_$AddingDiscussionSuccessImpl(
       discussion: null == discussion
           ? _value.discussion
           : discussion // ignore: cast_nullable_to_non_nullable
@@ -3095,10 +3554,10 @@ class __$$AddingDiscussionSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddingDiscussionSuccess
+class _$AddingDiscussionSuccessImpl
     with DiagnosticableTreeMixin
     implements AddingDiscussionSuccess {
-  const _$AddingDiscussionSuccess({required this.discussion});
+  const _$AddingDiscussionSuccessImpl({required this.discussion});
 
   @override
   final Discussion discussion;
@@ -3118,10 +3577,10 @@ class _$AddingDiscussionSuccess
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddingDiscussionSuccess &&
+            other is _$AddingDiscussionSuccessImpl &&
             (identical(other.discussion, discussion) ||
                 other.discussion == discussion));
   }
@@ -3129,12 +3588,14 @@ class _$AddingDiscussionSuccess
   @override
   int get hashCode => Object.hash(runtimeType, discussion);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddingDiscussionSuccessCopyWith<_$AddingDiscussionSuccess> get copyWith =>
-      __$$AddingDiscussionSuccessCopyWithImpl<_$AddingDiscussionSuccess>(
-          this, _$identity);
+  _$$AddingDiscussionSuccessImplCopyWith<_$AddingDiscussionSuccessImpl>
+      get copyWith => __$$AddingDiscussionSuccessImplCopyWithImpl<
+          _$AddingDiscussionSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3156,6 +3617,8 @@ class _$AddingDiscussionSuccess
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return addingDiscussionSuccess(discussion);
   }
@@ -3180,6 +3643,8 @@ class _$AddingDiscussionSuccess
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return addingDiscussionSuccess?.call(discussion);
   }
@@ -3204,6 +3669,8 @@ class _$AddingDiscussionSuccess
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (addingDiscussionSuccess != null) {
@@ -3238,6 +3705,9 @@ class _$AddingDiscussionSuccess
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return addingDiscussionSuccess(this);
   }
@@ -3265,6 +3735,9 @@ class _$AddingDiscussionSuccess
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return addingDiscussionSuccess?.call(this);
   }
@@ -3292,6 +3765,9 @@ class _$AddingDiscussionSuccess
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (addingDiscussionSuccess != null) {
@@ -3303,38 +3779,45 @@ class _$AddingDiscussionSuccess
 
 abstract class AddingDiscussionSuccess implements DiscussionsState {
   const factory AddingDiscussionSuccess(
-      {required final Discussion discussion}) = _$AddingDiscussionSuccess;
+      {required final Discussion discussion}) = _$AddingDiscussionSuccessImpl;
 
   Discussion get discussion;
-  @JsonKey(ignore: true)
-  _$$AddingDiscussionSuccessCopyWith<_$AddingDiscussionSuccess> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddingDiscussionSuccessImplCopyWith<_$AddingDiscussionSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ReplyingDiscussionSuccessCopyWith<$Res> {
-  factory _$$ReplyingDiscussionSuccessCopyWith(
-          _$ReplyingDiscussionSuccess value,
-          $Res Function(_$ReplyingDiscussionSuccess) then) =
-      __$$ReplyingDiscussionSuccessCopyWithImpl<$Res>;
+abstract class _$$ReplyingDiscussionSuccessImplCopyWith<$Res> {
+  factory _$$ReplyingDiscussionSuccessImplCopyWith(
+          _$ReplyingDiscussionSuccessImpl value,
+          $Res Function(_$ReplyingDiscussionSuccessImpl) then) =
+      __$$ReplyingDiscussionSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DiscussionReply discussionReply});
 }
 
 /// @nodoc
-class __$$ReplyingDiscussionSuccessCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$ReplyingDiscussionSuccess>
-    implements _$$ReplyingDiscussionSuccessCopyWith<$Res> {
-  __$$ReplyingDiscussionSuccessCopyWithImpl(_$ReplyingDiscussionSuccess _value,
-      $Res Function(_$ReplyingDiscussionSuccess) _then)
+class __$$ReplyingDiscussionSuccessImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res,
+        _$ReplyingDiscussionSuccessImpl>
+    implements _$$ReplyingDiscussionSuccessImplCopyWith<$Res> {
+  __$$ReplyingDiscussionSuccessImplCopyWithImpl(
+      _$ReplyingDiscussionSuccessImpl _value,
+      $Res Function(_$ReplyingDiscussionSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? discussionReply = null,
   }) {
-    return _then(_$ReplyingDiscussionSuccess(
+    return _then(_$ReplyingDiscussionSuccessImpl(
       discussionReply: null == discussionReply
           ? _value.discussionReply
           : discussionReply // ignore: cast_nullable_to_non_nullable
@@ -3345,10 +3828,10 @@ class __$$ReplyingDiscussionSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReplyingDiscussionSuccess
+class _$ReplyingDiscussionSuccessImpl
     with DiagnosticableTreeMixin
     implements ReplyingDiscussionSuccess {
-  const _$ReplyingDiscussionSuccess({required this.discussionReply});
+  const _$ReplyingDiscussionSuccessImpl({required this.discussionReply});
 
   @override
   final DiscussionReply discussionReply;
@@ -3368,10 +3851,10 @@ class _$ReplyingDiscussionSuccess
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReplyingDiscussionSuccess &&
+            other is _$ReplyingDiscussionSuccessImpl &&
             (identical(other.discussionReply, discussionReply) ||
                 other.discussionReply == discussionReply));
   }
@@ -3379,12 +3862,14 @@ class _$ReplyingDiscussionSuccess
   @override
   int get hashCode => Object.hash(runtimeType, discussionReply);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ReplyingDiscussionSuccessCopyWith<_$ReplyingDiscussionSuccess>
-      get copyWith => __$$ReplyingDiscussionSuccessCopyWithImpl<
-          _$ReplyingDiscussionSuccess>(this, _$identity);
+  _$$ReplyingDiscussionSuccessImplCopyWith<_$ReplyingDiscussionSuccessImpl>
+      get copyWith => __$$ReplyingDiscussionSuccessImplCopyWithImpl<
+          _$ReplyingDiscussionSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3406,6 +3891,8 @@ class _$ReplyingDiscussionSuccess
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return replyingDiscussionSuccess(discussionReply);
   }
@@ -3430,6 +3917,8 @@ class _$ReplyingDiscussionSuccess
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return replyingDiscussionSuccess?.call(discussionReply);
   }
@@ -3454,6 +3943,8 @@ class _$ReplyingDiscussionSuccess
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (replyingDiscussionSuccess != null) {
@@ -3488,6 +3979,9 @@ class _$ReplyingDiscussionSuccess
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return replyingDiscussionSuccess(this);
   }
@@ -3515,6 +4009,9 @@ class _$ReplyingDiscussionSuccess
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return replyingDiscussionSuccess?.call(this);
   }
@@ -3542,6 +4039,9 @@ class _$ReplyingDiscussionSuccess
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (replyingDiscussionSuccess != null) {
@@ -3554,40 +4054,45 @@ class _$ReplyingDiscussionSuccess
 abstract class ReplyingDiscussionSuccess implements DiscussionsState {
   const factory ReplyingDiscussionSuccess(
           {required final DiscussionReply discussionReply}) =
-      _$ReplyingDiscussionSuccess;
+      _$ReplyingDiscussionSuccessImpl;
 
   DiscussionReply get discussionReply;
-  @JsonKey(ignore: true)
-  _$$ReplyingDiscussionSuccessCopyWith<_$ReplyingDiscussionSuccess>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ReplyingDiscussionSuccessImplCopyWith<_$ReplyingDiscussionSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UpdatingDiscussionVotesCountSuccessCopyWith<$Res> {
-  factory _$$UpdatingDiscussionVotesCountSuccessCopyWith(
-          _$UpdatingDiscussionVotesCountSuccess value,
-          $Res Function(_$UpdatingDiscussionVotesCountSuccess) then) =
-      __$$UpdatingDiscussionVotesCountSuccessCopyWithImpl<$Res>;
+abstract class _$$UpdatingDiscussionVotesCountSuccessImplCopyWith<$Res> {
+  factory _$$UpdatingDiscussionVotesCountSuccessImplCopyWith(
+          _$UpdatingDiscussionVotesCountSuccessImpl value,
+          $Res Function(_$UpdatingDiscussionVotesCountSuccessImpl) then) =
+      __$$UpdatingDiscussionVotesCountSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Discussion discussion});
 }
 
 /// @nodoc
-class __$$UpdatingDiscussionVotesCountSuccessCopyWithImpl<$Res>
+class __$$UpdatingDiscussionVotesCountSuccessImplCopyWithImpl<$Res>
     extends _$DiscussionsStateCopyWithImpl<$Res,
-        _$UpdatingDiscussionVotesCountSuccess>
-    implements _$$UpdatingDiscussionVotesCountSuccessCopyWith<$Res> {
-  __$$UpdatingDiscussionVotesCountSuccessCopyWithImpl(
-      _$UpdatingDiscussionVotesCountSuccess _value,
-      $Res Function(_$UpdatingDiscussionVotesCountSuccess) _then)
+        _$UpdatingDiscussionVotesCountSuccessImpl>
+    implements _$$UpdatingDiscussionVotesCountSuccessImplCopyWith<$Res> {
+  __$$UpdatingDiscussionVotesCountSuccessImplCopyWithImpl(
+      _$UpdatingDiscussionVotesCountSuccessImpl _value,
+      $Res Function(_$UpdatingDiscussionVotesCountSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? discussion = null,
   }) {
-    return _then(_$UpdatingDiscussionVotesCountSuccess(
+    return _then(_$UpdatingDiscussionVotesCountSuccessImpl(
       discussion: null == discussion
           ? _value.discussion
           : discussion // ignore: cast_nullable_to_non_nullable
@@ -3598,10 +4103,10 @@ class __$$UpdatingDiscussionVotesCountSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdatingDiscussionVotesCountSuccess
+class _$UpdatingDiscussionVotesCountSuccessImpl
     with DiagnosticableTreeMixin
     implements UpdatingDiscussionVotesCountSuccess {
-  const _$UpdatingDiscussionVotesCountSuccess({required this.discussion});
+  const _$UpdatingDiscussionVotesCountSuccessImpl({required this.discussion});
 
   @override
   final Discussion discussion;
@@ -3621,10 +4126,10 @@ class _$UpdatingDiscussionVotesCountSuccess
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdatingDiscussionVotesCountSuccess &&
+            other is _$UpdatingDiscussionVotesCountSuccessImpl &&
             (identical(other.discussion, discussion) ||
                 other.discussion == discussion));
   }
@@ -3632,13 +4137,15 @@ class _$UpdatingDiscussionVotesCountSuccess
   @override
   int get hashCode => Object.hash(runtimeType, discussion);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UpdatingDiscussionVotesCountSuccessCopyWith<
-          _$UpdatingDiscussionVotesCountSuccess>
-      get copyWith => __$$UpdatingDiscussionVotesCountSuccessCopyWithImpl<
-          _$UpdatingDiscussionVotesCountSuccess>(this, _$identity);
+  _$$UpdatingDiscussionVotesCountSuccessImplCopyWith<
+          _$UpdatingDiscussionVotesCountSuccessImpl>
+      get copyWith => __$$UpdatingDiscussionVotesCountSuccessImplCopyWithImpl<
+          _$UpdatingDiscussionVotesCountSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3660,6 +4167,8 @@ class _$UpdatingDiscussionVotesCountSuccess
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCountSuccess(discussion);
   }
@@ -3684,6 +4193,8 @@ class _$UpdatingDiscussionVotesCountSuccess
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCountSuccess?.call(discussion);
   }
@@ -3708,6 +4219,8 @@ class _$UpdatingDiscussionVotesCountSuccess
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (updatingDiscussionVotesCountSuccess != null) {
@@ -3742,6 +4255,9 @@ class _$UpdatingDiscussionVotesCountSuccess
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCountSuccess(this);
   }
@@ -3769,6 +4285,9 @@ class _$UpdatingDiscussionVotesCountSuccess
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCountSuccess?.call(this);
   }
@@ -3796,6 +4315,9 @@ class _$UpdatingDiscussionVotesCountSuccess
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (updatingDiscussionVotesCountSuccess != null) {
@@ -3808,39 +4330,46 @@ class _$UpdatingDiscussionVotesCountSuccess
 abstract class UpdatingDiscussionVotesCountSuccess implements DiscussionsState {
   const factory UpdatingDiscussionVotesCountSuccess(
           {required final Discussion discussion}) =
-      _$UpdatingDiscussionVotesCountSuccess;
+      _$UpdatingDiscussionVotesCountSuccessImpl;
 
   Discussion get discussion;
-  @JsonKey(ignore: true)
-  _$$UpdatingDiscussionVotesCountSuccessCopyWith<
-          _$UpdatingDiscussionVotesCountSuccess>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdatingDiscussionVotesCountSuccessImplCopyWith<
+          _$UpdatingDiscussionVotesCountSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UpdatingDiscussionVotesCountCopyWith<$Res> {
-  factory _$$UpdatingDiscussionVotesCountCopyWith(
-          _$UpdatingDiscussionVotesCount value,
-          $Res Function(_$UpdatingDiscussionVotesCount) then) =
-      __$$UpdatingDiscussionVotesCountCopyWithImpl<$Res>;
+abstract class _$$UpdatingDiscussionVotesCountImplCopyWith<$Res> {
+  factory _$$UpdatingDiscussionVotesCountImplCopyWith(
+          _$UpdatingDiscussionVotesCountImpl value,
+          $Res Function(_$UpdatingDiscussionVotesCountImpl) then) =
+      __$$UpdatingDiscussionVotesCountImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UpdatingDiscussionVotesCountCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$UpdatingDiscussionVotesCount>
-    implements _$$UpdatingDiscussionVotesCountCopyWith<$Res> {
-  __$$UpdatingDiscussionVotesCountCopyWithImpl(
-      _$UpdatingDiscussionVotesCount _value,
-      $Res Function(_$UpdatingDiscussionVotesCount) _then)
+class __$$UpdatingDiscussionVotesCountImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res,
+        _$UpdatingDiscussionVotesCountImpl>
+    implements _$$UpdatingDiscussionVotesCountImplCopyWith<$Res> {
+  __$$UpdatingDiscussionVotesCountImplCopyWithImpl(
+      _$UpdatingDiscussionVotesCountImpl _value,
+      $Res Function(_$UpdatingDiscussionVotesCountImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$UpdatingDiscussionVotesCount
+class _$UpdatingDiscussionVotesCountImpl
     with DiagnosticableTreeMixin
     implements UpdatingDiscussionVotesCount {
-  const _$UpdatingDiscussionVotesCount();
+  const _$UpdatingDiscussionVotesCountImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -3855,10 +4384,10 @@ class _$UpdatingDiscussionVotesCount
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdatingDiscussionVotesCount);
+            other is _$UpdatingDiscussionVotesCountImpl);
   }
 
   @override
@@ -3884,6 +4413,8 @@ class _$UpdatingDiscussionVotesCount
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCount();
   }
@@ -3908,6 +4439,8 @@ class _$UpdatingDiscussionVotesCount
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCount?.call();
   }
@@ -3932,6 +4465,8 @@ class _$UpdatingDiscussionVotesCount
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (updatingDiscussionVotesCount != null) {
@@ -3966,6 +4501,9 @@ class _$UpdatingDiscussionVotesCount
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCount(this);
   }
@@ -3993,6 +4531,9 @@ class _$UpdatingDiscussionVotesCount
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return updatingDiscussionVotesCount?.call(this);
   }
@@ -4020,6 +4561,9 @@ class _$UpdatingDiscussionVotesCount
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (updatingDiscussionVotesCount != null) {
@@ -4030,32 +4574,35 @@ class _$UpdatingDiscussionVotesCount
 }
 
 abstract class UpdatingDiscussionVotesCount implements DiscussionsState {
-  const factory UpdatingDiscussionVotesCount() = _$UpdatingDiscussionVotesCount;
+  const factory UpdatingDiscussionVotesCount() =
+      _$UpdatingDiscussionVotesCountImpl;
 }
 
 /// @nodoc
-abstract class _$$DiscussionsErrorCopyWith<$Res> {
-  factory _$$DiscussionsErrorCopyWith(
-          _$DiscussionsError value, $Res Function(_$DiscussionsError) then) =
-      __$$DiscussionsErrorCopyWithImpl<$Res>;
+abstract class _$$DiscussionsErrorImplCopyWith<$Res> {
+  factory _$$DiscussionsErrorImplCopyWith(_$DiscussionsErrorImpl value,
+          $Res Function(_$DiscussionsErrorImpl) then) =
+      __$$DiscussionsErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$DiscussionsErrorCopyWithImpl<$Res>
-    extends _$DiscussionsStateCopyWithImpl<$Res, _$DiscussionsError>
-    implements _$$DiscussionsErrorCopyWith<$Res> {
-  __$$DiscussionsErrorCopyWithImpl(
-      _$DiscussionsError _value, $Res Function(_$DiscussionsError) _then)
+class __$$DiscussionsErrorImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$DiscussionsErrorImpl>
+    implements _$$DiscussionsErrorImplCopyWith<$Res> {
+  __$$DiscussionsErrorImplCopyWithImpl(_$DiscussionsErrorImpl _value,
+      $Res Function(_$DiscussionsErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$DiscussionsError(
+    return _then(_$DiscussionsErrorImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -4066,10 +4613,10 @@ class __$$DiscussionsErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DiscussionsError
+class _$DiscussionsErrorImpl
     with DiagnosticableTreeMixin
     implements DiscussionsError {
-  const _$DiscussionsError({required this.error});
+  const _$DiscussionsErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -4088,21 +4635,24 @@ class _$DiscussionsError
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DiscussionsError &&
+            other is _$DiscussionsErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DiscussionsErrorCopyWith<_$DiscussionsError> get copyWith =>
-      __$$DiscussionsErrorCopyWithImpl<_$DiscussionsError>(this, _$identity);
+  _$$DiscussionsErrorImplCopyWith<_$DiscussionsErrorImpl> get copyWith =>
+      __$$DiscussionsErrorImplCopyWithImpl<_$DiscussionsErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4124,6 +4674,8 @@ class _$DiscussionsError
         updatingDiscussionVotesCountSuccess,
     required TResult Function() updatingDiscussionVotesCount,
     required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
   }) {
     return discussionsError(error);
   }
@@ -4148,6 +4700,8 @@ class _$DiscussionsError
         updatingDiscussionVotesCountSuccess,
     TResult? Function()? updatingDiscussionVotesCount,
     TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
   }) {
     return discussionsError?.call(error);
   }
@@ -4172,6 +4726,8 @@ class _$DiscussionsError
         updatingDiscussionVotesCountSuccess,
     TResult Function()? updatingDiscussionVotesCount,
     TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (discussionsError != null) {
@@ -4206,6 +4762,9 @@ class _$DiscussionsError
     required TResult Function(UpdatingDiscussionVotesCount value)
         updatingDiscussionVotesCount,
     required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
   }) {
     return discussionsError(this);
   }
@@ -4233,6 +4792,9 @@ class _$DiscussionsError
     TResult? Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
   }) {
     return discussionsError?.call(this);
   }
@@ -4260,6 +4822,9 @@ class _$DiscussionsError
     TResult Function(UpdatingDiscussionVotesCount value)?
         updatingDiscussionVotesCount,
     TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
     required TResult orElse(),
   }) {
     if (discussionsError != null) {
@@ -4271,10 +4836,481 @@ class _$DiscussionsError
 
 abstract class DiscussionsError implements DiscussionsState {
   const factory DiscussionsError({required final HttpError error}) =
-      _$DiscussionsError;
+      _$DiscussionsErrorImpl;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$DiscussionsErrorCopyWith<_$DiscussionsError> get copyWith =>
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DiscussionsErrorImplCopyWith<_$DiscussionsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ReportingDiscussionsImplCopyWith<$Res> {
+  factory _$$ReportingDiscussionsImplCopyWith(_$ReportingDiscussionsImpl value,
+          $Res Function(_$ReportingDiscussionsImpl) then) =
+      __$$ReportingDiscussionsImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ReportingDiscussionsImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res, _$ReportingDiscussionsImpl>
+    implements _$$ReportingDiscussionsImplCopyWith<$Res> {
+  __$$ReportingDiscussionsImplCopyWithImpl(_$ReportingDiscussionsImpl _value,
+      $Res Function(_$ReportingDiscussionsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ReportingDiscussionsImpl
+    with DiagnosticableTreeMixin
+    implements ReportingDiscussions {
+  const _$ReportingDiscussionsImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DiscussionsState.reportingDiscussions()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'DiscussionsState.reportingDiscussions'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReportingDiscussionsImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() fetchingDiscussions,
+    required TResult Function(ListDiscussionsResponse discussions)
+        fetchingDiscussionsSuccess,
+    required TResult Function(HttpError error) fetchingDiscussionsError,
+    required TResult Function() fetchingDiscussionReplies,
+    required TResult Function(List<DiscussionReply> replies)
+        fetchingDiscussionRepliesSuccess,
+    required TResult Function(HttpError error) fetchingDiscussionRepliesError,
+    required TResult Function() addingDiscussionOrReply,
+    required TResult Function(Discussion discussion) addingDiscussionSuccess,
+    required TResult Function(DiscussionReply discussionReply)
+        replyingDiscussionSuccess,
+    required TResult Function(Discussion discussion)
+        updatingDiscussionVotesCountSuccess,
+    required TResult Function() updatingDiscussionVotesCount,
+    required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussions();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? fetchingDiscussions,
+    TResult? Function(ListDiscussionsResponse discussions)?
+        fetchingDiscussionsSuccess,
+    TResult? Function(HttpError error)? fetchingDiscussionsError,
+    TResult? Function()? fetchingDiscussionReplies,
+    TResult? Function(List<DiscussionReply> replies)?
+        fetchingDiscussionRepliesSuccess,
+    TResult? Function(HttpError error)? fetchingDiscussionRepliesError,
+    TResult? Function()? addingDiscussionOrReply,
+    TResult? Function(Discussion discussion)? addingDiscussionSuccess,
+    TResult? Function(DiscussionReply discussionReply)?
+        replyingDiscussionSuccess,
+    TResult? Function(Discussion discussion)?
+        updatingDiscussionVotesCountSuccess,
+    TResult? Function()? updatingDiscussionVotesCount,
+    TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussions?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? fetchingDiscussions,
+    TResult Function(ListDiscussionsResponse discussions)?
+        fetchingDiscussionsSuccess,
+    TResult Function(HttpError error)? fetchingDiscussionsError,
+    TResult Function()? fetchingDiscussionReplies,
+    TResult Function(List<DiscussionReply> replies)?
+        fetchingDiscussionRepliesSuccess,
+    TResult Function(HttpError error)? fetchingDiscussionRepliesError,
+    TResult Function()? addingDiscussionOrReply,
+    TResult Function(Discussion discussion)? addingDiscussionSuccess,
+    TResult Function(DiscussionReply discussionReply)?
+        replyingDiscussionSuccess,
+    TResult Function(Discussion discussion)?
+        updatingDiscussionVotesCountSuccess,
+    TResult Function()? updatingDiscussionVotesCount,
+    TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
+    required TResult orElse(),
+  }) {
+    if (reportingDiscussions != null) {
+      return reportingDiscussions();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(FetchingDiscussions value) fetchingDiscussions,
+    required TResult Function(FetchingDiscussionsSuccess value)
+        fetchingDiscussionsSuccess,
+    required TResult Function(FetchingDiscussionsError value)
+        fetchingDiscussionsError,
+    required TResult Function(FetchingDiscussionReplies value)
+        fetchingDiscussionReplies,
+    required TResult Function(FetchingDiscussionRepliesSuccess value)
+        fetchingDiscussionRepliesSuccess,
+    required TResult Function(FetchingDiscussionRepliesError value)
+        fetchingDiscussionRepliesError,
+    required TResult Function(AddingDiscussionOrReply value)
+        addingDiscussionOrReply,
+    required TResult Function(AddingDiscussionSuccess value)
+        addingDiscussionSuccess,
+    required TResult Function(ReplyingDiscussionSuccess value)
+        replyingDiscussionSuccess,
+    required TResult Function(UpdatingDiscussionVotesCountSuccess value)
+        updatingDiscussionVotesCountSuccess,
+    required TResult Function(UpdatingDiscussionVotesCount value)
+        updatingDiscussionVotesCount,
+    required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(FetchingDiscussions value)? fetchingDiscussions,
+    TResult? Function(FetchingDiscussionsSuccess value)?
+        fetchingDiscussionsSuccess,
+    TResult? Function(FetchingDiscussionsError value)? fetchingDiscussionsError,
+    TResult? Function(FetchingDiscussionReplies value)?
+        fetchingDiscussionReplies,
+    TResult? Function(FetchingDiscussionRepliesSuccess value)?
+        fetchingDiscussionRepliesSuccess,
+    TResult? Function(FetchingDiscussionRepliesError value)?
+        fetchingDiscussionRepliesError,
+    TResult? Function(AddingDiscussionOrReply value)? addingDiscussionOrReply,
+    TResult? Function(AddingDiscussionSuccess value)? addingDiscussionSuccess,
+    TResult? Function(ReplyingDiscussionSuccess value)?
+        replyingDiscussionSuccess,
+    TResult? Function(UpdatingDiscussionVotesCountSuccess value)?
+        updatingDiscussionVotesCountSuccess,
+    TResult? Function(UpdatingDiscussionVotesCount value)?
+        updatingDiscussionVotesCount,
+    TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussions?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(FetchingDiscussions value)? fetchingDiscussions,
+    TResult Function(FetchingDiscussionsSuccess value)?
+        fetchingDiscussionsSuccess,
+    TResult Function(FetchingDiscussionsError value)? fetchingDiscussionsError,
+    TResult Function(FetchingDiscussionReplies value)?
+        fetchingDiscussionReplies,
+    TResult Function(FetchingDiscussionRepliesSuccess value)?
+        fetchingDiscussionRepliesSuccess,
+    TResult Function(FetchingDiscussionRepliesError value)?
+        fetchingDiscussionRepliesError,
+    TResult Function(AddingDiscussionOrReply value)? addingDiscussionOrReply,
+    TResult Function(AddingDiscussionSuccess value)? addingDiscussionSuccess,
+    TResult Function(ReplyingDiscussionSuccess value)?
+        replyingDiscussionSuccess,
+    TResult Function(UpdatingDiscussionVotesCountSuccess value)?
+        updatingDiscussionVotesCountSuccess,
+    TResult Function(UpdatingDiscussionVotesCount value)?
+        updatingDiscussionVotesCount,
+    TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
+    required TResult orElse(),
+  }) {
+    if (reportingDiscussions != null) {
+      return reportingDiscussions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ReportingDiscussions implements DiscussionsState {
+  const factory ReportingDiscussions() = _$ReportingDiscussionsImpl;
+}
+
+/// @nodoc
+abstract class _$$ReportingDiscussionsSuccessImplCopyWith<$Res> {
+  factory _$$ReportingDiscussionsSuccessImplCopyWith(
+          _$ReportingDiscussionsSuccessImpl value,
+          $Res Function(_$ReportingDiscussionsSuccessImpl) then) =
+      __$$ReportingDiscussionsSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ReportingDiscussionsSuccessImplCopyWithImpl<$Res>
+    extends _$DiscussionsStateCopyWithImpl<$Res,
+        _$ReportingDiscussionsSuccessImpl>
+    implements _$$ReportingDiscussionsSuccessImplCopyWith<$Res> {
+  __$$ReportingDiscussionsSuccessImplCopyWithImpl(
+      _$ReportingDiscussionsSuccessImpl _value,
+      $Res Function(_$ReportingDiscussionsSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DiscussionsState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ReportingDiscussionsSuccessImpl
+    with DiagnosticableTreeMixin
+    implements ReportingDiscussionsSuccess {
+  const _$ReportingDiscussionsSuccessImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DiscussionsState.reportingDiscussionsSuccess()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'DiscussionsState.reportingDiscussionsSuccess'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReportingDiscussionsSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() fetchingDiscussions,
+    required TResult Function(ListDiscussionsResponse discussions)
+        fetchingDiscussionsSuccess,
+    required TResult Function(HttpError error) fetchingDiscussionsError,
+    required TResult Function() fetchingDiscussionReplies,
+    required TResult Function(List<DiscussionReply> replies)
+        fetchingDiscussionRepliesSuccess,
+    required TResult Function(HttpError error) fetchingDiscussionRepliesError,
+    required TResult Function() addingDiscussionOrReply,
+    required TResult Function(Discussion discussion) addingDiscussionSuccess,
+    required TResult Function(DiscussionReply discussionReply)
+        replyingDiscussionSuccess,
+    required TResult Function(Discussion discussion)
+        updatingDiscussionVotesCountSuccess,
+    required TResult Function() updatingDiscussionVotesCount,
+    required TResult Function(HttpError error) discussionsError,
+    required TResult Function() reportingDiscussions,
+    required TResult Function() reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussionsSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? fetchingDiscussions,
+    TResult? Function(ListDiscussionsResponse discussions)?
+        fetchingDiscussionsSuccess,
+    TResult? Function(HttpError error)? fetchingDiscussionsError,
+    TResult? Function()? fetchingDiscussionReplies,
+    TResult? Function(List<DiscussionReply> replies)?
+        fetchingDiscussionRepliesSuccess,
+    TResult? Function(HttpError error)? fetchingDiscussionRepliesError,
+    TResult? Function()? addingDiscussionOrReply,
+    TResult? Function(Discussion discussion)? addingDiscussionSuccess,
+    TResult? Function(DiscussionReply discussionReply)?
+        replyingDiscussionSuccess,
+    TResult? Function(Discussion discussion)?
+        updatingDiscussionVotesCountSuccess,
+    TResult? Function()? updatingDiscussionVotesCount,
+    TResult? Function(HttpError error)? discussionsError,
+    TResult? Function()? reportingDiscussions,
+    TResult? Function()? reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussionsSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? fetchingDiscussions,
+    TResult Function(ListDiscussionsResponse discussions)?
+        fetchingDiscussionsSuccess,
+    TResult Function(HttpError error)? fetchingDiscussionsError,
+    TResult Function()? fetchingDiscussionReplies,
+    TResult Function(List<DiscussionReply> replies)?
+        fetchingDiscussionRepliesSuccess,
+    TResult Function(HttpError error)? fetchingDiscussionRepliesError,
+    TResult Function()? addingDiscussionOrReply,
+    TResult Function(Discussion discussion)? addingDiscussionSuccess,
+    TResult Function(DiscussionReply discussionReply)?
+        replyingDiscussionSuccess,
+    TResult Function(Discussion discussion)?
+        updatingDiscussionVotesCountSuccess,
+    TResult Function()? updatingDiscussionVotesCount,
+    TResult Function(HttpError error)? discussionsError,
+    TResult Function()? reportingDiscussions,
+    TResult Function()? reportingDiscussionsSuccess,
+    required TResult orElse(),
+  }) {
+    if (reportingDiscussionsSuccess != null) {
+      return reportingDiscussionsSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(FetchingDiscussions value) fetchingDiscussions,
+    required TResult Function(FetchingDiscussionsSuccess value)
+        fetchingDiscussionsSuccess,
+    required TResult Function(FetchingDiscussionsError value)
+        fetchingDiscussionsError,
+    required TResult Function(FetchingDiscussionReplies value)
+        fetchingDiscussionReplies,
+    required TResult Function(FetchingDiscussionRepliesSuccess value)
+        fetchingDiscussionRepliesSuccess,
+    required TResult Function(FetchingDiscussionRepliesError value)
+        fetchingDiscussionRepliesError,
+    required TResult Function(AddingDiscussionOrReply value)
+        addingDiscussionOrReply,
+    required TResult Function(AddingDiscussionSuccess value)
+        addingDiscussionSuccess,
+    required TResult Function(ReplyingDiscussionSuccess value)
+        replyingDiscussionSuccess,
+    required TResult Function(UpdatingDiscussionVotesCountSuccess value)
+        updatingDiscussionVotesCountSuccess,
+    required TResult Function(UpdatingDiscussionVotesCount value)
+        updatingDiscussionVotesCount,
+    required TResult Function(DiscussionsError value) discussionsError,
+    required TResult Function(ReportingDiscussions value) reportingDiscussions,
+    required TResult Function(ReportingDiscussionsSuccess value)
+        reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussionsSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(FetchingDiscussions value)? fetchingDiscussions,
+    TResult? Function(FetchingDiscussionsSuccess value)?
+        fetchingDiscussionsSuccess,
+    TResult? Function(FetchingDiscussionsError value)? fetchingDiscussionsError,
+    TResult? Function(FetchingDiscussionReplies value)?
+        fetchingDiscussionReplies,
+    TResult? Function(FetchingDiscussionRepliesSuccess value)?
+        fetchingDiscussionRepliesSuccess,
+    TResult? Function(FetchingDiscussionRepliesError value)?
+        fetchingDiscussionRepliesError,
+    TResult? Function(AddingDiscussionOrReply value)? addingDiscussionOrReply,
+    TResult? Function(AddingDiscussionSuccess value)? addingDiscussionSuccess,
+    TResult? Function(ReplyingDiscussionSuccess value)?
+        replyingDiscussionSuccess,
+    TResult? Function(UpdatingDiscussionVotesCountSuccess value)?
+        updatingDiscussionVotesCountSuccess,
+    TResult? Function(UpdatingDiscussionVotesCount value)?
+        updatingDiscussionVotesCount,
+    TResult? Function(DiscussionsError value)? discussionsError,
+    TResult? Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult? Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
+  }) {
+    return reportingDiscussionsSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(FetchingDiscussions value)? fetchingDiscussions,
+    TResult Function(FetchingDiscussionsSuccess value)?
+        fetchingDiscussionsSuccess,
+    TResult Function(FetchingDiscussionsError value)? fetchingDiscussionsError,
+    TResult Function(FetchingDiscussionReplies value)?
+        fetchingDiscussionReplies,
+    TResult Function(FetchingDiscussionRepliesSuccess value)?
+        fetchingDiscussionRepliesSuccess,
+    TResult Function(FetchingDiscussionRepliesError value)?
+        fetchingDiscussionRepliesError,
+    TResult Function(AddingDiscussionOrReply value)? addingDiscussionOrReply,
+    TResult Function(AddingDiscussionSuccess value)? addingDiscussionSuccess,
+    TResult Function(ReplyingDiscussionSuccess value)?
+        replyingDiscussionSuccess,
+    TResult Function(UpdatingDiscussionVotesCountSuccess value)?
+        updatingDiscussionVotesCountSuccess,
+    TResult Function(UpdatingDiscussionVotesCount value)?
+        updatingDiscussionVotesCount,
+    TResult Function(DiscussionsError value)? discussionsError,
+    TResult Function(ReportingDiscussions value)? reportingDiscussions,
+    TResult Function(ReportingDiscussionsSuccess value)?
+        reportingDiscussionsSuccess,
+    required TResult orElse(),
+  }) {
+    if (reportingDiscussionsSuccess != null) {
+      return reportingDiscussionsSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ReportingDiscussionsSuccess implements DiscussionsState {
+  const factory ReportingDiscussionsSuccess() =
+      _$ReportingDiscussionsSuccessImpl;
 }

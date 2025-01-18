@@ -1,21 +1,37 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:passco/blocs/user/user_bloc.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
+import 'package:passco/router/routes.dart';
 import 'package:passco/ui/screens/downloads/downloads_screen.dart';
-import 'package:passco/ui/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:passco/ui/screens/home/home.dart';
+import 'package:passco/ui/screens/profile/profile_index.dart';
 import 'package:screenshot/screenshot.dart';
 
 final navBarScreenshotController = ScreenshotController();
+final GlobalKey<_BottomNavBarState> bottomNavBarKey = GlobalKey<_BottomNavBarState>();
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
-
+  BottomNavBar() : super(key: bottomNavBarKey);
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  @override
+  void initState() {
+    super.initState();
+    // if (!getIt.isRegistered<_BottomNavBarState>(instance: this)) {
+    //   getIt.registerSingleton<_BottomNavBarState>(this);
+    // }
+
+    getIt<UserBloc>().add(const RetrieveUser());
+  }
+
   int selectedIndex = 0;
   List<Widget> pages = [
     const HomeScreen(),
@@ -24,7 +40,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const ProfileScreen(),
   ];
 
-  void onBottomNavItemTap(int index) {
+  void onBottomNavItemTap(int index) async {
+    if (index == 2) {
+      final user = await getIt<AuthedUserRepository>().getUser();
+      if (user == null) {
+        Navigator.of(context).pushNamed(Routes.signin_signup);
+        return;
+      }
+    }
     selectedIndex = index;
     setState(() {});
     HapticFeedback.lightImpact();

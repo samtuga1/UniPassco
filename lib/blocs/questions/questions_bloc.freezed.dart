@@ -12,7 +12,7 @@ part of 'questions_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$QuestionsEvent {
@@ -113,25 +113,30 @@ class _$QuestionsEventCopyWithImpl<$Res, $Val extends QuestionsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$FetchQuestionsListCopyWith<$Res> {
-  factory _$$FetchQuestionsListCopyWith(_$FetchQuestionsList value,
-          $Res Function(_$FetchQuestionsList) then) =
-      __$$FetchQuestionsListCopyWithImpl<$Res>;
+abstract class _$$FetchQuestionsListImplCopyWith<$Res> {
+  factory _$$FetchQuestionsListImplCopyWith(_$FetchQuestionsListImpl value,
+          $Res Function(_$FetchQuestionsListImpl) then) =
+      __$$FetchQuestionsListImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String level, String? query, int? limit, int? offset});
 }
 
 /// @nodoc
-class __$$FetchQuestionsListCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$FetchQuestionsList>
-    implements _$$FetchQuestionsListCopyWith<$Res> {
-  __$$FetchQuestionsListCopyWithImpl(
-      _$FetchQuestionsList _value, $Res Function(_$FetchQuestionsList) _then)
+class __$$FetchQuestionsListImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$FetchQuestionsListImpl>
+    implements _$$FetchQuestionsListImplCopyWith<$Res> {
+  __$$FetchQuestionsListImplCopyWithImpl(_$FetchQuestionsListImpl _value,
+      $Res Function(_$FetchQuestionsListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +145,7 @@ class __$$FetchQuestionsListCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? offset = freezed,
   }) {
-    return _then(_$FetchQuestionsList(
+    return _then(_$FetchQuestionsListImpl(
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -163,8 +168,8 @@ class __$$FetchQuestionsListCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchQuestionsList implements FetchQuestionsList {
-  const _$FetchQuestionsList(
+class _$FetchQuestionsListImpl implements FetchQuestionsList {
+  const _$FetchQuestionsListImpl(
       {required this.level, this.query, this.limit, this.offset});
 
   @override
@@ -182,10 +187,10 @@ class _$FetchQuestionsList implements FetchQuestionsList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchQuestionsList &&
+            other is _$FetchQuestionsListImpl &&
             (identical(other.level, level) || other.level == level) &&
             (identical(other.query, query) || other.query == query) &&
             (identical(other.limit, limit) || other.limit == limit) &&
@@ -195,11 +200,13 @@ class _$FetchQuestionsList implements FetchQuestionsList {
   @override
   int get hashCode => Object.hash(runtimeType, level, query, limit, offset);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchQuestionsListCopyWith<_$FetchQuestionsList> get copyWith =>
-      __$$FetchQuestionsListCopyWithImpl<_$FetchQuestionsList>(
+  _$$FetchQuestionsListImplCopyWith<_$FetchQuestionsListImpl> get copyWith =>
+      __$$FetchQuestionsListImplCopyWithImpl<_$FetchQuestionsListImpl>(
           this, _$identity);
 
   @override
@@ -311,40 +318,45 @@ abstract class FetchQuestionsList implements QuestionsEvent {
       {required final String level,
       final String? query,
       final int? limit,
-      final int? offset}) = _$FetchQuestionsList;
+      final int? offset}) = _$FetchQuestionsListImpl;
 
   String get level;
   String? get query;
   int? get limit;
   int? get offset;
-  @JsonKey(ignore: true)
-  _$$FetchQuestionsListCopyWith<_$FetchQuestionsList> get copyWith =>
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchQuestionsListImplCopyWith<_$FetchQuestionsListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RetrieveQuestionByIdCopyWith<$Res> {
-  factory _$$RetrieveQuestionByIdCopyWith(_$RetrieveQuestionById value,
-          $Res Function(_$RetrieveQuestionById) then) =
-      __$$RetrieveQuestionByIdCopyWithImpl<$Res>;
+abstract class _$$RetrieveQuestionByIdImplCopyWith<$Res> {
+  factory _$$RetrieveQuestionByIdImplCopyWith(_$RetrieveQuestionByIdImpl value,
+          $Res Function(_$RetrieveQuestionByIdImpl) then) =
+      __$$RetrieveQuestionByIdImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String questionId});
 }
 
 /// @nodoc
-class __$$RetrieveQuestionByIdCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$RetrieveQuestionById>
-    implements _$$RetrieveQuestionByIdCopyWith<$Res> {
-  __$$RetrieveQuestionByIdCopyWithImpl(_$RetrieveQuestionById _value,
-      $Res Function(_$RetrieveQuestionById) _then)
+class __$$RetrieveQuestionByIdImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$RetrieveQuestionByIdImpl>
+    implements _$$RetrieveQuestionByIdImplCopyWith<$Res> {
+  __$$RetrieveQuestionByIdImplCopyWithImpl(_$RetrieveQuestionByIdImpl _value,
+      $Res Function(_$RetrieveQuestionByIdImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? questionId = null,
   }) {
-    return _then(_$RetrieveQuestionById(
+    return _then(_$RetrieveQuestionByIdImpl(
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
@@ -355,8 +367,8 @@ class __$$RetrieveQuestionByIdCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RetrieveQuestionById implements RetrieveQuestionById {
-  const _$RetrieveQuestionById({required this.questionId});
+class _$RetrieveQuestionByIdImpl implements RetrieveQuestionById {
+  const _$RetrieveQuestionByIdImpl({required this.questionId});
 
   @override
   final String questionId;
@@ -367,10 +379,10 @@ class _$RetrieveQuestionById implements RetrieveQuestionById {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RetrieveQuestionById &&
+            other is _$RetrieveQuestionByIdImpl &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId));
   }
@@ -378,12 +390,15 @@ class _$RetrieveQuestionById implements RetrieveQuestionById {
   @override
   int get hashCode => Object.hash(runtimeType, questionId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RetrieveQuestionByIdCopyWith<_$RetrieveQuestionById> get copyWith =>
-      __$$RetrieveQuestionByIdCopyWithImpl<_$RetrieveQuestionById>(
-          this, _$identity);
+  _$$RetrieveQuestionByIdImplCopyWith<_$RetrieveQuestionByIdImpl>
+      get copyWith =>
+          __$$RetrieveQuestionByIdImplCopyWithImpl<_$RetrieveQuestionByIdImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -491,37 +506,42 @@ class _$RetrieveQuestionById implements RetrieveQuestionById {
 
 abstract class RetrieveQuestionById implements QuestionsEvent {
   const factory RetrieveQuestionById({required final String questionId}) =
-      _$RetrieveQuestionById;
+      _$RetrieveQuestionByIdImpl;
 
   String get questionId;
-  @JsonKey(ignore: true)
-  _$$RetrieveQuestionByIdCopyWith<_$RetrieveQuestionById> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RetrieveQuestionByIdImplCopyWith<_$RetrieveQuestionByIdImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AddBookmarkQuestionCopyWith<$Res> {
-  factory _$$AddBookmarkQuestionCopyWith(_$AddBookmarkQuestion value,
-          $Res Function(_$AddBookmarkQuestion) then) =
-      __$$AddBookmarkQuestionCopyWithImpl<$Res>;
+abstract class _$$AddBookmarkQuestionImplCopyWith<$Res> {
+  factory _$$AddBookmarkQuestionImplCopyWith(_$AddBookmarkQuestionImpl value,
+          $Res Function(_$AddBookmarkQuestionImpl) then) =
+      __$$AddBookmarkQuestionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String questionId});
 }
 
 /// @nodoc
-class __$$AddBookmarkQuestionCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$AddBookmarkQuestion>
-    implements _$$AddBookmarkQuestionCopyWith<$Res> {
-  __$$AddBookmarkQuestionCopyWithImpl(
-      _$AddBookmarkQuestion _value, $Res Function(_$AddBookmarkQuestion) _then)
+class __$$AddBookmarkQuestionImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$AddBookmarkQuestionImpl>
+    implements _$$AddBookmarkQuestionImplCopyWith<$Res> {
+  __$$AddBookmarkQuestionImplCopyWithImpl(_$AddBookmarkQuestionImpl _value,
+      $Res Function(_$AddBookmarkQuestionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? questionId = null,
   }) {
-    return _then(_$AddBookmarkQuestion(
+    return _then(_$AddBookmarkQuestionImpl(
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
@@ -532,8 +552,8 @@ class __$$AddBookmarkQuestionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AddBookmarkQuestion implements AddBookmarkQuestion {
-  const _$AddBookmarkQuestion({required this.questionId});
+class _$AddBookmarkQuestionImpl implements AddBookmarkQuestion {
+  const _$AddBookmarkQuestionImpl({required this.questionId});
 
   @override
   final String questionId;
@@ -544,10 +564,10 @@ class _$AddBookmarkQuestion implements AddBookmarkQuestion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddBookmarkQuestion &&
+            other is _$AddBookmarkQuestionImpl &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId));
   }
@@ -555,11 +575,13 @@ class _$AddBookmarkQuestion implements AddBookmarkQuestion {
   @override
   int get hashCode => Object.hash(runtimeType, questionId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddBookmarkQuestionCopyWith<_$AddBookmarkQuestion> get copyWith =>
-      __$$AddBookmarkQuestionCopyWithImpl<_$AddBookmarkQuestion>(
+  _$$AddBookmarkQuestionImplCopyWith<_$AddBookmarkQuestionImpl> get copyWith =>
+      __$$AddBookmarkQuestionImplCopyWithImpl<_$AddBookmarkQuestionImpl>(
           this, _$identity);
 
   @override
@@ -668,37 +690,44 @@ class _$AddBookmarkQuestion implements AddBookmarkQuestion {
 
 abstract class AddBookmarkQuestion implements QuestionsEvent {
   const factory AddBookmarkQuestion({required final String questionId}) =
-      _$AddBookmarkQuestion;
+      _$AddBookmarkQuestionImpl;
 
   String get questionId;
-  @JsonKey(ignore: true)
-  _$$AddBookmarkQuestionCopyWith<_$AddBookmarkQuestion> get copyWith =>
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddBookmarkQuestionImplCopyWith<_$AddBookmarkQuestionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RemoveBookmarkQuestionCopyWith<$Res> {
-  factory _$$RemoveBookmarkQuestionCopyWith(_$RemoveBookmarkQuestion value,
-          $Res Function(_$RemoveBookmarkQuestion) then) =
-      __$$RemoveBookmarkQuestionCopyWithImpl<$Res>;
+abstract class _$$RemoveBookmarkQuestionImplCopyWith<$Res> {
+  factory _$$RemoveBookmarkQuestionImplCopyWith(
+          _$RemoveBookmarkQuestionImpl value,
+          $Res Function(_$RemoveBookmarkQuestionImpl) then) =
+      __$$RemoveBookmarkQuestionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String questionId});
 }
 
 /// @nodoc
-class __$$RemoveBookmarkQuestionCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$RemoveBookmarkQuestion>
-    implements _$$RemoveBookmarkQuestionCopyWith<$Res> {
-  __$$RemoveBookmarkQuestionCopyWithImpl(_$RemoveBookmarkQuestion _value,
-      $Res Function(_$RemoveBookmarkQuestion) _then)
+class __$$RemoveBookmarkQuestionImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$RemoveBookmarkQuestionImpl>
+    implements _$$RemoveBookmarkQuestionImplCopyWith<$Res> {
+  __$$RemoveBookmarkQuestionImplCopyWithImpl(
+      _$RemoveBookmarkQuestionImpl _value,
+      $Res Function(_$RemoveBookmarkQuestionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? questionId = null,
   }) {
-    return _then(_$RemoveBookmarkQuestion(
+    return _then(_$RemoveBookmarkQuestionImpl(
       questionId: null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
@@ -709,8 +738,8 @@ class __$$RemoveBookmarkQuestionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
-  const _$RemoveBookmarkQuestion({required this.questionId});
+class _$RemoveBookmarkQuestionImpl implements RemoveBookmarkQuestion {
+  const _$RemoveBookmarkQuestionImpl({required this.questionId});
 
   @override
   final String questionId;
@@ -721,10 +750,10 @@ class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoveBookmarkQuestion &&
+            other is _$RemoveBookmarkQuestionImpl &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId));
   }
@@ -732,12 +761,14 @@ class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
   @override
   int get hashCode => Object.hash(runtimeType, questionId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RemoveBookmarkQuestionCopyWith<_$RemoveBookmarkQuestion> get copyWith =>
-      __$$RemoveBookmarkQuestionCopyWithImpl<_$RemoveBookmarkQuestion>(
-          this, _$identity);
+  _$$RemoveBookmarkQuestionImplCopyWith<_$RemoveBookmarkQuestionImpl>
+      get copyWith => __$$RemoveBookmarkQuestionImplCopyWithImpl<
+          _$RemoveBookmarkQuestionImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -845,37 +876,42 @@ class _$RemoveBookmarkQuestion implements RemoveBookmarkQuestion {
 
 abstract class RemoveBookmarkQuestion implements QuestionsEvent {
   const factory RemoveBookmarkQuestion({required final String questionId}) =
-      _$RemoveBookmarkQuestion;
+      _$RemoveBookmarkQuestionImpl;
 
   String get questionId;
-  @JsonKey(ignore: true)
-  _$$RemoveBookmarkQuestionCopyWith<_$RemoveBookmarkQuestion> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RemoveBookmarkQuestionImplCopyWith<_$RemoveBookmarkQuestionImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DownloadQuestionCopyWith<$Res> {
-  factory _$$DownloadQuestionCopyWith(
-          _$DownloadQuestion value, $Res Function(_$DownloadQuestion) then) =
-      __$$DownloadQuestionCopyWithImpl<$Res>;
+abstract class _$$DownloadQuestionImplCopyWith<$Res> {
+  factory _$$DownloadQuestionImplCopyWith(_$DownloadQuestionImpl value,
+          $Res Function(_$DownloadQuestionImpl) then) =
+      __$$DownloadQuestionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Question question});
 }
 
 /// @nodoc
-class __$$DownloadQuestionCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$DownloadQuestion>
-    implements _$$DownloadQuestionCopyWith<$Res> {
-  __$$DownloadQuestionCopyWithImpl(
-      _$DownloadQuestion _value, $Res Function(_$DownloadQuestion) _then)
+class __$$DownloadQuestionImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$DownloadQuestionImpl>
+    implements _$$DownloadQuestionImplCopyWith<$Res> {
+  __$$DownloadQuestionImplCopyWithImpl(_$DownloadQuestionImpl _value,
+      $Res Function(_$DownloadQuestionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? question = null,
   }) {
-    return _then(_$DownloadQuestion(
+    return _then(_$DownloadQuestionImpl(
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -886,8 +922,8 @@ class __$$DownloadQuestionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DownloadQuestion implements DownloadQuestion {
-  const _$DownloadQuestion({required this.question});
+class _$DownloadQuestionImpl implements DownloadQuestion {
+  const _$DownloadQuestionImpl({required this.question});
 
   @override
   final Question question;
@@ -898,10 +934,10 @@ class _$DownloadQuestion implements DownloadQuestion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadQuestion &&
+            other is _$DownloadQuestionImpl &&
             (identical(other.question, question) ||
                 other.question == question));
   }
@@ -909,11 +945,14 @@ class _$DownloadQuestion implements DownloadQuestion {
   @override
   int get hashCode => Object.hash(runtimeType, question);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DownloadQuestionCopyWith<_$DownloadQuestion> get copyWith =>
-      __$$DownloadQuestionCopyWithImpl<_$DownloadQuestion>(this, _$identity);
+  _$$DownloadQuestionImplCopyWith<_$DownloadQuestionImpl> get copyWith =>
+      __$$DownloadQuestionImplCopyWithImpl<_$DownloadQuestionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1021,37 +1060,42 @@ class _$DownloadQuestion implements DownloadQuestion {
 
 abstract class DownloadQuestion implements QuestionsEvent {
   const factory DownloadQuestion({required final Question question}) =
-      _$DownloadQuestion;
+      _$DownloadQuestionImpl;
 
   Question get question;
-  @JsonKey(ignore: true)
-  _$$DownloadQuestionCopyWith<_$DownloadQuestion> get copyWith =>
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DownloadQuestionImplCopyWith<_$DownloadQuestionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DeleteQuestionCopyWith<$Res> {
-  factory _$$DeleteQuestionCopyWith(
-          _$DeleteQuestion value, $Res Function(_$DeleteQuestion) then) =
-      __$$DeleteQuestionCopyWithImpl<$Res>;
+abstract class _$$DeleteQuestionImplCopyWith<$Res> {
+  factory _$$DeleteQuestionImplCopyWith(_$DeleteQuestionImpl value,
+          $Res Function(_$DeleteQuestionImpl) then) =
+      __$$DeleteQuestionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Question question});
 }
 
 /// @nodoc
-class __$$DeleteQuestionCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$DeleteQuestion>
-    implements _$$DeleteQuestionCopyWith<$Res> {
-  __$$DeleteQuestionCopyWithImpl(
-      _$DeleteQuestion _value, $Res Function(_$DeleteQuestion) _then)
+class __$$DeleteQuestionImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$DeleteQuestionImpl>
+    implements _$$DeleteQuestionImplCopyWith<$Res> {
+  __$$DeleteQuestionImplCopyWithImpl(
+      _$DeleteQuestionImpl _value, $Res Function(_$DeleteQuestionImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? question = null,
   }) {
-    return _then(_$DeleteQuestion(
+    return _then(_$DeleteQuestionImpl(
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -1062,8 +1106,8 @@ class __$$DeleteQuestionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteQuestion implements DeleteQuestion {
-  const _$DeleteQuestion({required this.question});
+class _$DeleteQuestionImpl implements DeleteQuestion {
+  const _$DeleteQuestionImpl({required this.question});
 
   @override
   final Question question;
@@ -1074,10 +1118,10 @@ class _$DeleteQuestion implements DeleteQuestion {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DeleteQuestion &&
+            other is _$DeleteQuestionImpl &&
             (identical(other.question, question) ||
                 other.question == question));
   }
@@ -1085,11 +1129,14 @@ class _$DeleteQuestion implements DeleteQuestion {
   @override
   int get hashCode => Object.hash(runtimeType, question);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DeleteQuestionCopyWith<_$DeleteQuestion> get copyWith =>
-      __$$DeleteQuestionCopyWithImpl<_$DeleteQuestion>(this, _$identity);
+  _$$DeleteQuestionImplCopyWith<_$DeleteQuestionImpl> get copyWith =>
+      __$$DeleteQuestionImplCopyWithImpl<_$DeleteQuestionImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1197,34 +1244,40 @@ class _$DeleteQuestion implements DeleteQuestion {
 
 abstract class DeleteQuestion implements QuestionsEvent {
   const factory DeleteQuestion({required final Question question}) =
-      _$DeleteQuestion;
+      _$DeleteQuestionImpl;
 
   Question get question;
-  @JsonKey(ignore: true)
-  _$$DeleteQuestionCopyWith<_$DeleteQuestion> get copyWith =>
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteQuestionImplCopyWith<_$DeleteQuestionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchBookmarksCopyWith<$Res> {
-  factory _$$FetchBookmarksCopyWith(
-          _$FetchBookmarks value, $Res Function(_$FetchBookmarks) then) =
-      __$$FetchBookmarksCopyWithImpl<$Res>;
+abstract class _$$FetchBookmarksImplCopyWith<$Res> {
+  factory _$$FetchBookmarksImplCopyWith(_$FetchBookmarksImpl value,
+          $Res Function(_$FetchBookmarksImpl) then) =
+      __$$FetchBookmarksImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchBookmarksCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$FetchBookmarks>
-    implements _$$FetchBookmarksCopyWith<$Res> {
-  __$$FetchBookmarksCopyWithImpl(
-      _$FetchBookmarks _value, $Res Function(_$FetchBookmarks) _then)
+class __$$FetchBookmarksImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$FetchBookmarksImpl>
+    implements _$$FetchBookmarksImplCopyWith<$Res> {
+  __$$FetchBookmarksImplCopyWithImpl(
+      _$FetchBookmarksImpl _value, $Res Function(_$FetchBookmarksImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FetchBookmarks implements FetchBookmarks {
-  const _$FetchBookmarks();
+class _$FetchBookmarksImpl implements FetchBookmarks {
+  const _$FetchBookmarksImpl();
 
   @override
   String toString() {
@@ -1232,9 +1285,9 @@ class _$FetchBookmarks implements FetchBookmarks {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchBookmarks);
+        (other.runtimeType == runtimeType && other is _$FetchBookmarksImpl);
   }
 
   @override
@@ -1345,29 +1398,32 @@ class _$FetchBookmarks implements FetchBookmarks {
 }
 
 abstract class FetchBookmarks implements QuestionsEvent {
-  const factory FetchBookmarks() = _$FetchBookmarks;
+  const factory FetchBookmarks() = _$FetchBookmarksImpl;
 }
 
 /// @nodoc
-abstract class _$$RefreshDownloadsCopyWith<$Res> {
-  factory _$$RefreshDownloadsCopyWith(
-          _$RefreshDownloads value, $Res Function(_$RefreshDownloads) then) =
-      __$$RefreshDownloadsCopyWithImpl<$Res>;
+abstract class _$$RefreshDownloadsImplCopyWith<$Res> {
+  factory _$$RefreshDownloadsImplCopyWith(_$RefreshDownloadsImpl value,
+          $Res Function(_$RefreshDownloadsImpl) then) =
+      __$$RefreshDownloadsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RefreshDownloadsCopyWithImpl<$Res>
-    extends _$QuestionsEventCopyWithImpl<$Res, _$RefreshDownloads>
-    implements _$$RefreshDownloadsCopyWith<$Res> {
-  __$$RefreshDownloadsCopyWithImpl(
-      _$RefreshDownloads _value, $Res Function(_$RefreshDownloads) _then)
+class __$$RefreshDownloadsImplCopyWithImpl<$Res>
+    extends _$QuestionsEventCopyWithImpl<$Res, _$RefreshDownloadsImpl>
+    implements _$$RefreshDownloadsImplCopyWith<$Res> {
+  __$$RefreshDownloadsImplCopyWithImpl(_$RefreshDownloadsImpl _value,
+      $Res Function(_$RefreshDownloadsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RefreshDownloads implements RefreshDownloads {
-  const _$RefreshDownloads();
+class _$RefreshDownloadsImpl implements RefreshDownloads {
+  const _$RefreshDownloadsImpl();
 
   @override
   String toString() {
@@ -1375,9 +1431,9 @@ class _$RefreshDownloads implements RefreshDownloads {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RefreshDownloads);
+        (other.runtimeType == runtimeType && other is _$RefreshDownloadsImpl);
   }
 
   @override
@@ -1488,7 +1544,7 @@ class _$RefreshDownloads implements RefreshDownloads {
 }
 
 abstract class RefreshDownloads implements QuestionsEvent {
-  const factory RefreshDownloads() = _$RefreshDownloads;
+  const factory RefreshDownloads() = _$RefreshDownloadsImpl;
 }
 
 /// @nodoc
@@ -1673,28 +1729,34 @@ class _$QuestionsStateCopyWithImpl<T, $Res, $Val extends QuestionsState<T>>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$QuestionsInitialCopyWith<T, $Res> {
-  factory _$$QuestionsInitialCopyWith(_$QuestionsInitial<T> value,
-          $Res Function(_$QuestionsInitial<T>) then) =
-      __$$QuestionsInitialCopyWithImpl<T, $Res>;
+abstract class _$$QuestionsInitialImplCopyWith<T, $Res> {
+  factory _$$QuestionsInitialImplCopyWith(_$QuestionsInitialImpl<T> value,
+          $Res Function(_$QuestionsInitialImpl<T>) then) =
+      __$$QuestionsInitialImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$QuestionsInitialCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$QuestionsInitial<T>>
-    implements _$$QuestionsInitialCopyWith<T, $Res> {
-  __$$QuestionsInitialCopyWithImpl(
-      _$QuestionsInitial<T> _value, $Res Function(_$QuestionsInitial<T>) _then)
+class __$$QuestionsInitialImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res, _$QuestionsInitialImpl<T>>
+    implements _$$QuestionsInitialImplCopyWith<T, $Res> {
+  __$$QuestionsInitialImplCopyWithImpl(_$QuestionsInitialImpl<T> _value,
+      $Res Function(_$QuestionsInitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$QuestionsInitial<T> implements QuestionsInitial<T> {
-  const _$QuestionsInitial();
+class _$QuestionsInitialImpl<T> implements QuestionsInitial<T> {
+  const _$QuestionsInitialImpl();
 
   @override
   String toString() {
@@ -1702,9 +1764,10 @@ class _$QuestionsInitial<T> implements QuestionsInitial<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$QuestionsInitial<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionsInitialImpl<T>);
   }
 
   @override
@@ -1898,29 +1961,35 @@ class _$QuestionsInitial<T> implements QuestionsInitial<T> {
 }
 
 abstract class QuestionsInitial<T> implements QuestionsState<T> {
-  const factory QuestionsInitial() = _$QuestionsInitial<T>;
+  const factory QuestionsInitial() = _$QuestionsInitialImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$FetchingQuestionsListCopyWith<T, $Res> {
-  factory _$$FetchingQuestionsListCopyWith(_$FetchingQuestionsList<T> value,
-          $Res Function(_$FetchingQuestionsList<T>) then) =
-      __$$FetchingQuestionsListCopyWithImpl<T, $Res>;
+abstract class _$$FetchingQuestionsListImplCopyWith<T, $Res> {
+  factory _$$FetchingQuestionsListImplCopyWith(
+          _$FetchingQuestionsListImpl<T> value,
+          $Res Function(_$FetchingQuestionsListImpl<T>) then) =
+      __$$FetchingQuestionsListImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$FetchingQuestionsListCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$FetchingQuestionsList<T>>
-    implements _$$FetchingQuestionsListCopyWith<T, $Res> {
-  __$$FetchingQuestionsListCopyWithImpl(_$FetchingQuestionsList<T> _value,
-      $Res Function(_$FetchingQuestionsList<T>) _then)
+class __$$FetchingQuestionsListImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res,
+        _$FetchingQuestionsListImpl<T>>
+    implements _$$FetchingQuestionsListImplCopyWith<T, $Res> {
+  __$$FetchingQuestionsListImplCopyWithImpl(
+      _$FetchingQuestionsListImpl<T> _value,
+      $Res Function(_$FetchingQuestionsListImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FetchingQuestionsList<T> implements FetchingQuestionsList<T> {
-  const _$FetchingQuestionsList();
+class _$FetchingQuestionsListImpl<T> implements FetchingQuestionsList<T> {
+  const _$FetchingQuestionsListImpl();
 
   @override
   String toString() {
@@ -1928,10 +1997,10 @@ class _$FetchingQuestionsList<T> implements FetchingQuestionsList<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingQuestionsList<T>);
+            other is _$FetchingQuestionsListImpl<T>);
   }
 
   @override
@@ -2125,35 +2194,37 @@ class _$FetchingQuestionsList<T> implements FetchingQuestionsList<T> {
 }
 
 abstract class FetchingQuestionsList<T> implements QuestionsState<T> {
-  const factory FetchingQuestionsList() = _$FetchingQuestionsList<T>;
+  const factory FetchingQuestionsList() = _$FetchingQuestionsListImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$FetchingQuestionsListSuccessCopyWith<T, $Res> {
-  factory _$$FetchingQuestionsListSuccessCopyWith(
-          _$FetchingQuestionsListSuccess<T> value,
-          $Res Function(_$FetchingQuestionsListSuccess<T>) then) =
-      __$$FetchingQuestionsListSuccessCopyWithImpl<T, $Res>;
+abstract class _$$FetchingQuestionsListSuccessImplCopyWith<T, $Res> {
+  factory _$$FetchingQuestionsListSuccessImplCopyWith(
+          _$FetchingQuestionsListSuccessImpl<T> value,
+          $Res Function(_$FetchingQuestionsListSuccessImpl<T>) then) =
+      __$$FetchingQuestionsListSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T questions});
 }
 
 /// @nodoc
-class __$$FetchingQuestionsListSuccessCopyWithImpl<T, $Res>
+class __$$FetchingQuestionsListSuccessImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$FetchingQuestionsListSuccess<T>>
-    implements _$$FetchingQuestionsListSuccessCopyWith<T, $Res> {
-  __$$FetchingQuestionsListSuccessCopyWithImpl(
-      _$FetchingQuestionsListSuccess<T> _value,
-      $Res Function(_$FetchingQuestionsListSuccess<T>) _then)
+        _$FetchingQuestionsListSuccessImpl<T>>
+    implements _$$FetchingQuestionsListSuccessImplCopyWith<T, $Res> {
+  __$$FetchingQuestionsListSuccessImplCopyWithImpl(
+      _$FetchingQuestionsListSuccessImpl<T> _value,
+      $Res Function(_$FetchingQuestionsListSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? questions = freezed,
   }) {
-    return _then(_$FetchingQuestionsListSuccess<T>(
+    return _then(_$FetchingQuestionsListSuccessImpl<T>(
       questions: freezed == questions
           ? _value.questions
           : questions // ignore: cast_nullable_to_non_nullable
@@ -2164,9 +2235,9 @@ class __$$FetchingQuestionsListSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FetchingQuestionsListSuccess<T>
+class _$FetchingQuestionsListSuccessImpl<T>
     implements FetchingQuestionsListSuccess<T> {
-  const _$FetchingQuestionsListSuccess({required this.questions});
+  const _$FetchingQuestionsListSuccessImpl({required this.questions});
 
   @override
   final T questions;
@@ -2177,10 +2248,10 @@ class _$FetchingQuestionsListSuccess<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingQuestionsListSuccess<T> &&
+            other is _$FetchingQuestionsListSuccessImpl<T> &&
             const DeepCollectionEquality().equals(other.questions, questions));
   }
 
@@ -2188,12 +2259,15 @@ class _$FetchingQuestionsListSuccess<T>
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(questions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingQuestionsListSuccessCopyWith<T, _$FetchingQuestionsListSuccess<T>>
-      get copyWith => __$$FetchingQuestionsListSuccessCopyWithImpl<T,
-          _$FetchingQuestionsListSuccess<T>>(this, _$identity);
+  _$$FetchingQuestionsListSuccessImplCopyWith<T,
+          _$FetchingQuestionsListSuccessImpl<T>>
+      get copyWith => __$$FetchingQuestionsListSuccessImplCopyWithImpl<T,
+          _$FetchingQuestionsListSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2384,40 +2458,46 @@ class _$FetchingQuestionsListSuccess<T>
 
 abstract class FetchingQuestionsListSuccess<T> implements QuestionsState<T> {
   const factory FetchingQuestionsListSuccess({required final T questions}) =
-      _$FetchingQuestionsListSuccess<T>;
+      _$FetchingQuestionsListSuccessImpl<T>;
 
   T get questions;
-  @JsonKey(ignore: true)
-  _$$FetchingQuestionsListSuccessCopyWith<T, _$FetchingQuestionsListSuccess<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingQuestionsListSuccessImplCopyWith<T,
+          _$FetchingQuestionsListSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchingQuestionsListErrorCopyWith<T, $Res> {
-  factory _$$FetchingQuestionsListErrorCopyWith(
-          _$FetchingQuestionsListError<T> value,
-          $Res Function(_$FetchingQuestionsListError<T>) then) =
-      __$$FetchingQuestionsListErrorCopyWithImpl<T, $Res>;
+abstract class _$$FetchingQuestionsListErrorImplCopyWith<T, $Res> {
+  factory _$$FetchingQuestionsListErrorImplCopyWith(
+          _$FetchingQuestionsListErrorImpl<T> value,
+          $Res Function(_$FetchingQuestionsListErrorImpl<T>) then) =
+      __$$FetchingQuestionsListErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$FetchingQuestionsListErrorCopyWithImpl<T, $Res>
+class __$$FetchingQuestionsListErrorImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$FetchingQuestionsListError<T>>
-    implements _$$FetchingQuestionsListErrorCopyWith<T, $Res> {
-  __$$FetchingQuestionsListErrorCopyWithImpl(
-      _$FetchingQuestionsListError<T> _value,
-      $Res Function(_$FetchingQuestionsListError<T>) _then)
+        _$FetchingQuestionsListErrorImpl<T>>
+    implements _$$FetchingQuestionsListErrorImplCopyWith<T, $Res> {
+  __$$FetchingQuestionsListErrorImplCopyWithImpl(
+      _$FetchingQuestionsListErrorImpl<T> _value,
+      $Res Function(_$FetchingQuestionsListErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$FetchingQuestionsListError<T>(
+    return _then(_$FetchingQuestionsListErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -2428,8 +2508,9 @@ class __$$FetchingQuestionsListErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FetchingQuestionsListError<T> implements FetchingQuestionsListError<T> {
-  const _$FetchingQuestionsListError({required this.error});
+class _$FetchingQuestionsListErrorImpl<T>
+    implements FetchingQuestionsListError<T> {
+  const _$FetchingQuestionsListErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -2440,22 +2521,25 @@ class _$FetchingQuestionsListError<T> implements FetchingQuestionsListError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingQuestionsListError<T> &&
+            other is _$FetchingQuestionsListErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingQuestionsListErrorCopyWith<T, _$FetchingQuestionsListError<T>>
-      get copyWith => __$$FetchingQuestionsListErrorCopyWithImpl<T,
-          _$FetchingQuestionsListError<T>>(this, _$identity);
+  _$$FetchingQuestionsListErrorImplCopyWith<T,
+          _$FetchingQuestionsListErrorImpl<T>>
+      get copyWith => __$$FetchingQuestionsListErrorImplCopyWithImpl<T,
+          _$FetchingQuestionsListErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2646,34 +2730,44 @@ class _$FetchingQuestionsListError<T> implements FetchingQuestionsListError<T> {
 
 abstract class FetchingQuestionsListError<T> implements QuestionsState<T> {
   const factory FetchingQuestionsListError({required final HttpError error}) =
-      _$FetchingQuestionsListError<T>;
+      _$FetchingQuestionsListErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$FetchingQuestionsListErrorCopyWith<T, _$FetchingQuestionsListError<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingQuestionsListErrorImplCopyWith<T,
+          _$FetchingQuestionsListErrorImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RetrievingQuestionByIdCopyWith<T, $Res> {
-  factory _$$RetrievingQuestionByIdCopyWith(_$RetrievingQuestionById<T> value,
-          $Res Function(_$RetrievingQuestionById<T>) then) =
-      __$$RetrievingQuestionByIdCopyWithImpl<T, $Res>;
+abstract class _$$RetrievingQuestionByIdImplCopyWith<T, $Res> {
+  factory _$$RetrievingQuestionByIdImplCopyWith(
+          _$RetrievingQuestionByIdImpl<T> value,
+          $Res Function(_$RetrievingQuestionByIdImpl<T>) then) =
+      __$$RetrievingQuestionByIdImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$RetrievingQuestionByIdCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$RetrievingQuestionById<T>>
-    implements _$$RetrievingQuestionByIdCopyWith<T, $Res> {
-  __$$RetrievingQuestionByIdCopyWithImpl(_$RetrievingQuestionById<T> _value,
-      $Res Function(_$RetrievingQuestionById<T>) _then)
+class __$$RetrievingQuestionByIdImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res,
+        _$RetrievingQuestionByIdImpl<T>>
+    implements _$$RetrievingQuestionByIdImplCopyWith<T, $Res> {
+  __$$RetrievingQuestionByIdImplCopyWithImpl(
+      _$RetrievingQuestionByIdImpl<T> _value,
+      $Res Function(_$RetrievingQuestionByIdImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RetrievingQuestionById<T> implements RetrievingQuestionById<T> {
-  const _$RetrievingQuestionById();
+class _$RetrievingQuestionByIdImpl<T> implements RetrievingQuestionById<T> {
+  const _$RetrievingQuestionByIdImpl();
 
   @override
   String toString() {
@@ -2681,10 +2775,10 @@ class _$RetrievingQuestionById<T> implements RetrievingQuestionById<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RetrievingQuestionById<T>);
+            other is _$RetrievingQuestionByIdImpl<T>);
   }
 
   @override
@@ -2878,35 +2972,37 @@ class _$RetrievingQuestionById<T> implements RetrievingQuestionById<T> {
 }
 
 abstract class RetrievingQuestionById<T> implements QuestionsState<T> {
-  const factory RetrievingQuestionById() = _$RetrievingQuestionById<T>;
+  const factory RetrievingQuestionById() = _$RetrievingQuestionByIdImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$RetrievingQuestionSuccessCopyWith<T, $Res> {
-  factory _$$RetrievingQuestionSuccessCopyWith(
-          _$RetrievingQuestionSuccess<T> value,
-          $Res Function(_$RetrievingQuestionSuccess<T>) then) =
-      __$$RetrievingQuestionSuccessCopyWithImpl<T, $Res>;
+abstract class _$$RetrievingQuestionSuccessImplCopyWith<T, $Res> {
+  factory _$$RetrievingQuestionSuccessImplCopyWith(
+          _$RetrievingQuestionSuccessImpl<T> value,
+          $Res Function(_$RetrievingQuestionSuccessImpl<T>) then) =
+      __$$RetrievingQuestionSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({Question question});
 }
 
 /// @nodoc
-class __$$RetrievingQuestionSuccessCopyWithImpl<T, $Res>
+class __$$RetrievingQuestionSuccessImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$RetrievingQuestionSuccess<T>>
-    implements _$$RetrievingQuestionSuccessCopyWith<T, $Res> {
-  __$$RetrievingQuestionSuccessCopyWithImpl(
-      _$RetrievingQuestionSuccess<T> _value,
-      $Res Function(_$RetrievingQuestionSuccess<T>) _then)
+        _$RetrievingQuestionSuccessImpl<T>>
+    implements _$$RetrievingQuestionSuccessImplCopyWith<T, $Res> {
+  __$$RetrievingQuestionSuccessImplCopyWithImpl(
+      _$RetrievingQuestionSuccessImpl<T> _value,
+      $Res Function(_$RetrievingQuestionSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? question = null,
   }) {
-    return _then(_$RetrievingQuestionSuccess<T>(
+    return _then(_$RetrievingQuestionSuccessImpl<T>(
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -2917,8 +3013,9 @@ class __$$RetrievingQuestionSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$RetrievingQuestionSuccess<T> implements RetrievingQuestionSuccess<T> {
-  const _$RetrievingQuestionSuccess({required this.question});
+class _$RetrievingQuestionSuccessImpl<T>
+    implements RetrievingQuestionSuccess<T> {
+  const _$RetrievingQuestionSuccessImpl({required this.question});
 
   @override
   final Question question;
@@ -2929,10 +3026,10 @@ class _$RetrievingQuestionSuccess<T> implements RetrievingQuestionSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RetrievingQuestionSuccess<T> &&
+            other is _$RetrievingQuestionSuccessImpl<T> &&
             (identical(other.question, question) ||
                 other.question == question));
   }
@@ -2940,12 +3037,15 @@ class _$RetrievingQuestionSuccess<T> implements RetrievingQuestionSuccess<T> {
   @override
   int get hashCode => Object.hash(runtimeType, question);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RetrievingQuestionSuccessCopyWith<T, _$RetrievingQuestionSuccess<T>>
-      get copyWith => __$$RetrievingQuestionSuccessCopyWithImpl<T,
-          _$RetrievingQuestionSuccess<T>>(this, _$identity);
+  _$$RetrievingQuestionSuccessImplCopyWith<T,
+          _$RetrievingQuestionSuccessImpl<T>>
+      get copyWith => __$$RetrievingQuestionSuccessImplCopyWithImpl<T,
+          _$RetrievingQuestionSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3136,37 +3236,46 @@ class _$RetrievingQuestionSuccess<T> implements RetrievingQuestionSuccess<T> {
 
 abstract class RetrievingQuestionSuccess<T> implements QuestionsState<T> {
   const factory RetrievingQuestionSuccess({required final Question question}) =
-      _$RetrievingQuestionSuccess<T>;
+      _$RetrievingQuestionSuccessImpl<T>;
 
   Question get question;
-  @JsonKey(ignore: true)
-  _$$RetrievingQuestionSuccessCopyWith<T, _$RetrievingQuestionSuccess<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RetrievingQuestionSuccessImplCopyWith<T,
+          _$RetrievingQuestionSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RetrievingQuestionErrorCopyWith<T, $Res> {
-  factory _$$RetrievingQuestionErrorCopyWith(_$RetrievingQuestionError<T> value,
-          $Res Function(_$RetrievingQuestionError<T>) then) =
-      __$$RetrievingQuestionErrorCopyWithImpl<T, $Res>;
+abstract class _$$RetrievingQuestionErrorImplCopyWith<T, $Res> {
+  factory _$$RetrievingQuestionErrorImplCopyWith(
+          _$RetrievingQuestionErrorImpl<T> value,
+          $Res Function(_$RetrievingQuestionErrorImpl<T>) then) =
+      __$$RetrievingQuestionErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$RetrievingQuestionErrorCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$RetrievingQuestionError<T>>
-    implements _$$RetrievingQuestionErrorCopyWith<T, $Res> {
-  __$$RetrievingQuestionErrorCopyWithImpl(_$RetrievingQuestionError<T> _value,
-      $Res Function(_$RetrievingQuestionError<T>) _then)
+class __$$RetrievingQuestionErrorImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res,
+        _$RetrievingQuestionErrorImpl<T>>
+    implements _$$RetrievingQuestionErrorImplCopyWith<T, $Res> {
+  __$$RetrievingQuestionErrorImplCopyWithImpl(
+      _$RetrievingQuestionErrorImpl<T> _value,
+      $Res Function(_$RetrievingQuestionErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$RetrievingQuestionError<T>(
+    return _then(_$RetrievingQuestionErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -3177,8 +3286,8 @@ class __$$RetrievingQuestionErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$RetrievingQuestionError<T> implements RetrievingQuestionError<T> {
-  const _$RetrievingQuestionError({required this.error});
+class _$RetrievingQuestionErrorImpl<T> implements RetrievingQuestionError<T> {
+  const _$RetrievingQuestionErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -3189,22 +3298,24 @@ class _$RetrievingQuestionError<T> implements RetrievingQuestionError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RetrievingQuestionError<T> &&
+            other is _$RetrievingQuestionErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RetrievingQuestionErrorCopyWith<T, _$RetrievingQuestionError<T>>
-      get copyWith => __$$RetrievingQuestionErrorCopyWithImpl<T,
-          _$RetrievingQuestionError<T>>(this, _$identity);
+  _$$RetrievingQuestionErrorImplCopyWith<T, _$RetrievingQuestionErrorImpl<T>>
+      get copyWith => __$$RetrievingQuestionErrorImplCopyWithImpl<T,
+          _$RetrievingQuestionErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3395,34 +3506,40 @@ class _$RetrievingQuestionError<T> implements RetrievingQuestionError<T> {
 
 abstract class RetrievingQuestionError<T> implements QuestionsState<T> {
   const factory RetrievingQuestionError({required final HttpError error}) =
-      _$RetrievingQuestionError<T>;
+      _$RetrievingQuestionErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$RetrievingQuestionErrorCopyWith<T, _$RetrievingQuestionError<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RetrievingQuestionErrorImplCopyWith<T, _$RetrievingQuestionErrorImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DownloadingQuestionCopyWith<T, $Res> {
-  factory _$$DownloadingQuestionCopyWith(_$DownloadingQuestion<T> value,
-          $Res Function(_$DownloadingQuestion<T>) then) =
-      __$$DownloadingQuestionCopyWithImpl<T, $Res>;
+abstract class _$$DownloadingQuestionImplCopyWith<T, $Res> {
+  factory _$$DownloadingQuestionImplCopyWith(_$DownloadingQuestionImpl<T> value,
+          $Res Function(_$DownloadingQuestionImpl<T>) then) =
+      __$$DownloadingQuestionImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$DownloadingQuestionCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$DownloadingQuestion<T>>
-    implements _$$DownloadingQuestionCopyWith<T, $Res> {
-  __$$DownloadingQuestionCopyWithImpl(_$DownloadingQuestion<T> _value,
-      $Res Function(_$DownloadingQuestion<T>) _then)
+class __$$DownloadingQuestionImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res, _$DownloadingQuestionImpl<T>>
+    implements _$$DownloadingQuestionImplCopyWith<T, $Res> {
+  __$$DownloadingQuestionImplCopyWithImpl(_$DownloadingQuestionImpl<T> _value,
+      $Res Function(_$DownloadingQuestionImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$DownloadingQuestion<T> implements DownloadingQuestion<T> {
-  const _$DownloadingQuestion();
+class _$DownloadingQuestionImpl<T> implements DownloadingQuestion<T> {
+  const _$DownloadingQuestionImpl();
 
   @override
   String toString() {
@@ -3430,9 +3547,10 @@ class _$DownloadingQuestion<T> implements DownloadingQuestion<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DownloadingQuestion<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$DownloadingQuestionImpl<T>);
   }
 
   @override
@@ -3626,36 +3744,38 @@ class _$DownloadingQuestion<T> implements DownloadingQuestion<T> {
 }
 
 abstract class DownloadingQuestion<T> implements QuestionsState<T> {
-  const factory DownloadingQuestion() = _$DownloadingQuestion<T>;
+  const factory DownloadingQuestion() = _$DownloadingQuestionImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$DownloadingQuestionSuccessCopyWith<T, $Res> {
-  factory _$$DownloadingQuestionSuccessCopyWith(
-          _$DownloadingQuestionSuccess<T> value,
-          $Res Function(_$DownloadingQuestionSuccess<T>) then) =
-      __$$DownloadingQuestionSuccessCopyWithImpl<T, $Res>;
+abstract class _$$DownloadingQuestionSuccessImplCopyWith<T, $Res> {
+  factory _$$DownloadingQuestionSuccessImplCopyWith(
+          _$DownloadingQuestionSuccessImpl<T> value,
+          $Res Function(_$DownloadingQuestionSuccessImpl<T>) then) =
+      __$$DownloadingQuestionSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String message, List<Question> downloadedQuestions});
 }
 
 /// @nodoc
-class __$$DownloadingQuestionSuccessCopyWithImpl<T, $Res>
+class __$$DownloadingQuestionSuccessImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$DownloadingQuestionSuccess<T>>
-    implements _$$DownloadingQuestionSuccessCopyWith<T, $Res> {
-  __$$DownloadingQuestionSuccessCopyWithImpl(
-      _$DownloadingQuestionSuccess<T> _value,
-      $Res Function(_$DownloadingQuestionSuccess<T>) _then)
+        _$DownloadingQuestionSuccessImpl<T>>
+    implements _$$DownloadingQuestionSuccessImplCopyWith<T, $Res> {
+  __$$DownloadingQuestionSuccessImplCopyWithImpl(
+      _$DownloadingQuestionSuccessImpl<T> _value,
+      $Res Function(_$DownloadingQuestionSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? message = null,
     Object? downloadedQuestions = null,
   }) {
-    return _then(_$DownloadingQuestionSuccess<T>(
+    return _then(_$DownloadingQuestionSuccessImpl<T>(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -3670,8 +3790,9 @@ class __$$DownloadingQuestionSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$DownloadingQuestionSuccess<T> implements DownloadingQuestionSuccess<T> {
-  const _$DownloadingQuestionSuccess(
+class _$DownloadingQuestionSuccessImpl<T>
+    implements DownloadingQuestionSuccess<T> {
+  const _$DownloadingQuestionSuccessImpl(
       {required this.message,
       required final List<Question> downloadedQuestions})
       : _downloadedQuestions = downloadedQuestions;
@@ -3693,10 +3814,10 @@ class _$DownloadingQuestionSuccess<T> implements DownloadingQuestionSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadingQuestionSuccess<T> &&
+            other is _$DownloadingQuestionSuccessImpl<T> &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality()
                 .equals(other._downloadedQuestions, _downloadedQuestions));
@@ -3706,12 +3827,15 @@ class _$DownloadingQuestionSuccess<T> implements DownloadingQuestionSuccess<T> {
   int get hashCode => Object.hash(runtimeType, message,
       const DeepCollectionEquality().hash(_downloadedQuestions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$DownloadingQuestionSuccessCopyWith<T, _$DownloadingQuestionSuccess<T>>
-      get copyWith => __$$DownloadingQuestionSuccessCopyWithImpl<T,
-          _$DownloadingQuestionSuccess<T>>(this, _$identity);
+  _$$DownloadingQuestionSuccessImplCopyWith<T,
+          _$DownloadingQuestionSuccessImpl<T>>
+      get copyWith => __$$DownloadingQuestionSuccessImplCopyWithImpl<T,
+          _$DownloadingQuestionSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3904,35 +4028,45 @@ abstract class DownloadingQuestionSuccess<T> implements QuestionsState<T> {
   const factory DownloadingQuestionSuccess(
           {required final String message,
           required final List<Question> downloadedQuestions}) =
-      _$DownloadingQuestionSuccess<T>;
+      _$DownloadingQuestionSuccessImpl<T>;
 
   String get message;
   List<Question> get downloadedQuestions;
-  @JsonKey(ignore: true)
-  _$$DownloadingQuestionSuccessCopyWith<T, _$DownloadingQuestionSuccess<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DownloadingQuestionSuccessImplCopyWith<T,
+          _$DownloadingQuestionSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$QuestionDeletedSuccessCopyWith<T, $Res> {
-  factory _$$QuestionDeletedSuccessCopyWith(_$QuestionDeletedSuccess<T> value,
-          $Res Function(_$QuestionDeletedSuccess<T>) then) =
-      __$$QuestionDeletedSuccessCopyWithImpl<T, $Res>;
+abstract class _$$QuestionDeletedSuccessImplCopyWith<T, $Res> {
+  factory _$$QuestionDeletedSuccessImplCopyWith(
+          _$QuestionDeletedSuccessImpl<T> value,
+          $Res Function(_$QuestionDeletedSuccessImpl<T>) then) =
+      __$$QuestionDeletedSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$QuestionDeletedSuccessCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$QuestionDeletedSuccess<T>>
-    implements _$$QuestionDeletedSuccessCopyWith<T, $Res> {
-  __$$QuestionDeletedSuccessCopyWithImpl(_$QuestionDeletedSuccess<T> _value,
-      $Res Function(_$QuestionDeletedSuccess<T>) _then)
+class __$$QuestionDeletedSuccessImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res,
+        _$QuestionDeletedSuccessImpl<T>>
+    implements _$$QuestionDeletedSuccessImplCopyWith<T, $Res> {
+  __$$QuestionDeletedSuccessImplCopyWithImpl(
+      _$QuestionDeletedSuccessImpl<T> _value,
+      $Res Function(_$QuestionDeletedSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$QuestionDeletedSuccess<T> implements QuestionDeletedSuccess<T> {
-  const _$QuestionDeletedSuccess();
+class _$QuestionDeletedSuccessImpl<T> implements QuestionDeletedSuccess<T> {
+  const _$QuestionDeletedSuccessImpl();
 
   @override
   String toString() {
@@ -3940,10 +4074,10 @@ class _$QuestionDeletedSuccess<T> implements QuestionDeletedSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionDeletedSuccess<T>);
+            other is _$QuestionDeletedSuccessImpl<T>);
   }
 
   @override
@@ -4137,32 +4271,34 @@ class _$QuestionDeletedSuccess<T> implements QuestionDeletedSuccess<T> {
 }
 
 abstract class QuestionDeletedSuccess<T> implements QuestionsState<T> {
-  const factory QuestionDeletedSuccess() = _$QuestionDeletedSuccess<T>;
+  const factory QuestionDeletedSuccess() = _$QuestionDeletedSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$AddBookmarkSuccessCopyWith<T, $Res> {
-  factory _$$AddBookmarkSuccessCopyWith(_$AddBookmarkSuccess<T> value,
-          $Res Function(_$AddBookmarkSuccess<T>) then) =
-      __$$AddBookmarkSuccessCopyWithImpl<T, $Res>;
+abstract class _$$AddBookmarkSuccessImplCopyWith<T, $Res> {
+  factory _$$AddBookmarkSuccessImplCopyWith(_$AddBookmarkSuccessImpl<T> value,
+          $Res Function(_$AddBookmarkSuccessImpl<T>) then) =
+      __$$AddBookmarkSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({Question question});
 }
 
 /// @nodoc
-class __$$AddBookmarkSuccessCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$AddBookmarkSuccess<T>>
-    implements _$$AddBookmarkSuccessCopyWith<T, $Res> {
-  __$$AddBookmarkSuccessCopyWithImpl(_$AddBookmarkSuccess<T> _value,
-      $Res Function(_$AddBookmarkSuccess<T>) _then)
+class __$$AddBookmarkSuccessImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res, _$AddBookmarkSuccessImpl<T>>
+    implements _$$AddBookmarkSuccessImplCopyWith<T, $Res> {
+  __$$AddBookmarkSuccessImplCopyWithImpl(_$AddBookmarkSuccessImpl<T> _value,
+      $Res Function(_$AddBookmarkSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? question = null,
   }) {
-    return _then(_$AddBookmarkSuccess<T>(
+    return _then(_$AddBookmarkSuccessImpl<T>(
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -4173,8 +4309,8 @@ class __$$AddBookmarkSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$AddBookmarkSuccess<T> implements AddBookmarkSuccess<T> {
-  const _$AddBookmarkSuccess({required this.question});
+class _$AddBookmarkSuccessImpl<T> implements AddBookmarkSuccess<T> {
+  const _$AddBookmarkSuccessImpl({required this.question});
 
   @override
   final Question question;
@@ -4185,10 +4321,10 @@ class _$AddBookmarkSuccess<T> implements AddBookmarkSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AddBookmarkSuccess<T> &&
+            other is _$AddBookmarkSuccessImpl<T> &&
             (identical(other.question, question) ||
                 other.question == question));
   }
@@ -4196,12 +4332,14 @@ class _$AddBookmarkSuccess<T> implements AddBookmarkSuccess<T> {
   @override
   int get hashCode => Object.hash(runtimeType, question);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddBookmarkSuccessCopyWith<T, _$AddBookmarkSuccess<T>> get copyWith =>
-      __$$AddBookmarkSuccessCopyWithImpl<T, _$AddBookmarkSuccess<T>>(
-          this, _$identity);
+  _$$AddBookmarkSuccessImplCopyWith<T, _$AddBookmarkSuccessImpl<T>>
+      get copyWith => __$$AddBookmarkSuccessImplCopyWithImpl<T,
+          _$AddBookmarkSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4392,37 +4530,45 @@ class _$AddBookmarkSuccess<T> implements AddBookmarkSuccess<T> {
 
 abstract class AddBookmarkSuccess<T> implements QuestionsState<T> {
   const factory AddBookmarkSuccess({required final Question question}) =
-      _$AddBookmarkSuccess<T>;
+      _$AddBookmarkSuccessImpl<T>;
 
   Question get question;
-  @JsonKey(ignore: true)
-  _$$AddBookmarkSuccessCopyWith<T, _$AddBookmarkSuccess<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddBookmarkSuccessImplCopyWith<T, _$AddBookmarkSuccessImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RemoveBookmarkSuccessCopyWith<T, $Res> {
-  factory _$$RemoveBookmarkSuccessCopyWith(_$RemoveBookmarkSuccess<T> value,
-          $Res Function(_$RemoveBookmarkSuccess<T>) then) =
-      __$$RemoveBookmarkSuccessCopyWithImpl<T, $Res>;
+abstract class _$$RemoveBookmarkSuccessImplCopyWith<T, $Res> {
+  factory _$$RemoveBookmarkSuccessImplCopyWith(
+          _$RemoveBookmarkSuccessImpl<T> value,
+          $Res Function(_$RemoveBookmarkSuccessImpl<T>) then) =
+      __$$RemoveBookmarkSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({Question question});
 }
 
 /// @nodoc
-class __$$RemoveBookmarkSuccessCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$RemoveBookmarkSuccess<T>>
-    implements _$$RemoveBookmarkSuccessCopyWith<T, $Res> {
-  __$$RemoveBookmarkSuccessCopyWithImpl(_$RemoveBookmarkSuccess<T> _value,
-      $Res Function(_$RemoveBookmarkSuccess<T>) _then)
+class __$$RemoveBookmarkSuccessImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res,
+        _$RemoveBookmarkSuccessImpl<T>>
+    implements _$$RemoveBookmarkSuccessImplCopyWith<T, $Res> {
+  __$$RemoveBookmarkSuccessImplCopyWithImpl(
+      _$RemoveBookmarkSuccessImpl<T> _value,
+      $Res Function(_$RemoveBookmarkSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? question = null,
   }) {
-    return _then(_$RemoveBookmarkSuccess<T>(
+    return _then(_$RemoveBookmarkSuccessImpl<T>(
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -4433,8 +4579,8 @@ class __$$RemoveBookmarkSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$RemoveBookmarkSuccess<T> implements RemoveBookmarkSuccess<T> {
-  const _$RemoveBookmarkSuccess({required this.question});
+class _$RemoveBookmarkSuccessImpl<T> implements RemoveBookmarkSuccess<T> {
+  const _$RemoveBookmarkSuccessImpl({required this.question});
 
   @override
   final Question question;
@@ -4445,10 +4591,10 @@ class _$RemoveBookmarkSuccess<T> implements RemoveBookmarkSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoveBookmarkSuccess<T> &&
+            other is _$RemoveBookmarkSuccessImpl<T> &&
             (identical(other.question, question) ||
                 other.question == question));
   }
@@ -4456,13 +4602,14 @@ class _$RemoveBookmarkSuccess<T> implements RemoveBookmarkSuccess<T> {
   @override
   int get hashCode => Object.hash(runtimeType, question);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RemoveBookmarkSuccessCopyWith<T, _$RemoveBookmarkSuccess<T>>
-      get copyWith =>
-          __$$RemoveBookmarkSuccessCopyWithImpl<T, _$RemoveBookmarkSuccess<T>>(
-              this, _$identity);
+  _$$RemoveBookmarkSuccessImplCopyWith<T, _$RemoveBookmarkSuccessImpl<T>>
+      get copyWith => __$$RemoveBookmarkSuccessImplCopyWithImpl<T,
+          _$RemoveBookmarkSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4653,38 +4800,44 @@ class _$RemoveBookmarkSuccess<T> implements RemoveBookmarkSuccess<T> {
 
 abstract class RemoveBookmarkSuccess<T> implements QuestionsState<T> {
   const factory RemoveBookmarkSuccess({required final Question question}) =
-      _$RemoveBookmarkSuccess<T>;
+      _$RemoveBookmarkSuccessImpl<T>;
 
   Question get question;
-  @JsonKey(ignore: true)
-  _$$RemoveBookmarkSuccessCopyWith<T, _$RemoveBookmarkSuccess<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RemoveBookmarkSuccessImplCopyWith<T, _$RemoveBookmarkSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchingBookmarkedQuestionsCopyWith<T, $Res> {
-  factory _$$FetchingBookmarkedQuestionsCopyWith(
-          _$FetchingBookmarkedQuestions<T> value,
-          $Res Function(_$FetchingBookmarkedQuestions<T>) then) =
-      __$$FetchingBookmarkedQuestionsCopyWithImpl<T, $Res>;
+abstract class _$$FetchingBookmarkedQuestionsImplCopyWith<T, $Res> {
+  factory _$$FetchingBookmarkedQuestionsImplCopyWith(
+          _$FetchingBookmarkedQuestionsImpl<T> value,
+          $Res Function(_$FetchingBookmarkedQuestionsImpl<T>) then) =
+      __$$FetchingBookmarkedQuestionsImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$FetchingBookmarkedQuestionsCopyWithImpl<T, $Res>
+class __$$FetchingBookmarkedQuestionsImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$FetchingBookmarkedQuestions<T>>
-    implements _$$FetchingBookmarkedQuestionsCopyWith<T, $Res> {
-  __$$FetchingBookmarkedQuestionsCopyWithImpl(
-      _$FetchingBookmarkedQuestions<T> _value,
-      $Res Function(_$FetchingBookmarkedQuestions<T>) _then)
+        _$FetchingBookmarkedQuestionsImpl<T>>
+    implements _$$FetchingBookmarkedQuestionsImplCopyWith<T, $Res> {
+  __$$FetchingBookmarkedQuestionsImplCopyWithImpl(
+      _$FetchingBookmarkedQuestionsImpl<T> _value,
+      $Res Function(_$FetchingBookmarkedQuestionsImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$FetchingBookmarkedQuestions<T>
+class _$FetchingBookmarkedQuestionsImpl<T>
     implements FetchingBookmarkedQuestions<T> {
-  const _$FetchingBookmarkedQuestions();
+  const _$FetchingBookmarkedQuestionsImpl();
 
   @override
   String toString() {
@@ -4692,10 +4845,10 @@ class _$FetchingBookmarkedQuestions<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingBookmarkedQuestions<T>);
+            other is _$FetchingBookmarkedQuestionsImpl<T>);
   }
 
   @override
@@ -4890,35 +5043,37 @@ class _$FetchingBookmarkedQuestions<T>
 
 abstract class FetchingBookmarkedQuestions<T> implements QuestionsState<T> {
   const factory FetchingBookmarkedQuestions() =
-      _$FetchingBookmarkedQuestions<T>;
+      _$FetchingBookmarkedQuestionsImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$FetchingBookmarkedQuestionsSuccessCopyWith<T, $Res> {
-  factory _$$FetchingBookmarkedQuestionsSuccessCopyWith(
-          _$FetchingBookmarkedQuestionsSuccess<T> value,
-          $Res Function(_$FetchingBookmarkedQuestionsSuccess<T>) then) =
-      __$$FetchingBookmarkedQuestionsSuccessCopyWithImpl<T, $Res>;
+abstract class _$$FetchingBookmarkedQuestionsSuccessImplCopyWith<T, $Res> {
+  factory _$$FetchingBookmarkedQuestionsSuccessImplCopyWith(
+          _$FetchingBookmarkedQuestionsSuccessImpl<T> value,
+          $Res Function(_$FetchingBookmarkedQuestionsSuccessImpl<T>) then) =
+      __$$FetchingBookmarkedQuestionsSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({ListQuestionsResponse bookmarkedQuestions});
 }
 
 /// @nodoc
-class __$$FetchingBookmarkedQuestionsSuccessCopyWithImpl<T, $Res>
+class __$$FetchingBookmarkedQuestionsSuccessImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$FetchingBookmarkedQuestionsSuccess<T>>
-    implements _$$FetchingBookmarkedQuestionsSuccessCopyWith<T, $Res> {
-  __$$FetchingBookmarkedQuestionsSuccessCopyWithImpl(
-      _$FetchingBookmarkedQuestionsSuccess<T> _value,
-      $Res Function(_$FetchingBookmarkedQuestionsSuccess<T>) _then)
+        _$FetchingBookmarkedQuestionsSuccessImpl<T>>
+    implements _$$FetchingBookmarkedQuestionsSuccessImplCopyWith<T, $Res> {
+  __$$FetchingBookmarkedQuestionsSuccessImplCopyWithImpl(
+      _$FetchingBookmarkedQuestionsSuccessImpl<T> _value,
+      $Res Function(_$FetchingBookmarkedQuestionsSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? bookmarkedQuestions = null,
   }) {
-    return _then(_$FetchingBookmarkedQuestionsSuccess<T>(
+    return _then(_$FetchingBookmarkedQuestionsSuccessImpl<T>(
       bookmarkedQuestions: null == bookmarkedQuestions
           ? _value.bookmarkedQuestions
           : bookmarkedQuestions // ignore: cast_nullable_to_non_nullable
@@ -4929,9 +5084,9 @@ class __$$FetchingBookmarkedQuestionsSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FetchingBookmarkedQuestionsSuccess<T>
+class _$FetchingBookmarkedQuestionsSuccessImpl<T>
     implements FetchingBookmarkedQuestionsSuccess<T> {
-  const _$FetchingBookmarkedQuestionsSuccess(
+  const _$FetchingBookmarkedQuestionsSuccessImpl(
       {required this.bookmarkedQuestions});
 
   @override
@@ -4943,10 +5098,10 @@ class _$FetchingBookmarkedQuestionsSuccess<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingBookmarkedQuestionsSuccess<T> &&
+            other is _$FetchingBookmarkedQuestionsSuccessImpl<T> &&
             (identical(other.bookmarkedQuestions, bookmarkedQuestions) ||
                 other.bookmarkedQuestions == bookmarkedQuestions));
   }
@@ -4954,13 +5109,15 @@ class _$FetchingBookmarkedQuestionsSuccess<T>
   @override
   int get hashCode => Object.hash(runtimeType, bookmarkedQuestions);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingBookmarkedQuestionsSuccessCopyWith<T,
-          _$FetchingBookmarkedQuestionsSuccess<T>>
-      get copyWith => __$$FetchingBookmarkedQuestionsSuccessCopyWithImpl<T,
-          _$FetchingBookmarkedQuestionsSuccess<T>>(this, _$identity);
+  _$$FetchingBookmarkedQuestionsSuccessImplCopyWith<T,
+          _$FetchingBookmarkedQuestionsSuccessImpl<T>>
+      get copyWith => __$$FetchingBookmarkedQuestionsSuccessImplCopyWithImpl<T,
+          _$FetchingBookmarkedQuestionsSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5153,41 +5310,46 @@ abstract class FetchingBookmarkedQuestionsSuccess<T>
     implements QuestionsState<T> {
   const factory FetchingBookmarkedQuestionsSuccess(
           {required final ListQuestionsResponse bookmarkedQuestions}) =
-      _$FetchingBookmarkedQuestionsSuccess<T>;
+      _$FetchingBookmarkedQuestionsSuccessImpl<T>;
 
   ListQuestionsResponse get bookmarkedQuestions;
-  @JsonKey(ignore: true)
-  _$$FetchingBookmarkedQuestionsSuccessCopyWith<T,
-          _$FetchingBookmarkedQuestionsSuccess<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingBookmarkedQuestionsSuccessImplCopyWith<T,
+          _$FetchingBookmarkedQuestionsSuccessImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchingBookmarkedQuestionsErrorCopyWith<T, $Res> {
-  factory _$$FetchingBookmarkedQuestionsErrorCopyWith(
-          _$FetchingBookmarkedQuestionsError<T> value,
-          $Res Function(_$FetchingBookmarkedQuestionsError<T>) then) =
-      __$$FetchingBookmarkedQuestionsErrorCopyWithImpl<T, $Res>;
+abstract class _$$FetchingBookmarkedQuestionsErrorImplCopyWith<T, $Res> {
+  factory _$$FetchingBookmarkedQuestionsErrorImplCopyWith(
+          _$FetchingBookmarkedQuestionsErrorImpl<T> value,
+          $Res Function(_$FetchingBookmarkedQuestionsErrorImpl<T>) then) =
+      __$$FetchingBookmarkedQuestionsErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$FetchingBookmarkedQuestionsErrorCopyWithImpl<T, $Res>
+class __$$FetchingBookmarkedQuestionsErrorImplCopyWithImpl<T, $Res>
     extends _$QuestionsStateCopyWithImpl<T, $Res,
-        _$FetchingBookmarkedQuestionsError<T>>
-    implements _$$FetchingBookmarkedQuestionsErrorCopyWith<T, $Res> {
-  __$$FetchingBookmarkedQuestionsErrorCopyWithImpl(
-      _$FetchingBookmarkedQuestionsError<T> _value,
-      $Res Function(_$FetchingBookmarkedQuestionsError<T>) _then)
+        _$FetchingBookmarkedQuestionsErrorImpl<T>>
+    implements _$$FetchingBookmarkedQuestionsErrorImplCopyWith<T, $Res> {
+  __$$FetchingBookmarkedQuestionsErrorImplCopyWithImpl(
+      _$FetchingBookmarkedQuestionsErrorImpl<T> _value,
+      $Res Function(_$FetchingBookmarkedQuestionsErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$FetchingBookmarkedQuestionsError<T>(
+    return _then(_$FetchingBookmarkedQuestionsErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -5198,9 +5360,9 @@ class __$$FetchingBookmarkedQuestionsErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$FetchingBookmarkedQuestionsError<T>
+class _$FetchingBookmarkedQuestionsErrorImpl<T>
     implements FetchingBookmarkedQuestionsError<T> {
-  const _$FetchingBookmarkedQuestionsError({required this.error});
+  const _$FetchingBookmarkedQuestionsErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -5211,23 +5373,25 @@ class _$FetchingBookmarkedQuestionsError<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchingBookmarkedQuestionsError<T> &&
+            other is _$FetchingBookmarkedQuestionsErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchingBookmarkedQuestionsErrorCopyWith<T,
-          _$FetchingBookmarkedQuestionsError<T>>
-      get copyWith => __$$FetchingBookmarkedQuestionsErrorCopyWithImpl<T,
-          _$FetchingBookmarkedQuestionsError<T>>(this, _$identity);
+  _$$FetchingBookmarkedQuestionsErrorImplCopyWith<T,
+          _$FetchingBookmarkedQuestionsErrorImpl<T>>
+      get copyWith => __$$FetchingBookmarkedQuestionsErrorImplCopyWithImpl<T,
+          _$FetchingBookmarkedQuestionsErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5419,35 +5583,42 @@ class _$FetchingBookmarkedQuestionsError<T>
 abstract class FetchingBookmarkedQuestionsError<T>
     implements QuestionsState<T> {
   const factory FetchingBookmarkedQuestionsError(
-      {required final HttpError error}) = _$FetchingBookmarkedQuestionsError<T>;
+          {required final HttpError error}) =
+      _$FetchingBookmarkedQuestionsErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$FetchingBookmarkedQuestionsErrorCopyWith<T,
-          _$FetchingBookmarkedQuestionsError<T>>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchingBookmarkedQuestionsErrorImplCopyWith<T,
+          _$FetchingBookmarkedQuestionsErrorImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RefreshedDownloadsCopyWith<T, $Res> {
-  factory _$$RefreshedDownloadsCopyWith(_$RefreshedDownloads<T> value,
-          $Res Function(_$RefreshedDownloads<T>) then) =
-      __$$RefreshedDownloadsCopyWithImpl<T, $Res>;
+abstract class _$$RefreshedDownloadsImplCopyWith<T, $Res> {
+  factory _$$RefreshedDownloadsImplCopyWith(_$RefreshedDownloadsImpl<T> value,
+          $Res Function(_$RefreshedDownloadsImpl<T>) then) =
+      __$$RefreshedDownloadsImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$RefreshedDownloadsCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$RefreshedDownloads<T>>
-    implements _$$RefreshedDownloadsCopyWith<T, $Res> {
-  __$$RefreshedDownloadsCopyWithImpl(_$RefreshedDownloads<T> _value,
-      $Res Function(_$RefreshedDownloads<T>) _then)
+class __$$RefreshedDownloadsImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res, _$RefreshedDownloadsImpl<T>>
+    implements _$$RefreshedDownloadsImplCopyWith<T, $Res> {
+  __$$RefreshedDownloadsImplCopyWithImpl(_$RefreshedDownloadsImpl<T> _value,
+      $Res Function(_$RefreshedDownloadsImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RefreshedDownloads<T> implements RefreshedDownloads<T> {
-  const _$RefreshedDownloads();
+class _$RefreshedDownloadsImpl<T> implements RefreshedDownloads<T> {
+  const _$RefreshedDownloadsImpl();
 
   @override
   String toString() {
@@ -5455,9 +5626,10 @@ class _$RefreshedDownloads<T> implements RefreshedDownloads<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RefreshedDownloads<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$RefreshedDownloadsImpl<T>);
   }
 
   @override
@@ -5651,32 +5823,34 @@ class _$RefreshedDownloads<T> implements RefreshedDownloads<T> {
 }
 
 abstract class RefreshedDownloads<T> implements QuestionsState<T> {
-  const factory RefreshedDownloads() = _$RefreshedDownloads<T>;
+  const factory RefreshedDownloads() = _$RefreshedDownloadsImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$QuestionsErrorCopyWith<T, $Res> {
-  factory _$$QuestionsErrorCopyWith(
-          _$QuestionsError<T> value, $Res Function(_$QuestionsError<T>) then) =
-      __$$QuestionsErrorCopyWithImpl<T, $Res>;
+abstract class _$$QuestionsErrorImplCopyWith<T, $Res> {
+  factory _$$QuestionsErrorImplCopyWith(_$QuestionsErrorImpl<T> value,
+          $Res Function(_$QuestionsErrorImpl<T>) then) =
+      __$$QuestionsErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({HttpError error});
 }
 
 /// @nodoc
-class __$$QuestionsErrorCopyWithImpl<T, $Res>
-    extends _$QuestionsStateCopyWithImpl<T, $Res, _$QuestionsError<T>>
-    implements _$$QuestionsErrorCopyWith<T, $Res> {
-  __$$QuestionsErrorCopyWithImpl(
-      _$QuestionsError<T> _value, $Res Function(_$QuestionsError<T>) _then)
+class __$$QuestionsErrorImplCopyWithImpl<T, $Res>
+    extends _$QuestionsStateCopyWithImpl<T, $Res, _$QuestionsErrorImpl<T>>
+    implements _$$QuestionsErrorImplCopyWith<T, $Res> {
+  __$$QuestionsErrorImplCopyWithImpl(_$QuestionsErrorImpl<T> _value,
+      $Res Function(_$QuestionsErrorImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$QuestionsError<T>(
+    return _then(_$QuestionsErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -5687,8 +5861,8 @@ class __$$QuestionsErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$QuestionsError<T> implements QuestionsError<T> {
-  const _$QuestionsError({required this.error});
+class _$QuestionsErrorImpl<T> implements QuestionsError<T> {
+  const _$QuestionsErrorImpl({required this.error});
 
   @override
   final HttpError error;
@@ -5699,21 +5873,24 @@ class _$QuestionsError<T> implements QuestionsError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$QuestionsError<T> &&
+            other is _$QuestionsErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$QuestionsErrorCopyWith<T, _$QuestionsError<T>> get copyWith =>
-      __$$QuestionsErrorCopyWithImpl<T, _$QuestionsError<T>>(this, _$identity);
+  _$$QuestionsErrorImplCopyWith<T, _$QuestionsErrorImpl<T>> get copyWith =>
+      __$$QuestionsErrorImplCopyWithImpl<T, _$QuestionsErrorImpl<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5904,10 +6081,13 @@ class _$QuestionsError<T> implements QuestionsError<T> {
 
 abstract class QuestionsError<T> implements QuestionsState<T> {
   const factory QuestionsError({required final HttpError error}) =
-      _$QuestionsError<T>;
+      _$QuestionsErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$QuestionsErrorCopyWith<T, _$QuestionsError<T>> get copyWith =>
+
+  /// Create a copy of QuestionsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$QuestionsErrorImplCopyWith<T, _$QuestionsErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

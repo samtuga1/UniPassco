@@ -1,4 +1,3 @@
-import 'package:passco/blocs/user/user_bloc.dart';
 import 'package:passco/cubits/theme/themes.cubit.dart';
 import 'package:passco/repositories/authed_user.repository.dart';
 import 'package:passco/ui/screens/bottom_navigation/bottom_nav_bar.dart';
@@ -136,20 +135,20 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   Future<void> _launchUrl() async {
-    if (!await launchUrl(Uri.parse('https://forms.gle/Bk3sr3E4yJFq6FAv8'), mode: LaunchMode.externalApplication)) {
+    if (!await launchUrl(Uri.parse('https://forms.gle/Bk3sr3E4yJFq6FAv8'), mode: LaunchMode.inAppWebView)) {
       // throw Exception('Could not launch $_url');
     }
   }
 
   Widget _profilePhotoWidget(BuildContext context) {
-    return FutureBuilder<UserModel>(
+    return FutureBuilder<UserModel?>(
         future: getIt<AuthedUserRepository>().getUser(),
         builder: (BuildContext _, AsyncSnapshot<UserModel?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SizedBox.shrink();
           } else if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == null) {
-              context.read<UserBloc>().add(const UserEvent.retrieveUser());
+              // context.read<UserBloc>().add(const UserEvent.retrieveUser());
             }
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,14 +170,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                         );
                   },
-                  child: Hero(
-                    tag: 'profile',
-                    child: CustomCacheImage(
-                      imageUrl: snapshot.data!.photo!,
-                      height: 46,
-                      width: 46,
-                    ),
-                  ),
+                  child: switch (snapshot.data?.photo == null) {
+                    true => const SizedBox.shrink(),
+                    false => Hero(
+                        tag: 'profile',
+                        child: CustomCacheImage(
+                          imageUrl: snapshot.data!.photo!,
+                          height: 46,
+                          width: 46,
+                        ),
+                      ),
+                  },
                 ),
                 7.horizontalSpace,
                 Expanded(
@@ -186,7 +188,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        '${snapshot.data?.name} 🚀',
+                        '${snapshot.data?.name ?? "Welcome"} 🚀',
                         style: context.getTheme.textTheme.titleLarge,
                       ),
                       CustomText(

@@ -13,5 +13,7 @@ sealed class AuthenticationState<T> with _$AuthenticationState<T> {
   const factory AuthenticationState.requestPasswordResetSuccess() = RequestPasswordResetSuccess<T>;
   const factory AuthenticationState.resettingPassword() = ResettingPassword<T>;
   const factory AuthenticationState.resettingPasswordSuccess() = ResettingPasswordSuccess<T>;
+  const factory AuthenticationState.deletingAccount() = DeletingAccount<T>;
+  const factory AuthenticationState.deletingAccountSuccess() = DeletingAccountSuccess<T>;
   const factory AuthenticationState.authenticationError({required HttpError error}) = AuthenticationError<T>;
 }

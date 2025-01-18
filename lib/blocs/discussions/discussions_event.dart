@@ -6,6 +6,9 @@ class DiscussionsEvent with _$DiscussionsEvent {
     required String text,
     required String questionId,
   }) = AddDiscussion;
+  const factory DiscussionsEvent.reportDiscussion({
+    required String discussionId,
+  }) = ReportDiscussion;
   const factory DiscussionsEvent.fetchDiscusstions({
     required String questionId,
     required int minRange,

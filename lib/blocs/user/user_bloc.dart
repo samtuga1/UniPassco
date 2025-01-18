@@ -75,11 +75,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(const RetrievingUser());
 
     // get the user data from backend
-    final HttpResponse<UserModel> response = await userService.retrieveUser();
+    final HttpResponse<UserModel?> response = await userService.retrieveUser();
 
     response.when(success: (user) {
       // save user data to user repository
-      userRepo.save(user: user!);
+
+      if (user != null) {
+        userRepo.save(user: user);
+      }
 
       emit(RetrievingUserSuccess(user: user));
     }, error: (error) {

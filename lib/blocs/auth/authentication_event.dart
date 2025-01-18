@@ -21,4 +21,6 @@ sealed class AuthenticationEvent with _$AuthenticationEvent {
   const factory AuthenticationEvent.requestPasswordReset({required String email}) = ResendVerificationToken;
 
   const factory AuthenticationEvent.resetPassword({required String email}) = ResetPassword;
+
+  const factory AuthenticationEvent.deleteAccount() = DeleteAccount;
 }

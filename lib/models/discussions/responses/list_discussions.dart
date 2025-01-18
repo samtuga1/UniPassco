@@ -2,7 +2,7 @@ import 'package:passco/models/discussions/data/discussion.dart';
 
 class ListDiscussionsResponse {
   final List<Discussion> discussions;
-  final int totalCount;
+  int totalCount;
 
   ListDiscussionsResponse({
     required this.discussions,

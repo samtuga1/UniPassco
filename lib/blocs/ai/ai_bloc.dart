@@ -19,14 +19,13 @@ class AiBloc extends Bloc<AiEvent, AiState> {
     try {
       emit(const AiInitializing());
       final data = await getIt<QuestionsRepository>().downloadData(event.question);
-      final response = await event.chat.sendMessage(
+
+      await event.chat.sendMessage(
         Content.multi([DataPart('application/pdf', data), TextPart("Consider these questions")]),
       );
 
-      print(response);
       emit(const InitializingSuccess());
     } catch (error) {
-      print(error);
       emit(const InitializingError());
     }
   }

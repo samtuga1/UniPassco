@@ -1,9 +1,7 @@
-import 'package:passco/blocs/user/user_bloc.dart';
 import 'package:passco/data/data.dart';
 import 'package:passco/injectable/injection.dart';
 import 'package:passco/services/shared_preferences.service.dart';
 import 'package:passco/ui/screens/screens.dart';
-import 'package:passco/ui/widgets/signup_login_switcher.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -40,34 +38,27 @@ class _LandingScreenState extends State<LandingScreen> {
       future: setData(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: SizedBox.shrink(),
-          );
+          return const Scaffold(body: SizedBox.shrink());
         } else {
-          if (hasSignedUp && !hasLoggedIn) {
-            return const LoginSignUpSwitch(
-              showLogin: true,
-            );
-          }
-          // else if (!hasSignedUp && !hasLoggedIn) {
-          //   return const LoginSignUpSwitch(
-          //     showLogin: false,
-          //   );
+          return BottomNavBar();
+          // if (hasSignedUp && !hasLoggedIn) {
+          //   return const LoginSignUpSwitch(showLogin: true);
           // }
-          else if (hasSignedUp && !hasVerifiedEmail) {
-            return VerificationScreen(
-              email: userEmail,
-            );
-          } else if (hasSignedUp && hasVerifiedEmail && !hasFinishedOnboarding) {
-            return OnboardingScreen(
-              email: userEmail,
-            );
-          } else if (hasSignedUp && hasVerifiedEmail && hasFinishedOnboarding && hasLoggedIn) {
-            // getIt<UserBloc>().add(const RetrieveUser());
-            return const BottomNavBar();
-          } else {
-            return const GetStartedScreen();
-          }
+          // // else if (!hasSignedUp && !hasLoggedIn) {
+          // //   return const LoginSignUpSwitch(
+          // //     showLogin: false,
+          // //   );
+          // // }
+          // else if (hasSignedUp && !hasVerifiedEmail) {
+          //   return VerificationScreen(email: userEmail);
+          // } else if (hasSignedUp && hasVerifiedEmail && !hasFinishedOnboarding) {
+          //   return OnboardingScreen(email: userEmail);
+          // } else if (hasSignedUp && hasVerifiedEmail && hasFinishedOnboarding && hasLoggedIn) {
+          //   // getIt<UserBloc>().add(const RetrieveUser());
+          //   return const BottomNavBar();
+          // } else {
+          //   return const GetStartedScreen();
+          // }
         }
       },
     );

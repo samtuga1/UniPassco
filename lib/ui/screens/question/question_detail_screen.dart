@@ -1,6 +1,8 @@
-import 'dart:async';
 import 'package:passco/blocs/discussions/discussions_bloc.dart';
+import 'package:passco/injectable/injection.dart';
+import 'package:passco/models/auth/data/user_model.dart';
 import 'package:passco/models/questions/data/question_model.dart';
+import 'package:passco/repositories/authed_user.repository.dart';
 import 'package:passco/ui/screens/question/detail_widgets/discussions_list.dart';
 import 'package:passco/ui/screens/question/detail_widgets/message_box.dart';
 import 'package:passco/ui/screens/question/detail_widgets/question_container.dart';
@@ -16,15 +18,14 @@ class QuestionDetailScreen extends StatefulWidget {
 }
 
 class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
-  late DiscussionsBloc discussionsBloc;
+  // late DiscussionsBloc discussionsBloc;
   late Question question;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       question = ModalRoute.of(context)?.settings.arguments as Question;
-      discussionsBloc = context.read<DiscussionsBloc>()
-        ..add(FetchDiscusstions(questionId: question.id, minRange: 0, maxRange: 20));
+      context.read<DiscussionsBloc>().add(FetchDiscusstions(questionId: question.id, minRange: 0, maxRange: 200));
     });
     super.initState();
   }
@@ -72,9 +73,9 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
         //   ),
         // ],
       ),
-      body: FutureBuilder(
-        future: Future.delayed(const Duration(microseconds: 10)),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      body: FutureBuilder<UserModel?>(
+        future: getIt<AuthedUserRepository>().getUser(),
+        builder: (BuildContext context, AsyncSnapshot<UserModel?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SizedBox();
           }
@@ -84,37 +85,55 @@ class _QuestionDetailScreenState extends State<QuestionDetailScreen> {
               context.read<DiscussionsBloc>().messageTextFieldLabel.value = 'Add opinion to forum';
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: QuestionContainer(question: question),
                 ),
-                DiscussionsList(
-                  questionId: question.id,
-                  discussionsBloc: discussionsBloc,
-                ),
+                // if (snapshot.data != null)
+                DiscussionsList(questionId: question.id)
+                // else
+                //   Align(
+                //     alignment: Alignment.center,
+                //     child: Text('Kindly login to access the Forum feature'),
+                //   ),
               ],
             ),
           );
         },
       ),
       extendBody: true,
-      bottomSheet: FutureBuilder(
-        future: Future.delayed(const Duration(microseconds: 10)),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SizedBox();
-          }
-          return BlocBuilder<DiscussionsBloc, DiscussionsState>(
-            builder: (context, state) => switch (state) {
-              FetchingDiscussionsSuccess(discussions: _) => MessageBox(questionId: question.id),
-              _ => const SizedBox.shrink(),
-            },
-            buildWhen: (previous, current) =>
-                current is FetchingDiscussions ||
-                current is FetchingDiscussionsError ||
-                current is FetchingDiscussionsSuccess,
-          );
+      bottomSheet: FutureBuilder<UserModel?>(
+        future: getIt<AuthedUserRepository>().getUser(),
+        builder: (BuildContext context, AsyncSnapshot<UserModel?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) return const SizedBox();
+          return (snapshot.data != null)
+              ? BlocBuilder<DiscussionsBloc, DiscussionsState>(
+                  builder: (context, state) => switch (state) {
+                    FetchingDiscussionsSuccess(discussions: _) => MessageBox(questionId: question.id),
+                    _ => const SizedBox.shrink(),
+                  },
+                  buildWhen: (previous, current) =>
+                      current is FetchingDiscussions ||
+                      current is FetchingDiscussionsError ||
+                      current is FetchingDiscussionsSuccess,
+                )
+              : Padding(
+                  padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom + 20, top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'You are required to login to be able to add your discussions to this forum',
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
         },
       ),
     );

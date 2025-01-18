@@ -260,12 +260,12 @@ class UiUtils {
     BuildContext context, {
     required List<CupertinoActionSheetData> actions,
   }) {
-    showCupertinoModalPopup<void>(
+    showCupertinoModalPopup(
       context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
+      builder: (BuildContext ctx) => CupertinoActionSheet(
           cancelButton: CupertinoActionSheetAction(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(ctx);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -280,8 +280,8 @@ class UiUtils {
           actions: actions.map((action) {
             return CupertinoActionSheetAction(
               onPressed: () {
+                Navigator.pop(ctx);
                 action.onTap.call();
-                Navigator.pop(context);
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 22.5),

@@ -85,11 +85,25 @@ class AuthenticationService {
     }
   }
 
-  Future<HttpResponse> resetPassword({
-    required String email,
-  }) async {
+  Future<HttpResponse> resetPassword({required String email}) async {
     try {
       await supabase.auth.resetPasswordForEmail(email);
+
+      return const HttpResponse.success();
+    } catch (err) {
+      return HttpResponse.error(error: HttpErrorUtils.getDioException(err));
+    }
+  }
+
+  Future<HttpResponse> deleteAccount({required String id}) async {
+    try {
+      await supabase.auth.admin.deleteUser(id);
+      await supabase.from('profiles').delete().eq('id', id);
+      final list = await supabase.storage.from('photos').list(path: 'users/$id');
+
+      final filesToRemove = list.map((x) => 'users/$id/${x.name}').toList();
+
+      await supabase.storage.from('photos').remove(filesToRemove);
 
       return const HttpResponse.success();
     } catch (err) {

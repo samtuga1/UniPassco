@@ -32,7 +32,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
 
   const CustomTextFieldWidget({
-    Key? key,
+    super.key,
     this.cursorHeight,
     this.labelText,
     this.hintText,
@@ -77,13 +77,13 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.focusNode,
     this.hintStyle,
     this.fontSize,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = style ?? context.getTheme.textTheme.bodyMedium!.copyWith(fontSize: 16.sp);
     return TextFormField(
-      cursorHeight: cursorHeight,
+      cursorHeight: cursorHeight ?? 17,
       cursorColor: context.getTheme.primaryColor,
       focusNode: focusNode,
       textAlign: TextAlign.start,

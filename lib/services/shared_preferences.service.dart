@@ -4,8 +4,8 @@ class SharedPreference {
   late SharedPreferences prefs;
   SharedPreference(this.prefs);
 
-  Future<String> getString(String path) async {
-    return prefs.getString(path) ?? '';
+  Future<String?> getString(String path) async {
+    return prefs.getString(path);
   }
 
   Future<bool> getBool(String path) async {

@@ -12,7 +12,7 @@ part of 'themes.cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ThemeCubitState {
@@ -72,26 +72,34 @@ class _$ThemeCubitStateCopyWithImpl<$Res, $Val extends ThemeCubitState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ThemeCubitState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$LightCopyWith<$Res> {
-  factory _$$LightCopyWith(_$Light value, $Res Function(_$Light) then) =
-      __$$LightCopyWithImpl<$Res>;
+abstract class _$$LightImplCopyWith<$Res> {
+  factory _$$LightImplCopyWith(
+          _$LightImpl value, $Res Function(_$LightImpl) then) =
+      __$$LightImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LightCopyWithImpl<$Res>
-    extends _$ThemeCubitStateCopyWithImpl<$Res, _$Light>
-    implements _$$LightCopyWith<$Res> {
-  __$$LightCopyWithImpl(_$Light _value, $Res Function(_$Light) _then)
+class __$$LightImplCopyWithImpl<$Res>
+    extends _$ThemeCubitStateCopyWithImpl<$Res, _$LightImpl>
+    implements _$$LightImplCopyWith<$Res> {
+  __$$LightImplCopyWithImpl(
+      _$LightImpl _value, $Res Function(_$LightImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ThemeCubitState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$Light implements Light {
-  const _$Light();
+class _$LightImpl implements Light {
+  const _$LightImpl();
 
   @override
   String toString() {
@@ -99,9 +107,9 @@ class _$Light implements Light {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Light);
+        (other.runtimeType == runtimeType && other is _$LightImpl);
   }
 
   @override
@@ -171,27 +179,31 @@ class _$Light implements Light {
 }
 
 abstract class Light implements ThemeCubitState {
-  const factory Light() = _$Light;
+  const factory Light() = _$LightImpl;
 }
 
 /// @nodoc
-abstract class _$$DarkCopyWith<$Res> {
-  factory _$$DarkCopyWith(_$Dark value, $Res Function(_$Dark) then) =
-      __$$DarkCopyWithImpl<$Res>;
+abstract class _$$DarkImplCopyWith<$Res> {
+  factory _$$DarkImplCopyWith(
+          _$DarkImpl value, $Res Function(_$DarkImpl) then) =
+      __$$DarkImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DarkCopyWithImpl<$Res>
-    extends _$ThemeCubitStateCopyWithImpl<$Res, _$Dark>
-    implements _$$DarkCopyWith<$Res> {
-  __$$DarkCopyWithImpl(_$Dark _value, $Res Function(_$Dark) _then)
+class __$$DarkImplCopyWithImpl<$Res>
+    extends _$ThemeCubitStateCopyWithImpl<$Res, _$DarkImpl>
+    implements _$$DarkImplCopyWith<$Res> {
+  __$$DarkImplCopyWithImpl(_$DarkImpl _value, $Res Function(_$DarkImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ThemeCubitState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$Dark implements Dark {
-  const _$Dark();
+class _$DarkImpl implements Dark {
+  const _$DarkImpl();
 
   @override
   String toString() {
@@ -199,9 +211,9 @@ class _$Dark implements Dark {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Dark);
+        (other.runtimeType == runtimeType && other is _$DarkImpl);
   }
 
   @override
@@ -271,5 +283,5 @@ class _$Dark implements Dark {
 }
 
 abstract class Dark implements ThemeCubitState {
-  const factory Dark() = _$Dark;
+  const factory Dark() = _$DarkImpl;
 }

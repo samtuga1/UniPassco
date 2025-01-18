@@ -2,7 +2,6 @@ import 'package:passco/blocs/discussions/discussions_bloc.dart';
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
 import 'package:passco/injectable/injection.dart';
 import 'package:passco/models/discussions/data/discussion_reply.dart';
-import 'package:passco/models/discussions/responses/list_discussions.dart';
 import 'package:passco/ui/screens/question/detail_widgets/discussion_item.dart';
 import 'package:passco/ui/screens/question/detail_widgets/discussion_item_skeletonizer.dart';
 import 'package:passco/ui/screens/question/detail_widgets/no_discussion_widget.dart';
@@ -10,7 +9,6 @@ import 'package:passco/ui/widgets/custom_error_screen.dart';
 import 'package:passco/ui/widgets/custom_overlay_entry.dart';
 import 'package:passco/ui/widgets/widgets.dart';
 import 'package:passco/utils/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,19 +17,14 @@ class DiscussionsList extends StatefulWidget {
   const DiscussionsList({
     super.key,
     required this.questionId,
-    required this.discussionsBloc,
   });
   final String questionId;
-  final DiscussionsBloc discussionsBloc;
 
   @override
   State<DiscussionsList> createState() => _DiscussionsListState();
 }
 
 class _DiscussionsListState extends State<DiscussionsList> {
-  GlobalKey<AnimatedListState> globalKey = GlobalKey<AnimatedListState>();
-  ListDiscussionsResponse discussionsList = ListDiscussionsResponse.blank();
-
   int minDiscussionRange = 0;
   int maxDiscussionRange = 20;
 
@@ -48,21 +41,24 @@ class _DiscussionsListState extends State<DiscussionsList> {
             state.maybeWhen(
               updatingDiscussionVotesCountSuccess: (discussion) {
                 getIt<CustomOverlayEntry>().hide(context);
-                final updatedDiscussionIndex = discussionsList.discussions.indexWhere(
+                final updatedDiscussionIndex = getIt<DiscussionsBloc>().discussion.discussions.indexWhere(
                   (element) {
                     return element.id == discussion.id;
                   },
                 );
 
                 setState(() {
-                  discussionsList.discussions[updatedDiscussionIndex] = discussion;
+                  getIt<DiscussionsBloc>().discussion.discussions[updatedDiscussionIndex] = discussion;
                 });
               },
               addingDiscussionSuccess: (discussion) {
                 setState(() {
-                  discussionsList.discussions.insert(0, discussion);
-                  globalKey.currentState?.insertItem(0);
+                  getIt<DiscussionsBloc>().discussion.discussions.insert(0, discussion);
+                  getIt<DiscussionsBloc>().discussion.totalCount += 1;
                 });
+              },
+              fetchingDiscussionsSuccess: (discussions) {
+                getIt<DiscussionsBloc>().discussion = discussions;
               },
               fetchingDiscussionRepliesSuccess: (replies) {
                 setState(() {
@@ -73,13 +69,14 @@ class _DiscussionsListState extends State<DiscussionsList> {
                   var fetchedReplies = _getUnmodifiableFetchedReplies(replies, discussionIndex);
 
                   // assign the fetched lists tot the new [_getUnmodifiableFetchedReplies]
-                  discussionsList.discussions[discussionIndex].fetchedReplies = fetchedReplies;
+                  getIt<DiscussionsBloc>().discussion.discussions[discussionIndex].fetchedReplies = fetchedReplies;
 
-                  int totalReplies = discussionsList.discussions[discussionIndex].totalReplies;
+                  int totalReplies = getIt<DiscussionsBloc>().discussion.discussions[discussionIndex].totalReplies;
 
-                  discussionsList.discussions[discussionIndex].totalRepliesLeft = totalReplies - fetchedReplies.length;
+                  getIt<DiscussionsBloc>().discussion.discussions[discussionIndex].totalRepliesLeft =
+                      totalReplies - fetchedReplies.length;
 
-                  // discussionsList.discussions[discussionIndex].replyPage += 1;
+                  // getIt<DiscussionsBloc>().discussion.discussions[discussionIndex].replyPage += 1;
                 });
               },
               replyingDiscussionSuccess: (discussionReply) {
@@ -89,7 +86,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
 
                     final discussionIndex = _getDiscussionIndex(tappedIndex: discussionId);
 
-                    discussionsList.discussions[discussionIndex].fetchedReplies =
+                    getIt<DiscussionsBloc>().discussion.discussions[discussionIndex].fetchedReplies =
                         _getUnmodifiableFetchedReplies([discussionReply], discussionIndex);
                   },
                 );
@@ -109,15 +106,23 @@ class _DiscussionsListState extends State<DiscussionsList> {
           },
           builder: (context, state) => switch (state) {
             FetchingDiscussions() => const DiscussionItemsSkeletonizer(),
-            FetchingDiscussionsSuccess(discussions: ListDiscussionsResponse discussionsList) =>
-              _discussions(discussionsList, context),
+            // FetchingDiscussionsSuccess(discussions: ListDiscussionsResponse getIt<DiscussionsBloc>().discussion) => _discussions(context),
             FetchingDiscussionsError(error: HttpError error) => CustomErrorPage(
                 errorDescription: HttpErrorUtils.getErrorMessage(error),
-                onRefreshTap: () => widget.discussionsBloc.add(
-                  FetchDiscusstions(questionId: widget.questionId, minRange: 0, maxRange: 20),
-                ),
+                onRefreshTap: () => context.read<DiscussionsBloc>().add(
+                      FetchDiscusstions(questionId: widget.questionId, minRange: 0, maxRange: 20),
+                    ),
               ),
-            _ => _discussions(discussionsList, context),
+            // AddingDiscussionSuccess(discussion: Discussion discussion) => () {
+            //     if (!getIt<DiscussionsBloc>().discussion.discussions.contains(discussion)) {
+            //       getIt<DiscussionsBloc>().discussion.discussions.insert(0, discussion);
+            //       globalKey.currentState?.insertItem(0);
+            //     }
+            //     print(getIt<DiscussionsBloc>().discussion.discussions[0].text);
+            //     return _discussions(context);
+            //   }(),
+            FetchingDiscussionsSuccess() => _discussions(context),
+            _ => const SizedBox(),
           },
           listenWhen: (previous, current) =>
               current is FetchingDiscussionsSuccess ||
@@ -138,8 +143,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
     );
   }
 
-  Widget _discussions(ListDiscussionsResponse discussions, BuildContext context) {
-    discussionsList = discussions;
+  Widget _discussions(BuildContext context) {
     return Column(
       children: [
         16.verticalSpace,
@@ -148,7 +152,9 @@ class _DiscussionsListState extends State<DiscussionsList> {
           children: [
             20.horizontalSpace,
             CustomText(
-              discussions.discussions.isEmpty ? 'No discussions yet' : '${discussions.totalCount} discussions',
+              getIt<DiscussionsBloc>().discussion.discussions.isEmpty
+                  ? 'No discussions yet'
+                  : '${getIt<DiscussionsBloc>().discussion.totalCount} discussions',
               style: context.getTheme.textTheme.titleMedium!.copyWith(
                 fontSize: 13,
               ),
@@ -157,43 +163,46 @@ class _DiscussionsListState extends State<DiscussionsList> {
         ),
         10.verticalSpace,
         Expanded(
-          child: discussions.discussions.isEmpty
+          child: getIt<DiscussionsBloc>().discussion.discussions.isEmpty
               ? const Padding(
                   padding: EdgeInsets.only(right: 24, left: 24, bottom: 70),
                   child: NoDiscussionsWidget(),
                 )
-              : AnimatedList(
-                  key: globalKey,
-                  padding: const EdgeInsets.only(right: 24, left: 24, bottom: 70),
-                  itemBuilder: (ctx, index, animation) {
-                    var discussion = discussions.discussions[index];
-                    if (index == (discussions.discussions.length - 1)) {
-                      if (discussions.discussions.length < discussions.totalCount) {
-                        return Column(
-                          children: [
-                            FadeTransition(
-                              opacity: animation,
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: DiscussionItem(discussion: discussion),
-                              ),
-                            ),
-                            const Center(
-                              child: CustomLoading(),
-                            ),
-                          ],
-                        );
-                      }
-                    }
-                    return FadeTransition(
-                      opacity: animation,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: DiscussionItem(discussion: discussions.discussions[index]),
+              : RefreshIndicator(
+                  onRefresh: () async => context.read<DiscussionsBloc>().add(
+                        FetchDiscusstions(questionId: widget.questionId, minRange: 0, maxRange: 200),
                       ),
-                    );
-                  },
-                  initialItemCount: discussions.discussions.length,
+                  child: ListView.builder(
+                    // key: globalKey,
+                    key: ValueKey(getIt<DiscussionsBloc>().discussion.discussions.map((e) => e.text).toList().length),
+                    padding: const EdgeInsets.only(right: 24, left: 24, bottom: 70),
+                    itemBuilder: (ctx, index) {
+                      // var discussion = discussions.discussions[index];
+                      // if (index == (discussions.discussions.length - 1)) {
+                      //   if (discussions.discussions.length < discussions.totalCount) {
+                      //     return Column(
+                      //       children: [
+                      //         FadeTransition(
+                      //           opacity: animation,
+                      //           child: Padding(
+                      //             padding: const EdgeInsets.only(bottom: 20),
+                      //             child: DiscussionItem(discussion: discussion),
+                      //           ),
+                      //         ),
+                      //         const Center(
+                      //           child: CustomLoading(height: 20, width: 20),
+                      //         ),
+                      //       ],
+                      //     );
+                      //   }
+                      // }
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: DiscussionItem(discussion: getIt<DiscussionsBloc>().discussion.discussions[index]),
+                      );
+                    },
+                    itemCount: getIt<DiscussionsBloc>().discussion.discussions.length,
+                  ),
                 ),
         ),
       ],
@@ -206,7 +215,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
     if (discussionIndex != -1) {
       // Create a modifiable copy of fetchedReplies
       modifiableFetchedReplies =
-          List<DiscussionReply>.from(discussionsList.discussions[discussionIndex].fetchedReplies);
+          List<DiscussionReply>.from(getIt<DiscussionsBloc>().discussion.discussions[discussionIndex].fetchedReplies);
 
       // Add the newly fetched replies to the modifiable copy
       modifiableFetchedReplies.addAll(replies);
@@ -215,7 +224,7 @@ class _DiscussionsListState extends State<DiscussionsList> {
     return modifiableFetchedReplies;
   }
 
-  int _getDiscussionIndex({String? tappedIndex}) => discussionsList.discussions.indexWhere(
+  int _getDiscussionIndex({String? tappedIndex}) => getIt<DiscussionsBloc>().discussion.discussions.indexWhere(
         (discussion) {
           if (tappedIndex == null) {
             return discussion.id == context.read<DiscussionsBloc>().tappedDiscussionIdFetchReplies;

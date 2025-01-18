@@ -23,14 +23,24 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
     on<AddDiscussion>(_addDiscussion);
     on<VoteDiscussion>(_updateDiscussionsLikesCount);
     on<ReplyDiscussion>(_replyDiscussion);
+    on<ReportDiscussion>(_reportDiscussion);
     on<ListDiscussionReplies>(_fetchDiscussionReplies);
   }
 
+  ListDiscussionsResponse discussion = ListDiscussionsResponse.blank();
   ValueNotifier<String?> messageTextFieldLabel = ValueNotifier('Add opinion to forum');
   late Discussion tappedDiscussionToReply;
   String? tappedDiscussionIdFetchReplies;
   // int minDiscussionRange = 0;
   // int maxDiscussionRange = 20;
+
+  Future<void> _reportDiscussion(ReportDiscussion event, Emitter emit) async {
+    emit(const ReportingDiscussions());
+
+    await Future.delayed(Duration(seconds: 2));
+
+    emit(ReportingDiscussionsSuccess());
+  }
 
   Future<void> _replyDiscussion(ReplyDiscussion event, Emitter emit) async {
     emit(const AddingDiscussionOrReply());

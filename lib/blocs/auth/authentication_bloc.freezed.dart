@@ -12,11 +12,10 @@ part of 'authentication_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthenticationEvent {
-  String get email => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String name, String email, String password)
@@ -25,6 +24,7 @@ mixin _$AuthenticationEvent {
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
     required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +35,7 @@ mixin _$AuthenticationEvent {
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
     TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,6 +46,7 @@ mixin _$AuthenticationEvent {
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
     TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +58,7 @@ mixin _$AuthenticationEvent {
     required TResult Function(ResendVerificationToken value)
         requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +68,7 @@ mixin _$AuthenticationEvent {
     TResult? Function(LoginAccount value)? loginAccount,
     TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,12 +78,9 @@ mixin _$AuthenticationEvent {
     TResult Function(LoginAccount value)? loginAccount,
     TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AuthenticationEventCopyWith<AuthenticationEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -88,8 +89,6 @@ abstract class $AuthenticationEventCopyWith<$Res> {
   factory $AuthenticationEventCopyWith(
           AuthenticationEvent value, $Res Function(AuthenticationEvent) then) =
       _$AuthenticationEventCopyWithImpl<$Res, AuthenticationEvent>;
-  @useResult
-  $Res call({String email});
 }
 
 /// @nodoc
@@ -102,39 +101,29 @@ class _$AuthenticationEventCopyWithImpl<$Res, $Val extends AuthenticationEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-  }) {
-    return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$SignUpWithEmailCopyWith<$Res>
-    implements $AuthenticationEventCopyWith<$Res> {
-  factory _$$SignUpWithEmailCopyWith(
-          _$SignUpWithEmail value, $Res Function(_$SignUpWithEmail) then) =
-      __$$SignUpWithEmailCopyWithImpl<$Res>;
-  @override
+abstract class _$$SignUpWithEmailImplCopyWith<$Res> {
+  factory _$$SignUpWithEmailImplCopyWith(_$SignUpWithEmailImpl value,
+          $Res Function(_$SignUpWithEmailImpl) then) =
+      __$$SignUpWithEmailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String name, String email, String password});
 }
 
 /// @nodoc
-class __$$SignUpWithEmailCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$SignUpWithEmail>
-    implements _$$SignUpWithEmailCopyWith<$Res> {
-  __$$SignUpWithEmailCopyWithImpl(
-      _$SignUpWithEmail _value, $Res Function(_$SignUpWithEmail) _then)
+class __$$SignUpWithEmailImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$SignUpWithEmailImpl>
+    implements _$$SignUpWithEmailImplCopyWith<$Res> {
+  __$$SignUpWithEmailImplCopyWithImpl(
+      _$SignUpWithEmailImpl _value, $Res Function(_$SignUpWithEmailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,7 +131,7 @@ class __$$SignUpWithEmailCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$SignUpWithEmail(
+    return _then(_$SignUpWithEmailImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -161,8 +150,8 @@ class __$$SignUpWithEmailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SignUpWithEmail implements SignUpWithEmail {
-  const _$SignUpWithEmail(
+class _$SignUpWithEmailImpl implements SignUpWithEmail {
+  const _$SignUpWithEmailImpl(
       {required this.name, required this.email, required this.password});
 
   @override
@@ -178,10 +167,10 @@ class _$SignUpWithEmail implements SignUpWithEmail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignUpWithEmail &&
+            other is _$SignUpWithEmailImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
@@ -191,11 +180,14 @@ class _$SignUpWithEmail implements SignUpWithEmail {
   @override
   int get hashCode => Object.hash(runtimeType, name, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SignUpWithEmailCopyWith<_$SignUpWithEmail> get copyWith =>
-      __$$SignUpWithEmailCopyWithImpl<_$SignUpWithEmail>(this, _$identity);
+  _$$SignUpWithEmailImplCopyWith<_$SignUpWithEmailImpl> get copyWith =>
+      __$$SignUpWithEmailImplCopyWithImpl<_$SignUpWithEmailImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -206,6 +198,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
     required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
   }) {
     return signUpWithEmail(name, email, password);
   }
@@ -219,6 +212,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
     TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
   }) {
     return signUpWithEmail?.call(name, email, password);
   }
@@ -232,6 +226,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
     TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (signUpWithEmail != null) {
@@ -249,6 +244,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     required TResult Function(ResendVerificationToken value)
         requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
   }) {
     return signUpWithEmail(this);
   }
@@ -261,6 +257,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult? Function(LoginAccount value)? loginAccount,
     TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
   }) {
     return signUpWithEmail?.call(this);
   }
@@ -273,6 +270,7 @@ class _$SignUpWithEmail implements SignUpWithEmail {
     TResult Function(LoginAccount value)? loginAccount,
     TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (signUpWithEmail != null) {
@@ -286,44 +284,45 @@ abstract class SignUpWithEmail implements AuthenticationEvent {
   const factory SignUpWithEmail(
       {required final String name,
       required final String email,
-      required final String password}) = _$SignUpWithEmail;
+      required final String password}) = _$SignUpWithEmailImpl;
 
   String get name;
-  @override
   String get email;
   String get password;
-  @override
-  @JsonKey(ignore: true)
-  _$$SignUpWithEmailCopyWith<_$SignUpWithEmail> get copyWith =>
+
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SignUpWithEmailImplCopyWith<_$SignUpWithEmailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$VerifyEmailCopyWith<$Res>
-    implements $AuthenticationEventCopyWith<$Res> {
-  factory _$$VerifyEmailCopyWith(
-          _$VerifyEmail value, $Res Function(_$VerifyEmail) then) =
-      __$$VerifyEmailCopyWithImpl<$Res>;
-  @override
+abstract class _$$VerifyEmailImplCopyWith<$Res> {
+  factory _$$VerifyEmailImplCopyWith(
+          _$VerifyEmailImpl value, $Res Function(_$VerifyEmailImpl) then) =
+      __$$VerifyEmailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String token});
 }
 
 /// @nodoc
-class __$$VerifyEmailCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$VerifyEmail>
-    implements _$$VerifyEmailCopyWith<$Res> {
-  __$$VerifyEmailCopyWithImpl(
-      _$VerifyEmail _value, $Res Function(_$VerifyEmail) _then)
+class __$$VerifyEmailImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$VerifyEmailImpl>
+    implements _$$VerifyEmailImplCopyWith<$Res> {
+  __$$VerifyEmailImplCopyWithImpl(
+      _$VerifyEmailImpl _value, $Res Function(_$VerifyEmailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? token = null,
   }) {
-    return _then(_$VerifyEmail(
+    return _then(_$VerifyEmailImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -338,8 +337,8 @@ class __$$VerifyEmailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$VerifyEmail implements VerifyEmail {
-  const _$VerifyEmail({required this.email, required this.token});
+class _$VerifyEmailImpl implements VerifyEmail {
+  const _$VerifyEmailImpl({required this.email, required this.token});
 
   @override
   final String email;
@@ -352,10 +351,10 @@ class _$VerifyEmail implements VerifyEmail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VerifyEmail &&
+            other is _$VerifyEmailImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.token, token) || other.token == token));
   }
@@ -363,11 +362,13 @@ class _$VerifyEmail implements VerifyEmail {
   @override
   int get hashCode => Object.hash(runtimeType, email, token);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$VerifyEmailCopyWith<_$VerifyEmail> get copyWith =>
-      __$$VerifyEmailCopyWithImpl<_$VerifyEmail>(this, _$identity);
+  _$$VerifyEmailImplCopyWith<_$VerifyEmailImpl> get copyWith =>
+      __$$VerifyEmailImplCopyWithImpl<_$VerifyEmailImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -378,6 +379,7 @@ class _$VerifyEmail implements VerifyEmail {
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
     required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
   }) {
     return verifyEmail(email, token);
   }
@@ -391,6 +393,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
     TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
   }) {
     return verifyEmail?.call(email, token);
   }
@@ -404,6 +407,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
     TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (verifyEmail != null) {
@@ -421,6 +425,7 @@ class _$VerifyEmail implements VerifyEmail {
     required TResult Function(ResendVerificationToken value)
         requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
   }) {
     return verifyEmail(this);
   }
@@ -433,6 +438,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult? Function(LoginAccount value)? loginAccount,
     TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
   }) {
     return verifyEmail?.call(this);
   }
@@ -445,6 +451,7 @@ class _$VerifyEmail implements VerifyEmail {
     TResult Function(LoginAccount value)? loginAccount,
     TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (verifyEmail != null) {
@@ -457,43 +464,44 @@ class _$VerifyEmail implements VerifyEmail {
 abstract class VerifyEmail implements AuthenticationEvent {
   const factory VerifyEmail(
       {required final String email,
-      required final String token}) = _$VerifyEmail;
+      required final String token}) = _$VerifyEmailImpl;
 
-  @override
   String get email;
   String get token;
-  @override
-  @JsonKey(ignore: true)
-  _$$VerifyEmailCopyWith<_$VerifyEmail> get copyWith =>
+
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VerifyEmailImplCopyWith<_$VerifyEmailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoginAccountCopyWith<$Res>
-    implements $AuthenticationEventCopyWith<$Res> {
-  factory _$$LoginAccountCopyWith(
-          _$LoginAccount value, $Res Function(_$LoginAccount) then) =
-      __$$LoginAccountCopyWithImpl<$Res>;
-  @override
+abstract class _$$LoginAccountImplCopyWith<$Res> {
+  factory _$$LoginAccountImplCopyWith(
+          _$LoginAccountImpl value, $Res Function(_$LoginAccountImpl) then) =
+      __$$LoginAccountImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$LoginAccountCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$LoginAccount>
-    implements _$$LoginAccountCopyWith<$Res> {
-  __$$LoginAccountCopyWithImpl(
-      _$LoginAccount _value, $Res Function(_$LoginAccount) _then)
+class __$$LoginAccountImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$LoginAccountImpl>
+    implements _$$LoginAccountImplCopyWith<$Res> {
+  __$$LoginAccountImplCopyWithImpl(
+      _$LoginAccountImpl _value, $Res Function(_$LoginAccountImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$LoginAccount(
+    return _then(_$LoginAccountImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -508,8 +516,8 @@ class __$$LoginAccountCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoginAccount implements LoginAccount {
-  const _$LoginAccount({required this.email, required this.password});
+class _$LoginAccountImpl implements LoginAccount {
+  const _$LoginAccountImpl({required this.email, required this.password});
 
   @override
   final String email;
@@ -522,10 +530,10 @@ class _$LoginAccount implements LoginAccount {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginAccount &&
+            other is _$LoginAccountImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -534,11 +542,13 @@ class _$LoginAccount implements LoginAccount {
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginAccountCopyWith<_$LoginAccount> get copyWith =>
-      __$$LoginAccountCopyWithImpl<_$LoginAccount>(this, _$identity);
+  _$$LoginAccountImplCopyWith<_$LoginAccountImpl> get copyWith =>
+      __$$LoginAccountImplCopyWithImpl<_$LoginAccountImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -549,6 +559,7 @@ class _$LoginAccount implements LoginAccount {
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
     required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
   }) {
     return loginAccount(email, password);
   }
@@ -562,6 +573,7 @@ class _$LoginAccount implements LoginAccount {
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
     TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
   }) {
     return loginAccount?.call(email, password);
   }
@@ -575,6 +587,7 @@ class _$LoginAccount implements LoginAccount {
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
     TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (loginAccount != null) {
@@ -592,6 +605,7 @@ class _$LoginAccount implements LoginAccount {
     required TResult Function(ResendVerificationToken value)
         requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
   }) {
     return loginAccount(this);
   }
@@ -604,6 +618,7 @@ class _$LoginAccount implements LoginAccount {
     TResult? Function(LoginAccount value)? loginAccount,
     TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
   }) {
     return loginAccount?.call(this);
   }
@@ -616,6 +631,7 @@ class _$LoginAccount implements LoginAccount {
     TResult Function(LoginAccount value)? loginAccount,
     TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (loginAccount != null) {
@@ -628,42 +644,46 @@ class _$LoginAccount implements LoginAccount {
 abstract class LoginAccount implements AuthenticationEvent {
   const factory LoginAccount(
       {required final String email,
-      required final String password}) = _$LoginAccount;
+      required final String password}) = _$LoginAccountImpl;
 
-  @override
   String get email;
   String get password;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoginAccountCopyWith<_$LoginAccount> get copyWith =>
+
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoginAccountImplCopyWith<_$LoginAccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ResendVerificationTokenCopyWith<$Res>
-    implements $AuthenticationEventCopyWith<$Res> {
-  factory _$$ResendVerificationTokenCopyWith(_$ResendVerificationToken value,
-          $Res Function(_$ResendVerificationToken) then) =
-      __$$ResendVerificationTokenCopyWithImpl<$Res>;
-  @override
+abstract class _$$ResendVerificationTokenImplCopyWith<$Res> {
+  factory _$$ResendVerificationTokenImplCopyWith(
+          _$ResendVerificationTokenImpl value,
+          $Res Function(_$ResendVerificationTokenImpl) then) =
+      __$$ResendVerificationTokenImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email});
 }
 
 /// @nodoc
-class __$$ResendVerificationTokenCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$ResendVerificationToken>
-    implements _$$ResendVerificationTokenCopyWith<$Res> {
-  __$$ResendVerificationTokenCopyWithImpl(_$ResendVerificationToken _value,
-      $Res Function(_$ResendVerificationToken) _then)
+class __$$ResendVerificationTokenImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res,
+        _$ResendVerificationTokenImpl>
+    implements _$$ResendVerificationTokenImplCopyWith<$Res> {
+  __$$ResendVerificationTokenImplCopyWithImpl(
+      _$ResendVerificationTokenImpl _value,
+      $Res Function(_$ResendVerificationTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
   }) {
-    return _then(_$ResendVerificationToken(
+    return _then(_$ResendVerificationTokenImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -674,8 +694,8 @@ class __$$ResendVerificationTokenCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ResendVerificationToken implements ResendVerificationToken {
-  const _$ResendVerificationToken({required this.email});
+class _$ResendVerificationTokenImpl implements ResendVerificationToken {
+  const _$ResendVerificationTokenImpl({required this.email});
 
   @override
   final String email;
@@ -686,22 +706,24 @@ class _$ResendVerificationToken implements ResendVerificationToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResendVerificationToken &&
+            other is _$ResendVerificationTokenImpl &&
             (identical(other.email, email) || other.email == email));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResendVerificationTokenCopyWith<_$ResendVerificationToken> get copyWith =>
-      __$$ResendVerificationTokenCopyWithImpl<_$ResendVerificationToken>(
-          this, _$identity);
+  _$$ResendVerificationTokenImplCopyWith<_$ResendVerificationTokenImpl>
+      get copyWith => __$$ResendVerificationTokenImplCopyWithImpl<
+          _$ResendVerificationTokenImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -712,6 +734,7 @@ class _$ResendVerificationToken implements ResendVerificationToken {
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
     required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
   }) {
     return requestPasswordReset(email);
   }
@@ -725,6 +748,7 @@ class _$ResendVerificationToken implements ResendVerificationToken {
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
     TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
   }) {
     return requestPasswordReset?.call(email);
   }
@@ -738,6 +762,7 @@ class _$ResendVerificationToken implements ResendVerificationToken {
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
     TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (requestPasswordReset != null) {
@@ -755,6 +780,7 @@ class _$ResendVerificationToken implements ResendVerificationToken {
     required TResult Function(ResendVerificationToken value)
         requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
   }) {
     return requestPasswordReset(this);
   }
@@ -767,6 +793,7 @@ class _$ResendVerificationToken implements ResendVerificationToken {
     TResult? Function(LoginAccount value)? loginAccount,
     TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
   }) {
     return requestPasswordReset?.call(this);
   }
@@ -779,6 +806,7 @@ class _$ResendVerificationToken implements ResendVerificationToken {
     TResult Function(LoginAccount value)? loginAccount,
     TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (requestPasswordReset != null) {
@@ -790,41 +818,42 @@ class _$ResendVerificationToken implements ResendVerificationToken {
 
 abstract class ResendVerificationToken implements AuthenticationEvent {
   const factory ResendVerificationToken({required final String email}) =
-      _$ResendVerificationToken;
+      _$ResendVerificationTokenImpl;
 
-  @override
   String get email;
-  @override
-  @JsonKey(ignore: true)
-  _$$ResendVerificationTokenCopyWith<_$ResendVerificationToken> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ResendVerificationTokenImplCopyWith<_$ResendVerificationTokenImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ResetPasswordCopyWith<$Res>
-    implements $AuthenticationEventCopyWith<$Res> {
-  factory _$$ResetPasswordCopyWith(
-          _$ResetPassword value, $Res Function(_$ResetPassword) then) =
-      __$$ResetPasswordCopyWithImpl<$Res>;
-  @override
+abstract class _$$ResetPasswordImplCopyWith<$Res> {
+  factory _$$ResetPasswordImplCopyWith(
+          _$ResetPasswordImpl value, $Res Function(_$ResetPasswordImpl) then) =
+      __$$ResetPasswordImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email});
 }
 
 /// @nodoc
-class __$$ResetPasswordCopyWithImpl<$Res>
-    extends _$AuthenticationEventCopyWithImpl<$Res, _$ResetPassword>
-    implements _$$ResetPasswordCopyWith<$Res> {
-  __$$ResetPasswordCopyWithImpl(
-      _$ResetPassword _value, $Res Function(_$ResetPassword) _then)
+class __$$ResetPasswordImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$ResetPasswordImpl>
+    implements _$$ResetPasswordImplCopyWith<$Res> {
+  __$$ResetPasswordImplCopyWithImpl(
+      _$ResetPasswordImpl _value, $Res Function(_$ResetPasswordImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
   }) {
-    return _then(_$ResetPassword(
+    return _then(_$ResetPasswordImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -835,8 +864,8 @@ class __$$ResetPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ResetPassword implements ResetPassword {
-  const _$ResetPassword({required this.email});
+class _$ResetPasswordImpl implements ResetPassword {
+  const _$ResetPasswordImpl({required this.email});
 
   @override
   final String email;
@@ -847,21 +876,23 @@ class _$ResetPassword implements ResetPassword {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResetPassword &&
+            other is _$ResetPasswordImpl &&
             (identical(other.email, email) || other.email == email));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResetPasswordCopyWith<_$ResetPassword> get copyWith =>
-      __$$ResetPasswordCopyWithImpl<_$ResetPassword>(this, _$identity);
+  _$$ResetPasswordImplCopyWith<_$ResetPasswordImpl> get copyWith =>
+      __$$ResetPasswordImplCopyWithImpl<_$ResetPasswordImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -872,6 +903,7 @@ class _$ResetPassword implements ResetPassword {
     required TResult Function(String email, String password) loginAccount,
     required TResult Function(String email) requestPasswordReset,
     required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
   }) {
     return resetPassword(email);
   }
@@ -885,6 +917,7 @@ class _$ResetPassword implements ResetPassword {
     TResult? Function(String email, String password)? loginAccount,
     TResult? Function(String email)? requestPasswordReset,
     TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
   }) {
     return resetPassword?.call(email);
   }
@@ -898,6 +931,7 @@ class _$ResetPassword implements ResetPassword {
     TResult Function(String email, String password)? loginAccount,
     TResult Function(String email)? requestPasswordReset,
     TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
@@ -915,6 +949,7 @@ class _$ResetPassword implements ResetPassword {
     required TResult Function(ResendVerificationToken value)
         requestPasswordReset,
     required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
   }) {
     return resetPassword(this);
   }
@@ -927,6 +962,7 @@ class _$ResetPassword implements ResetPassword {
     TResult? Function(LoginAccount value)? loginAccount,
     TResult? Function(ResendVerificationToken value)? requestPasswordReset,
     TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
   }) {
     return resetPassword?.call(this);
   }
@@ -939,6 +975,7 @@ class _$ResetPassword implements ResetPassword {
     TResult Function(LoginAccount value)? loginAccount,
     TResult Function(ResendVerificationToken value)? requestPasswordReset,
     TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
@@ -949,14 +986,149 @@ class _$ResetPassword implements ResetPassword {
 }
 
 abstract class ResetPassword implements AuthenticationEvent {
-  const factory ResetPassword({required final String email}) = _$ResetPassword;
+  const factory ResetPassword({required final String email}) =
+      _$ResetPasswordImpl;
+
+  String get email;
+
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ResetPasswordImplCopyWith<_$ResetPasswordImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteAccountImplCopyWith<$Res> {
+  factory _$$DeleteAccountImplCopyWith(
+          _$DeleteAccountImpl value, $Res Function(_$DeleteAccountImpl) then) =
+      __$$DeleteAccountImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteAccountImplCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$DeleteAccountImpl>
+    implements _$$DeleteAccountImplCopyWith<$Res> {
+  __$$DeleteAccountImplCopyWithImpl(
+      _$DeleteAccountImpl _value, $Res Function(_$DeleteAccountImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthenticationEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteAccountImpl implements DeleteAccount {
+  const _$DeleteAccountImpl();
 
   @override
-  String get email;
+  String toString() {
+    return 'AuthenticationEvent.deleteAccount()';
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$$ResetPasswordCopyWith<_$ResetPassword> get copyWith =>
-      throw _privateConstructorUsedError;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DeleteAccountImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String name, String email, String password)
+        signUpWithEmail,
+    required TResult Function(String email, String token) verifyEmail,
+    required TResult Function(String email, String password) loginAccount,
+    required TResult Function(String email) requestPasswordReset,
+    required TResult Function(String email) resetPassword,
+    required TResult Function() deleteAccount,
+  }) {
+    return deleteAccount();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String name, String email, String password)?
+        signUpWithEmail,
+    TResult? Function(String email, String token)? verifyEmail,
+    TResult? Function(String email, String password)? loginAccount,
+    TResult? Function(String email)? requestPasswordReset,
+    TResult? Function(String email)? resetPassword,
+    TResult? Function()? deleteAccount,
+  }) {
+    return deleteAccount?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String name, String email, String password)?
+        signUpWithEmail,
+    TResult Function(String email, String token)? verifyEmail,
+    TResult Function(String email, String password)? loginAccount,
+    TResult Function(String email)? requestPasswordReset,
+    TResult Function(String email)? resetPassword,
+    TResult Function()? deleteAccount,
+    required TResult orElse(),
+  }) {
+    if (deleteAccount != null) {
+      return deleteAccount();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignUpWithEmail value) signUpWithEmail,
+    required TResult Function(VerifyEmail value) verifyEmail,
+    required TResult Function(LoginAccount value) loginAccount,
+    required TResult Function(ResendVerificationToken value)
+        requestPasswordReset,
+    required TResult Function(ResetPassword value) resetPassword,
+    required TResult Function(DeleteAccount value) deleteAccount,
+  }) {
+    return deleteAccount(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignUpWithEmail value)? signUpWithEmail,
+    TResult? Function(VerifyEmail value)? verifyEmail,
+    TResult? Function(LoginAccount value)? loginAccount,
+    TResult? Function(ResendVerificationToken value)? requestPasswordReset,
+    TResult? Function(ResetPassword value)? resetPassword,
+    TResult? Function(DeleteAccount value)? deleteAccount,
+  }) {
+    return deleteAccount?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignUpWithEmail value)? signUpWithEmail,
+    TResult Function(VerifyEmail value)? verifyEmail,
+    TResult Function(LoginAccount value)? loginAccount,
+    TResult Function(ResendVerificationToken value)? requestPasswordReset,
+    TResult Function(ResetPassword value)? resetPassword,
+    TResult Function(DeleteAccount value)? deleteAccount,
+    required TResult orElse(),
+  }) {
+    if (deleteAccount != null) {
+      return deleteAccount(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteAccount implements AuthenticationEvent {
+  const factory DeleteAccount() = _$DeleteAccountImpl;
 }
 
 /// @nodoc
@@ -974,6 +1146,8 @@ mixin _$AuthenticationState<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) =>
       throw _privateConstructorUsedError;
@@ -990,6 +1164,8 @@ mixin _$AuthenticationState<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) =>
       throw _privateConstructorUsedError;
@@ -1006,6 +1182,8 @@ mixin _$AuthenticationState<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) =>
@@ -1027,6 +1205,9 @@ mixin _$AuthenticationState<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) =>
       throw _privateConstructorUsedError;
@@ -1046,6 +1227,8 @@ mixin _$AuthenticationState<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) =>
       throw _privateConstructorUsedError;
@@ -1064,6 +1247,8 @@ mixin _$AuthenticationState<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) =>
@@ -1087,29 +1272,37 @@ class _$AuthenticationStateCopyWithImpl<T, $Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$AuthenticationInitialCopyWith<T, $Res> {
-  factory _$$AuthenticationInitialCopyWith(_$AuthenticationInitial<T> value,
-          $Res Function(_$AuthenticationInitial<T>) then) =
-      __$$AuthenticationInitialCopyWithImpl<T, $Res>;
+abstract class _$$AuthenticationInitialImplCopyWith<T, $Res> {
+  factory _$$AuthenticationInitialImplCopyWith(
+          _$AuthenticationInitialImpl<T> value,
+          $Res Function(_$AuthenticationInitialImpl<T>) then) =
+      __$$AuthenticationInitialImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$AuthenticationInitialCopyWithImpl<T, $Res>
+class __$$AuthenticationInitialImplCopyWithImpl<T, $Res>
     extends _$AuthenticationStateCopyWithImpl<T, $Res,
-        _$AuthenticationInitial<T>>
-    implements _$$AuthenticationInitialCopyWith<T, $Res> {
-  __$$AuthenticationInitialCopyWithImpl(_$AuthenticationInitial<T> _value,
-      $Res Function(_$AuthenticationInitial<T>) _then)
+        _$AuthenticationInitialImpl<T>>
+    implements _$$AuthenticationInitialImplCopyWith<T, $Res> {
+  __$$AuthenticationInitialImplCopyWithImpl(
+      _$AuthenticationInitialImpl<T> _value,
+      $Res Function(_$AuthenticationInitialImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
-  const _$AuthenticationInitial();
+class _$AuthenticationInitialImpl<T> implements AuthenticationInitial<T> {
+  const _$AuthenticationInitialImpl();
 
   @override
   String toString() {
@@ -1117,10 +1310,10 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AuthenticationInitial<T>);
+            other is _$AuthenticationInitialImpl<T>);
   }
 
   @override
@@ -1140,6 +1333,8 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return authenticationInitial();
@@ -1159,6 +1354,8 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return authenticationInitial?.call();
@@ -1178,6 +1375,8 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1205,6 +1404,9 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return authenticationInitial(this);
@@ -1227,6 +1429,8 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return authenticationInitial?.call(this);
@@ -1248,6 +1452,8 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1259,29 +1465,32 @@ class _$AuthenticationInitial<T> implements AuthenticationInitial<T> {
 }
 
 abstract class AuthenticationInitial<T> implements AuthenticationState<T> {
-  const factory AuthenticationInitial() = _$AuthenticationInitial<T>;
+  const factory AuthenticationInitial() = _$AuthenticationInitialImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SigningUpCopyWith<T, $Res> {
-  factory _$$SigningUpCopyWith(
-          _$SigningUp<T> value, $Res Function(_$SigningUp<T>) then) =
-      __$$SigningUpCopyWithImpl<T, $Res>;
+abstract class _$$SigningUpImplCopyWith<T, $Res> {
+  factory _$$SigningUpImplCopyWith(
+          _$SigningUpImpl<T> value, $Res Function(_$SigningUpImpl<T>) then) =
+      __$$SigningUpImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$SigningUpCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$SigningUp<T>>
-    implements _$$SigningUpCopyWith<T, $Res> {
-  __$$SigningUpCopyWithImpl(
-      _$SigningUp<T> _value, $Res Function(_$SigningUp<T>) _then)
+class __$$SigningUpImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$SigningUpImpl<T>>
+    implements _$$SigningUpImplCopyWith<T, $Res> {
+  __$$SigningUpImplCopyWithImpl(
+      _$SigningUpImpl<T> _value, $Res Function(_$SigningUpImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SigningUp<T> implements SigningUp<T> {
-  const _$SigningUp();
+class _$SigningUpImpl<T> implements SigningUp<T> {
+  const _$SigningUpImpl();
 
   @override
   String toString() {
@@ -1289,9 +1498,9 @@ class _$SigningUp<T> implements SigningUp<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SigningUp<T>);
+        (other.runtimeType == runtimeType && other is _$SigningUpImpl<T>);
   }
 
   @override
@@ -1311,6 +1520,8 @@ class _$SigningUp<T> implements SigningUp<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return signingUp();
@@ -1330,6 +1541,8 @@ class _$SigningUp<T> implements SigningUp<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return signingUp?.call();
@@ -1349,6 +1562,8 @@ class _$SigningUp<T> implements SigningUp<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1376,6 +1591,9 @@ class _$SigningUp<T> implements SigningUp<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return signingUp(this);
@@ -1398,6 +1616,8 @@ class _$SigningUp<T> implements SigningUp<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return signingUp?.call(this);
@@ -1419,6 +1639,8 @@ class _$SigningUp<T> implements SigningUp<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1430,29 +1652,32 @@ class _$SigningUp<T> implements SigningUp<T> {
 }
 
 abstract class SigningUp<T> implements AuthenticationState<T> {
-  const factory SigningUp() = _$SigningUp<T>;
+  const factory SigningUp() = _$SigningUpImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SignUpSuccessCopyWith<T, $Res> {
-  factory _$$SignUpSuccessCopyWith(
-          _$SignUpSuccess<T> value, $Res Function(_$SignUpSuccess<T>) then) =
-      __$$SignUpSuccessCopyWithImpl<T, $Res>;
+abstract class _$$SignUpSuccessImplCopyWith<T, $Res> {
+  factory _$$SignUpSuccessImplCopyWith(_$SignUpSuccessImpl<T> value,
+          $Res Function(_$SignUpSuccessImpl<T>) then) =
+      __$$SignUpSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$SignUpSuccessCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$SignUpSuccess<T>>
-    implements _$$SignUpSuccessCopyWith<T, $Res> {
-  __$$SignUpSuccessCopyWithImpl(
-      _$SignUpSuccess<T> _value, $Res Function(_$SignUpSuccess<T>) _then)
+class __$$SignUpSuccessImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$SignUpSuccessImpl<T>>
+    implements _$$SignUpSuccessImplCopyWith<T, $Res> {
+  __$$SignUpSuccessImplCopyWithImpl(_$SignUpSuccessImpl<T> _value,
+      $Res Function(_$SignUpSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$SignUpSuccess<T> implements SignUpSuccess<T> {
-  const _$SignUpSuccess();
+class _$SignUpSuccessImpl<T> implements SignUpSuccess<T> {
+  const _$SignUpSuccessImpl();
 
   @override
   String toString() {
@@ -1460,9 +1685,9 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SignUpSuccess<T>);
+        (other.runtimeType == runtimeType && other is _$SignUpSuccessImpl<T>);
   }
 
   @override
@@ -1482,6 +1707,8 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return signUpSuccess();
@@ -1501,6 +1728,8 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return signUpSuccess?.call();
@@ -1520,6 +1749,8 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1547,6 +1778,9 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return signUpSuccess(this);
@@ -1569,6 +1803,8 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return signUpSuccess?.call(this);
@@ -1590,6 +1826,8 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1601,29 +1839,32 @@ class _$SignUpSuccess<T> implements SignUpSuccess<T> {
 }
 
 abstract class SignUpSuccess<T> implements AuthenticationState<T> {
-  const factory SignUpSuccess() = _$SignUpSuccess<T>;
+  const factory SignUpSuccess() = _$SignUpSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$VerifyingTokenCopyWith<T, $Res> {
-  factory _$$VerifyingTokenCopyWith(
-          _$VerifyingToken<T> value, $Res Function(_$VerifyingToken<T>) then) =
-      __$$VerifyingTokenCopyWithImpl<T, $Res>;
+abstract class _$$VerifyingTokenImplCopyWith<T, $Res> {
+  factory _$$VerifyingTokenImplCopyWith(_$VerifyingTokenImpl<T> value,
+          $Res Function(_$VerifyingTokenImpl<T>) then) =
+      __$$VerifyingTokenImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$VerifyingTokenCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$VerifyingToken<T>>
-    implements _$$VerifyingTokenCopyWith<T, $Res> {
-  __$$VerifyingTokenCopyWithImpl(
-      _$VerifyingToken<T> _value, $Res Function(_$VerifyingToken<T>) _then)
+class __$$VerifyingTokenImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$VerifyingTokenImpl<T>>
+    implements _$$VerifyingTokenImplCopyWith<T, $Res> {
+  __$$VerifyingTokenImplCopyWithImpl(_$VerifyingTokenImpl<T> _value,
+      $Res Function(_$VerifyingTokenImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$VerifyingToken<T> implements VerifyingToken<T> {
-  const _$VerifyingToken();
+class _$VerifyingTokenImpl<T> implements VerifyingToken<T> {
+  const _$VerifyingTokenImpl();
 
   @override
   String toString() {
@@ -1631,9 +1872,9 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$VerifyingToken<T>);
+        (other.runtimeType == runtimeType && other is _$VerifyingTokenImpl<T>);
   }
 
   @override
@@ -1653,6 +1894,8 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return verifyingToken();
@@ -1672,6 +1915,8 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return verifyingToken?.call();
@@ -1691,6 +1936,8 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1718,6 +1965,9 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return verifyingToken(this);
@@ -1740,6 +1990,8 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return verifyingToken?.call(this);
@@ -1761,6 +2013,8 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1772,29 +2026,33 @@ class _$VerifyingToken<T> implements VerifyingToken<T> {
 }
 
 abstract class VerifyingToken<T> implements AuthenticationState<T> {
-  const factory VerifyingToken() = _$VerifyingToken<T>;
+  const factory VerifyingToken() = _$VerifyingTokenImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$VerifyTokenSuccessCopyWith<T, $Res> {
-  factory _$$VerifyTokenSuccessCopyWith(_$VerifyTokenSuccess<T> value,
-          $Res Function(_$VerifyTokenSuccess<T>) then) =
-      __$$VerifyTokenSuccessCopyWithImpl<T, $Res>;
+abstract class _$$VerifyTokenSuccessImplCopyWith<T, $Res> {
+  factory _$$VerifyTokenSuccessImplCopyWith(_$VerifyTokenSuccessImpl<T> value,
+          $Res Function(_$VerifyTokenSuccessImpl<T>) then) =
+      __$$VerifyTokenSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$VerifyTokenSuccessCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$VerifyTokenSuccess<T>>
-    implements _$$VerifyTokenSuccessCopyWith<T, $Res> {
-  __$$VerifyTokenSuccessCopyWithImpl(_$VerifyTokenSuccess<T> _value,
-      $Res Function(_$VerifyTokenSuccess<T>) _then)
+class __$$VerifyTokenSuccessImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res,
+        _$VerifyTokenSuccessImpl<T>>
+    implements _$$VerifyTokenSuccessImplCopyWith<T, $Res> {
+  __$$VerifyTokenSuccessImplCopyWithImpl(_$VerifyTokenSuccessImpl<T> _value,
+      $Res Function(_$VerifyTokenSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
-  const _$VerifyTokenSuccess();
+class _$VerifyTokenSuccessImpl<T> implements VerifyTokenSuccess<T> {
+  const _$VerifyTokenSuccessImpl();
 
   @override
   String toString() {
@@ -1802,9 +2060,10 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$VerifyTokenSuccess<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$VerifyTokenSuccessImpl<T>);
   }
 
   @override
@@ -1824,6 +2083,8 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return verifyTokenSuccess();
@@ -1843,6 +2104,8 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return verifyTokenSuccess?.call();
@@ -1862,6 +2125,8 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1889,6 +2154,9 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return verifyTokenSuccess(this);
@@ -1911,6 +2179,8 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return verifyTokenSuccess?.call(this);
@@ -1932,6 +2202,8 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -1943,29 +2215,32 @@ class _$VerifyTokenSuccess<T> implements VerifyTokenSuccess<T> {
 }
 
 abstract class VerifyTokenSuccess<T> implements AuthenticationState<T> {
-  const factory VerifyTokenSuccess() = _$VerifyTokenSuccess<T>;
+  const factory VerifyTokenSuccess() = _$VerifyTokenSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$LogingInCopyWith<T, $Res> {
-  factory _$$LogingInCopyWith(
-          _$LogingIn<T> value, $Res Function(_$LogingIn<T>) then) =
-      __$$LogingInCopyWithImpl<T, $Res>;
+abstract class _$$LogingInImplCopyWith<T, $Res> {
+  factory _$$LogingInImplCopyWith(
+          _$LogingInImpl<T> value, $Res Function(_$LogingInImpl<T>) then) =
+      __$$LogingInImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$LogingInCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$LogingIn<T>>
-    implements _$$LogingInCopyWith<T, $Res> {
-  __$$LogingInCopyWithImpl(
-      _$LogingIn<T> _value, $Res Function(_$LogingIn<T>) _then)
+class __$$LogingInImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$LogingInImpl<T>>
+    implements _$$LogingInImplCopyWith<T, $Res> {
+  __$$LogingInImplCopyWithImpl(
+      _$LogingInImpl<T> _value, $Res Function(_$LogingInImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LogingIn<T> implements LogingIn<T> {
-  const _$LogingIn();
+class _$LogingInImpl<T> implements LogingIn<T> {
+  const _$LogingInImpl();
 
   @override
   String toString() {
@@ -1973,9 +2248,9 @@ class _$LogingIn<T> implements LogingIn<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LogingIn<T>);
+        (other.runtimeType == runtimeType && other is _$LogingInImpl<T>);
   }
 
   @override
@@ -1995,6 +2270,8 @@ class _$LogingIn<T> implements LogingIn<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return logingIn();
@@ -2014,6 +2291,8 @@ class _$LogingIn<T> implements LogingIn<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return logingIn?.call();
@@ -2033,6 +2312,8 @@ class _$LogingIn<T> implements LogingIn<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2060,6 +2341,9 @@ class _$LogingIn<T> implements LogingIn<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return logingIn(this);
@@ -2082,6 +2366,8 @@ class _$LogingIn<T> implements LogingIn<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return logingIn?.call(this);
@@ -2103,6 +2389,8 @@ class _$LogingIn<T> implements LogingIn<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2114,32 +2402,34 @@ class _$LogingIn<T> implements LogingIn<T> {
 }
 
 abstract class LogingIn<T> implements AuthenticationState<T> {
-  const factory LogingIn() = _$LogingIn<T>;
+  const factory LogingIn() = _$LogingInImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$LoginSuccessCopyWith<T, $Res> {
-  factory _$$LoginSuccessCopyWith(
-          _$LoginSuccess<T> value, $Res Function(_$LoginSuccess<T>) then) =
-      __$$LoginSuccessCopyWithImpl<T, $Res>;
+abstract class _$$LoginSuccessImplCopyWith<T, $Res> {
+  factory _$$LoginSuccessImplCopyWith(_$LoginSuccessImpl<T> value,
+          $Res Function(_$LoginSuccessImpl<T>) then) =
+      __$$LoginSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({UserModel user});
 }
 
 /// @nodoc
-class __$$LoginSuccessCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$LoginSuccess<T>>
-    implements _$$LoginSuccessCopyWith<T, $Res> {
-  __$$LoginSuccessCopyWithImpl(
-      _$LoginSuccess<T> _value, $Res Function(_$LoginSuccess<T>) _then)
+class __$$LoginSuccessImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$LoginSuccessImpl<T>>
+    implements _$$LoginSuccessImplCopyWith<T, $Res> {
+  __$$LoginSuccessImplCopyWithImpl(
+      _$LoginSuccessImpl<T> _value, $Res Function(_$LoginSuccessImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$LoginSuccess<T>(
+    return _then(_$LoginSuccessImpl<T>(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -2150,8 +2440,8 @@ class __$$LoginSuccessCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$LoginSuccess<T> implements LoginSuccess<T> {
-  const _$LoginSuccess({required this.user});
+class _$LoginSuccessImpl<T> implements LoginSuccess<T> {
+  const _$LoginSuccessImpl({required this.user});
 
   @override
   final UserModel user;
@@ -2162,21 +2452,24 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginSuccess<T> &&
+            other is _$LoginSuccessImpl<T> &&
             (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginSuccessCopyWith<T, _$LoginSuccess<T>> get copyWith =>
-      __$$LoginSuccessCopyWithImpl<T, _$LoginSuccess<T>>(this, _$identity);
+  _$$LoginSuccessImplCopyWith<T, _$LoginSuccessImpl<T>> get copyWith =>
+      __$$LoginSuccessImplCopyWithImpl<T, _$LoginSuccessImpl<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2192,6 +2485,8 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return loginSuccess(user);
@@ -2211,6 +2506,8 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return loginSuccess?.call(user);
@@ -2230,6 +2527,8 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2257,6 +2556,9 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return loginSuccess(this);
@@ -2279,6 +2581,8 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return loginSuccess?.call(this);
@@ -2300,6 +2604,8 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2312,35 +2618,43 @@ class _$LoginSuccess<T> implements LoginSuccess<T> {
 
 abstract class LoginSuccess<T> implements AuthenticationState<T> {
   const factory LoginSuccess({required final UserModel user}) =
-      _$LoginSuccess<T>;
+      _$LoginSuccessImpl<T>;
 
   UserModel get user;
-  @JsonKey(ignore: true)
-  _$$LoginSuccessCopyWith<T, _$LoginSuccess<T>> get copyWith =>
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoginSuccessImplCopyWith<T, _$LoginSuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RequestingPasswordResetCopyWith<T, $Res> {
-  factory _$$RequestingPasswordResetCopyWith(_$RequestingPasswordReset<T> value,
-          $Res Function(_$RequestingPasswordReset<T>) then) =
-      __$$RequestingPasswordResetCopyWithImpl<T, $Res>;
+abstract class _$$RequestingPasswordResetImplCopyWith<T, $Res> {
+  factory _$$RequestingPasswordResetImplCopyWith(
+          _$RequestingPasswordResetImpl<T> value,
+          $Res Function(_$RequestingPasswordResetImpl<T>) then) =
+      __$$RequestingPasswordResetImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$RequestingPasswordResetCopyWithImpl<T, $Res>
+class __$$RequestingPasswordResetImplCopyWithImpl<T, $Res>
     extends _$AuthenticationStateCopyWithImpl<T, $Res,
-        _$RequestingPasswordReset<T>>
-    implements _$$RequestingPasswordResetCopyWith<T, $Res> {
-  __$$RequestingPasswordResetCopyWithImpl(_$RequestingPasswordReset<T> _value,
-      $Res Function(_$RequestingPasswordReset<T>) _then)
+        _$RequestingPasswordResetImpl<T>>
+    implements _$$RequestingPasswordResetImplCopyWith<T, $Res> {
+  __$$RequestingPasswordResetImplCopyWithImpl(
+      _$RequestingPasswordResetImpl<T> _value,
+      $Res Function(_$RequestingPasswordResetImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
-  const _$RequestingPasswordReset();
+class _$RequestingPasswordResetImpl<T> implements RequestingPasswordReset<T> {
+  const _$RequestingPasswordResetImpl();
 
   @override
   String toString() {
@@ -2348,10 +2662,10 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestingPasswordReset<T>);
+            other is _$RequestingPasswordResetImpl<T>);
   }
 
   @override
@@ -2371,6 +2685,8 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return requestingPasswordReset();
@@ -2390,6 +2706,8 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return requestingPasswordReset?.call();
@@ -2409,6 +2727,8 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2436,6 +2756,9 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return requestingPasswordReset(this);
@@ -2458,6 +2781,8 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return requestingPasswordReset?.call(this);
@@ -2479,6 +2804,8 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2490,33 +2817,36 @@ class _$RequestingPasswordReset<T> implements RequestingPasswordReset<T> {
 }
 
 abstract class RequestingPasswordReset<T> implements AuthenticationState<T> {
-  const factory RequestingPasswordReset() = _$RequestingPasswordReset<T>;
+  const factory RequestingPasswordReset() = _$RequestingPasswordResetImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$RequestPasswordResetSuccessCopyWith<T, $Res> {
-  factory _$$RequestPasswordResetSuccessCopyWith(
-          _$RequestPasswordResetSuccess<T> value,
-          $Res Function(_$RequestPasswordResetSuccess<T>) then) =
-      __$$RequestPasswordResetSuccessCopyWithImpl<T, $Res>;
+abstract class _$$RequestPasswordResetSuccessImplCopyWith<T, $Res> {
+  factory _$$RequestPasswordResetSuccessImplCopyWith(
+          _$RequestPasswordResetSuccessImpl<T> value,
+          $Res Function(_$RequestPasswordResetSuccessImpl<T>) then) =
+      __$$RequestPasswordResetSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$RequestPasswordResetSuccessCopyWithImpl<T, $Res>
+class __$$RequestPasswordResetSuccessImplCopyWithImpl<T, $Res>
     extends _$AuthenticationStateCopyWithImpl<T, $Res,
-        _$RequestPasswordResetSuccess<T>>
-    implements _$$RequestPasswordResetSuccessCopyWith<T, $Res> {
-  __$$RequestPasswordResetSuccessCopyWithImpl(
-      _$RequestPasswordResetSuccess<T> _value,
-      $Res Function(_$RequestPasswordResetSuccess<T>) _then)
+        _$RequestPasswordResetSuccessImpl<T>>
+    implements _$$RequestPasswordResetSuccessImplCopyWith<T, $Res> {
+  __$$RequestPasswordResetSuccessImplCopyWithImpl(
+      _$RequestPasswordResetSuccessImpl<T> _value,
+      $Res Function(_$RequestPasswordResetSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$RequestPasswordResetSuccess<T>
+class _$RequestPasswordResetSuccessImpl<T>
     implements RequestPasswordResetSuccess<T> {
-  const _$RequestPasswordResetSuccess();
+  const _$RequestPasswordResetSuccessImpl();
 
   @override
   String toString() {
@@ -2524,10 +2854,10 @@ class _$RequestPasswordResetSuccess<T>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestPasswordResetSuccess<T>);
+            other is _$RequestPasswordResetSuccessImpl<T>);
   }
 
   @override
@@ -2547,6 +2877,8 @@ class _$RequestPasswordResetSuccess<T>
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return requestPasswordResetSuccess();
@@ -2566,6 +2898,8 @@ class _$RequestPasswordResetSuccess<T>
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return requestPasswordResetSuccess?.call();
@@ -2585,6 +2919,8 @@ class _$RequestPasswordResetSuccess<T>
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2612,6 +2948,9 @@ class _$RequestPasswordResetSuccess<T>
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return requestPasswordResetSuccess(this);
@@ -2634,6 +2973,8 @@ class _$RequestPasswordResetSuccess<T>
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return requestPasswordResetSuccess?.call(this);
@@ -2655,6 +2996,8 @@ class _$RequestPasswordResetSuccess<T>
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2668,29 +3011,33 @@ class _$RequestPasswordResetSuccess<T>
 abstract class RequestPasswordResetSuccess<T>
     implements AuthenticationState<T> {
   const factory RequestPasswordResetSuccess() =
-      _$RequestPasswordResetSuccess<T>;
+      _$RequestPasswordResetSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$ResettingPasswordCopyWith<T, $Res> {
-  factory _$$ResettingPasswordCopyWith(_$ResettingPassword<T> value,
-          $Res Function(_$ResettingPassword<T>) then) =
-      __$$ResettingPasswordCopyWithImpl<T, $Res>;
+abstract class _$$ResettingPasswordImplCopyWith<T, $Res> {
+  factory _$$ResettingPasswordImplCopyWith(_$ResettingPasswordImpl<T> value,
+          $Res Function(_$ResettingPasswordImpl<T>) then) =
+      __$$ResettingPasswordImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$ResettingPasswordCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$ResettingPassword<T>>
-    implements _$$ResettingPasswordCopyWith<T, $Res> {
-  __$$ResettingPasswordCopyWithImpl(_$ResettingPassword<T> _value,
-      $Res Function(_$ResettingPassword<T>) _then)
+class __$$ResettingPasswordImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res,
+        _$ResettingPasswordImpl<T>>
+    implements _$$ResettingPasswordImplCopyWith<T, $Res> {
+  __$$ResettingPasswordImplCopyWithImpl(_$ResettingPasswordImpl<T> _value,
+      $Res Function(_$ResettingPasswordImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ResettingPassword<T> implements ResettingPassword<T> {
-  const _$ResettingPassword();
+class _$ResettingPasswordImpl<T> implements ResettingPassword<T> {
+  const _$ResettingPasswordImpl();
 
   @override
   String toString() {
@@ -2698,9 +3045,10 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ResettingPassword<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$ResettingPasswordImpl<T>);
   }
 
   @override
@@ -2720,6 +3068,8 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return resettingPassword();
@@ -2739,6 +3089,8 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return resettingPassword?.call();
@@ -2758,6 +3110,8 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2785,6 +3139,9 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return resettingPassword(this);
@@ -2807,6 +3164,8 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return resettingPassword?.call(this);
@@ -2828,6 +3187,8 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2839,31 +3200,35 @@ class _$ResettingPassword<T> implements ResettingPassword<T> {
 }
 
 abstract class ResettingPassword<T> implements AuthenticationState<T> {
-  const factory ResettingPassword() = _$ResettingPassword<T>;
+  const factory ResettingPassword() = _$ResettingPasswordImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$ResettingPasswordSuccessCopyWith<T, $Res> {
-  factory _$$ResettingPasswordSuccessCopyWith(
-          _$ResettingPasswordSuccess<T> value,
-          $Res Function(_$ResettingPasswordSuccess<T>) then) =
-      __$$ResettingPasswordSuccessCopyWithImpl<T, $Res>;
+abstract class _$$ResettingPasswordSuccessImplCopyWith<T, $Res> {
+  factory _$$ResettingPasswordSuccessImplCopyWith(
+          _$ResettingPasswordSuccessImpl<T> value,
+          $Res Function(_$ResettingPasswordSuccessImpl<T>) then) =
+      __$$ResettingPasswordSuccessImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$ResettingPasswordSuccessCopyWithImpl<T, $Res>
+class __$$ResettingPasswordSuccessImplCopyWithImpl<T, $Res>
     extends _$AuthenticationStateCopyWithImpl<T, $Res,
-        _$ResettingPasswordSuccess<T>>
-    implements _$$ResettingPasswordSuccessCopyWith<T, $Res> {
-  __$$ResettingPasswordSuccessCopyWithImpl(_$ResettingPasswordSuccess<T> _value,
-      $Res Function(_$ResettingPasswordSuccess<T>) _then)
+        _$ResettingPasswordSuccessImpl<T>>
+    implements _$$ResettingPasswordSuccessImplCopyWith<T, $Res> {
+  __$$ResettingPasswordSuccessImplCopyWithImpl(
+      _$ResettingPasswordSuccessImpl<T> _value,
+      $Res Function(_$ResettingPasswordSuccessImpl<T>) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
-  const _$ResettingPasswordSuccess();
+class _$ResettingPasswordSuccessImpl<T> implements ResettingPasswordSuccess<T> {
+  const _$ResettingPasswordSuccessImpl();
 
   @override
   String toString() {
@@ -2871,10 +3236,10 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResettingPasswordSuccess<T>);
+            other is _$ResettingPasswordSuccessImpl<T>);
   }
 
   @override
@@ -2894,6 +3259,8 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return resettingPasswordSuccess();
@@ -2913,6 +3280,8 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return resettingPasswordSuccess?.call();
@@ -2932,6 +3301,8 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -2959,6 +3330,9 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return resettingPasswordSuccess(this);
@@ -2981,6 +3355,8 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return resettingPasswordSuccess?.call(this);
@@ -3002,6 +3378,8 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -3013,70 +3391,46 @@ class _$ResettingPasswordSuccess<T> implements ResettingPasswordSuccess<T> {
 }
 
 abstract class ResettingPasswordSuccess<T> implements AuthenticationState<T> {
-  const factory ResettingPasswordSuccess() = _$ResettingPasswordSuccess<T>;
+  const factory ResettingPasswordSuccess() = _$ResettingPasswordSuccessImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$AuthenticationErrorCopyWith<T, $Res> {
-  factory _$$AuthenticationErrorCopyWith(_$AuthenticationError<T> value,
-          $Res Function(_$AuthenticationError<T>) then) =
-      __$$AuthenticationErrorCopyWithImpl<T, $Res>;
-  @useResult
-  $Res call({HttpError error});
+abstract class _$$DeletingAccountImplCopyWith<T, $Res> {
+  factory _$$DeletingAccountImplCopyWith(_$DeletingAccountImpl<T> value,
+          $Res Function(_$DeletingAccountImpl<T>) then) =
+      __$$DeletingAccountImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$AuthenticationErrorCopyWithImpl<T, $Res>
-    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$AuthenticationError<T>>
-    implements _$$AuthenticationErrorCopyWith<T, $Res> {
-  __$$AuthenticationErrorCopyWithImpl(_$AuthenticationError<T> _value,
-      $Res Function(_$AuthenticationError<T>) _then)
+class __$$DeletingAccountImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res, _$DeletingAccountImpl<T>>
+    implements _$$DeletingAccountImplCopyWith<T, $Res> {
+  __$$DeletingAccountImplCopyWithImpl(_$DeletingAccountImpl<T> _value,
+      $Res Function(_$DeletingAccountImpl<T>) _then)
       : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? error = null,
-  }) {
-    return _then(_$AuthenticationError<T>(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as HttpError,
-    ));
-  }
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$AuthenticationError<T> implements AuthenticationError<T> {
-  const _$AuthenticationError({required this.error});
-
-  @override
-  final HttpError error;
+class _$DeletingAccountImpl<T> implements DeletingAccount<T> {
+  const _$DeletingAccountImpl();
 
   @override
   String toString() {
-    return 'AuthenticationState<$T>.authenticationError(error: $error)';
+    return 'AuthenticationState<$T>.deletingAccount()';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthenticationError<T> &&
-            (identical(other.error, error) || other.error == error));
+        (other.runtimeType == runtimeType && other is _$DeletingAccountImpl<T>);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthenticationErrorCopyWith<T, _$AuthenticationError<T>> get copyWith =>
-      __$$AuthenticationErrorCopyWithImpl<T, _$AuthenticationError<T>>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -3092,6 +3446,415 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     required TResult Function() requestPasswordResetSuccess,
     required TResult Function() resettingPassword,
     required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
+    required TResult Function(HttpError error) authenticationError,
+  }) {
+    return deletingAccount();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? authenticationInitial,
+    TResult? Function()? signingUp,
+    TResult? Function()? signUpSuccess,
+    TResult? Function()? verifyingToken,
+    TResult? Function()? verifyTokenSuccess,
+    TResult? Function()? logingIn,
+    TResult? Function(UserModel user)? loginSuccess,
+    TResult? Function()? requestingPasswordReset,
+    TResult? Function()? requestPasswordResetSuccess,
+    TResult? Function()? resettingPassword,
+    TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
+    TResult? Function(HttpError error)? authenticationError,
+  }) {
+    return deletingAccount?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? authenticationInitial,
+    TResult Function()? signingUp,
+    TResult Function()? signUpSuccess,
+    TResult Function()? verifyingToken,
+    TResult Function()? verifyTokenSuccess,
+    TResult Function()? logingIn,
+    TResult Function(UserModel user)? loginSuccess,
+    TResult Function()? requestingPasswordReset,
+    TResult Function()? requestPasswordResetSuccess,
+    TResult Function()? resettingPassword,
+    TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
+    TResult Function(HttpError error)? authenticationError,
+    required TResult orElse(),
+  }) {
+    if (deletingAccount != null) {
+      return deletingAccount();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthenticationInitial<T> value)
+        authenticationInitial,
+    required TResult Function(SigningUp<T> value) signingUp,
+    required TResult Function(SignUpSuccess<T> value) signUpSuccess,
+    required TResult Function(VerifyingToken<T> value) verifyingToken,
+    required TResult Function(VerifyTokenSuccess<T> value) verifyTokenSuccess,
+    required TResult Function(LogingIn<T> value) logingIn,
+    required TResult Function(LoginSuccess<T> value) loginSuccess,
+    required TResult Function(RequestingPasswordReset<T> value)
+        requestingPasswordReset,
+    required TResult Function(RequestPasswordResetSuccess<T> value)
+        requestPasswordResetSuccess,
+    required TResult Function(ResettingPassword<T> value) resettingPassword,
+    required TResult Function(ResettingPasswordSuccess<T> value)
+        resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
+    required TResult Function(AuthenticationError<T> value) authenticationError,
+  }) {
+    return deletingAccount(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthenticationInitial<T> value)? authenticationInitial,
+    TResult? Function(SigningUp<T> value)? signingUp,
+    TResult? Function(SignUpSuccess<T> value)? signUpSuccess,
+    TResult? Function(VerifyingToken<T> value)? verifyingToken,
+    TResult? Function(VerifyTokenSuccess<T> value)? verifyTokenSuccess,
+    TResult? Function(LogingIn<T> value)? logingIn,
+    TResult? Function(LoginSuccess<T> value)? loginSuccess,
+    TResult? Function(RequestingPasswordReset<T> value)?
+        requestingPasswordReset,
+    TResult? Function(RequestPasswordResetSuccess<T> value)?
+        requestPasswordResetSuccess,
+    TResult? Function(ResettingPassword<T> value)? resettingPassword,
+    TResult? Function(ResettingPasswordSuccess<T> value)?
+        resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
+    TResult? Function(AuthenticationError<T> value)? authenticationError,
+  }) {
+    return deletingAccount?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthenticationInitial<T> value)? authenticationInitial,
+    TResult Function(SigningUp<T> value)? signingUp,
+    TResult Function(SignUpSuccess<T> value)? signUpSuccess,
+    TResult Function(VerifyingToken<T> value)? verifyingToken,
+    TResult Function(VerifyTokenSuccess<T> value)? verifyTokenSuccess,
+    TResult Function(LogingIn<T> value)? logingIn,
+    TResult Function(LoginSuccess<T> value)? loginSuccess,
+    TResult Function(RequestingPasswordReset<T> value)? requestingPasswordReset,
+    TResult Function(RequestPasswordResetSuccess<T> value)?
+        requestPasswordResetSuccess,
+    TResult Function(ResettingPassword<T> value)? resettingPassword,
+    TResult Function(ResettingPasswordSuccess<T> value)?
+        resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
+    TResult Function(AuthenticationError<T> value)? authenticationError,
+    required TResult orElse(),
+  }) {
+    if (deletingAccount != null) {
+      return deletingAccount(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeletingAccount<T> implements AuthenticationState<T> {
+  const factory DeletingAccount() = _$DeletingAccountImpl<T>;
+}
+
+/// @nodoc
+abstract class _$$DeletingAccountSuccessImplCopyWith<T, $Res> {
+  factory _$$DeletingAccountSuccessImplCopyWith(
+          _$DeletingAccountSuccessImpl<T> value,
+          $Res Function(_$DeletingAccountSuccessImpl<T>) then) =
+      __$$DeletingAccountSuccessImplCopyWithImpl<T, $Res>;
+}
+
+/// @nodoc
+class __$$DeletingAccountSuccessImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res,
+        _$DeletingAccountSuccessImpl<T>>
+    implements _$$DeletingAccountSuccessImplCopyWith<T, $Res> {
+  __$$DeletingAccountSuccessImplCopyWithImpl(
+      _$DeletingAccountSuccessImpl<T> _value,
+      $Res Function(_$DeletingAccountSuccessImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeletingAccountSuccessImpl<T> implements DeletingAccountSuccess<T> {
+  const _$DeletingAccountSuccessImpl();
+
+  @override
+  String toString() {
+    return 'AuthenticationState<$T>.deletingAccountSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeletingAccountSuccessImpl<T>);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() authenticationInitial,
+    required TResult Function() signingUp,
+    required TResult Function() signUpSuccess,
+    required TResult Function() verifyingToken,
+    required TResult Function() verifyTokenSuccess,
+    required TResult Function() logingIn,
+    required TResult Function(UserModel user) loginSuccess,
+    required TResult Function() requestingPasswordReset,
+    required TResult Function() requestPasswordResetSuccess,
+    required TResult Function() resettingPassword,
+    required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
+    required TResult Function(HttpError error) authenticationError,
+  }) {
+    return deletingAccountSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? authenticationInitial,
+    TResult? Function()? signingUp,
+    TResult? Function()? signUpSuccess,
+    TResult? Function()? verifyingToken,
+    TResult? Function()? verifyTokenSuccess,
+    TResult? Function()? logingIn,
+    TResult? Function(UserModel user)? loginSuccess,
+    TResult? Function()? requestingPasswordReset,
+    TResult? Function()? requestPasswordResetSuccess,
+    TResult? Function()? resettingPassword,
+    TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
+    TResult? Function(HttpError error)? authenticationError,
+  }) {
+    return deletingAccountSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? authenticationInitial,
+    TResult Function()? signingUp,
+    TResult Function()? signUpSuccess,
+    TResult Function()? verifyingToken,
+    TResult Function()? verifyTokenSuccess,
+    TResult Function()? logingIn,
+    TResult Function(UserModel user)? loginSuccess,
+    TResult Function()? requestingPasswordReset,
+    TResult Function()? requestPasswordResetSuccess,
+    TResult Function()? resettingPassword,
+    TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
+    TResult Function(HttpError error)? authenticationError,
+    required TResult orElse(),
+  }) {
+    if (deletingAccountSuccess != null) {
+      return deletingAccountSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthenticationInitial<T> value)
+        authenticationInitial,
+    required TResult Function(SigningUp<T> value) signingUp,
+    required TResult Function(SignUpSuccess<T> value) signUpSuccess,
+    required TResult Function(VerifyingToken<T> value) verifyingToken,
+    required TResult Function(VerifyTokenSuccess<T> value) verifyTokenSuccess,
+    required TResult Function(LogingIn<T> value) logingIn,
+    required TResult Function(LoginSuccess<T> value) loginSuccess,
+    required TResult Function(RequestingPasswordReset<T> value)
+        requestingPasswordReset,
+    required TResult Function(RequestPasswordResetSuccess<T> value)
+        requestPasswordResetSuccess,
+    required TResult Function(ResettingPassword<T> value) resettingPassword,
+    required TResult Function(ResettingPasswordSuccess<T> value)
+        resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
+    required TResult Function(AuthenticationError<T> value) authenticationError,
+  }) {
+    return deletingAccountSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthenticationInitial<T> value)? authenticationInitial,
+    TResult? Function(SigningUp<T> value)? signingUp,
+    TResult? Function(SignUpSuccess<T> value)? signUpSuccess,
+    TResult? Function(VerifyingToken<T> value)? verifyingToken,
+    TResult? Function(VerifyTokenSuccess<T> value)? verifyTokenSuccess,
+    TResult? Function(LogingIn<T> value)? logingIn,
+    TResult? Function(LoginSuccess<T> value)? loginSuccess,
+    TResult? Function(RequestingPasswordReset<T> value)?
+        requestingPasswordReset,
+    TResult? Function(RequestPasswordResetSuccess<T> value)?
+        requestPasswordResetSuccess,
+    TResult? Function(ResettingPassword<T> value)? resettingPassword,
+    TResult? Function(ResettingPasswordSuccess<T> value)?
+        resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
+    TResult? Function(AuthenticationError<T> value)? authenticationError,
+  }) {
+    return deletingAccountSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthenticationInitial<T> value)? authenticationInitial,
+    TResult Function(SigningUp<T> value)? signingUp,
+    TResult Function(SignUpSuccess<T> value)? signUpSuccess,
+    TResult Function(VerifyingToken<T> value)? verifyingToken,
+    TResult Function(VerifyTokenSuccess<T> value)? verifyTokenSuccess,
+    TResult Function(LogingIn<T> value)? logingIn,
+    TResult Function(LoginSuccess<T> value)? loginSuccess,
+    TResult Function(RequestingPasswordReset<T> value)? requestingPasswordReset,
+    TResult Function(RequestPasswordResetSuccess<T> value)?
+        requestPasswordResetSuccess,
+    TResult Function(ResettingPassword<T> value)? resettingPassword,
+    TResult Function(ResettingPasswordSuccess<T> value)?
+        resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
+    TResult Function(AuthenticationError<T> value)? authenticationError,
+    required TResult orElse(),
+  }) {
+    if (deletingAccountSuccess != null) {
+      return deletingAccountSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeletingAccountSuccess<T> implements AuthenticationState<T> {
+  const factory DeletingAccountSuccess() = _$DeletingAccountSuccessImpl<T>;
+}
+
+/// @nodoc
+abstract class _$$AuthenticationErrorImplCopyWith<T, $Res> {
+  factory _$$AuthenticationErrorImplCopyWith(_$AuthenticationErrorImpl<T> value,
+          $Res Function(_$AuthenticationErrorImpl<T>) then) =
+      __$$AuthenticationErrorImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({HttpError error});
+}
+
+/// @nodoc
+class __$$AuthenticationErrorImplCopyWithImpl<T, $Res>
+    extends _$AuthenticationStateCopyWithImpl<T, $Res,
+        _$AuthenticationErrorImpl<T>>
+    implements _$$AuthenticationErrorImplCopyWith<T, $Res> {
+  __$$AuthenticationErrorImplCopyWithImpl(_$AuthenticationErrorImpl<T> _value,
+      $Res Function(_$AuthenticationErrorImpl<T>) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$AuthenticationErrorImpl<T>(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as HttpError,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthenticationErrorImpl<T> implements AuthenticationError<T> {
+  const _$AuthenticationErrorImpl({required this.error});
+
+  @override
+  final HttpError error;
+
+  @override
+  String toString() {
+    return 'AuthenticationState<$T>.authenticationError(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthenticationErrorImpl<T> &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthenticationErrorImplCopyWith<T, _$AuthenticationErrorImpl<T>>
+      get copyWith => __$$AuthenticationErrorImplCopyWithImpl<T,
+          _$AuthenticationErrorImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() authenticationInitial,
+    required TResult Function() signingUp,
+    required TResult Function() signUpSuccess,
+    required TResult Function() verifyingToken,
+    required TResult Function() verifyTokenSuccess,
+    required TResult Function() logingIn,
+    required TResult Function(UserModel user) loginSuccess,
+    required TResult Function() requestingPasswordReset,
+    required TResult Function() requestPasswordResetSuccess,
+    required TResult Function() resettingPassword,
+    required TResult Function() resettingPasswordSuccess,
+    required TResult Function() deletingAccount,
+    required TResult Function() deletingAccountSuccess,
     required TResult Function(HttpError error) authenticationError,
   }) {
     return authenticationError(error);
@@ -3111,6 +3874,8 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     TResult? Function()? requestPasswordResetSuccess,
     TResult? Function()? resettingPassword,
     TResult? Function()? resettingPasswordSuccess,
+    TResult? Function()? deletingAccount,
+    TResult? Function()? deletingAccountSuccess,
     TResult? Function(HttpError error)? authenticationError,
   }) {
     return authenticationError?.call(error);
@@ -3130,6 +3895,8 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     TResult Function()? requestPasswordResetSuccess,
     TResult Function()? resettingPassword,
     TResult Function()? resettingPasswordSuccess,
+    TResult Function()? deletingAccount,
+    TResult Function()? deletingAccountSuccess,
     TResult Function(HttpError error)? authenticationError,
     required TResult orElse(),
   }) {
@@ -3157,6 +3924,9 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     required TResult Function(ResettingPassword<T> value) resettingPassword,
     required TResult Function(ResettingPasswordSuccess<T> value)
         resettingPasswordSuccess,
+    required TResult Function(DeletingAccount<T> value) deletingAccount,
+    required TResult Function(DeletingAccountSuccess<T> value)
+        deletingAccountSuccess,
     required TResult Function(AuthenticationError<T> value) authenticationError,
   }) {
     return authenticationError(this);
@@ -3179,6 +3949,8 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     TResult? Function(ResettingPassword<T> value)? resettingPassword,
     TResult? Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult? Function(DeletingAccount<T> value)? deletingAccount,
+    TResult? Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult? Function(AuthenticationError<T> value)? authenticationError,
   }) {
     return authenticationError?.call(this);
@@ -3200,6 +3972,8 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
     TResult Function(ResettingPassword<T> value)? resettingPassword,
     TResult Function(ResettingPasswordSuccess<T> value)?
         resettingPasswordSuccess,
+    TResult Function(DeletingAccount<T> value)? deletingAccount,
+    TResult Function(DeletingAccountSuccess<T> value)? deletingAccountSuccess,
     TResult Function(AuthenticationError<T> value)? authenticationError,
     required TResult orElse(),
   }) {
@@ -3212,10 +3986,13 @@ class _$AuthenticationError<T> implements AuthenticationError<T> {
 
 abstract class AuthenticationError<T> implements AuthenticationState<T> {
   const factory AuthenticationError({required final HttpError error}) =
-      _$AuthenticationError<T>;
+      _$AuthenticationErrorImpl<T>;
 
   HttpError get error;
-  @JsonKey(ignore: true)
-  _$$AuthenticationErrorCopyWith<T, _$AuthenticationError<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of AuthenticationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AuthenticationErrorImplCopyWith<T, _$AuthenticationErrorImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }

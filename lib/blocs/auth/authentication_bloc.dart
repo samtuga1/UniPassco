@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:passco/data/constants.dart';
 import 'package:passco/handlers/http_error/http_errors.handler.dart';
 import 'package:passco/handlers/http_response/http_response.handler.dart';
+import 'package:passco/injectable/injection.dart';
 import 'package:passco/models/auth/data/user_model.dart';
 import 'package:passco/models/auth/requests/login_request.dart';
 import 'package:passco/models/auth/requests/signup_request.dart';
@@ -28,6 +29,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<LoginAccount>(_loginUser);
     on<ResendVerificationToken>(_resendVerificationToken);
     on<ResetPassword>(_resetPassword);
+    on<DeleteAccount>(_deleteAccount);
   }
 
   Future<void> _resetPassword(
@@ -41,6 +43,26 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     response.when(
       success: (_) {
         emit(const AuthenticationState.resettingPasswordSuccess());
+      },
+      error: (error) {
+        emit(AuthenticationState<HttpError>.authenticationError(error: error));
+      },
+    );
+  }
+
+  Future<void> _deleteAccount(
+    DeleteAccount event,
+    Emitter emit,
+  ) async {
+    final userId = (await getIt<AuthedUserRepository>().getUserId())!;
+
+    emit(const AuthenticationState.deletingAccount());
+
+    final HttpResponse response = await authService.deleteAccount(id: userId);
+
+    response.when(
+      success: (_) {
+        emit(const AuthenticationState.deletingAccountSuccess());
       },
       error: (error) {
         emit(AuthenticationState<HttpError>.authenticationError(error: error));

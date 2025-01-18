@@ -45,7 +45,7 @@ class QuestionsRepository {
     downloadedQuestions.add(finalQuestion);
 
     await _prefs.setString(
-      Constants.downloadedQuestions(await _userRepository.getUserId()),
+      Constants.downloadedQuestions((await _userRepository.getUserId())!),
       jsonEncode(downloadedQuestions),
     );
 
@@ -58,9 +58,13 @@ class QuestionsRepository {
   }
 
   Future<List<Question>> getDownloads() async {
-    final String result = await _prefs.getString(
-      Constants.downloadedQuestions(await _userRepository.getUserId()),
-    );
+    final userId = await _userRepository.getUserId();
+
+    if (userId == null) return [];
+
+    final String? result = await _prefs.getString(Constants.downloadedQuestions(userId));
+
+    if (result == null) return [];
 
     // check if the user has not downloaded questions before
     if (result.isEmpty) {
@@ -73,6 +77,10 @@ class QuestionsRepository {
   }
 
   Future<void> clearDownloads() async {
+    final userId = await _userRepository.getUserId();
+
+    if (userId == null) return;
+
     final questions = await getDownloads();
 
     for (var question in questions) {
@@ -84,11 +92,15 @@ class QuestionsRepository {
     }
 
     await _prefs.remove(
-      Constants.downloadedQuestions(await _userRepository.getUserId()),
+      Constants.downloadedQuestions(userId),
     );
   }
 
   Future<void> deleteFile({required Question question}) async {
+    final userId = await _userRepository.getUserId();
+
+    if (userId == null) return;
+
     List<Question> questions = await getDownloads();
 
     Question result = questions.firstWhere(
@@ -107,7 +119,7 @@ class QuestionsRepository {
     questions.removeWhere((element) => element.id == result.id);
 
     await _prefs.setString(
-      Constants.downloadedQuestions(await _userRepository.getUserId()),
+      Constants.downloadedQuestions(userId),
       jsonEncode(questions),
     );
   }

@@ -5,6 +5,7 @@ import 'package:passco/ui/screens/forgot_password/request_password_screen.dart';
 import 'package:passco/ui/screens/forgot_password/reset_password.dart';
 import 'package:passco/ui/screens/landing/landing_screen.dart';
 import 'package:passco/ui/screens/question/detail_widgets/pdf_screen.dart';
+import 'package:passco/ui/screens/report/report_screen.dart';
 import 'package:passco/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:passco/router/routes.dart';
@@ -18,10 +19,27 @@ import '../ui/widgets/widgets.dart';
 class AppRouter {
   Route onGenerateRoute(RouteSettings settings) => switch (settings.name) {
         Routes.landing => route(const LandingScreen()),
-        Routes.signin_signup => route(const LoginSignUpSwitch()),
+        Routes.signin_signup => PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => CustomPageRoutes.slidingUpTransition(
+              context,
+              animation,
+              secondaryAnimation,
+              const LoginSignUpSwitch(),
+            ),
+            settings: settings,
+          ),
+        ReportScreen.route => PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => CustomPageRoutes.slidingUpTransition(
+              context,
+              animation,
+              secondaryAnimation,
+              const ReportScreen(),
+            ),
+            settings: settings,
+          ),
         Routes.verificationScreen => route(VerificationScreen(), settings: settings),
         Routes.onbardingScreen => route(const OnboardingScreen(), settings: settings),
-        Routes.bottomNavigationBar => route(const BottomNavBar()),
+        Routes.bottomNavigationBar => route(BottomNavBar()),
         Routes.question_screen => route(const QuestionScreen(), settings: settings),
         Routes.question_detail => route(const QuestionDetailScreen(), settings: settings),
         Routes.requestPasswordReset => route(const RequestPasswordResetScreen()),

@@ -120,17 +120,17 @@ class _SignUpState extends State<SignUp> {
                       );
                     },
                   ),
-                  12.verticalSpace,
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: CustomAdaptiveTextButton(
-                      onTap: () => Navigator.of(context).pushNamed(Routes.requestPasswordReset),
-                      text: 'Forgot password?',
-                      style: context.getTheme.textTheme.labelMedium!.copyWith(
-                        color: const Color(0xFF0F96FF),
-                      ),
-                    ),
-                  ),
+                  // 12.verticalSpace,
+                  // Align(
+                  //   alignment: Alignment.topRight,
+                  //   child: CustomAdaptiveTextButton(
+                  //     onTap: () => Navigator.of(context).pushNamed(Routes.requestPasswordReset),
+                  //     text: 'Forgot password?',
+                  //     style: context.getTheme.textTheme.labelMedium!.copyWith(
+                  //       color: const Color(0xFF0F96FF),
+                  //     ),
+                  //   ),
+                  // ),
                   26.verticalSpace,
                   BlocConsumer<AuthenticationBloc, AuthenticationState>(
                     listenWhen: (previous, current) => current is SignUpSuccess || current is AuthenticationError,
